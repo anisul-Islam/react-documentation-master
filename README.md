@@ -1305,6 +1305,8 @@ const Todo = () => {
   export default Counter;
   ```
 
+  - we can also use name attribute for identifying element and use 1 function instead of many. from ebent handler we can use event.target.name and then decide what to do or not? - [1 handler for multiple elements] (https://github.com/anisul-Islam/react-counter-app-1-function/blob/master/src/components/Counter.js)
+
 - **Code Example - 26(store data in state )**
 
   ```js
