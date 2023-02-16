@@ -999,9 +999,16 @@ const Todo = () => {
   Todos.defaultProps = {
     todos: [],
   };
-  Todos.propTypes = {
-    todos: PropTypes.array,
+    Todos.propTypes = {
+    todos: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        title: PropTypes.string,
+        desc: PropTypes.string,
+      })
+    ),
   };
+
 
   export default Todos;
 
