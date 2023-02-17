@@ -1291,7 +1291,7 @@ const Todo = () => {
   function Counter() {
     const [count, setCount] = useState(0);
     const handleIncrement = () => {
-      setCount(count + 1);
+      setCount(count + 1); // setCount (count => count + 1)
     };
 
     return (
@@ -1333,6 +1333,8 @@ const Todo = () => {
 
   export default App;
   ```
+
+  - update state based on prev value - `setCount (count => count + 1)`
 
 ## [20. developer tools and extension](https://youtu.be/m1paEcDlC5U)
 
@@ -1538,7 +1540,7 @@ const Todo = () => {
 
   ```js
   // App.js
-  step 1: create a function that will help us to get the data from child component
+  step 1: create a callback function that will help us to get the data from child component
    const handleAddNewTodo = (newTodo) => {
     console.log(newTodo);
   };
@@ -1561,6 +1563,10 @@ const Todo = () => {
   AddTodo.propTypes = {
     onHandleAddNewTodo: PropTypes.func,
   };
+
+
+  // Another Example
+
   ```
 
 ## [26. update the state based on previous state]
