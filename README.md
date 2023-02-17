@@ -1566,7 +1566,37 @@ const Todo = () => {
 
 
   // Another Example
+    function App() {
+      const [users, setUsers] = useState([
+        { name: 'alex', email: 'alex@gmail.com' },
+      ]);
 
+      console.log(users);
+
+      return (
+        <div className="container">
+          <Test setUsers={setUsers} />
+        </div>
+        )
+    }
+
+    const Test = (props) => {
+      const { setUsers } = props;
+
+      const [user, setUser] = useState({ name: '', email: '' });
+      const handleSubmit = (event) => {
+        event.preventDefault();
+        setUsers((users) => [...users, user]);
+        setUser({
+          name: '',
+          email: '',
+        });
+      };
+      const handleChange = (event) => {
+        const name = event.target.name;
+        setUser({ ...user, [name]: event.target.value });
+      };
+   }
   ```
 
 ## [26. update the state based on previous state]
