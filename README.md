@@ -14,20 +14,20 @@
 
 ### 1.2 Why React?
 
-- It helps us to create reusable components (small and isloated pieces of code using html, css, js)
+- It helps us to create reusable components (small and isloated pieces of code using html, css, js). It helps us to render UI. Think about youtube's website.
 - Single Page Application (SPA) allows us to render as much as we need for reducing unnecessary rendering such as loading navbar, footer etc. in all the pages
 - think about html tag and creating your own tag with react
-- Load fast - Why React.js is faster? - virtual DOM
+- Load fast - Why React.js is faster? - virtual DOM compares with previous states
 - Allows us to use external plugin
 - Example of React app - facebook, twitter, airbnb, netflix
-- competitor - Angular (more full-fledged / developed no need 3rd party library just like react-router-dom)
+- competitor - Vue.js, Angular (more full-fledged / developed no need 3rd party library just like react-router-dom)
 
 ## [2. Environment setup](https://youtu.be/4wjI8fh77GM)
 
 - VSCode
 - node.js (Download LTS: Long Term Support one)
   (npm is included in node.js by default)
-- React Developer tools
+- React Developer tools extention for google, firefox, edge
 - Extension: ES7 react, JS JSX snippets + “editior.snipperSuggestions”: “top”, react developer tools, material theme, setup eslint and prettier
 
 ## [3. First react app](https://youtu.be/2Ec3h0z51aI)
@@ -152,67 +152,159 @@ npm start
 
 ## [4. JSX and JS Expression](https://youtu.be/6-r6pBA4eUY)
 
-- **JSX: stands for JavsScript XML which allows us to use write html inside javascript and vice versa**
+- **JSX: stands for JavsScript XML which allows us to use write html-like syntax inside javascript and vice versa**
 - react module has babbel inside of it that helps us to run jsx
+- JSX is similar like HTML but it is more dynamic.
+- JSX and React are independent things and they can be used independently.
+- Rules for JSX
 
-- **Code Example - 3 (render single element)**
+  - 1. We can return single element using JSX, for multiple elements we can use a wrapper. We can also use Fragment here.
 
-  ```js
-  import React from "react";
-  import ReactDOM from "react-dom/client";
+    - why we can not return multiple elements in JSX needs to be rendered?
+      - jsx is javascript object and we can return 2 objetcs from a function so we need to use array syntax and wrap everything inside one array
+    - **Code Example - 3 (render single element)**
 
-  const root = ReactDOM.createRoot(document.getElementById("root"));
-  root.render(<h1>Todo App</h1>);
-  ```
+      ```js
+      import React from "react";
+      import ReactDOM from "react-dom/client";
 
-- **React render function can render only one element**
-- **Code Example - 4 (Rendering multiple elements)**
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<h2>Anis Ecommerce website</h2>);
+      ```
 
-  ```js
-  import React from "react";
-  import ReactDOM from "react-dom/client";
+    - **React render function can render only one element**
+    - **Code Example - 4 (Rendering multiple elements)**
 
-  const root = ReactDOM.createRoot(document.getElementById("root"));
+      ```js
+      import React from "react";
+      import ReactDOM from "react-dom/client";
 
-  root.render(
-    <div>
-      <h1>Todo App</h1>{" "}
-      <article>
-        <h3>Make React series</h3>
-        <p>
-          I have to create a lot of videos for react series starting from a
-          scratch
-        </p>
-      </article>
-    </div>
-  );
-  ```
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+
+      root.render(
+         <div>
+          <header><h2>Anis Express</h2></header>
+          <main>
+          <aside>this is sidebar</aside>
+            <section>
+                <article>
+                  <img
+                    src="https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+                    alt="iPhone 9"
+                  />
+                  <h2>iPhone 9</h2>
+                  <p>description: An apple mobile which is nothing like apple</p>
+                  <p>Price: $549</p>
+                  <p>rating: 4.69</p>
+                  <p>brand: Apple</p>
+                  <p>category: smartphones</p>
+                  );
+                <article>
+
+                <article>
+                  <img
+                    src="https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+                    alt="iPhone X"
+                  />
+                  <h2>iPhone X</h2>
+                  <p>description: SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...</p>
+                  <p>Price: $899</p>
+                  <p>rating: 4.44</p>
+                  <p>brand: Apple</p>
+                  <p>category: smartphones</p>
+                  );
+                <article>
+            </section>
+          </main>
+          <footer>this is a footer</footer>
+      </div>
+
+      ```
+
+      - React.Fragment or <> </> helps us to avoid div soup or unncessary div nesting
+      - **Code Example - 5 (Fragment)**
+
+        ```js
+        <>
+          <img
+            src="https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+            alt="iPhone 9"
+          />
+          <h2>iPhone 9</h2>
+          <p>description: An apple mobile which is nothing like apple",</p>
+          <p>Price: $549</p>
+          <p>rating: 4.69</p>
+          <p>category: smartphones</p>
+          );
+        <>
+        ```
+
+  - 2. Remember to close all tags - `<img />`
+  - 3. Camelcase - className
 
 - We can use Javascript expression inside JSX
-- **Code Example - 5 (JS Expression in JSX)**
+- **Code Example - 6 (JS Expression in JSX)**
 
   ```js
   import React from "react";
   import ReactDOM from "react-dom/client";
 
-  const title1 = "Make React series";
-  const desc1 =
-    "I have to create a lot of videos for react series starting from a scratch.";
+  const imageSource1 = "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
+  const title1 = "iPhone 9";
+  const description1 = "An apple mobile which is nothing like apple";
+  const price1 = 549;
+  const rating1 = 4.69;
+  const brand1 = "Apple";
+  const category1 = "smartphones";
+
+  const imageSource2 = "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
+  const title2 = "iPhone X";
+  const description2 =
+    "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
+  const price2 = 899;
+  const rating2 = 4.44;
+  const brand2 = "Apple";
+  const category2 = "smartphones";
 
   const root = ReactDOM.createRoot(document.getElementById("root"));
 
   root.render(
     <div>
-      <h1>Todo App</h1>{" "}
-      <article>
-        <h3>{title1}</h3>
-        <p>{desc1}</p>
-      </article>
+      <header>
+        <h2>Anis Express</h2>
+      </header>
+
+      <main>
+        <aside>this is sidebar</aside>
+        <section>
+          <article>
+            <img src={imageSource1} alt="iPhone 9" />
+            <h2>{title1}</h2>
+            <p>description: {description1}</p>
+            <p>Price: {price1}</p>
+            <p>rating: {rating1}</p>
+            <p>brand: {brand1}</p>
+            <p>category: {category1}</p>
+          </article>
+          <article>
+            <img src={imageSource2} alt="iPhone 9" />
+            <h2>{title2}</h2>
+            <p>description: {description2}</p>
+            <p>Price: {price2}</p>
+            <p>rating: {rating2}</p>
+            <p>brand: {brand2}</p>
+            <p>category: {category2}</p>
+          </article>
+        </section>
+      </main>
+      <footer>this is a footer</footer>
     </div>
   );
   ```
 
 ## [5. How React works under the hood](https://youtu.be/kj0cxv_dC9M)
+
+- **Code Example - 7 (React under the hood)**
 
 ```javascript
 const Message = () => {
@@ -245,392 +337,346 @@ const Todo = () => {
 
 ## [6. Component](https://youtu.be/qgLZSNppJOU)
 
-- **Component: A reusable building block constrcut with html, css, javascript**
+- **Component: A _reusable_, _nestable_ _building block_ constrcut with mainly Javascript function and HTML; CSS can be added**
+- Component VS Function: Component should always start with capital letter and return JSX
 - There are 2 main types of components: functional component and class component
 - keep a blank line when importing your components for separting built in modules
-- **Code Example - 6 (Create a functional component named App)**
+- **Code Example - 8 (Create a reusable functional component)**
 
   ```javascript
-  // Inside index.js file
+  // reusable component
   import React from "react";
   import ReactDOM from "react-dom/client";
 
-  import App from "./App";
+  const Products = () => {
+    const imageSource1 =
+      "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
+    const title1 = "iPhone 9";
+    const description1 = "An apple mobile which is nothing like apple";
+    const price1 = 549;
+    const rating1 = 4.6;
+    const brand1 = "Apple";
+    const category1 = "smartphones";
+
+    const imageSource2 =
+      "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
+    const title2 = "iPhone X";
+    const description2 =
+      "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
+    const price2 = 899;
+    const rating2 = 4.44;
+    const brand2 = "Apple";
+    const category2 = "smartphones";
+
+    return (
+      <section>
+        <article>
+          <img src={imageSource1} alt="iPhone 9" />
+          <h2>{title1}</h2>
+          <p>description: {description1}</p>
+          <p>Price: {price1}</p>
+          <p>rating: {rating1}</p>
+          <p>brand: {brand1}</p>
+          <p>category: {category1}</p>
+        </article>
+        <article>
+          <img src={imageSource2} alt="iPhone X" />
+          <h2>{title2}</h2>
+          <p>description: {description2}</p>
+          <p>Price: {price2}</p>
+          <p>rating: {rating2}</p>
+          <p>brand: {brand2}</p>
+          <p>category: {category2}</p>
+        </article>
+      </section>
+    );
+  };
 
   const root = ReactDOM.createRoot(document.getElementById("root"));
-  root.render(<App />);
-
-  // Inside App.js
-  import React from "react";
-
-  const App = () => {
-    const title1 = "Make React series";
-    const desc1 =
-      "I have to create a lot of videos for react series starting from a scratch.";
-    return (
-      <div>
-        <h1>Todo App</h1>
-        <article>
-          <h3>{title1}</h3>
-          <p>{desc1} </p>
-          <p>Created at {new Date().toLocaleDateString()}</p>
-        </article>
-      </div>
-    );
-  };
+  root.render(
+    <div>
+      <header>
+        <h2>Anis Express</h2>
+      </header>
+      <main>
+        <aside>this is sidebar</aside>
+        <Products />
+        <Products />
+      </main>
+      <footer>this is a footer</footer>
+    </div>
+  );
   ```
 
-- **Code Example - 7 (Add more javascript expression)**
+- **Code Example - 9 (Decomposite & Nested Component)**
 
   ```js
   import React from "react";
+  import ReactDOM from "react-dom/client";
 
-  const App = () => {
-    const title1 = "Make React series";
-    const desc1 =
-      "I have to create a lot of videos for react series starting from a scratch.";
-
-    const title2 = "make REST API series";
-    const desc2 =
-      "I have already crated node.js, express.js, ejs and mongodb series. It is time for making a REST API series";
-
-    const title3 = "make Docker series";
-    const desc3 =
-      "It has a been while planning for Docker series. It is now hight time to start a series for this demanding topic";
+  const Product1 = () => {
+    const imageSource1 =
+      "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
+    const title1 = "iPhone 9";
+    const description1 = "An apple mobile which is nothing like apple";
+    const price1 = 549;
+    const rating1 = 4.6;
+    const brand1 = "Apple";
+    const category1 = "smartphones";
 
     return (
-      <div>
-        <header>
-          <h1>Todo App</h1>
-        </header>
-
-        <main>
-          <section>
-            <article>
-              <h3>{title1}</h3>
-              <p>{desc1} </p>
-            </article>
-
-            <article>
-              <h3>{title2}</h3>
-              <p>{desc2} </p>
-            </article>
-
-            <article>
-              <h3>{title3}</h3>
-              <p>{desc3} </p>
-            </article>
-          </section>
-        </main>
-
-        <footer>
-          <p>Developed by Anisul Islam with &hearts;</p>
-        </footer>
-      </div>
+      <article>
+        <img src={imageSource1} alt="iPhone 9" />
+        <h2>{title1}</h2>
+        <p>description: {description1}</p>
+        <p>Price: {price1}</p>
+        <p>rating: {rating1}</p>
+        <p>brand: {brand1}</p>
+        <p>category: {category1}</p>
+      </article>
     );
   };
 
-  export default App;
+  const Product2 = () => {
+    const imageSource2 =
+      "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
+    const title2 = "iPhone X";
+    const description2 =
+      "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
+    const price2 = 899;
+    const rating2 = 4.44;
+    const brand2 = "Apple";
+    const category2 = "smartphones";
+    return (
+      <article>
+        <img src={imageSource2} alt="iPhone X" />
+        <h2>{title2}</h2>
+        <p>description: {description2}</p>
+        <p>Price: {price2}</p>
+        <p>rating: {rating2}</p>
+        <p>brand: {brand2}</p>
+        <p>category: {category2}</p>
+      </article>
+    );
+  };
+
+  const Products = () => {
+    return (
+      <section>
+        <Product1 />
+        <Product2 />
+      </section>
+    );
+  };
+
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(
+    <div>
+      <header>
+        <h2>Anis Express</h2>
+      </header>
+      <main>
+        <aside>this is sidebar</aside>
+        <Products />
+      </main>
+      <footer>this is a footer</footer>
+    </div>
+  );
   ```
 
-- **Code Example - 8 (Decompisite component)**
-
-- create a folder named as components inside src folder then create Header, Footer, Todos component for decomposing the App.js
+- **Code Example - 10 (create Header, Sidebar, Footer component)**
 
   ```js
-    // Create Header.js and import it into App.js
-    import React from "react";
-
-    const Header = () => {
-      return (
-        <header>
-          <h1>Todo App</h1>
-        </header>
-      );
-    };
-
-    export default Header;
-
-    // Create Footer.js and import it into App.js
-    import React from "react";
-
-    const Footer = () => {
-      return (
-        <footer>
-          <p>Developed by Anisul Islam with &hearts;</p>
-        </footer>
-      );
-    };
-
-    export default Footer;
-
-    // Create Todos.js
-    import React from "react";
-
-    const Todos = () => {
-      const title1 = "Make React series";
-    const desc1 =
-      "I have to create a lot of videos for react series starting from a scratch.";
-
-    const title2 = "make REST API series";
-    const desc2 =
-      "I have already crated node.js, express.js, ejs and mongodb series. It is time for making a REST API series";
-
-    const title3 = "make Docker series";
-    const desc3 =
-      "It has a been while planning for Docker series. It is now hight time to start a series for this demanding topic";
-
-      return (
-        <section>
-          <article>
-            <h3>{title1}</h3>
-            <p>{desc1} </p>
-          </article>
-
-          <article>
-            <h3>{title2}</h3>
-            <p>{desc2} </p>
-          </article>
-
-          <article>
-            <h3>{title3}</h3>
-            <p>{desc3} </p>
-          </article>
-        </section>
-      );
-    };
-
-    export default Todos;
-
-    // App.js
-    import React from "react";
-
-    import Footer from "./components/Footer";
-    import Header from "./components/Header";
-    import Todos from "./components/Todos";
-
-    const App = () => {
-      const title1 = "Make React series";
-      const desc1 =
-        "I have to create a lot of videos for react series starting from a scratch.";
-
-      const title2 = "make REST API series";
-      const desc2 =
-        "I have already crated node.js, express.js, ejs and mongodb series. It is time for making a REST API series";
-
-      const title3 = "make Docker series";
-      const desc3 =
-        "It has a been while planning for Docker series. It is now hight time to start a series for this demanding topic";
-
-      return (
-        <div>
-          <Header />
-          <main>
-            <Todos/>
-          </main>
-          <Footer />
-        </div>
-      );
-    };
-
-    export default App;
-
+  const Header = () => {
+    return (
+      <header>
+        <h2>Anis Express</h2>
+      </header>
+    );
+  };
+  const Sidebar = () => {
+    return <aside>this is sidebar</aside>;
+  };
+  const Footer = () => {
+    return <footer>this is a footer</footer>;
+  };
   ```
 
-## [7. Adding CSS Styling part-1](https://youtu.be/02YWKDxLpwk)
+- **Code Example - 11 (App root component)**
 
-- Inline styling
-- CSS Stylesheet
-- CSS module
-- third party packages such as Material UI, styled components
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-- **Code Example - 9 (Styling component with CSS)**
-- create and import App.css
+const Product1 = () => {
+  const imageSource1 = "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
+  const title1 = "iPhone 9";
+  const description1 = "An apple mobile which is nothing like apple";
+  const price1 = 549;
+  const rating1 = 4.6;
+  const brand1 = "Apple";
+  const category1 = "smartphones";
 
-  ```css
-  /*code for the App.css */
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    text-decoration: none;
-  }
-  .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  header {
-    height: 10vh;
-    background-color: #2c2c2c;
-    color: white;
-  }
-  main {
-    min-height: 85vh;
-    background-color: #3c3c3c;
-    padding: 1rem;
-  }
-  .todos {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-  }
-  .todo {
-    background-color: bisque;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+  return (
+    <article>
+      <img src={imageSource1} alt="iPhone 9" />
+      <h2>{title1}</h2>
+      <p>description: {description1}</p>
+      <p>Price: {price1}</p>
+      <p>rating: {rating1}</p>
+      <p>brand: {brand1}</p>
+      <p>category: {category1}</p>
+    </article>
+  );
+};
 
-  footer {
-    height: 5vh;
-    background-color: #4c4c4c;
-    color: white;
-  }
+const Product2 = () => {
+  const imageSource2 = "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
+  const title2 = "iPhone X";
+  const description2 =
+    "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
+  const price2 = 899;
+  const rating2 = 4.44;
+  const brand2 = "Apple";
+  const category2 = "smartphones";
+  return (
+    <article>
+      <img src={imageSource2} alt="iPhone X" />
+      <h2>{title2}</h2>
+      <p>description: {description2}</p>
+      <p>Price: {price2}</p>
+      <p>rating: {rating2}</p>
+      <p>brand: {brand2}</p>
+      <p>category: {category2}</p>
+    </article>
+  );
+};
 
-  /* responsive */
-  @media (max-width: 992px) {
-    .todos {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  @media (max-width: 768px) {
-    .todos {
-      grid-template-columns: repeat(1, minmax(0, 1fr));
-    }
-  }
-  ```
+const Products = () => {
+  return (
+    <section>
+      <Product1 />
+      <Product2 />
+    </section>
+  );
+};
+
+const Header = () => {
+  return (
+    <header>
+      <h2>Anis Express</h2>
+    </header>
+  );
+};
+const Sidebar = () => {
+  return <aside>this is sidebar</aside>;
+};
+const Footer = () => {
+  return <footer>this is a footer</footer>;
+};
+
+const App = () => {
+  return (
+    <div>
+      <Header />
+      <main>
+        <Sidebar />
+        <Products />
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+```
+
+- **Code Example - 12 (export, import modular component)**
+
+  - export default can be used once in a file where multiple exports can be used
+  - importing export default does not require {} and you can name anything on the other hand only exports requires {} and naming is strict
+  - export App component
 
   ```js
-    // Header.js
-    import React from "react";
-
-    const Header = () => {
-      return (
-        <header className="center">
-          <h1>Todo App</h1>
-        </header>
-      );
-    };
-
-    export default Header;
-
-    // Footer.js
-    import React from "react";
-
-    const Footer = () => {
-      return (
-        <footer className="center">
-          <p>Developed by Anisul Islam with &hearts;</p>
-        </footer>
-      );
-    };
-
-    export default Footer;
-
-    // Todos.js
-    import React from "react";
-
-    const Todos = () => {
-      return (
-        <section className="todos">
-          <article className="todo">
-            <h3>{title1}</h3>
-            <p>{desc1} </p>
-          </article>
-
-          <article className="todo">
-            <h3>{title2}</h3>
-            <p>{desc2} </p>
-          </article>
-
-          <article className="todo">
-            <h3>{title3}</h3>
-            <p>{desc3} </p>
-          </article>
-        </section>
-      );
-    };
-
-    export default Todos;
-
-    // App.js
-    import React from "react";
-
-    import Footer from "./components/Footer";
-    import Header from "./components/Header";
-    import Todos from "./components/Todos";
-
-    import { todosData } from "./data";
-    import './App.css';
-
-    const App = () => {
-      const title1 = "Make React series";
-    const desc1 =
-      "I have to create a lot of videos for react series starting from a scratch.";
-
-    const title2 = "make REST API series";
-    const desc2 =
-      "I have already crated node.js, express.js, ejs and mongodb series. It is time for making a REST API series";
-
-    const title3 = "make Docker series";
-    const desc3 =
-      "It has a been while planning for Docker series. It is now hight time to start a series for this demanding topic";
-
-      return (
-        <div>
-          <Header />
-          <main>
-            <Todos/>
-          </main>
-          <Footer />
-        </div>
-      );
-    };
-
-    export default App;
-
-  ```
-
-## [8. Props and destructuring](https://youtu.be/GQx58yfYqxo)
-
-- **props object: we can pass information from one component to another using props object.**
-- **Code Example - 10 (Props for simple data)**
-
-  ```js
+  // App.js
   import React from "react";
+  const Product1 = () => {
+    const imageSource1 =
+      "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
+    const title1 = "iPhone 9";
+    const description1 = "An apple mobile which is nothing like apple";
+    const price1 = 549;
+    const rating1 = 4.6;
+    const brand1 = "Apple";
+    const category1 = "smartphones";
 
-  import Footer from "./components/Footer";
-  import Header from "./components/Header";
-  import Todos from "./components/Todos";
+    return (
+      <article>
+        <img src={imageSource1} alt="iPhone 9" />
+        <h2>{title1}</h2>
+        <p>description: {description1}</p>
+        <p>Price: {price1}</p>
+        <p>rating: {rating1}</p>
+        <p>brand: {brand1}</p>
+        <p>category: {category1}</p>
+      </article>
+    );
+  };
+
+  const Product2 = () => {
+    const imageSource2 =
+      "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
+    const title2 = "iPhone X";
+    const description2 =
+      "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
+    const price2 = 899;
+    const rating2 = 4.44;
+    const brand2 = "Apple";
+    const category2 = "smartphones";
+    return (
+      <article>
+        <img src={imageSource2} alt="iPhone X" />
+        <h2>{title2}</h2>
+        <p>description: {description2}</p>
+        <p>Price: {price2}</p>
+        <p>rating: {rating2}</p>
+        <p>brand: {brand2}</p>
+        <p>category: {category2}</p>
+      </article>
+    );
+  };
+
+  const Products = () => {
+    return (
+      <section>
+        <Product1 />
+        <Product2 />
+      </section>
+    );
+  };
+
+  const Header = () => {
+    return (
+      <header>
+        <h2>Anis Express</h2>
+      </header>
+    );
+  };
+  const Sidebar = () => {
+    return <aside>this is sidebar</aside>;
+  };
+  const Footer = () => {
+    return <footer>this is a footer</footer>;
+  };
 
   const App = () => {
-    const title1 = "Make React series";
-    const desc1 =
-      "I have to create a lot of videos for react series starting from a scratch.";
-
-    const title2 = "make REST API series";
-    const desc2 =
-      "I have already crated node.js, express.js, ejs and mongodb series. It is time for making a REST API series";
-
-    const title3 = "make Docker series";
-    const desc3 =
-      "It has a been while planning for Docker series. It is now hight time to start a series for this demanding topic";
-
     return (
       <div>
         <Header />
         <main>
-          <Todos
-            title1={title1}
-            title2={title2}
-            title3={title3}
-            desc1={desc1}
-            desc2={desc2}
-            desc3={desc3}
-          />
+          <Sidebar />
+          <Products />
         </main>
         <Footer />
       </div>
@@ -639,66 +685,300 @@ const Todo = () => {
 
   export default App;
 
-  // Todos.js
+  // import in index.js
   import React from "react";
+  import ReactDOM from "react-dom/client";
+  import App from "./App";
 
-  const Todos = (props) => {
-    return (
-      <section className="todos">
-        <article className="todo">
-          <h3>{props.title1}</h3>
-          <p>{props.desc1} </p>
-        </article>
-
-        <article className="todo">
-          <h3>{props.title2}</h3>
-          <p>{props.desc2} </p>
-        </article>
-
-        <article className="todo">
-          <h3>{props.title3}</h3>
-          <p>{props.desc3} </p>
-        </article>
-      </section>
-    );
-  };
-
-  export default Todos;
-
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(<App />);
   ```
 
-- **Code Example - 11 (Destructuring)**
+- More practice for export,import
+  - **Code Example - 13 (More export, import)**
+  - separate all the components
+
+## [7. Adding CSS Styling part-1](https://youtu.be/02YWKDxLpwk)
+
+- Inline styling
+- CSS Stylesheet
+- CSS module
+- third party packages such as Material UI, styled components
+
+- **Code Example - 14 (Styling component with CSS)**
+- create and import App.css
+
+  ```css
+  /*code for the App.css */
+  /* reset code and common starts here  */
+  :root {
+    --primary-color: rgb(11, 181, 48);
+    --secondary-color: rgba(36, 122, 55, 0.9);
+    --padding: 0.5rem;
+    --transition: all 0.3s;
+    --border-radius: 0.6rem;
+    --box-shadow: 0.1rem 0.2rem 0.8rem rgba(205, 202, 202, 0.5);
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+    outline: none;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  .flex-space-around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* reset code and common ends here  */
+
+  /* header starts here  */
+  .header {
+    height: 10vh;
+    background-color: var(--primary-color);
+    color: white;
+  }
+  /* header ends here  */
+
+  /* main starts here  */
+  main {
+    height: 80vh;
+  }
+  .sidebar {
+    flex: 1;
+    padding: var(--padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-self: flex-start;
+    background-color: #e6e3e3;
+    height: 100%;
+    border-right: 1px solid var(--primary-color);
+  }
+  .main-content {
+    flex: 3;
+    height: 100%;
+    padding: var(--padding);
+    overflow: scroll;
+  }
+  .products {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+  .product__img {
+    width: 100%;
+    height: 15rem;
+    filter: saturate(0);
+    transition: var(--transition);
+  }
+  /* main ends here  */
+
+  /* footer starts here  */
+  .footer {
+    min-height: 10vh;
+    padding: var(--padding);
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.1rem;
+  }
+  /* footer ends here  */
+
+  /* responsiveness starts here  */
+  @media (max-width: 992px) {
+    .flex-space-around,
+    .flex-center {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+    .header {
+      min-height: 10vh;
+    }
+    .sidebar {
+      width: 100%;
+    }
+    .products {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .products {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+  }
+  /* responsiveness ends here  */
+  ```
 
   ```js
-  // Destructure the props in Todos.js
+  // App.js
   import React from "react";
 
-  const Todos = (props) => {
-    const { title1, title2, title3, desc1, desc2, desc3 } = props;
+  import Header from "./components/Header";
+  import Sidebar from "./components/Sidebar";
+  import Footer from "./components/Footer";
+  import Products from "./components/Products";
+
+  import "./App.css";
+
+  const App = () => {
     return (
-      <section className="todos">
-        <article className="todo">
-          <h3>{title1}</h3>
-          <p>{desc1} </p>
-        </article>
+      <div>
+        <Header />
+        <main className="flex-center">
+          <Sidebar />
+          <div className="main-content">
+            <Products />
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  };
 
-        <article className="todo">
-          <h3>{title2}</h3>
-          <p>{desc2} </p>
-        </article>
+  export default App;
 
-        <article className="todo">
-          <h3>{title3}</h3>
-          <p>{desc3} </p>
-        </article>
+  // Header.js
+    import React from "react";
+
+    const Header = () => {
+      return (
+        <header className="header flex-center">
+          <h2 className="header__title">Anis Express</h2>
+        </header>
+      );
+    };
+    export default Header;
+
+  // Sidebar.js
+  import React from "react";
+
+  const Sidebar = () => {
+    return <aside className="sidebar">this is sidebar</aside>;
+  };
+  export default Sidebar;
+
+  // Products.js
+  import React from "react";
+
+  import Product1 from "./Product1";
+  import Product2 from "./Product2";
+
+  const Products = () => {
+    return (
+      <section className="products">
+        <Product1 />
+        <Product1 />
+        <Product1 />
+        <Product2 />
       </section>
     );
   };
 
-  export default Todos;
+  export default Products;
+
+  // Product1.js
+  import React from "react";
+
+  const Product1 = () => {
+    const imageSource1 = "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
+    const title1 = "iPhone 9";
+    const description1 = "An apple mobile which is nothing like apple";
+    const price1 = 549;
+    const rating1 = 4.6;
+    const brand1 = "Apple";
+    const category1 = "smartphones";
+
+    return (
+      <article className="product">
+        <img src={imageSource1} alt="iPhone 9" className="product__img" />
+        <h2>{title1}</h2>
+        <p>description: {description1}</p>
+        <p>Price: {price1}</p>
+        <p>rating: {rating1}</p>
+        <p>brand: {brand1}</p>
+        <p>category: {category1}</p>
+      </article>
+    );
+  };
+  export default Product1;
+
+  // Product2.js
+  import React from "react";
+
+  const Product2 = () => {
+    const imageSource2 = "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
+    const title2 = "iPhone X";
+    const description2 =
+      "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
+    const price2 = 899;
+    const rating2 = 4.44;
+    const brand2 = "Apple";
+    const category2 = "smartphones";
+    return (
+      <article className="product">
+        <img src={imageSource2} className="product__img" alt="iPhone X" />
+        <h2>{title2}</h2>
+        <p>description: {description2}</p>
+        <p>Price: {price2}</p>
+        <p>rating: {rating2}</p>
+        <p>brand: {brand2}</p>
+        <p>category: {category2}</p>
+      </article>
+    );
+  };
+  export default Product2;
+
+  // Footer.js
+  import React from "react";
+
+    const Footer = () => {
+      return (
+        <footer className="footer flex-space-around">
+          <div className="footer__left">
+            <p className="footer__title">&copy;Copyright by Anisul Islam</p>
+          </div>
+          <div className="footer__right">
+            <p>social media icons</p>
+          </div>
+        </footer>
+      );
+    };
+
+    export default Footer;
   ```
 
-- **Code Example - 12 (props for complex data)**
+## [8. Props and destructuring](https://youtu.be/GQx58yfYqxo)
+
+- **props object: we can pass information from one component to another using props object. components communicate with each others via props. props is an object**
+  - how to pass, recieve, set default props
+  - how to pass JSX to component,
+- **Code Example - 15 (Props for simple data)**
+
+```js
+
+```
+
+- **Code Example - 16 (Destructuring)**
+
+  ```js
+
+  ```
+
+- **Code Example - 17 (props for complex data)**
 
   ```js
   // App.js
@@ -768,45 +1048,13 @@ const Todo = () => {
   export default Todos;
   ```
 
-## [9. Module - Export, import in details]
-
 - create data.js in src folder and move all the todos dummy data there and import in App.js for using it.
 
-- **Code Example - 13 (Module- export, import)**
+- **Code Example - 17 (Module- export, import)**
 
-  ```js
-  // src/data.js
-  import { getUniqueId } from "./utility/getUniqueId";
-  export const todosData = [
-    {
-      id: getUniqueId(),
-      title: "Make React series",
-      desc: "I have to create a lot of videos for react series starting from a scratch.",
-    },
-    {
-      id: getUniqueId(),
-      title: "Make REST API series",
-      desc: "I have already crated node.js, express.js, ejs and mongodb series. It is time for making a REST API series",
-    },
-    {
-      id: getUniqueId(),
-      title: "Make Docker series",
-      desc: "It has a been while planning for Docker series. It is now hight time to start a series for this demanding topic.",
-    },
-    {
-      id: getUniqueId(),
-      title: "Complete Go lang series",
-      desc: "I really wish to complete this series but beacuse of time limitation I am unable to do this.",
-    },
-  ];
+## [9. Mapping components](https://youtu.be/OwwmIzH7FzI)
 
-  // import the data.js in App.js
-  import { todosData } from "./data";
-  ```
-
-## [10. Mapping components](https://youtu.be/OwwmIzH7FzI)
-
-- **Code Example - 14 (Map component with for loop)**
+- **Code Example - 18 (Map component with for loop)**
 
   ```js
   import React from "react";
@@ -829,7 +1077,7 @@ const Todo = () => {
   export default Todos;
   ```
 
-- **Code Example - 15 (Map component with forEach higher order Array function)**
+- **Code Example - 19 (Map component with forEach higher order Array function)**
 
   ```js
   import React from "react";
@@ -854,7 +1102,7 @@ const Todo = () => {
   export default Todos;
   ```
 
-- **Code Example - 16 (Map component with map higher order Array function)**
+- **Code Example - 20 (Map component with map higher order Array function)**
 
   ```js
   import React from "react";
@@ -875,7 +1123,7 @@ const Todo = () => {
   export default Todos;
   ```
 
-## [11. Adding unique key to each child](https://youtu.be/Dj7ynTdhy1Q)
+## [10. Adding unique key to each child](https://youtu.be/Dj7ynTdhy1Q)
 
 - we need to map each children of list uniquly so that react can identify them wor properly
 - we can use index or any external package like [uuid](https://www.npmjs.com/package/uuid)
@@ -919,7 +1167,7 @@ const Todo = () => {
   // Now add the unique Id in App.js
   ```
 
-## [12. creating Todo Component]
+## [11. creating Todo Component]
 
 - Add more todo data in App.js
 - Create Todo.js component and make change only Todos.js
@@ -959,7 +1207,7 @@ const Todo = () => {
 
   ```
 
-## [13. PropTypes](https://youtu.be/mnPJrxHUarA)
+## [12. PropTypes](https://youtu.be/mnPJrxHUarA)
 
 - [documentation is here](https://reactjs.org/docs/typechecking-with-proptypes.html)
 - **catch bugs with typechecking.**
@@ -1037,7 +1285,7 @@ const Todo = () => {
 
   ```
 
-## [14. Conditional rendering](https://youtu.be/roSfZjXp5us)
+## [13. Conditional rendering](https://youtu.be/roSfZjXp5us)
 
 - rendering components based on if-else, element variable, ternary, short circuit
 
@@ -1108,9 +1356,9 @@ const Todo = () => {
   );
   ```
 
-## [15. Assignment 1: products-listing-app](https://github.com/anisul-Islam/react-assignment-1-products-listing-app)
+## [14. Assignment 1: products-listing-app](https://github.com/anisul-Islam/react-assignment-1-products-listing-app)
 
-## [16. Adding CSS Styling part-2](https://youtu.be/02YWKDxLpwk)
+## [15. Adding CSS Styling part-2](https://youtu.be/02YWKDxLpwk)
 
 - Inline styling
 
@@ -1158,25 +1406,9 @@ const Todo = () => {
     export default Footer;
     ```
 
-## [17. Fragment](https://youtu.be/tw8Lj2xPf3I)
-
-- React.Fragment or <> </> helps us to avoid div soup or unncessary div nesting
-- **Code Example - 23 (Fragment)**
-
-  ```js
-  // Inside App.js
-  return (
-    <>
-      <Header />
-      <main>{todosData.length > 0 && <Todos todos={todosData} />}</main>
-      <Footer />
-    </>
-  );
-  ```
-
 ## Part-3 (class component, state, useState hook, event handler, controlled component, state lifting, react dev-tools, more on css)
 
-## [18. add font awesome / react icons](https://youtu.be/jHDP6myBXRM)
+## [16. add font awesome / react icons](https://youtu.be/jHDP6myBXRM)
 
 - [How to use react-icons](https://react-icons.github.io/react-icons/)
 - **Code Example - 24 (Adding & styling react icons )**
@@ -1262,7 +1494,7 @@ const Todo = () => {
 
   ```
 
-## [19. useState Hooks](https://youtu.be/skUOiqcVurY)
+## [17. useState Hooks](https://youtu.be/skUOiqcVurY)
 
 - useState() hook helps us to track state in a functional component.
 - **Code Example - 25 (Counter App )**
@@ -1536,6 +1768,7 @@ const Todo = () => {
 ## [25. data passing: child to parent component](https://youtu.be/xdW2uFA-SOg)
 
 - Another practical example: https://youtu.be/h7yq5lfDZc8
+- [Freecodecamp doc](https://www.freecodecamp.org/news/what-is-lifting-state-up-in-react/)
 - **Code Example - 29 (state lifting)**
 
   ```js
