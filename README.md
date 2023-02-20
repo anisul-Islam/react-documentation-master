@@ -606,7 +606,7 @@ root.render(<App />);
 
 - Inline styling
 - CSS Stylesheet
-- CSS module
+- CSS module [why you should use css module]
 - third party packages such as Material UI, styled components
 
 - **Code Example - 14 (Styling component with CSS)**
@@ -845,7 +845,7 @@ root.render(<App />);
 
 ## [8. Props and destructuring](https://youtu.be/GQx58yfYqxo)
 
-- **props object: we can pass information from one component to another using props object. components communicate with each others via props. props is an object**
+- **props object: we can pass information from one component to another using props object. components communicate with each others via props. props is an object. props are like attributes in our HTML tag**
   - how to pass, recieve, set default props
   - how to pass JSX to component,
 - **Code Example - 15 (Props sending)**
@@ -984,25 +984,148 @@ export default Products;
 
 - create data.js in src folder and move all the todos dummy data there and import in App.js for using it.
 - Can you load all the data from App.js to Products.js as props
+- **Code Example - 18 (import data from another file and pass as props)**
+
+```js
+// App.js
+import React from "react";
+
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import Footer from "./components/Footer";
+import Products from "./components/Products";
+import { products } from "./data";
+
+import "./App.css";
+
+const App = () => {
+  return (
+    <div>
+      <Header />
+      <main className="flex-center">
+        <Sidebar />
+        <div className="main-content">
+          <Products products={products} />
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default App;
+
+// Products.js
+import React from "react";
+import Product from "./Product";
+
+const Products = ({ products }) => {
+  return (
+    <section className="products">
+      <Product
+        imageSource={products[0].thumbnail}
+        title={products[0].title}
+        description={products[0].description}
+        price={products[0].price}
+        rating={products[0].rating}
+        brand={products[0].brand}
+        category={products[0].category}
+      />
+      <Product
+        imageSource={products[1].thumbnail}
+        title={products[1].title}
+        description={products[1].description}
+        price={products[1].price}
+        rating={products[1].rating}
+        brand={products[1].brand}
+        category={products[1].category}
+      />
+    </section>
+  );
+};
+export default Products;
+```
 
 ## [9. Mapping components](https://youtu.be/OwwmIzH7FzI)
 
-- **Code Example - 18 (Map component with for loop)**
+- **Code Example - 19 (Map component with for loop)**
 
 ```js
+import React from "react";
+import Product from "./Product";
 
+const Products = ({ products }) => {
+  const productsElement = [];
+  for (let index = 0; index < products.length; index++) {
+    productsElement.push(
+      <Product
+        imageSource={products[index].thumbnail}
+        title={products[index].title}
+        description={products[index].description}
+        price={products[index].price}
+        rating={products[index].rating}
+        brand={products[index].brand}
+        category={products[index].category}
+      />
+    );
+  }
+  return <section className="products">{productsElement}</section>;
+};
+export default Products;
 ```
 
-- **Code Example - 19 (Map component with forEach higher order Array function)**
+- **Code Example - 20 (Map component with forEach higher order Array function)**
 
   ```js
+  import React from "react";
+  import Product from "./Product";
 
+  const Products = ({ products }) => {
+    const productsElement = [];
+
+    products.forEach((product) => {
+      productsElement.push(
+        <Product
+          imageSource={product.thumbnail}
+          title={product.title}
+          description={product.description}
+          price={product.price}
+          rating={product.rating}
+          brand={product.brand}
+          category={product.category}
+        />
+      );
+    });
+
+    return <section className="products">{productsElement}</section>;
+  };
+  export default Products;
   ```
 
-- **Code Example - 20 (Map component with map higher order Array function)**
+- **Code Example - 21 (Map component with map higher order Array function)**
 
   ```js
+  import React from "react";
+  import Product from "./Product";
 
+  const Products = ({ products }) => {
+    const productsElement = products.map((product) => {
+      return (
+        <Product
+          imageSource={product.thumbnail}
+          title={product.title}
+          description={product.description}
+          price={product.price}
+          rating={product.rating}
+          brand={product.brand}
+          category={product.category}
+        />
+      );
+    });
+
+    return <section className="products">{productsElement}</section>;
+  };
+  export default Products;
   ```
 
 ## [10. Adding unique key to each child](https://youtu.be/Dj7ynTdhy1Q)
@@ -1018,7 +1141,7 @@ export default Products;
 
   ```
 
-- **Code Example - 17 (Adding unique key)**
+- **Code Example - 22 (Adding unique key)**
 
   ```js
   // first use index
@@ -1026,21 +1149,27 @@ export default Products;
   // thirs use the uuid if id is not available inside the data
 
   import React from "react";
+  import Product from "./Product";
 
-  const Todos = (props) => {
-    const { todos } = props;
+  const Products = ({ products }) => {
+    const productsElement = products.map((product) => {
+      return (
+        <Product
+          key={product.id}
+          imageSource={product.thumbnail}
+          title={product.title}
+          description={product.description}
+          price={product.price}
+          rating={product.rating}
+          brand={product.brand}
+          category={product.category}
+        />
+      );
+    });
 
-    const renderTodosElement = todos.map((todo) => (
-      <article className="todo" key={todo.id}>
-        <h3>{todo.title}</h3>
-        <p>{todo.desc} </p>
-      </article>
-    ));
-
-    return <section className="todos">{renderTodosElement}</section>;
+    return <section className="products">{productsElement}</section>;
   };
-
-  export default Todos;
+  export default Products;
 
   // get a uniqueId -> utility/getUniqueId.js
   import { v4 as uuidv4 } from "uuid";
@@ -1049,45 +1178,59 @@ export default Products;
   // Now add the unique Id in App.js
   ```
 
-## [11. creating Todo Component]
+## [11. More about props](https://youtu.be/Dj7ynTdhy1Q)
 
-- Add more todo data in App.js
-- Create Todo.js component and make change only Todos.js
-- **Code Example - 18 (Adding Todo Component)**
+- default props
+- jsx spread syntax
 
-  ```js
-  // Todo.js
-  import React from "react";
+```js
+import React from "react";
+import Product from "./Product";
 
-  const Todo = (props) => {
-    const { todo } = props;
-    return (
-      <article className="todo" key={todo.id}>
-        <h3>{todo.title}</h3>
-        <p>{todo.desc} </p>
+const Products = ({ products }) => {
+  const productsElement = products.map((product) => {
+    return <Product key={product.id} {...product} />;
+  });
+
+  return <section className="products">{productsElement}</section>;
+};
+export default Products;
+```
+
+- passing jsx as children
+
+```js
+import React from "react";
+
+const Card = ({ children }) => {
+  return <div className="card">{children}</div>;
+};
+
+export default Card;
+
+import React from "react";
+import Card from "./Card";
+
+const Product = (props) => {
+  const { thumbnail, title, description, price, rating, brand, category } =
+    props;
+  return (
+    <Card>
+      <article className="product">
+        <img src={thumbnail} alt="iPhone 9" className="product__img" />
+        <h2>{title}</h2>
+        <p>description: {description}</p>
+        <p>Price: {price}</p>
+        <p>rating: {rating}</p>
+        <p>brand: {brand}</p>
+        <p>category: {category}</p>
       </article>
-    );
-  };
+    </Card>
+  );
+};
+export default Product;
 
-  export default Todo;
-
-  // Todos.js
-  import React from "react";
-  import Todo from "./Todo";
-
-  const Todos = (props) => {
-    const { todos } = props;
-
-    const renderTodosElement = todos.map((todo) => (
-      <Todo key={todo.id} todo={todo} />
-    ));
-
-    return <section className="todos">{renderTodosElement}</section>;
-  };
-
-  export default Todos;
-
-  ```
+```
 
 ## [12. PropTypes](https://youtu.be/mnPJrxHUarA)
 
