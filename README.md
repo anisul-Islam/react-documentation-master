@@ -408,83 +408,7 @@ const Todo = () => {
   );
   ```
 
-- **Code Example - 9 (Decomposite & Nested Component)**
-
-  ```js
-  import React from "react";
-  import ReactDOM from "react-dom/client";
-
-  const Product1 = () => {
-    const imageSource1 =
-      "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
-    const title1 = "iPhone 9";
-    const description1 = "An apple mobile which is nothing like apple";
-    const price1 = 549;
-    const rating1 = 4.6;
-    const brand1 = "Apple";
-    const category1 = "smartphones";
-
-    return (
-      <article>
-        <img src={imageSource1} alt="iPhone 9" />
-        <h2>{title1}</h2>
-        <p>description: {description1}</p>
-        <p>Price: {price1}</p>
-        <p>rating: {rating1}</p>
-        <p>brand: {brand1}</p>
-        <p>category: {category1}</p>
-      </article>
-    );
-  };
-
-  const Product2 = () => {
-    const imageSource2 =
-      "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
-    const title2 = "iPhone X";
-    const description2 =
-      "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
-    const price2 = 899;
-    const rating2 = 4.44;
-    const brand2 = "Apple";
-    const category2 = "smartphones";
-    return (
-      <article>
-        <img src={imageSource2} alt="iPhone X" />
-        <h2>{title2}</h2>
-        <p>description: {description2}</p>
-        <p>Price: {price2}</p>
-        <p>rating: {rating2}</p>
-        <p>brand: {brand2}</p>
-        <p>category: {category2}</p>
-      </article>
-    );
-  };
-
-  const Products = () => {
-    return (
-      <section>
-        <Product1 />
-        <Product2 />
-      </section>
-    );
-  };
-
-  const root = ReactDOM.createRoot(document.getElementById("root"));
-  root.render(
-    <div>
-      <header>
-        <h2>Anis Express</h2>
-      </header>
-      <main>
-        <aside>this is sidebar</aside>
-        <Products />
-      </main>
-      <footer>this is a footer</footer>
-    </div>
-  );
-  ```
-
-- **Code Example - 10 (create Header, Sidebar, Footer component)**
+- **Code Example - 9 (create Header, Sidebar, Footer component)**
 
   ```js
   const Header = () => {
@@ -502,13 +426,13 @@ const Todo = () => {
   };
   ```
 
-- **Code Example - 11 (App root component)**
+- **Code Example - 10 (App root component, Nested components)**
 
 ```js
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-const Product1 = () => {
+const Products = () => {
   const imageSource1 = "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
   const title1 = "iPhone 9";
   const description1 = "An apple mobile which is nothing like apple";
@@ -517,20 +441,6 @@ const Product1 = () => {
   const brand1 = "Apple";
   const category1 = "smartphones";
 
-  return (
-    <article>
-      <img src={imageSource1} alt="iPhone 9" />
-      <h2>{title1}</h2>
-      <p>description: {description1}</p>
-      <p>Price: {price1}</p>
-      <p>rating: {rating1}</p>
-      <p>brand: {brand1}</p>
-      <p>category: {category1}</p>
-    </article>
-  );
-};
-
-const Product2 = () => {
   const imageSource2 = "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
   const title2 = "iPhone X";
   const description2 =
@@ -539,24 +449,27 @@ const Product2 = () => {
   const rating2 = 4.44;
   const brand2 = "Apple";
   const category2 = "smartphones";
-  return (
-    <article>
-      <img src={imageSource2} alt="iPhone X" />
-      <h2>{title2}</h2>
-      <p>description: {description2}</p>
-      <p>Price: {price2}</p>
-      <p>rating: {rating2}</p>
-      <p>brand: {brand2}</p>
-      <p>category: {category2}</p>
-    </article>
-  );
-};
 
-const Products = () => {
   return (
     <section>
-      <Product1 />
-      <Product2 />
+      <article>
+        <img src={imageSource1} alt="iPhone 9" />
+        <h2>{title1}</h2>
+        <p>description: {description1}</p>
+        <p>Price: {price1}</p>
+        <p>rating: {rating1}</p>
+        <p>brand: {brand1}</p>
+        <p>category: {category1}</p>
+      </article>
+      <article>
+        <img src={imageSource2} alt="iPhone X" />
+        <h2>{title2}</h2>
+        <p>description: {description2}</p>
+        <p>Price: {price2}</p>
+        <p>rating: {rating2}</p>
+        <p>brand: {brand2}</p>
+        <p>category: {category2}</p>
+      </article>
     </section>
   );
 };
@@ -592,7 +505,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
 ```
 
-- **Code Example - 12 (export, import modular component)**
+- **Code Example - 11 (export, import modular component)**
 
   - export default can be used once in a file where multiple exports can be used
   - importing export default does not require {} and you can name anything on the other hand only exports requires {} and naming is strict
@@ -600,8 +513,11 @@ root.render(<App />);
 
   ```js
   // App.js
+
   import React from "react";
-  const Product1 = () => {
+  import ReactDOM from "react-dom/client";
+
+  const Products = () => {
     const imageSource1 =
       "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
     const title1 = "iPhone 9";
@@ -611,20 +527,6 @@ root.render(<App />);
     const brand1 = "Apple";
     const category1 = "smartphones";
 
-    return (
-      <article>
-        <img src={imageSource1} alt="iPhone 9" />
-        <h2>{title1}</h2>
-        <p>description: {description1}</p>
-        <p>Price: {price1}</p>
-        <p>rating: {rating1}</p>
-        <p>brand: {brand1}</p>
-        <p>category: {category1}</p>
-      </article>
-    );
-  };
-
-  const Product2 = () => {
     const imageSource2 =
       "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
     const title2 = "iPhone X";
@@ -634,24 +536,27 @@ root.render(<App />);
     const rating2 = 4.44;
     const brand2 = "Apple";
     const category2 = "smartphones";
-    return (
-      <article>
-        <img src={imageSource2} alt="iPhone X" />
-        <h2>{title2}</h2>
-        <p>description: {description2}</p>
-        <p>Price: {price2}</p>
-        <p>rating: {rating2}</p>
-        <p>brand: {brand2}</p>
-        <p>category: {category2}</p>
-      </article>
-    );
-  };
 
-  const Products = () => {
     return (
       <section>
-        <Product1 />
-        <Product2 />
+        <article>
+          <img src={imageSource1} alt="iPhone 9" />
+          <h2>{title1}</h2>
+          <p>description: {description1}</p>
+          <p>Price: {price1}</p>
+          <p>rating: {rating1}</p>
+          <p>brand: {brand1}</p>
+          <p>category: {category1}</p>
+        </article>
+        <article>
+          <img src={imageSource2} alt="iPhone X" />
+          <h2>{title2}</h2>
+          <p>description: {description2}</p>
+          <p>Price: {price2}</p>
+          <p>rating: {rating2}</p>
+          <p>brand: {brand2}</p>
+          <p>category: {category2}</p>
+        </article>
       </section>
     );
   };
@@ -669,7 +574,6 @@ root.render(<App />);
   const Footer = () => {
     return <footer>this is a footer</footer>;
   };
-
   const App = () => {
     return (
       <div>
@@ -874,27 +778,10 @@ root.render(<App />);
   // Products.js
   import React from "react";
 
-  import Product1 from "./Product1";
-  import Product2 from "./Product2";
 
   const Products = () => {
-    return (
-      <section className="products">
-        <Product1 />
-        <Product1 />
-        <Product1 />
-        <Product2 />
-      </section>
-    );
-  };
-
-  export default Products;
-
-  // Product1.js
-  import React from "react";
-
-  const Product1 = () => {
-    const imageSource1 = "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
+    const imageSource1 =
+      "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
     const title1 = "iPhone 9";
     const description1 = "An apple mobile which is nothing like apple";
     const price1 = 549;
@@ -902,25 +789,8 @@ root.render(<App />);
     const brand1 = "Apple";
     const category1 = "smartphones";
 
-    return (
-      <article className="product">
-        <img src={imageSource1} alt="iPhone 9" className="product__img" />
-        <h2>{title1}</h2>
-        <p>description: {description1}</p>
-        <p>Price: {price1}</p>
-        <p>rating: {rating1}</p>
-        <p>brand: {brand1}</p>
-        <p>category: {category1}</p>
-      </article>
-    );
-  };
-  export default Product1;
-
-  // Product2.js
-  import React from "react";
-
-  const Product2 = () => {
-    const imageSource2 = "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
+    const imageSource2 =
+      "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
     const title2 = "iPhone X";
     const description2 =
       "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
@@ -928,19 +798,31 @@ root.render(<App />);
     const rating2 = 4.44;
     const brand2 = "Apple";
     const category2 = "smartphones";
+
     return (
-      <article className="product">
-        <img src={imageSource2} className="product__img" alt="iPhone X" />
-        <h2>{title2}</h2>
-        <p>description: {description2}</p>
-        <p>Price: {price2}</p>
-        <p>rating: {rating2}</p>
-        <p>brand: {brand2}</p>
-        <p>category: {category2}</p>
-      </article>
+      <section className="products">
+        <article className="product">
+          <img src={imageSource1} alt="iPhone 9" className="product__img"/>
+          <h2>{title1}</h2>
+          <p>description: {description1}</p>
+          <p>Price: {price1}</p>
+          <p>rating: {rating1}</p>
+          <p>brand: {brand1}</p>
+          <p>category: {category1}</p>
+        </article>
+        <article className="product">
+          <img src={imageSource2} alt="iPhone X" className="product__img"/>
+          <h2>{title2}</h2>
+          <p>description: {description2}</p>
+          <p>Price: {price2}</p>
+          <p>rating: {rating2}</p>
+          <p>brand: {brand2}</p>
+          <p>category: {category2}</p>
+        </article>
+      </section>
     );
   };
-  export default Product2;
+  export default Products;
 
   // Footer.js
   import React from "react";
@@ -966,161 +848,161 @@ root.render(<App />);
 - **props object: we can pass information from one component to another using props object. components communicate with each others via props. props is an object**
   - how to pass, recieve, set default props
   - how to pass JSX to component,
-- **Code Example - 15 (Props for simple data)**
+- **Code Example - 15 (Props sending)**
 
 ```js
+import React from "react";
+import Product from "./Product";
 
+const Products = () => {
+  const imageSource1 = "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
+  const title1 = "iPhone 9";
+  const description1 = "An apple mobile which is nothing like apple";
+  const price1 = 549;
+  const rating1 = 4.6;
+  const brand1 = "Apple";
+  const category1 = "smartphones";
+
+  const imageSource2 = "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
+  const title2 = "iPhone X";
+  const description2 =
+    "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
+  const price2 = 899;
+  const rating2 = 4.44;
+  const brand2 = "Apple";
+  const category2 = "smartphones";
+
+  return (
+    <section className="products">
+      <Product
+        imageSource={imageSource1}
+        title={title1}
+        description={description1}
+        price={price1}
+        rating={rating1}
+        brand={brand1}
+        category={category1}
+      />
+      <Product
+        imageSource={imageSource2}
+        title={title2}
+        description={description2}
+        price={price2}
+        rating={rating2}
+        brand={brand2}
+        category={category2}
+      />
+    </section>
+  );
+};
+export default Products;
 ```
 
-- **Code Example - 16 (Destructuring)**
+- **Code Example - 16 (props recieveing & Destructuring)**
 
   ```js
+  import React from "react";
 
+  const Product = (props) => {
+    const { imageSource, title, description, price, rating, brand, category } =
+      props;
+    return (
+      <article className="product">
+        <img src={imageSource} alt="iPhone 9" className="product__img" />
+        <h2>{title}</h2>
+        <p>description: {description}</p>
+        <p>Price: {price}</p>
+        <p>rating: {rating}</p>
+        <p>brand: {brand}</p>
+        <p>category: {category}</p>
+      </article>
+    );
+  };
+  export default Product;
   ```
 
 - **Code Example - 17 (props for complex data)**
 
   ```js
-  // App.js
+  // Products.js
   import React from "react";
+  import Product from "./Product";
 
-  import Footer from "./components/Footer";
-  import Header from "./components/Header";
-  import Todos from "./components/Todos";
-
-  const App = () => {
-    const todosData = [
+  const Products = () => {
+    const products = [
       {
         id: 1,
-        title: "Make React series",
-        desc: "I have to create a lot of videos for react series starting from a scratch.",
+        title: "iPhone 9",
+        description: "An apple mobile which is nothing like apple",
+        price: 549,
+        discountPercentage: 12.96,
+        rating: 4.69,
+        stock: 94,
+        brand: "Apple",
+        category: "smartphones",
+        thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
       },
       {
         id: 2,
-        title: "make REST API series",
-        desc: "I have already crated node.js, express.js, ejs and mongodb series. It is time for making a REST API series",
-      },
-      {
-        id: 3,
-        title: "make Docker series",
-        desc: "It has a been while planning for Docker series. It is now hight time to start a series for this demanding topic.",
+        title: "iPhone X",
+        description:
+          "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+        price: 899,
+        discountPercentage: 17.94,
+        rating: 4.44,
+        stock: 34,
+        brand: "Apple",
+        category: "smartphones",
+        thumbnail: "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
       },
     ];
-
     return (
-      <div>
-        <Header />
-        <main>
-          <Todos todos={todosData} />
-        </main>
-        <Footer />
-      </div>
-    );
-  };
-
-  export default App;
-
-  // Todos.js
-  import React from "react";
-
-  const Todos = (props) => {
-    const { todos } = props;
-    return (
-      <section className="todos">
-        <article className="todo">
-          <h3>{todos[0].title}</h3>
-          <p>{todos[0].desc} </p>
-        </article>
-
-        <article className="todo">
-          <h3>{todos[1].title}</h3>
-          <p>{todos[1].desc} </p>
-        </article>
-
-        <article className="todo">
-          <h3>{todos[2].title}</h3>
-          <p>{todos[2].desc} </p>
-        </article>
+      <section className="products">
+        <Product
+          imageSource={products[0].thumbnail}
+          title={products[0].title}
+          description={products[0].description}
+          price={products[0].price}
+          rating={products[0].rating}
+          brand={products[0].brand}
+          category={products[0].category}
+        />
+        <Product
+          imageSource={products[1].thumbnail}
+          title={products[1].title}
+          description={products[1].description}
+          price={products[1].price}
+          rating={products[1].rating}
+          brand={products[1].brand}
+          category={products[1].category}
+        />
       </section>
     );
   };
-
-  export default Todos;
+  export default Products;
   ```
 
 - create data.js in src folder and move all the todos dummy data there and import in App.js for using it.
-
-- **Code Example - 17 (Module- export, import)**
+- Can you load all the data from App.js to Products.js as props
 
 ## [9. Mapping components](https://youtu.be/OwwmIzH7FzI)
 
 - **Code Example - 18 (Map component with for loop)**
 
-  ```js
-  import React from "react";
+```js
 
-  const Todos = (props) => {
-    const { todos } = props;
-    let renderTodosElement = [];
-    for (let index = 0; index < todos.length; index++) {
-      renderTodosElement.push(
-        <article className="todo">
-          <h3>{todos[index].title}</h3>
-          <p>{todos[index].desc} </p>
-        </article>
-      );
-    }
-
-    return <section className="todos">{renderTodosElement}</section>;
-  };
-
-  export default Todos;
-  ```
+```
 
 - **Code Example - 19 (Map component with forEach higher order Array function)**
 
   ```js
-  import React from "react";
 
-  const Todos = (props) => {
-    const { todos } = props;
-
-    let renderTodosElement = [];
-
-    todos.forEach((todo) =>
-      renderTodosElement.push(
-        <article className="todo">
-          <h3>{todo.title}</h3>
-          <p>{todo.desc} </p>
-        </article>
-      )
-    );
-
-    return <section className="todos">{renderTodosElement}</section>;
-  };
-
-  export default Todos;
   ```
 
 - **Code Example - 20 (Map component with map higher order Array function)**
 
   ```js
-  import React from "react";
 
-  const Todos = (props) => {
-    const { todos } = props;
-
-    const renderTodosElement = todos.map((todo) => (
-      <article className="todo">
-        <h3>{todo.title}</h3>
-        <p>{todo.desc} </p>
-      </article>
-    ));
-
-    return <section className="todos">{renderTodosElement}</section>;
-  };
-
-  export default Todos;
   ```
 
 ## [10. Adding unique key to each child](https://youtu.be/Dj7ynTdhy1Q)
