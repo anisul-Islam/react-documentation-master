@@ -1046,8 +1046,9 @@ const Products = ({ products }) => {
 export default Products;
 ```
 
-## [9. Mapping components](https://youtu.be/OwwmIzH7FzI)
+## [9. Mapping & rednering components](https://youtu.be/OwwmIzH7FzI)
 
+- learn how to use map() and filter() from an array of Data.
 - **Code Example - 19 (Map component with for loop)**
 
 ```js
@@ -1473,26 +1474,11 @@ export default Product;
   };
 
   export default Footer;
-  ```
 
-  ```css
-  /*Add the following css in App.css*/
-  .buttons {
+  // App.css
+  .footer__right {
     display: flex;
-    justify-content: center;
     gap: 1rem;
-  }
-  .btn {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-  }
-  .icon {
-    font-size: 2rem;
-    transition: all 0.3s;
-  }
-  .icon:hover {
-    color: orange;
   }
   ```
 
@@ -1521,6 +1507,8 @@ export default Product;
     // use className for styling icons
 
   ```
+
+## [16. Adding Interactivity - event & event handler]
 
 ## [17. useState Hooks](https://youtu.be/skUOiqcVurY)
 
