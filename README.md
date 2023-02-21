@@ -845,7 +845,7 @@ root.render(<App />);
 
 ## [8. Props and destructuring](https://youtu.be/GQx58yfYqxo)
 
-- **props object: we can pass information from one component to another using props object. components communicate with each others via props. props is an object. props are like attributes in our HTML tag**
+- **props object: we can pass information from one component to another using props object. components communicate with each others via props. props is an object. props are like attributes in our HTML tag. props are readonly**
   - how to pass, recieve, set default props
   - how to pass JSX to component,
 - **Code Example - 15 (Props sending)**
@@ -1131,15 +1131,21 @@ export default Products;
 ## [10. Adding unique key to each child](https://youtu.be/Dj7ynTdhy1Q)
 
 - we need to map each children of list uniquly so that react can identify them wor properly
-- we can use index or any external package like [uuid](https://www.npmjs.com/package/uuid)
-- How to use uuid:
+- Keys are unique. we can use same keys for JSX nodes in different arrays.
+- Where I can find key?
 
-  ```js
-  step 1: npm install uuid
-  step 2: import { v4 as uuidv4 } from "uuid";
-  step 3: uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+  - from database
+  - generate locally - crypto.randomUUID() , uuid, nanoid
 
-  ```
+    - we can use index or any external package like [uuid](https://www.npmjs.com/package/uuid)
+    - How to use uuid:
+
+      ```js
+      step 1: npm install uuid
+      step 2: import { v4 as uuidv4 } from "uuid";
+      step 3: uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+
+      ```
 
 - **Code Example - 22 (Adding unique key)**
 
@@ -1182,6 +1188,7 @@ export default Products;
 
 - default props
 - jsx spread syntax
+- **Code Example - 23 (jsx spread syntax)**
 
 ```js
 import React from "react";
@@ -1197,7 +1204,7 @@ const Products = ({ products }) => {
 export default Products;
 ```
 
-- passing jsx as children
+- **Code Example - 24 (passing jsx as children)**
 
 ```js
 import React from "react";
@@ -1251,7 +1258,7 @@ export default Product;
     ])
   ```
 
-- **Code Example - 19 (PropTypes)**
+- **Code Example - 25 (PropTypes)**
 
   ```js
   // Todos.js
@@ -1314,40 +1321,46 @@ export default Product;
 
 - rendering components based on if-else, element variable, ternary, short circuit
 
-- **Code Example - 20 (Conditional rendering: element variable)**
+- **Code Example - 26 (Conditional rendering: element variable)**
 
   ```js
   // Inside App.js make adjustments
-  let todosElement;
-  if (todosData.length > 0) {
-    todosElement = <Todos todos={todosData} />;
+  let productsElement;
+  if (products.length > 0) {
+    productsElement = <Products products={products} />;
   } else {
-    todosElement = <p>Todo list is empty</p>;
+    productsElement = <p>Product list is empty</p>;
   }
   return (
     <div>
       <Header />
-      <main>{todosElement}</main>
+      <main className="flex-center">
+        <Sidebar />
+        <div className="main-content">{productsElement}</div>
+      </main>
       <Footer />
     </div>
   );
   ```
 
-- **Code Example - 21 (Conditional rendering: iternary)**
+- **Code Example - 27 (Conditional rendering: iternary)**
 
   ```js
   // Inside App.js make adjustments
-  let todosElement =
-    todosData.length > 0 ? (
-      <Todos todos={todosData} />
+  let productsElement =
+    products.length > 0 ? (
+      <Products products={products} />
     ) : (
-      <p>Todo list is empty</p>
+      <p>products list is empty</p>
     );
 
   return (
     <div>
       <Header />
-      <main>{todosElement}</main>
+      <main className="flex-center">
+        <Sidebar />
+        <div className="main-content">{productsElement}</div>
+      </main>
       <Footer />
     </div>
   );
@@ -1356,26 +1369,29 @@ export default Product;
   return (
     <div>
       <Header />
-      <main>
-        {todosData.length > 0 ? (
-          <Todos todos={todosData} />
-        ) : (
-          <p>Todo list is empty</p>
-        )}
+      <main className="flex-center">
+        <Sidebar />
+        <div className="main-content">
+          {products.length > 0 ? (
+            <Products products={products} />
+          ) : (
+            <p>products list is empty</p>
+          )}
+        </div>
       </main>
       <Footer />
     </div>
   );
   ```
 
-- **Code Example - 22 (Conditional rendering: short circuit)**
+- **Code Example - 28 (Conditional rendering: short circuit)**
 
   ```js
   // Inside App.js return() make following adjustments
   return (
     <div>
       <Header />
-      <main>{todosData.length > 0 && <Todos todos={todosData} />}</main>
+      <main>{products.length > 0 && <Products products={products} />}</main>
       <Footer />
     </div>
   );
@@ -1436,7 +1452,7 @@ export default Product;
 ## [16. add font awesome / react icons](https://youtu.be/jHDP6myBXRM)
 
 - [How to use react-icons](https://react-icons.github.io/react-icons/)
-- **Code Example - 24 (Adding & styling react icons )**
+- **Code Example - 29 (Adding & styling react icons )**
 
   ```js
   // Add button + icons inside Todo.js
@@ -1522,7 +1538,7 @@ export default Product;
 ## [17. useState Hooks](https://youtu.be/skUOiqcVurY)
 
 - useState() hook helps us to track state in a functional component.
-- **Code Example - 25 (Counter App )**
+- **Code Example - 30 (Counter App )**
 
   ```js
   // App.js
@@ -1564,7 +1580,7 @@ export default Product;
 
   - we can also use name attribute for identifying element and use 1 function instead of many. from ebent handler we can use event.target.name and then decide what to do or not? - [1 handler for multiple elements] (https://github.com/anisul-Islam/react-counter-app-1-function/blob/master/src/components/Counter.js)
 
-- **Code Example - 26(store data in state )**
+- **Code Example - 31 (store data in state )**
 
   ```js
   import React, { useState } from "react";
@@ -1593,17 +1609,17 @@ export default Product;
 
   - update state based on prev value - `setCount (count => count + 1)`
 
-## [20. developer tools and extension](https://youtu.be/m1paEcDlC5U)
+## [18. developer tools and extension](https://youtu.be/m1paEcDlC5U)
 
-## [21. Assignment - 2: Counter App](https://github.com/anisul-Islam/react-assignment-2-counter-app)
+## [19. Assignment - 2: Counter App](https://github.com/anisul-Islam/react-assignment-2-counter-app)
 
-## [22. class component](https://youtu.be/fu76idgpuEI)
+## [20. class component](https://youtu.be/fu76idgpuEI)
 
-## [23. state, setState, event handler](https://youtu.be/9AtJ4dM2xOU)
+## [21. state, setState, event handler](https://youtu.be/9AtJ4dM2xOU)
 
 - state is a js object for storing current situation of a component
 
-- **Code Example - 27 (Counter App using class component)**
+- **Code Example - 32 (Counter App using class component)**
 
   ```js
   // App.js
@@ -1652,11 +1668,11 @@ export default Product;
   }
   ```
 
-## [24. Form Controlled components](https://youtu.be/kvGNlTh3rNQ)
+## [22. Form Controlled components](https://youtu.be/kvGNlTh3rNQ)
 
 - create and complete AddTodo component
 - store newTodo data inside a state variable and update total todos
-- **Code Example - 28 (get data from a form)**
+- **Code Example - 33 (get data from a form)**
 
   ```js
   // In App.js
@@ -1790,11 +1806,11 @@ export default Product;
   /* form related styles starts here */
   ```
 
-## [25. data passing: child to parent component](https://youtu.be/xdW2uFA-SOg)
+## [23. data passing: child to parent component](https://youtu.be/xdW2uFA-SOg)
 
 - Another practical example: https://youtu.be/h7yq5lfDZc8
 - [Freecodecamp doc](https://www.freecodecamp.org/news/what-is-lifting-state-up-in-react/)
-- **Code Example - 29 (state lifting)**
+- **Code Example - 34 (state lifting)**
 
   ```js
   // App.js
@@ -1857,9 +1873,9 @@ export default Product;
    }
   ```
 
-## [26. update the state based on previous state]
+## [24. update the state based on previous state]
 
-- **Code Example - 30 (update the state based on previous state)**
+- **Code Example - 35 (update the state based on previous state)**
 
   ```js
   // Inside App.js
@@ -1868,9 +1884,9 @@ export default Product;
   };
   ```
 
-## [27. delete an item based on id or anything]
+## [25. delete an item based on id or anything]
 
-- **Code Example - 30 (state lifting and delete item)**
+- **Code Example - 36 (state lifting and delete item)**
 
   ```js
    // App.js
@@ -1907,10 +1923,10 @@ export default Product;
   };
   ```
 
-## [28. useRef hook - Uncontrolled component](https://youtu.be/l5z137GWakU)
+## [26. useRef hook - Uncontrolled component](https://youtu.be/l5z137GWakU)
 
 - If we look at the AddTodo component then you will see we are not using those title and desc state inside the component that much so we can avoid state and make the component stateless
-- **Code Example - 31 (useRef hook for getting form value)**
+- **Code Example - 37 (useRef hook for getting form value)**
 
   ```js
   import React, { useRef } from "react";
@@ -1968,10 +1984,10 @@ export default Product;
   export default AddTodo;
   ```
 
-## [29. dynamic styling in React](https://youtu.be/Eru9-kZfhw4)
+## [27. dynamic styling in React](https://youtu.be/Eru9-kZfhw4)
 
 - Now lets add some coditional styling
-- **Code Example - 32 (conditional styling)**
+- **Code Example - 38 (conditional styling)**
 
   ```js
   import React, { useState, useEffect } from "react";
@@ -2066,7 +2082,7 @@ export default Product;
   export default AddTodo;
   ```
 
-## [30. Assignment - 3: Add New Product](https://github.com/anisul-Islam/react-assignment-3-add-new-product)
+## [28. Assignment - 3: Add New Product](https://github.com/anisul-Islam/react-assignment-3-add-new-product)
 
 ## Part-4 (useEffect Hook, custom hook)
 
@@ -2079,7 +2095,7 @@ export default Product;
 
   // Rule: Don’t call Hooks inside loops, conditions, or nested functions
 
-  // The useEffect Hook allows to perform side effects (fetching data, timers, directly updating the DOM) in components.
+  // The useEffect Hook allows to perform side effects (fetching data, timers, directly manullay updating the DOM) in components.
 
   // useEffct = componentDidMount + componentDidUpdate + componentWillUnmount
 
@@ -2137,16 +2153,13 @@ export default Product;
 
   const UseEffectExample = () => {
     const [count, setCount] = useState(0);
-    const [loading, setIsLoading] = useState(false);
-
+    const [greeting, setGreeting] = useState("good morning");
     useEffect(() => {
-      console.log("useEffect");
-      console.log("isLoading: " + loading);
+      console.log("hello from useeffect");
     }, [count]);
 
     return (
       <div>
-        {console.log("render")}
         <h2>Count: {count}</h2>
         <button
           onClick={() => {
@@ -2157,11 +2170,12 @@ export default Product;
         </button>
         <button
           onClick={() => {
-            setIsLoading(!loading);
+            setGreeting(greeting + "2");
           }}
         >
-          change loading
+          greeting
         </button>
+        <p>{greeting}</p>
       </div>
     );
   };
