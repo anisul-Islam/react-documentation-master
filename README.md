@@ -1455,37 +1455,24 @@ export default Product;
 - **Code Example - 29 (Adding & styling react icons )**
 
   ```js
-  // Add button + icons inside Todo.js
   import React from "react";
-  import PropTypes from "prop-types";
-  import { FaTrash, FaEdit } from "react-icons/fa";
-
-  const Todo = (props) => {
-    const { todo } = props;
+  import { FaFacebookF, FaYoutube, FaTwitter } from "react-icons/fa";
+  const Footer = () => {
     return (
-      <article className="todo" key={todo.id}>
-        <h3>{todo.title}</h3>
-        <p>{todo.desc} </p>
-        <div className="buttons">
-          <button className="btn">
-            <FaEdit className="icon" />
-          </button>
-          <button className="btn">
-            <FaTrash className="icon" />
-          </button>
+      <footer className="footer flex-space-around">
+        <div className="footer__left">
+          <p className="footer__title">&copy;Copyright by Anisul Islam</p>
         </div>
-      </article>
+        <div className="footer__right">
+          <FaFacebookF />
+          <FaYoutube />
+          <FaTwitter />
+        </div>
+      </footer>
     );
   };
 
-  Todo.propTypes = {
-    todo: PropTypes.shape({
-      title: PropTypes.string,
-      desc: PropTypes.string,
-    }),
-  };
-
-  export default Todo;
+  export default Footer;
   ```
 
   ```css
