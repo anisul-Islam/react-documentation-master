@@ -2100,7 +2100,70 @@ export default Product;
 - **Code Example - 40 (updating object in state)**
 
   ```js
+  import React, { useState } from "react";
 
+  const NewUser = () => {
+    const [user, setUser] = useState({
+      name: "",
+      email: "",
+      password: "",
+    });
+    const handleChange = (event) => {
+      event.stopPropagation();
+      setUser((prevUser) => {
+        return { ...prevUser, [event.target.name]: event.target.value };
+      });
+    };
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      console.log("submitted");
+      alert(JSON.stringify(user));
+    };
+
+    return (
+      <div>
+        <form action="" className="form" onSubmit={handleSubmit}>
+          <div className="form__control">
+            <label htmlFor="name">name: </label>
+            <input
+              type="text"
+              placeholder="Enter Name"
+              name="name"
+              value={user.name}
+              onChange={handleChange}
+              required={true}
+            />
+          </div>
+          <div className="form__control">
+            <label htmlFor="email">email: </label>
+            <input
+              type="email"
+              placeholder="Enter Email"
+              name="email"
+              value={user.email}
+              onChange={handleChange}
+              required={true}
+            />
+          </div>
+          <div className="form__control">
+            <label htmlFor="password">password: </label>
+            <input
+              type="password"
+              placeholder="Enter password"
+              name="password"
+              value={user.password}
+              onChange={handleChange}
+              required={true}
+            />
+          </div>
+          <button type="submit">Add User</button>
+        </form>
+      </div>
+    );
+  };
+
+  export default NewUser;
   ```
 
 - **Code Example - 41 (updating nested object in state)**
@@ -2538,92 +2601,148 @@ export default Product;
   export default UseEffectExample;
   ```
 
-## [30. fatch data using useEffect Hook](https://youtu.be/Z-EkslDJTJI)
+## [32. fatch data using useEffect Hook](https://youtu.be/Z-EkslDJTJI)
 
-- example
+- **Code Example - 49 (fetch data using useEffect hook)**
 
   ```js
   import React, { useEffect, useState } from "react";
 
-  const UseEffectHook = () => {
-    const [todos, setTodos] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+  import "./App.css";
+
+  const App = () => {
+    const [users, setUsers] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-      fetch("https://jsonplaceholde.typicode.com/todos")
+      setIsLoading(true);
+      fetch("https://jsonplaceholder.typicode.com/users")
         .then((res) => {
           if (!res.ok) {
-            throw Error("error while fetching the data");
+            throw new Error("could not fetch the data");
           }
           return res.json();
         })
-        .then((data) => {
-          setTodos(data);
+        .then((result) => {
+          setUsers(result);
           setIsLoading(false);
-          setError(null);
         })
         .catch((error) => {
           setIsLoading(false);
           setError(error.message);
         });
     }, []);
-
-    const errorMessage = error && <p> {error} </p>;
-    const loadingMessage = isLoading && "data is loading";
-
-    const todosElement =
-      todos &&
-      todos.map((todo) => (
-        <div key={todo.id}>
-          <p>{todo.title}</p>
-        </div>
-      ));
+    console.log(users);
+    const renderUsers = users.map((user) => {
+      const { id, name, username, email, phone, website } = user;
+      return (
+        <article key={id} style={{ margin: "2rem" }}>
+          <h2>{id}</h2>
+          <h3>{name}</h3>
+          <p>{username}</p>
+          <p>{email}</p>
+          <p>{phone}</p>
+          <p>{website}</p>
+        </article>
+      );
+    });
 
     return (
       <div>
-        {errorMessage}
-        {loadingMessage}
-        {todosElement}
+        {isLoading && <p>Loading...</p>}
+        {error ? <p>{error}</p> : <section>{renderUsers}</section>}
       </div>
     );
   };
 
-  export default UseEffectHook;
+  export default App;
   ```
 
-## [31. how to create custom hook](https://youtu.be/ZWschU7H_20)
+- **Code Example - 50 (fetch data using useEffect hook - async await)**
 
-- example
+  ```js
+  import React, { useEffect, useState } from "react";
+
+  import "./App.css";
+
+  const App = () => {
+    const [users, setUsers] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/users"
+        );
+        const result = await response.json();
+        setUsers(result);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        setError(error.message);
+      }
+    };
+
+    useEffect(() => {
+      setIsLoading(true);
+      fetchUsers();
+    }, []);
+
+    const renderUsers = users.map((user) => {
+      const { id, name, username, email, phone, website } = user;
+      return (
+        <article key={id} style={{ margin: "2rem" }}>
+          <h2>{id}</h2>
+          <h3>{name}</h3>
+          <p>{username}</p>
+          <p>{email}</p>
+          <p>{phone}</p>
+          <p>{website}</p>
+        </article>
+      );
+    });
+
+    return (
+      <div>
+        {isLoading && <p>Loading...</p>}
+        {error ? <p>{error}</p> : <section>{renderUsers}</section>}
+      </div>
+    );
+  };
+
+  export default App;
+  ```
+
+## [33. how to create custom hook](https://youtu.be/ZWschU7H_20)
+
+- **Code Example - 51 (custom hook)**
 
   ```js
   import React, { useState, useEffect } from "react";
 
-  const useFetch = (url) => {
-    const [data, setData] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+  const useFetch = (URL) => {
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch(URL);
+        const result = await response.json();
+        setData(result);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        setError(error.message);
+      }
+    };
+
     useEffect(() => {
-      fetch(url)
-        .then((res) => {
-          if (!res.ok) {
-            throw Error("fecthing is not successful");
-          } else {
-            return res.json();
-          }
-        })
-        .then((data) => {
-          setData(data);
-          console.log(data);
-          setIsLoading(false);
-          setError(null);
-        })
-        .catch((error) => {
-          setError(error.message);
-          setIsLoading(false);
-        });
-    }, [url]);
+      setIsLoading(true);
+      fetchUsers();
+    }, []);
 
     return { data, isLoading, error };
   };
@@ -2631,11 +2750,100 @@ export default Product;
   export default useFetch;
   ```
 
-## [32. Assignment 4 - fetch products](https://github.com/anisul-Islam/react-assignment-4-fetch-products)
+## [34. create services for making http requests]
+
+- **Code Example - 52 (services for http requests)**
+
+  ```js
+  // UserService.js
+  import axios from "axios";
+
+  const BASE_URL = "https://jsonplaceholder.typicode.com";
+
+  // using axios
+  export const getAllUsers = async () => {
+    const response = await axios.get(`${BASE_URL}/users/202`);
+    return response.data;
+  };
+
+  // using fetch
+  export const createUser = async () => {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      body: JSON.stringify({
+        title: "foo",
+        body: "bar",
+        userId: 1,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    return response;
+  };
+
+  // App.js
+  import React, { useEffect, useState } from "react";
+  import { ToastContainer, toast } from "react-toastify";
+  import "react-toastify/dist/ReactToastify.css";
+
+  import "./App.css";
+  import { getAllUsers } from "./services/UserService";
+
+  const App = () => {
+    const [users, setUsers] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const fetchUsers = async () => {
+      try {
+        const result = await getAllUsers();
+        console.log(result);
+        setUsers(result);
+        setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
+        setError(err.message);
+        toast(err.message);
+      }
+    };
+
+    useEffect(() => {
+      setIsLoading(true);
+      fetchUsers();
+    }, []);
+
+    const renderUsers = users.map((user) => {
+      const { id, name, username, email, phone, website } = user;
+      return (
+        <article key={id} style={{ margin: "2rem" }}>
+          <h2>{id}</h2>
+          <h3>{name}</h3>
+          <p>{username}</p>
+          <p>{email}</p>
+          <p>{phone}</p>
+          <p>{website}</p>
+        </article>
+      );
+    });
+
+    return (
+      <div>
+        <ToastContainer />
+        {isLoading && <p>Loading...</p>}
+        {error ? <p>{error}</p> : <section>{renderUsers}</section>}
+      </div>
+    );
+  };
+
+  export default App;
+  ```
+
+## [35. Assignment 4 - fetch products](https://github.com/anisul-Islam/react-assignment-4-fetch-products)
 
 ## Part-5 (useReducer Hook, modal)
 
-## [33. useReducer hook](https://youtu.be/l_BhBNhNwhE)
+## [36. useReducer hook](https://youtu.be/l_BhBNhNwhE)
 
 - example
 
