@@ -1687,10 +1687,136 @@ export default Product;
 
 ## [18. Adding Interactivity - event & event handler]
 
-## [18. useState Hooks](https://youtu.be/skUOiqcVurY)
+- Event: any user interaction like clicking button, hovering button, giving values in input field etc.
+- Event handler: your response to user interactions. create a function for handling the interaction.
+- state - value of anything can be changed based on your interaction and you may want to update UI based on state.
+- **Code Example - 30 (event - onClick )**
+
+  ```js
+  <button
+    className="btn product__btn"
+    onClick={alert("product is added to the cart")} // not depends on user inetractivity
+  >
+    <FaCartPlus className="icon" /> Add To Cart
+  </button>
+  ```
+
+- **Code Example - 31 (event Handler)**
+
+  ```js
+  const handleClick = () => {
+    alert("product is added to the cart");
+  };
+
+  // method 1
+  <button
+    className="btn product__btn"
+    onClick={() => {
+      alert("product is added to the cart");
+    }} // depends on user inetractivity as we definied the function and it is not running until we click the button
+  >
+    <FaCartPlus className="icon" /> Add To Cart
+  </button>
+
+  // method 2
+  <button
+    className="btn product__btn"
+    onClick={handleClick} // do not call just define the function
+  >
+    <FaCartPlus className="icon" /> Add To Cart
+  </button>
+
+  // we can create own custom Button component
+  import React from "react";
+
+  const Button = (props) => {
+    console.log(props);
+
+    const handleClick = () => {
+      // we can use condition for calling multiple functions
+      props.onHandleAddProduct();
+    };
+
+   const handleAddProduct = (product) => {
+    alert(JSON.stringify(product, null, 4));
+  };
+
+    return (
+      <button className={props.className} onClick={props.onClick} type={props.type}>
+      {props.children}
+    </button>
+    );
+  };
+
+  export default Button;
+
+  // more simplified
+  import React from "react";
+
+  const Button = (props) => {
+    return (
+      <button className={props.className} onClick={props.onClick}>
+        {props.children}
+      </button>
+    );
+  };
+
+  export default Button;
+  ```
+
+- **Code Example - 32 (onChange Event )**
+
+  ```js
+  import React from "react";
+
+  const NewProduct = () => {
+    const handleTitleChange = (event) => {
+      console.log(event.target.value);
+    };
+    const handlePriceChange = (event) => {
+      console.log(event.target.value);
+    };
+
+    return (
+      <div className="new-user">
+        <h2>Create Product</h2>
+
+        <div className="form__control">
+          <label htmlFor="title">Title: </label>
+          <input
+            className="form__input"
+            type="text"
+            placeholder="Enter product title"
+            name="title"
+            onChange={handleTitleChange}
+            required={true}
+          />
+        </div>
+
+        <div className="form__control">
+          <label htmlFor="price">Price: </label>
+          <input
+            className="form__input"
+            type="number"
+            placeholder="Enter product price here"
+            name="price"
+            onChange={handlePriceChange}
+            required={true}
+          />
+        </div>
+      </div>
+    );
+  };
+
+  export default NewProduct;
+  ```
+
+- **Code Example - 33 (More complex example of onChange Event )**
+
+## [19. useState Hooks](https://youtu.be/skUOiqcVurY)
 
 - useState() hook helps us to track state in a functional component.
-- **Code Example - 30 (Counter App )**
+- **Code Example - 33 (Counter App )**
 
   ```js
   // App.js
