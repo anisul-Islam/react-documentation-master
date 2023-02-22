@@ -148,7 +148,7 @@ npm start
 - keep only the index.js in src and then play with React.js
 - change the title of the app inside index.html file
 
-## Part-2 (JSX, Component, react component under the hood, Styling, Props, PropTypes, Conditional rendering, Fragment)
+## Part-2 (JSX, Component, react component under the hood, Styling, Props, PropTypes, Conditional rendering, Fragment, react dev-tools, icons)
 
 ## [4. JSX and JS Expression](https://youtu.be/6-r6pBA4eUY)
 
@@ -908,13 +908,15 @@ export default Products;
       props;
     return (
       <article className="product">
-        <img src={imageSource} alt="iPhone 9" className="product__img" />
-        <h2>{title}</h2>
-        <p>description: {description}</p>
-        <p>Price: {price}</p>
-        <p>rating: {rating}</p>
-        <p>brand: {brand}</p>
-        <p>category: {category}</p>
+        <img src={thumbnail} alt="iPhone 9" className="product__img" />
+        <div className="product__body">
+          <h2 className="product__title">{title}</h2>
+          <p className="product__description">description: {description}</p>
+          <p className="product__price">Price: {price}</p>
+          <p className="product__rating">rating: {rating}</p>
+          <p className="product__brand">brand: {brand}</p>
+          <p className="product__category">category: {category}</p>
+        </div>
       </article>
     );
   };
@@ -1448,9 +1450,9 @@ export default Product;
     export default Footer;
     ```
 
-## Part-3 (class component, state, useState hook, event handler, controlled component, state lifting, react dev-tools, more on css)
+## [16. developer tools and extension](https://youtu.be/m1paEcDlC5U)
 
-## [16. add font awesome / react icons](https://youtu.be/jHDP6myBXRM)
+## [17. add font awesome / react icons](https://youtu.be/jHDP6myBXRM)
 
 - [How to use react-icons](https://react-icons.github.io/react-icons/)
 - **Code Example - 29 (Adding & styling react icons )**
@@ -1475,11 +1477,184 @@ export default Product;
 
   export default Footer;
 
+  // Product.js
+  import React from "react";
+  import { FaCartPlus } from "react-icons/fa";
+
+  import Card from "./Card";
+
+  const Product = (props) => {
+    const { thumbnail, title, description, price, rating, brand, category } =
+      props;
+    return (
+      <Card>
+        <article className="product">
+          <img src={thumbnail} alt="iPhone 9" className="product__img" />
+          <div className="product__body">
+            <h2 className="product__title">{title}</h2>
+            <p className="product__description">description: {description}</p>
+            <p className="product__price">Price: {price}</p>
+            <p className="product__rating">rating: {rating}</p>
+            <p className="product__brand">brand: {brand}</p>
+            <p className="product__category">category: {category}</p>
+            <button className="btn product__btn icon">
+              <FaCartPlus className="icon" /> Add To Cart
+            </button>
+          </div>
+        </article>
+            </Card>
+          );
+        };
+        export default Product;
+
+
   // App.css
-  .footer__right {
-    display: flex;
-    gap: 1rem;
-  }
+  /* reset code and common starts here  */
+    :root {
+      --primary-color: rgb(11, 181, 48);
+      --secondary-color: rgba(36, 122, 55, 0.9);
+      --padding: 0.5rem;
+      --transition: all 0.3s;
+      --border-radius: 0.6rem;
+      --box-shadow: 0.1rem 0.2rem 0.8rem rgba(205, 202, 202, 0.5);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      text-decoration: none;
+      list-style-type: none;
+      outline: none;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    .flex-space-around {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .flex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .card {
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius);
+      /* padding: var(--padding); */
+      transition: var(--transition);
+    }
+    img {
+      width: 100%;
+      height: auto;
+    }
+    .btn {
+      border: none;
+      padding: var(--padding);
+      border-radius: var(--border-radius);
+      transition: all 0.3s;
+      color: var(--secondary-color);
+    }
+    .btn:hover {
+      background-color: orange;
+      color: black;
+    }
+    /* reset code and common ends here  */
+
+    /* header starts here  */
+    .header {
+      height: 10vh;
+      background-color: var(--primary-color);
+      color: white;
+    }
+    /* header ends here  */
+
+    /* main starts here  */
+    main {
+      height: 80vh;
+    }
+    .sidebar {
+      flex: 1;
+      padding: var(--padding);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      align-self: flex-start;
+      background-color: #e6e3e3;
+      height: 100%;
+      border-right: 1px solid var(--primary-color);
+    }
+    .main-content {
+      flex: 3;
+      height: 100%;
+      padding: var(--padding);
+      overflow: scroll;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2rem;
+    }
+    .product {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .product__body {
+      padding: var(--padding);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .product__img {
+      width: 100%;
+      height: 15rem;
+      filter: saturate(0);
+      transition: var(--transition);
+    }
+    /* main ends here  */
+
+    /* footer starts here  */
+    .footer {
+      min-height: 10vh;
+      padding: var(--padding);
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 1.1rem;
+    }
+    .footer__right {
+      display: flex;
+      gap: 1rem;
+    }
+    /* footer ends here  */
+
+    /* responsiveness starts here  */
+    @media (max-width: 992px) {
+      .flex-space-around,
+      .flex-center {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 0;
+      }
+      .header {
+        min-height: 10vh;
+      }
+      .sidebar {
+        width: 100%;
+      }
+      .products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .products {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+      }
+    }
+    /* responsiveness ends here  */
   ```
 
 - How to use font awesome icons directly
@@ -1508,9 +1683,11 @@ export default Product;
 
   ```
 
-## [16. Adding Interactivity - event & event handler]
+## Part-3 (event handler, state,useState hook, controlled component, state lifting, more on css, class component)
 
-## [17. useState Hooks](https://youtu.be/skUOiqcVurY)
+## [18. Adding Interactivity - event & event handler]
+
+## [18. useState Hooks](https://youtu.be/skUOiqcVurY)
 
 - useState() hook helps us to track state in a functional component.
 - **Code Example - 30 (Counter App )**
@@ -1584,66 +1761,9 @@ export default Product;
 
   - update state based on prev value - `setCount (count => count + 1)`
 
-## [18. developer tools and extension](https://youtu.be/m1paEcDlC5U)
+## [20. Assignment - 2: Counter App](https://github.com/anisul-Islam/react-assignment-2-counter-app)
 
-## [19. Assignment - 2: Counter App](https://github.com/anisul-Islam/react-assignment-2-counter-app)
-
-## [20. class component](https://youtu.be/fu76idgpuEI)
-
-## [21. state, setState, event handler](https://youtu.be/9AtJ4dM2xOU)
-
-- state is a js object for storing current situation of a component
-
-- **Code Example - 32 (Counter App using class component)**
-
-  ```js
-  // App.js
-  import React from "react";
-
-  import Counter from "./components/Counter";
-
-  const App = () => {
-    return (
-      <div>
-        <Counter />
-      </div>
-    );
-  };
-
-  export default App;
-  ```
-
-  ```js
-  // Counter.js
-  import React, { Component } from "react";
-
-  export default class Counter extends Component {
-    constructor(props) {
-      super(props);
-
-      this.state = {
-        count: 0,
-      };
-    }
-
-    handleIncrement = () => {
-      this.setState({
-        count: this.state.count + 1,
-      });
-    };
-
-    render() {
-      return (
-        <div>
-          <h2>Counter: {this.state.count}</h2>
-          <button onClick={this.handleIncrement}>+</button>
-        </div>
-      );
-    }
-  }
-  ```
-
-## [22. Form Controlled components](https://youtu.be/kvGNlTh3rNQ)
+## [21. Form Controlled components](https://youtu.be/kvGNlTh3rNQ)
 
 - create and complete AddTodo component
 - store newTodo data inside a state variable and update total todos
@@ -2058,6 +2178,61 @@ export default Product;
   ```
 
 ## [28. Assignment - 3: Add New Product](https://github.com/anisul-Islam/react-assignment-3-add-new-product)
+
+## [21. class component](https://youtu.be/fu76idgpuEI)
+
+## [22. state, setState, event handler](https://youtu.be/9AtJ4dM2xOU)
+
+- state is a js object for storing current situation of a component
+
+- **Code Example - 32 (Counter App using class component)**
+
+  ```js
+  // App.js
+  import React from "react";
+
+  import Counter from "./components/Counter";
+
+  const App = () => {
+    return (
+      <div>
+        <Counter />
+      </div>
+    );
+  };
+
+  export default App;
+  ```
+
+  ```js
+  // Counter.js
+  import React, { Component } from "react";
+
+  export default class Counter extends Component {
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        count: 0,
+      };
+    }
+
+    handleIncrement = () => {
+      this.setState({
+        count: this.state.count + 1,
+      });
+    };
+
+    render() {
+      return (
+        <div>
+          <h2>Counter: {this.state.count}</h2>
+          <button onClick={this.handleIncrement}>+</button>
+        </div>
+      );
+    }
+  }
+  ```
 
 ## Part-4 (useEffect Hook, custom hook)
 
