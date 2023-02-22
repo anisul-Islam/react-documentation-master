@@ -2055,7 +2055,27 @@ export default Product;
 
   ```js
       const handleIncrement = (e) => {
-        console.log(e);
+        e.stopPropagation();
+
+        setcount(count + 1);
+        setcount(count + 1);
+        setcount(count + 1);
+
+        console.log("increment count: ", count);
+      };
+
+      const handleIncrement = (e) => {
+          e.stopPropagation();
+
+          setcount((count) => count + 1);
+          setcount((count) => count + 1);
+          setcount((count) => count + 1);
+
+          console.log("increment count: ", count);
+        };
+
+      const handleIncrement = (e) => {
+         e.stopPropagation();
         setTimeout(() => {
           <!-- setcount(count + 1); -->
           setcount((count) => count + 1);
