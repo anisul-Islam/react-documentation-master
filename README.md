@@ -2088,147 +2088,40 @@ export default Product;
 
 ## [21. Form Controlled components](https://youtu.be/kvGNlTh3rNQ)
 
-- create and complete AddTodo component
-- store newTodo data inside a state variable and update total todos
+- create a new resouce such as NewProduct, NewUser, NewTodo etc.
 - **Code Example - 39 (get data from a form)**
 
   ```js
-  // In App.js
-
-  import AddTodo from "./components/AddTodo";
-  import { todosData } from "./data";
-  import "./App.css";
-
-  const App = () => {
-    const [todos, setTodos] = useState(todosData);
-
-    return (
-      <>
-        <Header />
-        <main>
-          <AddTodo />
-          {todos.length > 0 && <Todos todos={todosData} />}
-        </main>
-        <Footer />
-      </>
-    );
-  };
-
-  export default App;
-
-  // AddTodo.js component
-  import React, { useState } from "react";
-  import { getUniqueId } from "../utility/getUniqueId";
-
-  const AddTodo = () => {
-    const [title, setTitle] = useState("");
-    const [desc, setDesc] = useState("");
-
-    const handleTitleChange = (event) => {
-      setTitle(event.target.value);
-    };
-
-    const handleDescriptionChange = (event) => {
-      setDesc(event.target.value);
-    };
-
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      const newTodo = { id: getUniqueId(), title, desc };
-      console.log(newTodo);
-      setTitle("");
-      setDesc("");
-    };
-
-    return (
-      <div className="form-container">
-        <form onSubmit={handleSubmit}>
-          <h2 className="form-title">Add New Todo</h2>
-          <div className="form-input">
-            <label htmlFor="title">Todo Title: </label>
-            <input
-              type="text"
-              name="title"
-              id="title"
-              value={title}
-              onChange={handleTitleChange}
-              required
-              autoFocus
-            />
-          </div>
-          <div className="form-input">
-            <label htmlFor="desc">Todo description: </label>
-            <textarea
-              name="desc"
-              id="desc"
-              value={desc}
-              onChange={handleDescriptionChange}
-              required
-            ></textarea>
-          </div>
-          <div className="form-input">
-            <button type="submit" className="btn form-btn">
-              Add Todo
-            </button>
-          </div>
-        </form>
-      </div>
-    );
-  };
-
-  export default AddTodo;
 
   ```
 
-  ```css
-  /*add css in App.css*/
-  /* form related styles starts here */
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  form {
-    background-color: rgb(247, 220, 187);
-    margin: 1rem 0;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 80%;
-  }
-  .form-title {
-    text-align: center;
-  }
-  .form-input input,
-  textarea {
-    width: 100%;
-    padding: 0.5rem;
-    border: none;
-    font-size: 1.5rem;
-    transition: all 0.3s;
-  }
-  textarea {
-    resize: none;
-  }
-  .form-input button {
-    background-color: black;
-    color: white;
-    padding: 1rem;
-    width: 100%;
-  }
-  .form-input button:hover {
-    background-color: orange;
-  }
-  /* form related styles starts here */
+## [22. upating object in state](https://beta.reactjs.org/learn/updating-objects-in-state)
+
+- **Code Example - 40 (updating object in state)**
+
+  ```js
+
   ```
 
-## [23. data passing: child to parent component](https://youtu.be/xdW2uFA-SOg)
+- **Code Example - 41 (updating nested object in state)**
+
+  ```js
+
+  ```
+
+## [23. upating array in state](https://beta.reactjs.org/learn/updating-arrays-in-state)
+
+- **Code Example - 42 (updating array in state)**
+
+  ```js
+
+  ```
+
+## [24. data passing: child to parent component, state lifting](https://youtu.be/xdW2uFA-SOg)
 
 - Another practical example: https://youtu.be/h7yq5lfDZc8
 - [Freecodecamp doc](https://www.freecodecamp.org/news/what-is-lifting-state-up-in-react/)
-- **Code Example - 39 (state lifting)**
+- **Code Example - 43 (state lifting)**
 
   ```js
   // App.js
@@ -2291,60 +2184,49 @@ export default Product;
    }
   ```
 
-## [24. update the state based on previous state]
+  - **Code Example - 44 (state lifting and delete item)**
 
-- **Code Example - 40 (update the state based on previous state)**
+    ```js
+    // App.js
+    step 1: create a function that will help us to get the id from child component Todo.js
+    const handleDeleteTodo = (id) => {
+      console.log(id);
+    };
 
-  ```js
-  // Inside App.js
-  const handleAddNewTodo = (newTodo) => {
-    setTodos((prevState) => [...prevState, newTodo]);
-  };
-  ```
+    step 2: pass the function as props to App.js -> Todos.js -> Todo.js
+    <Todos onHandleDeleteTodo={handleDeleteTodo} />
 
-## [25. delete an item based on id or anything]
+    step 3: After passing the function from App.js to Todo.js now lets handle the button click and get the id so that we pass the id to App.js with the help of the function onHandleDeleteTodo
+    // Todo.js
 
-- **Code Example - 41 (state lifting and delete item)**
+    const { todo, onHandleDeleteTodo } = props;
 
-  ```js
-   // App.js
-  step 1: create a function that will help us to get the id from child component Todo.js
-   const handleDeleteTodo = (id) => {
-    console.log(id);
-  };
+    const handleDelete = (id) => {
+      onHandleDeleteTodo(id);
+    };
 
-   step 2: pass the function as props to App.js -> Todos.js -> Todo.js
-  <Todos onHandleDeleteTodo={handleDeleteTodo} />
+    <button
+            className="btn"
+            onClick={() => {
+              handleDelete(todo.id);
+            }}
+          >
+            <FaTrash className="icon" />
+    </button>
 
-  step 3: After passing the function from App.js to Todo.js now lets handle the button click and get the id so that we pass the id to App.js with the help of the function onHandleDeleteTodo
-  // Todo.js
+    step 4: finally with the help of the id lets delete the item from todos state inside App.js
 
-  const { todo, onHandleDeleteTodo } = props;
+    const handleDeleteTodo = (id) => {
+      setTodos(todos.filter((todo) => todo.id !== id));
+    };
+    ```
 
-  const handleDelete = (id) => {
-    onHandleDeleteTodo(id);
-  };
-
-  <button
-          className="btn"
-          onClick={() => {
-            handleDelete(todo.id);
-          }}
-        >
-          <FaTrash className="icon" />
-  </button>
-
-  step 4: finally with the help of the id lets delete the item from todos state inside App.js
-
-  const handleDeleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
-  ```
+## [25. Form Validation without library](https://github.com/anisul-Islam/form-validation-without-library)
 
 ## [26. useRef hook - Uncontrolled component](https://youtu.be/l5z137GWakU)
 
 - If we look at the AddTodo component then you will see we are not using those title and desc state inside the component that much so we can avoid state and make the component stateless
-- **Code Example - 37 (useRef hook for getting form value)**
+- **Code Example - 45 (useRef hook for getting form value)**
 
   ```js
   import React, { useRef } from "react";
@@ -2405,7 +2287,7 @@ export default Product;
 ## [27. dynamic styling in React](https://youtu.be/Eru9-kZfhw4)
 
 - Now lets add some coditional styling
-- **Code Example - 38 (conditional styling)**
+- **Code Example - 46 (conditional styling)**
 
   ```js
   import React, { useState, useEffect } from "react";
@@ -2502,13 +2384,13 @@ export default Product;
 
 ## [28. Assignment - 3: Add New Product](https://github.com/anisul-Islam/react-assignment-3-add-new-product)
 
-## [21. class component](https://youtu.be/fu76idgpuEI)
+## [29. class component](https://youtu.be/fu76idgpuEI)
 
-## [22. state, setState, event handler](https://youtu.be/9AtJ4dM2xOU)
+## [30. state, setState, event handler](https://youtu.be/9AtJ4dM2xOU)
 
 - state is a js object for storing current situation of a component
 
-- **Code Example - 32 (Counter App using class component)**
+- **Code Example - 47 (Counter App using class component)**
 
   ```js
   // App.js
@@ -2559,9 +2441,9 @@ export default Product;
 
 ## Part-4 (useEffect Hook, custom hook)
 
-## [29. useEffect Hook](https://youtu.be/XEU3jlV9syI)
+## [31. useEffect Hook](https://youtu.be/XEU3jlV9syI)
 
-- Example 1
+- **Code Example - 48 (useEffect hook)**
 
   ```js
   import React, { useEffect, useState } from "react";
