@@ -1764,7 +1764,26 @@ export default Product;
   export default Button;
   ```
 
-- **Code Example - 32 (onChange Event )**
+- **Code Example - 32 (Pass parameter with event )**
+
+  ```js
+  const handleAddProduct = (e, product) => {
+    e.stopPropagation();
+    console.log("Product Event: ", e);
+    alert(JSON.stringify(product, null, 4));
+  };
+
+  <Button
+    className="btn product__btn"
+    onClick={(e) => {
+      handleAddProduct(e, product);
+    }}
+  >
+    <FaCartPlus className="icon" /> Add To Cart
+  </Button>;
+  ```
+
+- **Code Example - 33 (onChange Event )**
 
   ```js
   import React from "react";
@@ -1807,7 +1826,7 @@ export default Product;
   export default NewProduct;
   ```
 
-- **Code Example - 33 (More complex example of onChange Event )**
+- **Code Example - 34 (More complex example of onChange Event )**
 
   ```js
   import React from "react";
@@ -1919,10 +1938,20 @@ export default Product;
   export default Input;
   ```
 
+- **Code Example - 35 (Event Bubbling - child event can effect parent event )**
+
+  ```js
+  const handleAddProduct = (e, product) => {
+    e.stopPropagation();
+    console.log("Product Event: ", e);
+    alert(JSON.stringify(product, null, 4));
+  };
+  ```
+
 ## [19. useState Hooks](https://youtu.be/skUOiqcVurY)
 
 - useState() hook helps us to track state in a functional component.
-- **Code Example - 34 (Counter App )**
+- **Code Example - 36 (Counter App )**
 
   ```js
   // App.js
