@@ -1948,8 +1948,13 @@ export default Product;
   };
   ```
 
+- **Code Example - 36 (onSubmit Event )**
+
 ## [19. useState Hooks](https://youtu.be/skUOiqcVurY)
 
+- state is a memory for component where we can update value and re-render the component
+- state is a global variable thats why when you even re-render it fetch the last updated value
+- hooks are function which we can implement in our component - useState, useEffect
 - useState() hook helps us to track state in a functional component.
 - **Code Example - 36 (Counter App )**
 
@@ -1993,34 +1998,71 @@ export default Product;
 
   - we can also use name attribute for identifying element and use 1 function instead of many. from ebent handler we can use event.target.name and then decide what to do or not? - [1 handler for multiple elements] (https://github.com/anisul-Islam/react-counter-app-1-function/blob/master/src/components/Counter.js)
 
-- **Code Example - 31 (store data in state )**
+- **Code Example - 37 (store data in state )**
 
   ```js
   import React, { useState } from "react";
+  import { FaCartPlus } from "react-icons/fa";
+  import Button from "./Button";
 
-  import Footer from "./components/Footer";
-  import Header from "./components/Header";
-  import Todos from "./components/Todos";
+  import Card from "./Card";
 
-  import { todosData } from "./data";
-  import "./App.css";
-
-  const App = () => {
-    const [todos, setTodos] = useState(todosData);
-
+  const Product = (props) => {
+    const { thumbnail, title, description, price, rating, brand, category } =
+      props;
+    const product = props;
+    const [cartProducts, setCartProducts] = useState([]);
+    const handleAddProduct = (e, product) => {
+      e.stopPropagation();
+      setCartProducts((prevState) => {
+        return [...prevState, product];
+      });
+    };
+    console.log(cartProducts);
     return (
-      <>
-        <Header />
-        <main>{todos.length > 0 && <Todos todos={todosData} />}</main>
-        <Footer />
-      </>
+      <Card>
+        <article className="product">
+          <img src={thumbnail} alt="iPhone 9" className="product__img" />
+          <div className="product__body">
+            <h2 className="product__title">{title}</h2>
+            <p className="product__description">description: {description}</p>
+            <p className="product__price">Price: {price}</p>
+            <p className="product__rating">rating: {rating}</p>
+            <p className="product__brand">brand: {brand}</p>
+            <p className="product__category">category: {category}</p>
+            {/* <button className="btn product__btn icon">
+              <FaCartPlus className="icon" /> Add To Cart
+            </button> */}
+            <Button
+              className="btn product__btn"
+              onClick={(e) => {
+                handleAddProduct(e, product);
+              }}
+            >
+              <FaCartPlus className="icon" /> Add To Cart
+            </Button>
+          </div>
+        </article>
+      </Card>
     );
   };
-
-  export default App;
+  export default Product;
   ```
 
+- **Code Example - 38 (why update data based on prevState?)**
+
   - update state based on prev value - `setCount (count => count + 1)`
+
+  ```js
+      const handleIncrement = (e) => {
+        console.log(e);
+        setTimeout(() => {
+          <!-- setcount(count + 1); -->
+          setcount((count) => count + 1);
+        }, 3000);
+        console.log("increment count: ", count);
+      };
+  ```
 
 ## [20. Assignment - 2: Counter App](https://github.com/anisul-Islam/react-assignment-2-counter-app)
 
@@ -2028,7 +2070,7 @@ export default Product;
 
 - create and complete AddTodo component
 - store newTodo data inside a state variable and update total todos
-- **Code Example - 33 (get data from a form)**
+- **Code Example - 39 (get data from a form)**
 
   ```js
   // In App.js
@@ -2166,7 +2208,7 @@ export default Product;
 
 - Another practical example: https://youtu.be/h7yq5lfDZc8
 - [Freecodecamp doc](https://www.freecodecamp.org/news/what-is-lifting-state-up-in-react/)
-- **Code Example - 34 (state lifting)**
+- **Code Example - 39 (state lifting)**
 
   ```js
   // App.js
@@ -2231,7 +2273,7 @@ export default Product;
 
 ## [24. update the state based on previous state]
 
-- **Code Example - 35 (update the state based on previous state)**
+- **Code Example - 40 (update the state based on previous state)**
 
   ```js
   // Inside App.js
@@ -2242,7 +2284,7 @@ export default Product;
 
 ## [25. delete an item based on id or anything]
 
-- **Code Example - 36 (state lifting and delete item)**
+- **Code Example - 41 (state lifting and delete item)**
 
   ```js
    // App.js
