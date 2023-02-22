@@ -1770,13 +1770,9 @@ export default Product;
   import React from "react";
 
   const NewProduct = () => {
-    const handleTitleChange = (event) => {
+    const handleChange = (event) => {
       console.log(event.target.value);
     };
-    const handlePriceChange = (event) => {
-      console.log(event.target.value);
-    };
-
     return (
       <div className="new-user">
         <h2>Create Product</h2>
@@ -1788,7 +1784,7 @@ export default Product;
             type="text"
             placeholder="Enter product title"
             name="title"
-            onChange={handleTitleChange}
+            onChange={handleChange}
             required={true}
           />
         </div>
@@ -1800,7 +1796,7 @@ export default Product;
             type="number"
             placeholder="Enter product price here"
             name="price"
-            onChange={handlePriceChange}
+            onChange={handleChange}
             required={true}
           />
         </div>
@@ -1813,10 +1809,120 @@ export default Product;
 
 - **Code Example - 33 (More complex example of onChange Event )**
 
+  ```js
+  import React from "react";
+
+  const NewProduct = () => {
+    const inputs = [
+      {
+        id: 1,
+        type: "text",
+        name: "title",
+        placeholder: "Enter product title",
+        required: true,
+      },
+      {
+        id: 2,
+        type: "number",
+        name: "price",
+        placeholder: "Enter product price",
+        required: true,
+      },
+    ];
+    const handleChange = (event) => {
+      console.log(event.target.value);
+    };
+
+    return (
+      <div className="new-user">
+        <h2>Create Product</h2>
+
+        <input
+          className="form__input"
+          type={inputs[0].type}
+          placeholder={inputs[0].placeholder}
+          name={inputs[0].name}
+          onChange={handleChange}
+          required={inputs[0].required}
+        />
+
+        <input
+          className="form__input"
+          type={inputs[1].type}
+          placeholder={inputs[1].placeholder}
+          name={inputs[1].name}
+          onChange={handleChange}
+          required={inputs[1].required}
+        />
+      </div>
+    );
+  };
+
+  // More simplified
+  const NewProduct = () => {
+    const inputs = [
+      {
+        id: 1,
+        type: "text",
+        name: "title",
+        placeholder: "Enter product title",
+        required: true,
+      },
+      {
+        id: 2,
+        type: "number",
+        name: "price",
+        placeholder: "Enter product price",
+        required: true,
+      },
+    ];
+    const handleChange = (event) => {
+      console.log(event.target.value);
+    };
+
+    const renderInputs = inputs.map((input) => {
+      return (
+        <Input
+          key={input.id}
+          className="form__input"
+          type={input.type}
+          placeholder={input.placeholder}
+          name={input.name}
+          onChange={handleChange}
+          required={input.required}
+        />
+      );
+    });
+
+    return (
+      <div className="new-user">
+        <h2>Create Product</h2>
+        {renderInputs}
+      </div>
+    );
+  };
+
+  // more simplified
+  <Input key={input.id} {...input} onChange={handleChange} />;
+
+  // Input.js
+  import React from "react";
+  const Input = (props) => {
+    const { onChange, ...inputProps } = props; // getting onChnage from props and putting rest of the things inside inputProps
+
+    console.log([inputProps]);
+    return (
+      <input className="form__input" {...inputProps} onChange={onChange} />
+    );
+  };
+
+  export default Input;
+  ```
+
 ## [19. useState Hooks](https://youtu.be/skUOiqcVurY)
 
 - useState() hook helps us to track state in a functional component.
-- **Code Example - 33 (Counter App )**
+- **Code Example - 34 (Counter App )**
 
   ```js
   // App.js
