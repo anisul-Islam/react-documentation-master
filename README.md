@@ -2502,11 +2502,89 @@ export default Product;
   }
   ```
 
-## Part-4 (useEffect Hook, custom hook)
+## Part-4 (life cycle method of class component, useEffect Hook, custom hook, services)
 
-## [31. useEffect Hook](https://youtu.be/XEU3jlV9syI)
+## [31. life cycle methods of a class component](https://youtu.be/Yz5qTOmSt0M)
 
-- **Code Example - 48 (useEffect hook)**
+- **Code Example - 48 (life cycle methods of a class component)**
+
+  ```js
+  // Counter App
+  import React, { Component } from "react";
+
+  class Counter extends Component {
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        count: 0,
+      };
+    }
+
+    handleIncrement = () => {
+      this.setState({
+        count: this.state.count + 1,
+      });
+    };
+
+    render() {
+      return (
+        <div>
+          <h2>Count: {this.state.count}</h2>
+          <button onClick={this.handleIncrement}>Increment</button>
+        </div>
+      );
+    }
+  }
+  export default Counter;
+
+  // LifeCycle Methods
+  import React, { Component } from 'react';
+  // mounting - constructor -> render -> componentDidMount() (it will be called once, API Call is recommended here)
+  // updating - state/props ->  shouldComponentUpdate()-> render -> componentDidUpdate ->
+  // unmounting -> componentDidUnmount()
+  class LifeCycle extends Component {
+      constructor(props) {
+          super(props);
+          console.log('constructor');
+          this.state = {
+              count: 0
+          };
+      }
+
+      handleIncrement = () => {
+          this.setState({
+              count: this.state.count + 1
+          });
+      };
+      componentDidMount() {
+          console.log('componentDidMount');
+      }
+      componentDidUpdate() {
+          console.log('componentDidUpdate');
+      }
+      shouldComponentUpdate() {
+          console.log('shouldComponentUpdate()');
+          return true;
+      }
+
+      render() {
+          console.log('render');
+          return (
+              <div>
+                  <h2>Count: {this.state.count}</h2>
+                  <button onClick={this.handleIncrement}>Increment</button>
+              </div>
+          );
+      }
+  }
+  export default LifeCycle;
+
+  ```
+
+## [32. useEffect Hook](https://youtu.be/XEU3jlV9syI)
+
+- **Code Example - 49 (useEffect hook)**
 
   ```js
   import React, { useEffect, useState } from "react";
@@ -2601,9 +2679,9 @@ export default Product;
   export default UseEffectExample;
   ```
 
-## [32. fatch data using useEffect Hook](https://youtu.be/Z-EkslDJTJI)
+## [33. fatch data using useEffect Hook](https://youtu.be/Z-EkslDJTJI)
 
-- **Code Example - 49 (fetch data using useEffect hook)**
+- **Code Example - 50 (fetch data using useEffect hook)**
 
   ```js
   import React, { useEffect, useState } from "react";
@@ -2659,7 +2737,7 @@ export default Product;
   export default App;
   ```
 
-- **Code Example - 50 (fetch data using useEffect hook - async await)**
+- **Code Example - 51 (fetch data using useEffect hook - async await)**
 
   ```js
   import React, { useEffect, useState } from "react";
@@ -2715,9 +2793,9 @@ export default Product;
   export default App;
   ```
 
-## [33. how to create custom hook](https://youtu.be/ZWschU7H_20)
+## [34. how to create custom hook](https://youtu.be/ZWschU7H_20)
 
-- **Code Example - 51 (custom hook)**
+- **Code Example - 52 (custom hook)**
 
   ```js
   import React, { useState, useEffect } from "react";
@@ -2750,9 +2828,9 @@ export default Product;
   export default useFetch;
   ```
 
-## [34. create services for making http requests]
+## [35. create services for making http requests]
 
-- **Code Example - 52 (services for http requests)**
+- **Code Example - 53 (services for http requests)**
 
   ```js
   // UserService.js
@@ -2839,17 +2917,17 @@ export default Product;
   export default App;
   ```
 
-## [35. Assignment 4 - fetch products](https://github.com/anisul-Islam/react-assignment-4-fetch-products)
+## [36. Assignment 4 - fetch products](https://github.com/anisul-Islam/react-assignment-4-fetch-products)
 
-## Part-5 (useReducer Hook, modal)
+## Part-5 (useReducer Hook, modal, dynamic styling)
 
-## [36. useReducer hook](https://youtu.be/l_BhBNhNwhE)
+## [37. useReducer hook](https://youtu.be/l_BhBNhNwhE)
 
 - useState and useReducers helps us to manage states
 - useReducer is a good choice if you have multiple & complex states (objects, arrays)
 - useReducer is powerful when managing complex logic for updating the states
 - useState is better if you are using state for simple purpose and handling string, boolean or number type.
-- **Code Example - 53 (without useReducer)**
+- **Code Example - 54 (without useReducer)**
 
   ```js
   // without useReducer
@@ -2935,7 +3013,7 @@ export default Product;
   export default App;
   ```
 
-- **Code Example - 54 (with useReducer)**
+- **Code Example - 55 (with useReducer)**
 
   ```js
   import React, { useState, useReducer } from "react";
@@ -3052,9 +3130,9 @@ export default Product;
   // we can separate the reducer code
   ```
 
-## [37. dynamic styling in react]
+## [38. dynamic styling in react]
 
-- **Code Example - 55 (dynamic styling)**
+- **Code Example - 56 (dynamic styling)**
 
   ```js
   import React, { useState, useReducer, useEffect } from "react";
@@ -3170,13 +3248,40 @@ export default Product;
   export default App;
   ```
 
-## [38. react todo projects]
+## [39. react todo projects]
 
 - [react todo project](https://github.com/anisul-Islam/react-todo-project)
 
-## Part-6 (Optimization: React.memo(), useCallback(), useMemo())
+## Part-6 (react routing)
 
-## [39. react memo](https://youtu.be/pwh4oyGpVPk)
+- [react-routing-project](https://github.com/anisul-Islam/react-routing-project)
+- react-router
+
+## [40. Introduction to Routing](https://youtu.be/1_powatXjds)
+
+## [41. Navigation and redirect](https://youtu.be/DooqgS1JDg0)
+
+## [42. dynamic routing using useParams](https://youtu.be/g5B0Vq3jHbA)
+
+## [43. useLocation hook](https://youtu.be/EKmr00ZKkCg)
+
+## [44. route parameter, query parameter](https://youtu.be/uQtNSOUepVE)
+
+## [44. https://youtu.be/MqFZ-tewuW0](https://youtu.be/MqFZ-tewuW0)
+
+## Part-7 (CRUD Operations - http methods)
+
+## [45. Read Users](https://youtu.be/gnHdHFqlfew)
+
+## [46. Delete User](https://youtu.be/IX-1n_eHF0s)
+
+## [47. Create User](https://youtu.be/JOAiEGOqAmo)
+
+## [48. Update User](https://youtu.be/msrcslJPsjY)
+
+## Part-8 (Optimization: React.memo(), useCallback(), useMemo())
+
+## [40. react memo](https://youtu.be/pwh4oyGpVPk)
 
 - It helps to avoid unnecessary components rendering
 
@@ -3220,7 +3325,7 @@ export default Product;
     export default memo(Message);
   ```
 
-## [37. useCallback Hook](https://youtu.be/t9qUJ0SRQuE)
+## [41. useCallback Hook](https://youtu.be/t9qUJ0SRQuE)
 
 - It helps to avoid unnecessary components rendering for defining callback methods
 - only component will be rendered when some states or props change
@@ -3273,7 +3378,7 @@ export default Product;
 
   ```
 
-## [38. useMemo Hook](https://youtu.be/_namSWWPMeU)
+## [42. useMemo Hook](https://youtu.be/_namSWWPMeU)
 
 - It helps to avoid taking unnecessary time for same kind of complex calculation for each rendering
 
@@ -3327,32 +3432,6 @@ export default Product;
     export default React.memo(Message);
 
   ```
-
-## Part-7 (react routing)
-
-- [react-routing-project](https://github.com/anisul-Islam/react-routing-project)
-
-## [39. Introduction to Routing](https://youtu.be/1_powatXjds)
-
-## [40. Navigation and redirect](https://youtu.be/DooqgS1JDg0)
-
-## [41. dynamic routing using useParams](https://youtu.be/g5B0Vq3jHbA)
-
-## [42. useLocation hook](https://youtu.be/EKmr00ZKkCg)
-
-## [43. route parameter, query parameter](https://youtu.be/uQtNSOUepVE)
-
-## [44. https://youtu.be/MqFZ-tewuW0](https://youtu.be/MqFZ-tewuW0)
-
-## Part-8 (CRUD Operations - http methods)
-
-## [45. Read Users](https://youtu.be/gnHdHFqlfew)
-
-## [46. Delete User](https://youtu.be/IX-1n_eHF0s)
-
-## [47. Create User](https://youtu.be/JOAiEGOqAmo)
-
-## [48. Update User](https://youtu.be/msrcslJPsjY)
 
 ## Part-9 (props drilling, useContext Hook)
 
