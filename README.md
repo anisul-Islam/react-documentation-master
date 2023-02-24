@@ -2502,9 +2502,13 @@ export default Product;
   }
   ```
 
+## [31. react todo projects]
+
+- [react todo project](https://github.com/anisul-Islam/react-todo-project)
+
 ## Part-4 (life cycle method of class component, useEffect Hook, custom hook, services)
 
-## [31. life cycle methods of a class component](https://youtu.be/Yz5qTOmSt0M)
+## [32. life cycle methods of a class component](https://youtu.be/Yz5qTOmSt0M)
 
 - **Code Example - 48 (life cycle methods of a class component)**
 
@@ -2582,7 +2586,7 @@ export default Product;
 
   ```
 
-## [32. useEffect Hook](https://youtu.be/XEU3jlV9syI)
+## [33. useEffect Hook](https://youtu.be/XEU3jlV9syI)
 
 - **Code Example - 49 (useEffect hook)**
 
@@ -2679,7 +2683,7 @@ export default Product;
   export default UseEffectExample;
   ```
 
-## [33. fatch data using useEffect Hook](https://youtu.be/Z-EkslDJTJI)
+## [34. fatch data using useEffect Hook](https://youtu.be/Z-EkslDJTJI)
 
 - **Code Example - 50 (fetch data using useEffect hook)**
 
@@ -2793,7 +2797,7 @@ export default Product;
   export default App;
   ```
 
-## [34. how to create custom hook](https://youtu.be/ZWschU7H_20)
+## [35. how to create custom hook](https://youtu.be/ZWschU7H_20)
 
 - **Code Example - 52 (custom hook)**
 
@@ -2828,7 +2832,7 @@ export default Product;
   export default useFetch;
   ```
 
-## [35. create services for making http requests]
+## [36. create services for making http requests]
 
 - **Code Example - 53 (services for http requests)**
 
@@ -2917,11 +2921,11 @@ export default Product;
   export default App;
   ```
 
-## [36. Assignment 4 - fetch products](https://github.com/anisul-Islam/react-assignment-4-fetch-products)
+## [37. Assignment 4 - fetch products](https://github.com/anisul-Islam/react-assignment-4-fetch-products)
 
 ## Part-5 (useReducer Hook, modal, dynamic styling)
 
-## [37. useReducer hook](https://youtu.be/l_BhBNhNwhE)
+## [38. useReducer hook](https://youtu.be/l_BhBNhNwhE)
 
 - useState and useReducers helps us to manage states
 - useReducer is a good choice if you have multiple & complex states (objects, arrays)
@@ -3126,140 +3130,16 @@ export default Product;
   };
 
   export default App;
-
-  // we can separate the reducer code
   ```
-
-## [38. dynamic styling in react]
-
-- **Code Example - 56 (dynamic styling)**
-
-  ```js
-  import React, { useState, useReducer, useEffect } from "react";
-  import { reducer } from "./reducer";
-
-  // books, modalText, isModalOpen
-  // add book - modalText
-  // remove book - modalText
-  const dummyBooks = [
-    { id: 1, title: "book1" },
-    { id: 2, title: "book2" },
-  ];
-  const Modal = ({ modalText }) => {
-    return <p>{modalText}</p>;
-  };
-
-  const initialState = {
-    books: dummyBooks,
-    isModalOpen: false,
-    modalText: "",
-  };
-
-  const App = () => {
-    // const [books, setBooks] = useState(dummyBooks);
-    // const [modalText, setModalText] = useState('');
-    // const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const error = true;
-
-    const [bookState, dispatch] = useReducer(reducer, initialState);
-
-    const [bookTitle, setBookTitle] = useState("");
-    const [isValidTitle, setIsValidTitle] = useState(true);
-
-    useEffect(() => {
-      if (bookTitle.length < 2) {
-        setIsValidTitle(false);
-      } else {
-        setIsValidTitle(true);
-      }
-    }, [bookTitle]);
-
-    const handleTitleChange = (event) => {
-      event.stopPropagation();
-      setBookTitle(event.target.value);
-    };
-    const handleDeleteBook = (event, id) => {
-      event.stopPropagation();
-      dispatch({ type: "DELETE", payload: id });
-    };
-
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      const newBook = { id: new Date().getTime().toString(), title: bookTitle };
-      dispatch({ type: "ADD", payload: newBook });
-      setBookTitle("");
-    };
-
-    return (
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="enter book title"
-            value={bookTitle}
-            onChange={handleTitleChange}
-            required
-            style={{ backgroundColor: isValidTitle ? "" : "red" }}
-          />
-          <input
-            type="text"
-            placeholder="enter book title"
-            value={bookTitle}
-            onChange={handleTitleChange}
-            required
-            className={`${isValidTitle ? "valid" : "invalid"}`}
-          />
-          <p
-            style={{
-              color: error ? "red" : "green",
-              backgroundColor: error ? "white" : "black",
-            }}
-          >
-            Error
-          </p>
-          <button type="submit">Add Book</button>
-        </form>
-
-        {bookState.isModalOpen && <Modal modalText={bookState.modalText} />}
-
-        <section className="books">
-          {bookState.books.map((book) => {
-            const { id, title } = book;
-            return (
-              <article key={id} className="book">
-                <h2>id: {id}</h2>
-                <p>title: {title}</p>
-                <button
-                  onClick={(event) => {
-                    handleDeleteBook(event, id);
-                  }}
-                >
-                  Delete
-                </button>
-              </article>
-            );
-          })}
-        </section>
-      </div>
-    );
-  };
-
-  export default App;
-  ```
-
-## [39. react todo projects]
-
-- [react todo project](https://github.com/anisul-Islam/react-todo-project)
 
 ## Part-6 (react routing)
 
 - [react-routing-project](https://github.com/anisul-Islam/react-routing-project)
 - react-router
 
-## [40. Introduction to Routing](https://youtu.be/1_powatXjds)
+## [39. Introduction to Routing](https://youtu.be/1_powatXjds)
 
-## [41. Navigation and redirect](https://youtu.be/DooqgS1JDg0)
+## [40. Navigation and redirect](https://youtu.be/DooqgS1JDg0)
 
 ## [42. dynamic routing using useParams](https://youtu.be/g5B0Vq3jHbA)
 
@@ -3281,7 +3161,7 @@ export default Product;
 
 ## Part-8 (Optimization: React.memo(), useCallback(), useMemo())
 
-## [40. react memo](https://youtu.be/pwh4oyGpVPk)
+## [49. react memo](https://youtu.be/pwh4oyGpVPk)
 
 - It helps to avoid unnecessary components rendering
 
@@ -3325,7 +3205,7 @@ export default Product;
     export default memo(Message);
   ```
 
-## [41. useCallback Hook](https://youtu.be/t9qUJ0SRQuE)
+## [50. useCallback Hook](https://youtu.be/t9qUJ0SRQuE)
 
 - It helps to avoid unnecessary components rendering for defining callback methods
 - only component will be rendered when some states or props change
@@ -3378,7 +3258,7 @@ export default Product;
 
   ```
 
-## [42. useMemo Hook](https://youtu.be/_namSWWPMeU)
+## [51. useMemo Hook](https://youtu.be/_namSWWPMeU)
 
 - It helps to avoid taking unnecessary time for same kind of complex calculation for each rendering
 
@@ -3435,22 +3315,22 @@ export default Product;
 
 ## Part-9 (props drilling, useContext Hook)
 
-## [49. Props drilling](https://youtu.be/_JNIQXYSUu4)
+## [52. Props drilling](https://youtu.be/_JNIQXYSUu4)
 
-## [50. useContext Hook](https://youtu.be/RYeRn5_xL7k)
+## [53. useContext Hook](https://youtu.be/RYeRn5_xL7k)
 
-## [51. Theme change project using useContext]
+## [54. Theme change project using useContext]
 
 ## Part-10 (redux, redex toolkit)
 
 - check redux videos and then redux-toolkit
 - how to use redux devtools
 
-## [52. Counter App using Redux-toolkit](https://youtu.be/1aOGY0rRBQk)
+## [55. Counter App using Redux-toolkit](https://youtu.be/1aOGY0rRBQk)
 
-## [53. Fetch data using Redux-toolkit](https://youtu.be/LoK2bQUPjsY)
+## [56. Fetch data using Redux-toolkit](https://youtu.be/LoK2bQUPjsY)
 
-## [54. Books CRUD APP using Redux-toolkit](https://youtu.be/No1FYwxK6Es)
+## [57. Books CRUD APP using Redux-toolkit](https://youtu.be/No1FYwxK6Es)
 
 - [Project's GitHub link](https://github.com/anisul-Islam/redux-toolkit-crud-app)
 
