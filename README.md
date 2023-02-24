@@ -2845,27 +2845,338 @@ export default Product;
 
 ## [36. useReducer hook](https://youtu.be/l_BhBNhNwhE)
 
-- example
+- useState and useReducers helps us to manage states
+- useReducer is a good choice if you have multiple & complex states (objects, arrays)
+- useReducer is powerful when managing complex logic for updating the states
+- useState is better if you are using state for simple purpose and handling string, boolean or number type.
+- **Code Example - 53 (without useReducer)**
 
   ```js
+  // without useReducer
+  import React, { useState } from "react";
 
+  // books, modalText, isModalOpen
+  // add book - modalText
+  // remove book - modalText
+  const dummyBooks = [
+    { id: 1, title: "book1" },
+    { id: 2, title: "book2" },
+  ];
+  const Modal = ({ modalText }) => {
+    return <p>{modalText}</p>;
+  };
+  const App = () => {
+    // every time update 3 relevant states
+    const [books, setBooks] = useState(dummyBooks);
+    const [modalText, setModalText] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const [bookTitle, setBookTitle] = useState("");
+
+    const handleAddBook = (event) => {
+      event.stopPropagation();
+      setBookTitle(event.target.value);
+    };
+    const handleDeleteBook = (event, id) => {
+      event.stopPropagation();
+      const filterBooks = books.filter((book) => book.id !== id);
+      setBooks(filterBooks);
+      setIsModalOpen(true);
+      setModalText(" book is deleted");
+    };
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const newBook = { id: new Date().getTime().toString(), title: bookTitle };
+      setBooks((prevBooks) => {
+        return [...prevBooks, newBook];
+      });
+      setIsModalOpen(true);
+      setModalText("New book is added");
+    };
+
+    return (
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="enter book title"
+            value={bookTitle}
+            onChange={handleAddBook}
+            required
+          />
+          <button type="submit">Add Book</button>
+        </form>
+
+        {isModalOpen && <Modal modalText={modalText} />}
+
+        <section className="books">
+          {books.map((book) => {
+            const { id, title } = book;
+            return (
+              <article key={id} className="book">
+                <h2>id: {id}</h2>
+                <p>title: {title}</p>
+                <button
+                  onClick={(event) => {
+                    handleDeleteBook(event, id);
+                  }}
+                >
+                  Delete
+                </button>
+              </article>
+            );
+          })}
+        </section>
+      </div>
+    );
+  };
+
+  export default App;
   ```
 
-## [34. useReducer hook Example Modal]
-
-- example
+- **Code Example - 54 (with useReducer)**
 
   ```js
+  import React, { useState, useReducer } from "react";
 
+  // books, modalText, isModalOpen
+  // add book - modalText
+  // remove book - modalText
+  const dummyBooks = [
+    { id: 1, title: "book1" },
+    { id: 2, title: "book2" },
+  ];
+  const Modal = ({ modalText }) => {
+    return <p>{modalText}</p>;
+  };
+
+  // based on action type reducer will update the state & return the state
+  const reducer = (state, action) => {
+    // action object has action.type and action.payload
+    switch (action.type) {
+      case "ADD":
+        const allBooks = [...state.books, action.payload];
+        return {
+          ...state,
+          books: allBooks,
+          isModalOpen: true,
+          modalText: "new book is added",
+        };
+      case "DELETE":
+        const filteredBooks = state.books.filter(
+          (book) => book.id !== action.payload
+        );
+        return {
+          ...state,
+          books: filteredBooks,
+          isModalOpen: true,
+          modalText: "book is deleted",
+        };
+
+      default:
+        return state;
+    }
+  };
+
+  const initialState = {
+    books: dummyBooks,
+    isModalOpen: false,
+    modalText: "",
+  };
+
+  const App = () => {
+    // const [books, setBooks] = useState(dummyBooks);
+    // const [modalText, setModalText] = useState('');
+    // const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const [bookState, dispatch] = useReducer(reducer, initialState);
+
+    const [bookTitle, setBookTitle] = useState("");
+
+    const handleTitleChange = (event) => {
+      event.stopPropagation();
+      setBookTitle(event.target.value);
+    };
+    const handleDeleteBook = (event, id) => {
+      event.stopPropagation();
+      dispatch({ type: "DELETE", payload: id });
+    };
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const newBook = { id: new Date().getTime().toString(), title: bookTitle };
+      dispatch({ type: "ADD", payload: newBook });
+      setBookTitle("");
+    };
+
+    return (
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="enter book title"
+            value={bookTitle}
+            onChange={handleTitleChange}
+            required
+          />
+          <button type="submit">Add Book</button>
+        </form>
+
+        {bookState.isModalOpen && <Modal modalText={bookState.modalText} />}
+
+        <section className="books">
+          {bookState.books.map((book) => {
+            const { id, title } = book;
+            return (
+              <article key={id} className="book">
+                <h2>id: {id}</h2>
+                <p>title: {title}</p>
+                <button
+                  onClick={(event) => {
+                    handleDeleteBook(event, id);
+                  }}
+                >
+                  Delete
+                </button>
+              </article>
+            );
+          })}
+        </section>
+      </div>
+    );
+  };
+
+  export default App;
+
+  // we can separate the reducer code
   ```
 
-## [35. react todo projects]
+## [37. dynamic styling in react]
+
+- **Code Example - 55 (dynamic styling)**
+
+  ```js
+  import React, { useState, useReducer, useEffect } from "react";
+  import { reducer } from "./reducer";
+
+  // books, modalText, isModalOpen
+  // add book - modalText
+  // remove book - modalText
+  const dummyBooks = [
+    { id: 1, title: "book1" },
+    { id: 2, title: "book2" },
+  ];
+  const Modal = ({ modalText }) => {
+    return <p>{modalText}</p>;
+  };
+
+  const initialState = {
+    books: dummyBooks,
+    isModalOpen: false,
+    modalText: "",
+  };
+
+  const App = () => {
+    // const [books, setBooks] = useState(dummyBooks);
+    // const [modalText, setModalText] = useState('');
+    // const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const error = true;
+
+    const [bookState, dispatch] = useReducer(reducer, initialState);
+
+    const [bookTitle, setBookTitle] = useState("");
+    const [isValidTitle, setIsValidTitle] = useState(true);
+
+    useEffect(() => {
+      if (bookTitle.length < 2) {
+        setIsValidTitle(false);
+      } else {
+        setIsValidTitle(true);
+      }
+    }, [bookTitle]);
+
+    const handleTitleChange = (event) => {
+      event.stopPropagation();
+      setBookTitle(event.target.value);
+    };
+    const handleDeleteBook = (event, id) => {
+      event.stopPropagation();
+      dispatch({ type: "DELETE", payload: id });
+    };
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const newBook = { id: new Date().getTime().toString(), title: bookTitle };
+      dispatch({ type: "ADD", payload: newBook });
+      setBookTitle("");
+    };
+
+    return (
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="enter book title"
+            value={bookTitle}
+            onChange={handleTitleChange}
+            required
+            style={{ backgroundColor: isValidTitle ? "" : "red" }}
+          />
+          <input
+            type="text"
+            placeholder="enter book title"
+            value={bookTitle}
+            onChange={handleTitleChange}
+            required
+            className={`${isValidTitle ? "valid" : "invalid"}`}
+          />
+          <p
+            style={{
+              color: error ? "red" : "green",
+              backgroundColor: error ? "white" : "black",
+            }}
+          >
+            Error
+          </p>
+          <button type="submit">Add Book</button>
+        </form>
+
+        {bookState.isModalOpen && <Modal modalText={bookState.modalText} />}
+
+        <section className="books">
+          {bookState.books.map((book) => {
+            const { id, title } = book;
+            return (
+              <article key={id} className="book">
+                <h2>id: {id}</h2>
+                <p>title: {title}</p>
+                <button
+                  onClick={(event) => {
+                    handleDeleteBook(event, id);
+                  }}
+                >
+                  Delete
+                </button>
+              </article>
+            );
+          })}
+        </section>
+      </div>
+    );
+  };
+
+  export default App;
+  ```
+
+## [38. react todo projects]
 
 - [react todo project](https://github.com/anisul-Islam/react-todo-project)
 
 ## Part-6 (Optimization: React.memo(), useCallback(), useMemo())
 
-## [36. react memo](https://youtu.be/pwh4oyGpVPk)
+## [39. react memo](https://youtu.be/pwh4oyGpVPk)
 
 - It helps to avoid unnecessary components rendering
 
