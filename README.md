@@ -3391,12 +3391,15 @@ export default Component4;
 
 ## [53. useContext Hook](https://youtu.be/RYeRn5_xL7k)
 
-- create context in paraent component
+- it helps us to create component level, app level or global states. It also helps us to avoid state lifting.
+- Context lets the parent component make some information available to any component in the tree below it—no matter how deep—without passing it explicitly through props. (collected from react documentation)
+- use cases of context: theming, routing, managing states
 - step 1: create a context
 
 ```js
 import React from "react";
 
+// we can pass any value or object in createContext()
 export const UserContext = React.createContext(); // it allows us to use Provider and consumer (we will use useContext instead of consumer)
 ```
 
