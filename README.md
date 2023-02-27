@@ -3449,6 +3449,42 @@ export default Component4;
 
 ## [54. Theme change project using useContext]
 
+```js
+import React, { useState, useContext } from "react";
+import { ThemeContext } from "./context/ThemeContext";
+
+const App = () => {
+  const [theme, setTheme] = useState("dark");
+  // const themeContext = useContext(ThemeContext);
+  // console.log({ themeContext });
+  return (
+    <ThemeContext.Provider value={theme}>
+      <div className={`App ${theme}`}>
+        <h1>welcome</h1>
+        <button
+          onClick={() => {
+            setTheme(theme === "dark" ? "light" : "dark");
+          }}
+        >
+          Change Theme
+        </button>
+      </div>
+    </ThemeContext.Provider>
+  );
+};
+
+export default App;
+
+.dark {
+    background-color: #000;
+    color: #fff;
+}
+.light {
+    background-color: #fff;
+    color: #000;
+}
+```
+
 ## Part-10 (redux, redex toolkit)
 
 - check redux videos and then redux-toolkit
