@@ -3317,7 +3317,132 @@ export default Product;
 
 ## [52. Props drilling](https://youtu.be/_JNIQXYSUu4)
 
+```js
+import React, { useState } from "react";
+
+import Component1 from "./components/Component1";
+
+const App = () => {
+  const [user, setUser] = useState({ id: 1, name: "anisul islam" });
+  return (
+    <div>
+      <Component1 user={user} />
+    </div>
+  );
+};
+
+export default App;
+
+import React from 'react';
+import Component2 from './Component2';
+
+const Component1 = ({ user }) => {
+    return (
+        <div>
+            <Component2 user={user} />
+        </div>
+    );
+};
+
+export default Component1;
+
+import React from 'react';
+import Component3 from './Component3';
+
+const Component2 = ({ user }) => {
+    return (
+        <div>
+            <Component3 user={user} />
+        </div>
+    );
+};
+
+export default Component2;
+
+import React from 'react';
+import Component4 from './Component4';
+
+const Component3 = ({ user }) => {
+    return (
+        <div>
+            <Component4 user={user} />
+        </div>
+    );
+};
+
+export default Component3;
+
+import React from 'react';
+
+const Component4 = ({ user }) => {
+    console.log(user);
+    return (
+        <div>
+            <h2>Component 4</h2>
+            <h3>{user.id}</h3>
+            <p>{user.name}</p>
+        </div>
+    );
+};
+
+export default Component4;
+
+```
+
 ## [53. useContext Hook](https://youtu.be/RYeRn5_xL7k)
+
+- create context in paraent component
+- step 1: create a context
+
+```js
+import React from "react";
+
+export const UserContext = React.createContext(); // it allows us to use Provider and consumer (we will use useContext instead of consumer)
+```
+
+- step 2: provide the context - wrap the parent with the context
+
+```js
+import React, { useState } from "react";
+
+import Component1 from "./components/Component1";
+import { UserContext } from "./UserContext";
+
+const App = () => {
+  const [user, setUser] = useState({ id: 1, name: "anisul islam" });
+  const text = "hello everyone!";
+  return (
+    <div>
+      <UserContext.Provider value={{ user, text }}>
+        <Component1 />
+      </UserContext.Provider>
+    </div>
+  );
+};
+
+export default App;
+```
+
+- step 3: access the context with useContext
+
+```js
+import React, { useContext } from "react";
+import { UserContext } from "../UserContext";
+
+const Component4 = () => {
+  const { user } = useContext(UserContext);
+
+  return (
+    <div>
+      <h2>Component 4</h2>
+      <h3>{user.id}</h3>
+      <p>{user.name}</p>
+    </div>
+  );
+};
+
+export default Component4;
+```
 
 ## [54. Theme change project using useContext]
 
