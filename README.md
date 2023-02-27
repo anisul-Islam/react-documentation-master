@@ -3447,33 +3447,138 @@ const Component4 = () => {
 export default Component4;
 ```
 
-## [54. Theme change project using useContext]
+- Another example
 
 ```js
-import React, { useState, useContext } from "react";
-import { ThemeContext } from "./context/ThemeContext";
+// context/UserContext.js
+import { createContext } from 'react';
+export const UserContext = createContext({});
+
+// App.js
+import React, { useState } from "react";
+import NewUser from "./components/NewUser";
+
+import Users from "./components/Users";
+import { UserContext } from "./context/UserContext";
 
 const App = () => {
-  const [theme, setTheme] = useState("dark");
-  // const themeContext = useContext(ThemeContext);
-  // console.log({ themeContext });
+  const [users, setUsers] = useState([{ id: 1, name: "anisul islam" }]);
+
   return (
-    <ThemeContext.Provider value={theme}>
-      <div className={`App ${theme}`}>
-        <h1>welcome</h1>
-        <button
-          onClick={() => {
-            setTheme(theme === "dark" ? "light" : "dark");
-          }}
-        >
-          Change Theme
-        </button>
-      </div>
-    </ThemeContext.Provider>
+    <div>
+      <UserContext.Provider value={{ users, setUsers }}>
+        <NewUser />
+        <Users />
+      </UserContext.Provider>
+    </div>
   );
 };
 
 export default App;
+
+// Users.js
+import React, { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
+
+import User from './User';
+
+const Users = () => {
+    const { users } = useContext(UserContext);
+    return (
+        <section>
+            <h2>Users Management</h2>
+            {users.map((user) => (
+                <User key={user.id} {...user} />
+            ))}
+        </section>
+    );
+};
+
+export default Users;
+
+// User.js
+import React from 'react';
+
+const User = ({ ...user }) => {
+    const { id, name } = user;
+
+    return (
+        <article>
+            <h3>ID: {id}</h3>
+            <p>Name: {name}</p>
+        </article>
+    );
+};
+
+export default User;
+
+// NewUser.js
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../context/UserContext';
+
+const NewUser = () => {
+    const [name, setName] = useState('');
+    const { setUsers } = useContext(UserContext);
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const newUser = {
+            id: new Date().getTime().toString(),
+            name: name
+        };
+        setUsers((prevUsers) => {
+            return [...prevUsers, newUser];
+        });
+        // alert(JSON.stringify(newUser, null, 4));
+        setName('');
+    };
+
+    const handleNameChange = (event) => {
+        event.stopPropagation();
+        setName(event.target.value);
+    };
+
+    return (
+        <div>
+            <h2>Create New User</h2>
+            <form onSubmit={handleSubmit}>
+                <input type="text" placeholder="Enter name here" onChange={handleNameChange} value={name} />
+                <button type="submit">Add New User</button>
+            </form>
+        </div>
+    );
+};
+
+export default NewUser;
+
+```
+
+## [54. Theme change project using useContext]
+
+```js
+import React, { useState, useContext } from 'react';
+import { ThemeContext } from './context/ThemeContext';
+
+const App = () => {
+    const [theme, setTheme] = useState('dark');
+    // const themeContext = useContext(ThemeContext);
+    // console.log({ themeContext });
+
+    const toggleTheme = () => {
+        setTheme(theme === 'dark' ? 'light' : 'dark');
+    };
+    return (
+        <ThemeContext.Provider value={theme}>
+            <div className={`App ${theme}`}>
+                <h1>welcome</h1>
+                <button onClick={toggleTheme}>Change Theme</button>
+            </div>
+        </ThemeContext.Provider>
+    );
+};
+
+export default App;
+
 
 .dark {
     background-color: #000;
@@ -3487,6 +3592,7 @@ export default App;
 
 ## Part-10 (redux, redex toolkit)
 
+- redux = Context + useReducer
 - check redux videos and then redux-toolkit
 - how to use redux devtools
 
