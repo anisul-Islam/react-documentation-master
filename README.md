@@ -3134,20 +3134,349 @@ export default Product;
 
 ## Part-6 (react routing)
 
+## [39. Introduction to Routing](https://youtu.be/1_powatXjds)
+
 - [react-routing-project](https://github.com/anisul-Islam/react-routing-project)
 - react-router
+- **Code Example - 56 (basic routing)**
 
-## [39. Introduction to Routing](https://youtu.be/1_powatXjds)
+```js
+// create few pages -> Home.js, About.js, Contact.js, Error.js
+import React from "react";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Home from "./pages/Home";
+import Error from "./pages/Error";
+const App = () => {
+  return (
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+};
+
+export default App;
+```
 
 ## [40. Navigation and redirect](https://youtu.be/DooqgS1JDg0)
 
-## [42. dynamic routing using useParams](https://youtu.be/g5B0Vq3jHbA)
+- **Code Example - 57 (basic routing with Navbar)**
 
-## [43. useLocation hook](https://youtu.be/EKmr00ZKkCg)
+```js
+import React from "react";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
-## [44. route parameter, query parameter](https://youtu.be/uQtNSOUepVE)
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Home from "./pages/Home";
+import Error from "./pages/Error";
+
+const App = () => {
+  return (
+    <div>
+      <BrowserRouter>
+        <nav>
+          <Link to="/" className="nav__link">
+            Home
+          </Link>
+          <Link to="/about" className="nav__link">
+            About
+          </Link>
+          <Link to="/contact" className="nav__link">
+            Contact
+          </Link>
+        </nav>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+};
+
+export default App;
+
+// create a separate Navbar.js component inside layout folder
+
+// Active Link
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+
+const Navbar = () => {
+    return (
+        <nav>
+            <NavLink to="/" className="nav__link">
+                Home
+            </NavLink>
+            <NavLink to="/about" className="nav__link">
+                About
+            </NavLink>
+            <NavLink to="/contact" className="nav__link">
+                Contact
+            </NavLink>
+        </nav>
+    );
+};
+
+export default Navbar;
+.active {
+    color: orange;
+}
+```
+
+- **Code Example - 58 (navigate with useNavigate)**
+
+```js
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
+const Error = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div>
+      <h2>Error Page</h2>
+      <button
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        Go to Home Page
+      </button>
+    </div>
+  );
+};
+
+export default Error;
+```
+
+## [41. dynamic routing using useParams](https://youtu.be/g5B0Vq3jHbA)
+
+- **Code Example - 59 (dynamic routing)**
+- based on the parameters show dynamic data in a page
+- step 1: create some dummy data
+
+```js
+export const blogsData = [
+  {
+    id: 1,
+    title: "html",
+    body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe doloremque impedit cumque aperiam dignissimos cum eveniet reiciendis iste asperiores voluptates repudiandae et, deserunt nobis commodi hic! Ratione accusamus assumenda alias rerum, esse et aperiam nihil sunt amet nobis quod libero sapiente! Harum reiciendis quos tempora blanditiis recusandae impedit iusto ipsum?",
+  },
+  {
+    id: 2,
+    title: "css",
+    body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe doloremque impedit cumque aperiam dignissimos cum eveniet reiciendis iste asperiores voluptates repudiandae et, deserunt nobis commodi hic! Ratione accusamus assumenda alias rerum, esse et aperiam nihil sunt amet nobis quod libero sapiente! Harum reiciendis quos tempora blanditiis recusandae impedit iusto ipsum?",
+  },
+  {
+    id: 3,
+    title: "js",
+    body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe doloremque impedit cumque aperiam dignissimos cum eveniet reiciendis iste asperiores voluptates repudiandae et, deserunt nobis commodi hic! Ratione accusamus assumenda alias rerum, esse et aperiam nihil sunt amet nobis quod libero sapiente! Harum reiciendis quos tempora blanditiis recusandae impedit iusto ipsum?",
+  },
+  {
+    id: 4,
+    title: "react.js",
+    body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe doloremque impedit cumque aperiam dignissimos cum eveniet reiciendis iste asperiores voluptates repudiandae et, deserunt nobis commodi hic! Ratione accusamus assumenda alias rerum, esse et aperiam nihil sunt amet nobis quod libero sapiente! Harum reiciendis quos tempora blanditiis recusandae impedit iusto ipsum?",
+  },
+];
+```
+
+- step 2: load and map the data in Blogs.js page
+
+```js
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
+import { blogsData } from "../data";
+const Blogs = () => {
+  const [blogs, setBlogs] = useState(blogsData);
+
+  const truncateString = (str, number) => {
+    if (str.length > number) {
+      return str.slice(0, number) + "...";
+    } else return str;
+  };
+
+  const renderBlogsElement = blogs.map((blog) => {
+    return (
+      <article key={blog.id} className="blog">
+        <h3>{blog.title}</h3>
+        <p>{truncateString(blog.body, 100)}</p>
+        <Link className="link" to={blog.title}>
+          Learn More
+        </Link>
+      </article>
+    );
+  });
+
+  return (
+    <div>
+      <h2>Blogs Page</h2>
+      <section className="blogs">{renderBlogsElement}</section>
+    </div>
+  );
+};
+
+export default Blogs;
+// blogs/html -> HTML.JS -> Blog.JS
+// blogs/css -> CSS.JS -> Blog.JS
+// blogs/js -> JS.JS -> Blog.JS
+// blogs/react -> React.JS -> Blog.JS
+```
+
+- step 3: set and get parameter
+
+```js
+// in route setup
+<Route path="/blogs/:title" element={<Blog />} />;
+
+// where we wish to recieve the dynamic params
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { blogsData } from "../data";
+
+const Blog = () => {
+  const { title } = useParams();
+  const [blogs, setBlogs] = useState(blogsData);
+  const [singleBlog, setSingleBlog] = useState();
+
+  useEffect(() => {
+    const blogData = blogs.find((blog) => blog.title === title);
+    setSingleBlog(blogData);
+  }, [blogs, title]);
+
+  console.log(singleBlog);
+
+  return (
+    <div>
+      <div>
+        <h2>{title}</h2>
+        {singleBlog && <p>{singleBlog.body}</p>}
+      </div>
+    </div>
+  );
+};
+
+export default Blog;
+```
+
+## [42. useLocation hook](https://youtu.be/EKmr00ZKkCg)
+
+- **Code Example - 60 (pass data using useLocation hook)**
+
+```js
+// what do we have inside useLocation
+// we have state for passing data
+// Blog.js
+import { useParams, useLocation } from "react-router-dom";
+const Blog = () => {
+  const location = useLocation();
+  console.log(location);
+};
+
+//pass data using state in Link
+<Link className="link" to={title} state={{ id, title, body }}>
+  Learn More
+</Link>;
+
+import React from "react";
+import { useParams, useLocation } from "react-router-dom";
+
+const Blog = () => {
+  const location = useLocation();
+  const { title } = useParams();
+
+  return (
+    <div>
+      <div>
+        <h2>{title}</h2>
+        {location.state.body && <p>{location.state.body}</p>}
+      </div>
+    </div>
+  );
+};
+
+export default Blog;
+```
+
+## [43. route parameter, query parameter](https://youtu.be/uQtNSOUepVE)
 
 ## [44. https://youtu.be/MqFZ-tewuW0](https://youtu.be/MqFZ-tewuW0)
+
+- **Code Example - 61 (protected routing)**
+
+```js
+// Protected.js
+import React from "react";
+import { Navigate } from "react-router-dom";
+
+const Protected = ({ isLoggedIn, children }) => {
+  if (!isLoggedIn) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
+};
+
+export default Protected;
+
+// index.js - routing
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Navbar from '../layout/Navbar';
+
+import About from '../pages/About';
+import Blog from '../pages/Blog';
+import Blogs from '../pages/Blogs';
+import Contact from '../pages/Contact';
+import Error from '../pages/Error';
+import Home from '../pages/Home';
+import Protected from './Protected';
+
+const Index = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    return (
+        <BrowserRouter>
+            <Navbar />
+            <button
+                onClick={() => {
+                    setIsLoggedIn(!isLoggedIn);
+                }}>
+                {isLoggedIn ? 'logout' : 'login'}
+            </button>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route
+                    path="/blogs"
+                    element={
+                        <Protected isLoggedIn={isLoggedIn}>
+                            <Blogs />
+                        </Protected>
+                    }
+                />
+                <Route path="/blogs/:title" element={<Blog />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="*" element={<Error />} />
+            </Routes>
+        </BrowserRouter>
+    );
+};
+
+export default Index;
+
+```
 
 ## Part-7 (CRUD Operations - http methods)
 
@@ -3476,6 +3805,31 @@ const App = () => {
 
 export default App;
 
+// adding useMemo and modify
+import React, { useState, useMemo } from 'react';
+import NewUser from './components/NewUser';
+
+import Users from './components/Users';
+import { UserContext } from './context/UserContext';
+
+const App = () => {
+    const [users, setUsers] = useState([{ id: 1, name: 'anisul islam' }]);
+
+    const providerValue = useMemo(() => ({ users, setUsers }), [users, setUsers]);
+
+    return (
+        <div>
+            <UserContext.Provider value={providerValue}>
+                <NewUser />
+                <Users />
+            </UserContext.Provider>
+        </div>
+    );
+};
+
+export default App;
+
+
 // Users.js
 import React, { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
@@ -3590,17 +3944,25 @@ export default App;
 }
 ```
 
+## [55. useReducer + useContext]
+
+- [A good reference](https://www.youtube.com/watch?v=awGFsGc9oCM&ab_channel=DesignCode)
+
+```js
+
+```
+
 ## Part-10 (redux, redex toolkit)
 
 - redux = Context + useReducer
 - check redux videos and then redux-toolkit
 - how to use redux devtools
 
-## [55. Counter App using Redux-toolkit](https://youtu.be/1aOGY0rRBQk)
+## [56. Counter App using Redux-toolkit](https://youtu.be/1aOGY0rRBQk)
 
-## [56. Fetch data using Redux-toolkit](https://youtu.be/LoK2bQUPjsY)
+## [57. Fetch data using Redux-toolkit](https://youtu.be/LoK2bQUPjsY)
 
-## [57. Books CRUD APP using Redux-toolkit](https://youtu.be/No1FYwxK6Es)
+## [58. Books CRUD APP using Redux-toolkit](https://youtu.be/No1FYwxK6Es)
 
 - [Project's GitHub link](https://github.com/anisul-Islam/redux-toolkit-crud-app)
 
