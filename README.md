@@ -2095,6 +2095,8 @@ export default Product;
 
   ```
 
+- [How to create forms in react using react-hook-form](https://www.freecodecamp.org/news/how-to-create-forms-in-react-using-react-hook-form/)
+
 ## [22. upating object in state](https://beta.reactjs.org/learn/updating-objects-in-state)
 
 - **Code Example - 40 (updating object in state)**
@@ -3478,7 +3480,9 @@ export default Index;
 
 ```
 
-## Part-7 (CRUD Operations - http methods)
+## Part-7 [CRUD Operations - http methods - user management app](https://github.com/anisul-Islam/user-mgt-crud-react-app)
+
+- running a json server in react -> `npm i json-server && npx json-server -p 3001 -w database/db.json`
 
 ## [45. Read Users](https://youtu.be/gnHdHFqlfew)
 
@@ -3949,6 +3953,113 @@ export default App;
 - [A good reference](https://www.youtube.com/watch?v=awGFsGc9oCM&ab_channel=DesignCode)
 
 ```js
+// reducer/bookReducer.js
+export const initialState = {
+  books: [
+    {
+      id: 1,
+      title: "book1",
+    },
+    {
+      id: 2,
+      title: "book2",
+    },
+  ],
+};
+
+export const reducer = (state, action) => {
+  switch (action.type) {
+    case "ADD":
+      return state;
+    case "DELETE":
+      const filteredBooks = state.books.filter(
+        (book) => book.id !== action.payload
+      );
+      return {
+        ...state,
+        books: filteredBooks,
+      };
+
+    default:
+      return state;
+  }
+};
+
+// context/BookContext.js
+import { createContext } from "react";
+const BookContext = createContext(null);
+
+export default BookContext;
+
+// hooks/useBookContext.js
+// custom hook for using context
+import { useContext } from "react";
+import BookContext from "../context/BookContext";
+
+export const useBookContext = () => {
+  return useContext(BookContext);
+};
+
+
+// App.js
+import React, { useReducer, useState } from "react";
+
+import "./App.css";
+import Books from "./components/Books";
+import BookContext from "./context/BookContext";
+import { initialState, reducer } from "./reducer/booksReducer";
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <div className="App">
+        <BookContext.Provider value={{ state, dispatch }}>
+          <Books />
+        </BookContext.Provider>
+    </div>
+  );
+}
+
+export default App;
+
+// Books.js
+import React, { useContext } from "react";
+import BookContext from "../context/BookContext";
+import { useThemeContext } from "../context/ThemeContext";
+import { useBookContext } from "../hooks/useBookContext";
+
+const Books = () => {
+  const context = useThemeContext();
+  const { state, dispatch } = useBookContext();
+  // const handleDeleteBook = (id) => {
+  //   const filteredBooks = books.filter((book) => book.id !== id);
+  //   setBooks(filteredBooks);
+  // };
+  return (
+    <div className={context}>
+      {state.books &&
+        state.books.map((book) => {
+          const { id, title } = book;
+          return (
+            <article key={id}>
+              <h2>{id}</h2>
+              <p>{title}</p>
+              <button>edit book</button>
+              <button
+                onClick={() => {
+                  dispatch({ type: "DELETE", payload: id });
+                }}
+              >
+                delete book
+              </button>
+            </article>
+          );
+        })}
+    </div>
+  );
+};
+
+export default Books;
 
 ```
 
