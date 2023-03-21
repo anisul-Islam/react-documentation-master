@@ -4063,18 +4063,635 @@ export default Books;
 
 ```
 
-## Part-10 (redux, redex toolkit)
+## Part-10 (useState, useEffect, useReducer, useContext, custom hook practice)
 
-- redux = Context + useReducer
+## [57. user mgt crud app using useState]
+
+- version 1: only useState, useEffect
+
+```js
+//App.js
+import React, { useState } from "react";
+
+import Users from "./components/Users";
+import "./App.css";
+import NewUser from "./components/NewUser";
+
+const App = () => {
+  const [users, setUsers] = useState([
+    {
+      id: 1,
+      username: "anisul",
+    },
+    {
+      id: 2,
+      username: "sakib",
+    },
+  ]);
+  const [editableUser, setEditableUser] = useState(null);
+
+  const addNewUser = (user) => {
+    setUsers((prevUsers) => [...prevUsers, user]);
+  };
+
+  const editUser = (user) => {
+    setEditableUser(user);
+  };
+
+  const deleteUser = (id) => {
+    const filteredUsers = users.filter((user) => user.id !== id);
+    setUsers(filteredUsers);
+  };
+
+  const updateUser = (updatedUser) => {
+    console.log(updatedUser);
+    const userIndex = users.findIndex((user) => user.id === updatedUser.id);
+    const copiedUsers = [...users];
+    copiedUsers.splice(userIndex, 1, updatedUser);
+    setUsers(copiedUsers);
+  };
+
+  return (
+    <div>
+      <NewUser
+        onAddNewUser={addNewUser}
+        editableUser={editableUser}
+        onUpdateUser={updateUser}
+      />
+      {users && (
+        <Users users={users} onDeleteUser={deleteUser} onEditUser={editUser} />
+      )}
+    </div>
+  );
+};
+
+export default App;
+
+// components/NewUser.js
+import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+
+const NewUser = ({ onAddNewUser, editableUser, onUpdateUser }) => {
+  const [username, setUsername] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (editableUser) {
+      const updatedUser = { id: editableUser.id, username };
+      onUpdateUser(updatedUser);
+    } else {
+      const newUser = { id: uuidv4(), username };
+      onAddNewUser(newUser);
+      setUsername("");
+    }
+  };
+
+  useEffect(() => {
+    editableUser && setUsername(editableUser.username);
+  }, [editableUser]);
+
+  return (
+    <div className="new-user">
+      <h2>Register</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="username"
+          value={username}
+          placeholder="Enter username"
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
+          required
+        />
+        <button type="submit">{editableUser ? "Edit User" : "Add User"}</button>
+      </form>
+    </div>
+  );
+};
+
+export default NewUser;
+
+// components/Users.js
+import React from "react";
+import User from "./User";
+
+const Users = ({ users, onDeleteUser, onEditUser }) => {
+  return (
+    <section className="users">
+      {users.map((user) => (
+        <User
+          key={user.id}
+          user={user}
+          onDeleteUser={onDeleteUser}
+          onEditUser={onEditUser}
+        />
+      ))}
+    </section>
+  );
+};
+
+export default Users;
+
+
+// components/User.js
+import React from "react";
+
+const User = ({ user, onDeleteUser, onEditUser }) => {
+  const { id, username } = user;
+
+  const handleDelete = (id) => {
+    onDeleteUser(id);
+  };
+
+  const handleEdit = (user) => {
+    onEditUser(user);
+  };
+
+  return (
+    <article className="user">
+      <h2>{id}</h2>
+      <p>{username}</p>
+      <button
+        onClick={() => {
+          handleEdit(user);
+        }}
+      >
+        Edit
+      </button>
+      <button
+        onClick={() => {
+          handleDelete(id);
+        }}
+      >
+        Delete
+      </button>
+    </article>
+  );
+};
+
+export default User;
+
+```
+
+- version 2 (useReducer added)
+
+```js
+import React, { useState, useReducer } from "react";
+
+import Users from "./components/Users";
+import "./App.css";
+import NewUser from "./components/NewUser";
+
+const initialState = {
+  users: [
+    {
+      id: 1,
+      username: "anisul",
+    },
+    {
+      id: 2,
+      username: "sakib",
+    },
+  ],
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "ADD_USER":
+      return {
+        ...state,
+        users: [...state.users, action.payload],
+      };
+    case "DELETE_USER":
+      const filteredUsers = state.users.filter(
+        (user) => user.id !== action.payload
+      );
+      return {
+        ...state,
+        users: filteredUsers,
+      };
+    case "UPDATE_USER":
+      const userIndex = state.users.findIndex(
+        (user) => user.id === action.payload.id
+      );
+      const copiedUsers = [...state.users];
+      copiedUsers.splice(userIndex, 1, action.payload);
+      return {
+        ...state,
+        users: copiedUsers,
+      };
+
+    default:
+      return state;
+  }
+};
+
+const App = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [editableUser, setEditableUser] = useState(null);
+
+  const addNewUser = (user) => {
+    dispatch({ type: "ADD_USER", payload: user });
+  };
+
+  const editUser = (user) => {
+    setEditableUser(user);
+  };
+
+  const deleteUser = (id) => {
+    dispatch({ type: "DELETE_USER", payload: id });
+  };
+
+  const updateUser = (updatedUser) => {
+    dispatch({ type: "UPDATE_USER", payload: updatedUser });
+  };
+
+  return (
+    <div>
+      <NewUser
+        onAddNewUser={addNewUser}
+        editableUser={editableUser}
+        onUpdateUser={updateUser}
+      />
+      {state.users && (
+        <Users
+          users={state.users}
+          onDeleteUser={deleteUser}
+          onEditUser={editUser}
+        />
+      )}
+    </div>
+  );
+};
+
+export default App;
+
+// separte the reducer with initial states and exports them to use from the App.js
+```
+
+- version 3 (with useContext)
+
+```js
+// UsersContext.js
+import { createContext } from "react";
+export const UsersContext = createContext(null);
+
+// App.js
+import React, { useState, useReducer } from "react";
+
+import Users from "./components/Users";
+import "./App.css";
+import NewUser from "./components/NewUser";
+import { initialState, reducer } from "./reducer/userReducer";
+import { UsersContext } from "./context/UsersContext";
+
+const App = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [editableUser, setEditableUser] = useState(null);
+
+  return (
+    <div>
+      <UsersContext.Provider
+        value={{ state, dispatch, editableUser, setEditableUser }}
+      >
+        <NewUser />
+        {state.users && <Users />}
+      </UsersContext.Provider>
+    </div>
+  );
+};
+
+export default App;
+
+// Users.js
+import React, { useContext } from "react";
+import { UsersContext } from "../context/UsersContext";
+
+const User = ({ user }) => {
+  const { id, username } = user;
+  const { dispatch, setEditableUser } = useContext(UsersContext);
+
+  const handleDelete = (id) => {
+    dispatch({ type: "DELETE_USER", payload: id });
+  };
+
+  const handleEdit = (user) => {
+    setEditableUser(user);
+  };
+
+  return (
+    <article className="user">
+      <h2>{id}</h2>
+      <p>{username}</p>
+      <button
+        onClick={() => {
+          handleEdit(user);
+        }}
+      >
+        Edit
+      </button>
+      <button
+        onClick={() => {
+          handleDelete(id);
+        }}
+      >
+        Delete
+      </button>
+    </article>
+  );
+};
+
+export default User;
+
+// User.js
+import React, { useContext } from "react";
+import { UsersContext } from "../context/UsersContext";
+
+const User = ({ user }) => {
+  const { id, username } = user;
+  const { dispatch, setEditableUser } = useContext(UsersContext);
+
+  const handleDelete = (id) => {
+    dispatch({ type: "DELETE_USER", payload: id });
+  };
+
+  const handleEdit = (user) => {
+    setEditableUser(user);
+  };
+
+  return (
+    <article className="user">
+      <h2>{id}</h2>
+      <p>{username}</p>
+      <button
+        onClick={() => {
+          handleEdit(user);
+        }}
+      >
+        Edit
+      </button>
+      <button
+        onClick={() => {
+          handleDelete(id);
+        }}
+      >
+        Delete
+      </button>
+    </article>
+  );
+};
+
+export default User;
+
+// NewUser.js
+import React, { useState, useEffect, useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { UsersContext } from "../context/UsersContext";
+
+const NewUser = () => {
+  const { dispatch, editableUser } = useContext(UsersContext);
+  const [username, setUsername] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (editableUser) {
+      const updatedUser = { id: editableUser.id, username };
+      dispatch({ type: "UPDATE_USER", payload: updatedUser });
+    } else {
+      const newUser = { id: uuidv4(), username };
+      dispatch({ type: "ADD_USER", payload: newUser });
+      setUsername("");
+    }
+  };
+
+  useEffect(() => {
+    editableUser && setUsername(editableUser.username);
+  }, [editableUser]);
+
+  return (
+    <div className="new-user">
+      <h2>Register</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="username"
+          value={username}
+          placeholder="Enter username"
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
+          required
+        />
+        <button type="submit">{editableUser ? "Edit User" : "Add User"}</button>
+      </form>
+    </div>
+  );
+};
+
+export default NewUser;
+
+```
+
+- version 4 (custom hook for useContext)
+
+```js
+// hooks/useUsersContext.js
+import { useContext } from "react";
+
+import { UsersContext } from "../context/UsersContext";
+
+export const useUserContext = () => {
+  return useContext(UsersContext);
+};
+```
+
+- version 5 (creating Store.js)
+
+```js
+import React, { useState, useReducer } from "react";
+import { UsersContext } from "../context/UsersContext";
+import { initialState, reducer } from "../reducer/userReducer";
+
+const Store = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [editableUser, setEditableUser] = useState(null);
+
+  const value = {
+    users: state.users,
+    addUser: (newUser) => {
+      dispatch({ type: "ADD_USER", payload: newUser });
+    },
+    deleteUser: (id) => {
+      dispatch({ type: "DELETE_USER", payload: id });
+    },
+    updateUser: (updatedUser) => {
+      dispatch({ type: "UPDATE_USER", payload: updatedUser });
+    },
+    editableUser,
+    setEditableUser,
+  };
+
+  return (
+    <UsersContext.Provider value={value}>{children}</UsersContext.Provider>
+  );
+};
+
+export default Store;
+
+// provide the Store.js
+import React from "react";
+
+import Users from "./components/Users";
+import "./App.css";
+import NewUser from "./components/NewUser";
+import Store from "./store/Store";
+
+const App = () => {
+  return (
+    <div>
+      <Store>
+        <NewUser />
+        <Users />
+      </Store>
+    </div>
+  );
+};
+
+export default App;
+
+// use the Store.js
+// Users.js
+import React from "react";
+import { useUserContext } from "../hooks/useUsersContext";
+import User from "./User";
+
+const Users = () => {
+  const { users } = useUserContext();
+
+  return (
+    <section className="users">
+      {users.map((user) => (
+        <User key={user.id} user={user} />
+      ))}
+    </section>
+  );
+};
+
+export default Users;
+
+// User.js
+import React from "react";
+
+import { useUserContext } from "../hooks/useUsersContext";
+
+const User = ({ user }) => {
+  const { id, username } = user;
+  const { deleteUser, setEditableUser } = useUserContext();
+
+  const handleDelete = (id) => {
+    deleteUser(id);
+  };
+
+  const handleEdit = (user) => {
+    setEditableUser(user);
+  };
+
+  return (
+    <article className="user">
+      <h2>{id}</h2>
+      <p>{username}</p>
+      <button
+        onClick={() => {
+          handleEdit(user);
+        }}
+      >
+        Edit
+      </button>
+      <button
+        onClick={() => {
+          handleDelete(id);
+        }}
+      >
+        Delete
+      </button>
+    </article>
+  );
+};
+
+export default User;
+
+//NewUser.js
+import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+
+import { useUserContext } from "../hooks/useUsersContext";
+
+const NewUser = () => {
+  const { addUser, updateUser, editableUser } = useUserContext();
+  const [username, setUsername] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (editableUser) {
+      const updatedUser = { id: editableUser.id, username };
+      updateUser(updatedUser);
+    } else {
+      const newUser = { id: uuidv4(), username };
+      addUser(newUser);
+      setUsername("");
+    }
+  };
+
+  useEffect(() => {
+    editableUser && setUsername(editableUser.username);
+  }, [editableUser]);
+
+  return (
+    <div className="new-user">
+      <h2>Register</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="username"
+          value={username}
+          placeholder="Enter username"
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
+          required
+        />
+        <button type="submit">{editableUser ? "Edit User" : "Add User"}</button>
+      </form>
+    </div>
+  );
+};
+
+export default NewUser;
+
+```
+
+## [58. REST API state globally with useContext ]()
+
+```js
+
+```
+
+## Part-11 (redux, redex toolkit)
+
+- redux = useContext + useReducer
 - check redux videos and then redux-toolkit
 - how to use redux devtools
 
-## [56. Counter App using Redux-toolkit](https://youtu.be/1aOGY0rRBQk)
+## [59. Counter App using Redux-toolkit](https://youtu.be/1aOGY0rRBQk)
 
-## [57. Fetch data using Redux-toolkit](https://youtu.be/LoK2bQUPjsY)
+## [60. Fetch data using Redux-toolkit](https://youtu.be/LoK2bQUPjsY)
 
-## [58. Books CRUD APP using Redux-toolkit](https://youtu.be/No1FYwxK6Es)
+## [61. Books CRUD APP using Redux-toolkit](https://youtu.be/No1FYwxK6Es)
 
 - [Project's GitHub link](https://github.com/anisul-Islam/redux-toolkit-crud-app)
 
-## Part-11 (React + Typescript)
+## Part-12 (React + Typescript)
