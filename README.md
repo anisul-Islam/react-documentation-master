@@ -4674,7 +4674,7 @@ export default NewUser;
 
 ```
 
-## [58. REST API state globally with useContext ]()
+## [58. REST API state globally with useContext](https://www.positronx.io/react-manage-rest-api-state-globally-with-context-api-tutorial/)
 
 ```js
 
