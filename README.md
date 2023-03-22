@@ -4677,6 +4677,69 @@ export default NewUser;
 ## [58. REST API state globally with useContext](https://www.positronx.io/react-manage-rest-api-state-globally-with-context-api-tutorial/)
 
 ```js
+// context/MoviesContext.js
+import { createContext } from "react";
+
+export const MoviesContext = createContext([]);
+
+// store/Store.js
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { MoviesContext } from "./MoviesContext";
+
+const URL = "https://my.api.mockaroo.com/movies.json?key=c5bae7e0";
+const Store = ({ children }) => {
+  const [movies, setMovies] = useState([]);
+
+  const fetchMovies = async () => {
+    const result = await axios.get(URL);
+    setMovies(result.data);
+  };
+  useEffect(() => {
+    fetchMovies();
+  }, []);
+
+  return (
+    <MoviesContext.Provider value={{ movies, setMovies }}>
+      {children}
+    </MoviesContext.Provider>
+  );
+};
+
+export default Store;
+
+
+// custom hook for useContext
+import { useContext } from "react";
+
+import { MoviesContext } from "../context/MoviesContext";
+
+export const useMovieContext = () => {
+  return useContext(MoviesContext);
+};
+
+// App.js
+import React from "react";
+import { useMovieContext } from "./hooks/useMoviesContext";
+
+const App = () => {
+  const { movies } = useMovieContext();
+  return (
+    <section className="movies">
+      {movies &&
+        movies.map((movie) => {
+          return (
+            <article key={movie.id} className="movie">
+              <h3>{movie.id}</h3>
+              <p>{movie.title}</p>
+            </article>
+          );
+        })}
+    </section>
+  );
+};
+
+export default App;
 
 ```
 
