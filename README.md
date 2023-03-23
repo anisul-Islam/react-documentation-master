@@ -4743,17 +4743,19 @@ export default App;
 
 ```
 
+## [59. shppoing-cart-useReducer-usecontext](https://github.com/anisul-Islam/shppoing-cart-useReducer-usecontext)
+
 ## Part-11 (redux, redex toolkit)
 
 - redux = useContext + useReducer
 - check redux videos and then redux-toolkit
 - how to use redux devtools
 
-## [59. Counter App using Redux-toolkit](https://youtu.be/1aOGY0rRBQk)
+## [60. Counter App using Redux-toolkit](https://youtu.be/1aOGY0rRBQk)
 
-## [60. Fetch data using Redux-toolkit](https://youtu.be/LoK2bQUPjsY)
+## [61. Fetch data using Redux-toolkit](https://youtu.be/LoK2bQUPjsY)
 
-## [61. Books CRUD APP using Redux-toolkit](https://youtu.be/No1FYwxK6Es)
+## [62. Books CRUD APP using Redux-toolkit](https://youtu.be/No1FYwxK6Es)
 
 - [Project's GitHub link](https://github.com/anisul-Islam/redux-toolkit-crud-app)
 
