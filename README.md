@@ -4766,10 +4766,48 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // action creator for fetching data
-export const fetchUsers = createAsyncThunk("posts/fetchUsers", async () => {
-  const response = await axios.get("http://localhost:3001/users");
-  return response.data;
-});
+export const fetchUsers = createAsyncThunk(
+  "users/fetchUsers",
+  async (_, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const response = await axios.get("http://localhost:3001/users");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// action creator for deleteing data
+export const deleteUser = createAsyncThunk(
+  "users/deleteUser",
+  async (data, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/users/${data}`
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// action creator for deleteing data
+export const createUser = createAsyncThunk(
+  "users/createUser",
+  async (data, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const response = await axios.post(`http://localhost:3001/users}`, data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 const usersSlice = createSlice({
   name: "users",
@@ -4782,23 +4820,52 @@ const usersSlice = createSlice({
 
   // extraReducers will handle the asynchronous promise states: pending, fulfilled or reject
   extraReducers: (builder) => {
+    // fetchUsers
     builder.addCase(fetchUsers.pending, (state) => {
       state.isLoading = true;
-    });
-    builder.addCase(fetchUsers.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.users = action.payload;
       state.error = null;
     });
-    builder.addCase(fetchUsers.rejected, (state, action) => {
+    builder.addCase(fetchUsers.fulfilled, (state, action) => {
+      state.users = action.payload;
       state.isLoading = false;
-      state.users = [];
-      state.error = action.error.message;
+    });
+    builder.addCase(fetchUsers.rejected, (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    });
+
+    // deleteUser
+    builder.addCase(deleteUser.pending, (state, action) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+    builder.addCase(deleteUser.fulfilled, (state, action) => {
+      state.users = state.users.filter((user) => user.id !== action.payload.id);
+      state.isLoading = false;
+    });
+    builder.addCase(deleteUser.rejected, (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    });
+
+    // addUser
+    builder.addCase(createUser.pending, (state, action) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+    builder.addCase(createUser.fulfilled, (state, action) => {
+      state.users.push(action.payload);
+      state.isLoading = false;
+    });
+    builder.addCase(createUser.rejected, (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
     });
   },
 });
 
 export default usersSlice.reducer;
+
 
 
 // app/store.js
@@ -4816,16 +4883,26 @@ export const store = configureStore({
 
 
 // features/Users.js
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers } from "./usersSlice";
+import { deleteUser, fetchUsers } from "./usersSlice";
 
 const Users = () => {
   const { isLoading, users, error } = useSelector((state) => state.usersR);
   const dispatch = useDispatch();
-  useEffect(() => {
+
+  const fetchAllUsers = useCallback(() => {
     dispatch(fetchUsers());
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    fetchAllUsers();
+  }, [fetchAllUsers]);
+
+  const deleteUserById = (id) => {
+    dispatch(deleteUser(id)).then((res) => console.log(res));
+    fetchAllUsers();
+  };
 
   if (isLoading) {
     return <p>Loading Users...</p>;
@@ -4842,6 +4919,13 @@ const Users = () => {
             <article key={user.id}>
               <h2>{user.id}</h2>
               <h2>{user.name}</h2>
+              <button
+                onClick={() => {
+                  deleteUserById(user.id);
+                }}
+              >
+                delete
+              </button>
             </article>
           );
         })}
