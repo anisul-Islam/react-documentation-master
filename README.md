@@ -4943,6 +4943,8 @@ export default Users;
 
 ## [63. RTK Query]()
 
+- Example 1
+
 ```js
 // features/apiSlice
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
@@ -5007,5 +5009,8 @@ const Data = () => {
 export default Data;
 
 ```
+
+- [A complete CRUD APP using RTK Query
+  ](https://github.com/anisul-Islam/rtk-query-crud-app)
 
 ## Part-12 (React + Typescript)
