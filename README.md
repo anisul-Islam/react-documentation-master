@@ -4941,4 +4941,71 @@ export default Users;
 
 - [Project's GitHub link](https://github.com/anisul-Islam/redux-toolkit-crud-app)
 
+## [63. RTK Query]()
+
+```js
+// features/apiSlice
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+export const productsApi = createApi({
+  reducerPath: "productsApi",
+  baseQuery: fetchBaseQuery({ baseUrl: "https://dummyjson.com/" }),
+  endpoints: (builder) => ({
+    getAllProducts: builder.query({
+      query: () => "products",
+    }),
+    getProduct: builder.query({
+      query: (product) => `products/search?q=${product}`,
+    }),
+  }),
+});
+
+// created for us
+export const { useGetAllProductsQuery, useGetProductQuery } = productsApi;
+
+// App.js
+import React from "react";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import Data from "./components/Data";
+import { ApiProvider } from "@reduxjs/toolkit/query/react";
+import { productsApi } from "./features/apiSlice";
+const App = () => {
+  return (
+    <Provider store={store}>
+      <ApiProvider api={productsApi}>
+        <div>
+          <Data />
+        </div>
+      </ApiProvider>
+    </Provider>
+  );
+};
+
+export default App;
+
+// Data.js
+import React from "react";
+import {
+  useGetAllProductsQuery,
+  useGetProductQuery,
+} from "../features/apiSlice";
+
+const Data = () => {
+  const {
+    data: allProducts,
+    error,
+    isError,
+    isLoading,
+  } = useGetAllProductsQuery();
+  const { data: product } = useGetProductQuery("iphone");
+
+  if (isLoading) return <h1>Loading...</h1>;
+  return <div>Data</div>;
+};
+
+export default Data;
+
+```
+
 ## Part-12 (React + Typescript)
