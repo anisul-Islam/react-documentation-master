@@ -3494,6 +3494,9 @@ export default Index;
 
 ## Part-8 (Optimization: React.memo(), useCallback(), useMemo())
 
+- components re-render when state or props changes
+- A good reference: https://dmitripavlutin.com/use-react-memo-wisely/
+
 ## [49. react memo](https://youtu.be/pwh4oyGpVPk)
 
 - It helps to avoid unnecessary components rendering
@@ -3542,6 +3545,7 @@ export default Index;
 
 - It helps to avoid unnecessary components rendering for defining callback methods
 - only component will be rendered when some states or props change
+- callback function definition re-rendering the componenet unnecessarily
 
   ```js
        // App.js
@@ -4747,6 +4751,7 @@ export default App;
 
 ## Part-11 (redux, redex toolkit)
 
+- [redux documentation](https://github.com/anisul-Islam/redux-reduxtoolkit-tutorial)
 - redux = useContext + useReducer
 - check redux videos and then redux-toolkit
 - how to use redux devtools
@@ -4754,6 +4759,99 @@ export default App;
 ## [60. Counter App using Redux-toolkit](https://youtu.be/1aOGY0rRBQk)
 
 ## [61. Fetch data using Redux-toolkit](https://youtu.be/LoK2bQUPjsY)
+
+```js
+//features/users/usersSlice.js
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
+// action creator for fetching data
+export const fetchUsers = createAsyncThunk("posts/fetchUsers", async () => {
+  const response = await axios.get("http://localhost:3001/users");
+  return response.data;
+});
+
+const usersSlice = createSlice({
+  name: "users",
+  initialState: {
+    isLoading: false,
+    error: null,
+    users: [],
+  },
+  reducers: {},
+
+  // extraReducers will handle the asynchronous promise states: pending, fulfilled or reject
+  extraReducers: (builder) => {
+    builder.addCase(fetchUsers.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchUsers.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.users = action.payload;
+      state.error = null;
+    });
+    builder.addCase(fetchUsers.rejected, (state, action) => {
+      state.isLoading = false;
+      state.users = [];
+      state.error = action.error.message;
+    });
+  },
+});
+
+export default usersSlice.reducer;
+
+
+// app/store.js
+import { configureStore } from "@reduxjs/toolkit";
+
+import counterReducer from "../features/counter/counterSlice";
+import usersReducer from "../features/users/usersSlice";
+
+export const store = configureStore({
+  reducer: {
+    counterR: counterReducer,
+    usersR: usersReducer,
+  },
+});
+
+
+// features/Users.js
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUsers } from "./usersSlice";
+
+const Users = () => {
+  const { isLoading, users, error } = useSelector((state) => state.usersR);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, []);
+
+  if (isLoading) {
+    return <p>Loading Users...</p>;
+  }
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  return (
+    <div>
+      {users &&
+        users.map((user) => {
+          return (
+            <article key={user.id}>
+              <h2>{user.id}</h2>
+              <h2>{user.name}</h2>
+            </article>
+          );
+        })}
+    </div>
+  );
+};
+
+export default Users;
+
+```
 
 ## [62. Books CRUD APP using Redux-toolkit](https://youtu.be/No1FYwxK6Es)
 
