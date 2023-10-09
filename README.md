@@ -226,7 +226,6 @@ Rules for JSX
                   <p>rating: 4.69</p>
                   <p>brand: Apple</p>
                   <p>category: smartphones</p>
-                  );
                 <article>
 
                 <article>
@@ -240,7 +239,6 @@ Rules for JSX
                   <p>rating: 4.44</p>
                   <p>brand: Apple</p>
                   <p>category: smartphones</p>
-                  );
                 <article>
             </section>
           </main>
@@ -632,9 +630,20 @@ const Todo = () => {
 
 ### [1.4 Adding CSS Styling](https://youtu.be/02YWKDxLpwk)
 
-- Inline styling, CSS Stylesheet, CSS module [why you should use css module], third party packages such as Material UI, styled components
+Inline styling, CSS Stylesheet, CSS module [why you should use css module], third party packages such as Material UI, styled components
 
-- **Code Example - 14 (Styling component with CSS)**
+- Inline styling
+
+    ```js
+      const headingStyle = { color: 'red', fontSize: '3rem' };
+      <aside style={headingStyle}>
+        sidebar goes here
+      </aside>
+    ```
+
+- CSS Stylesheet
+
+  - **Code Example - 14 (Styling component with CSS)**
 
     ```css
     /*code for the App.css */
