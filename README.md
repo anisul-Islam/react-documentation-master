@@ -1,38 +1,67 @@
 # React Documentation
 
 - prerequisities: HTML, CSS, Javascript
-- React.js official Site: https://reactjs.org/
+- [React.js official Site](https://reactjs.org/)
 
-## Part-1 (Introduction to React)
 
-## [1. Introduction to React](https://youtu.be/fRXL0X2WSK4)
+## Table of Contents
 
-### 1.1 What is React?
+1. [Basic React.js Topics](#1-basic-reactjs)
 
-- React is a flexible, efficent Open Source UI Based JavaScript Library.
-- It is developed by Facebook in 2013 for building user interface.
+   [1.1 Introduction to React]()
 
-### 1.2 Why React?
+2. [Intermediate React.js Topics]()
 
-- It helps us to create reusable components (small and isloated pieces of code using html, css, js). It helps us to render UI. Think about youtube's website.
-- Single Page Application (SPA) allows us to render as much as we need for reducing unnecessary rendering such as loading navbar, footer etc. in all the pages
-- think about html tag and creating your own tag with react
-- Load fast - Why React.js is faster? - virtual DOM compares with previous states
-- Allows us to use external plugin
-- Example of React app - facebook, twitter, airbnb, netflix
-- competitor - Vue.js, Angular (more full-fledged / developed no need 3rd party library just like react-router-dom)
+3. [Advanced React.js Topics]()
 
-## [2. Environment setup](https://youtu.be/4wjI8fh77GM)
+## 1. Basic React.js
 
-- VSCode
+### [1.1 Introduction to React](https://youtu.be/fRXL0X2WSK4)
+
+#### What is React?
+
+React is an open-source JavaScript library for building user interfaces. It was developed in 2013 and is maintained by Facebook. React is known for its performance, flexibility, and component-based architecture, which allows developers to build reusable UI components and efficiently manage the state of an application.
+
+#### Why React / Features of React.js
+
+Here are some key features and concepts associated with React:
+
+  1. **Component-Based:** React applications are built using components, which are self-contained, reusable building blocks for user interfaces. Components encapsulate both the UI and the logic associated with it. It helps us to create reusable components (small and isloated pieces of code using html, css, js). It helps us to render UI. Think about youtube's website
+      - Single Page Application (SPA) allows us to render as much as we need for reducing unnecessary rendering such as loading navbar, footer etc. in all the pages
+      - think about html tag and creating your own tag with react
+
+  2. **Virtual DOM:** React uses a virtual representation of the DOM (Document Object Model) to optimize updates. Instead of directly manipulating the actual DOM, React compares changes in the virtual DOM and efficiently updates only the necessary parts of the real DOM, reducing rendering time and improving performance.
+      - Load fast - Why React.js is faster? - virtual DOM compares with previous states
+
+  3. **Declarative Syntax:** React uses a declarative approach to building UIs. Developers describe what the UI should look like based on the application's state, and React takes care of updating the DOM to match that state.
+
+  4. **Unidirectional Data Flow:** React enforces a one-way data flow, which means data flows down the component hierarchy from parent components to child components. This helps maintain predictable and debuggable code.
+
+  5. **JSX (JavaScript XML):** React allows you to write UI components using JSX, which is a syntax extension for JavaScript. JSX allows you to write HTML-like code within your JavaScript files, making it easier to define UI elements.
+
+  6. **Component Lifecycle:** React components have lifecycle methods that allow developers to hook into specific points in a component's lifecycle, such as when it's mounted or updated. This is useful for performing actions like data fetching, initialization, or cleanup.
+
+  7. **State Management:** React provides a mechanism for managing component-specific state using the `useState` hook for functional components and `setState` for class components. For global state management, libraries like Redux or React Context can be used.
+
+  8. **Routing:** React can be used in combination with routing libraries like React Router to create single-page applications with client-side routing.
+
+  9. **Community and Ecosystem:** React has a large and active community, which has led to the development of a rich ecosystem of third-party libraries and tools to enhance development and improve productivity.
+
+  10. **Example of React app and competitors** - facebook, twitter, airbnb, netflix etc. competitor: Vue.js, Angular (more full-fledged / developed no need 3rd party library just like react-router-dom)
+
+Overall, React is a powerful and popular choice for building modern web applications, and it's widely adopted by developers and organizations for its efficiency and developer-friendly approach to UI development.
+
+#### [Environment setup](https://youtu.be/4wjI8fh77GM)
+
+- VSCode (code editor)
 - node.js (Download LTS: Long Term Support one)
   (npm is included in node.js by default)
 - React Developer tools extention for google, firefox, edge
 - Extension: ES7 react, JS JSX snippets + “editior.snipperSuggestions”: “top”, react developer tools, material theme, setup eslint and prettier
 
-## [3. First react app](https://youtu.be/2Ec3h0z51aI)
+#### [First react app](https://youtu.be/_yYO_ly9hmY?si=ruoWbevzoJrj0pqS)
 
-### 3.1 Method 1: add React to a website with CDN
+Method 1: add React to a website with CDN
 
 - **Code Example - 1 (create React app)**
 
@@ -78,57 +107,57 @@
   </html>
   ```
 
-- **Code Example - 2 (create React app)**
+  - **Code Example - 2 (create React app)**
 
-  ```html
-  <!-- With JSX -->
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Document</title>
+    ```html
+    <!-- With JSX -->
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
 
-      <!-- adding React  -->
-      <script
-        crossorigin
-        src="https://unpkg.com/react@18/umd/react.development.js"
-      ></script>
+        <!-- adding React  -->
+        <script
+          crossorigin
+          src="https://unpkg.com/react@18/umd/react.development.js"
+        ></script>
 
-      <!-- adding ReactDOM  -->
-      <script
-        crossorigin
-        src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-      ></script>
+        <!-- adding ReactDOM  -->
+        <script
+          crossorigin
+          src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+        ></script>
 
-      <!-- add the babel and allow jsx  -->
-      <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <!-- add the babel and allow jsx  -->
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-      <style>
-        .title {
-          background-color: brown;
-          color: white;
-          text-align: center;
-        }
-      </style>
-    </head>
-    <body>
-      <div id="root"></div>
+        <style>
+          .title {
+            background-color: brown;
+            color: white;
+            text-align: center;
+          }
+        </style>
+      </head>
+      <body>
+        <div id="root"></div>
 
-      <script type="text/babel">
-        const root = ReactDOM.createRoot(document.getElementById("root"));
-        root.render(
-          <h1 id="heading" className="title">
-            Welcome to React
-          </h1>
-        );
-      </script>
-    </body>
-  </html>
-  ```
+        <script type="text/babel">
+          const root = ReactDOM.createRoot(document.getElementById("root"));
+          root.render(
+            <h1 id="heading" className="title">
+              Welcome to React
+            </h1>
+          );
+        </script>
+      </body>
+    </html>
+    ```
 
-### 3.2 Method 2: create and run react app with npx
+Method 2: create and run react app with npx
 
 ```js
 // create react app command
@@ -139,29 +168,29 @@ cd appName
 npm start
 ```
 
-- show how to run and stop the react app
+- Method 3: create react app with bundler with vite `npm create vite@latest` swc(speedy web compiler)
 
-### 3.3 understand File structure
+
+#### Understand File structure
 
 - discuss about package.json, node_modules, public, src
 - [package-lock.json](https://medium.com/helpshift-engineering/package-lock-json-the-complete-guide-2ae40175ebdd#:~:text=different%20machines%2Fenvironments.-,package%2Dlock.,json%20file.) is for version control for packages. it keeps the record of node_modules tree so that when you clone and use npm i it will install exactly same versions for the packages even though their is a new versions. if you do not have package-lock.json then it will install from package.json
 - keep only the index.js in src and then play with React.js
 - change the title of the app inside index.html file
 
-## Part-2 (JSX, Component, react component under the hood, Styling, Props, PropTypes, Conditional rendering, Fragment, react dev-tools, icons)
+<!-- ## Part-2 (JSX, Component, react component under the hood, Styling, Props, PropTypes, Conditional rendering, Fragment, react dev-tools, icons) -->
 
-## [4. JSX and JS Expression](https://youtu.be/6-r6pBA4eUY)
+### [1.2 JSX and JS Expression](https://youtu.be/6-r6pBA4eUY)
 
-- **JSX: stands for JavsScript XML which allows us to use write html-like syntax inside javascript and vice versa**
-- react module has babbel inside of it that helps us to run jsx
-- JSX is similar like HTML but it is more dynamic.
-- JSX and React are independent things and they can be used independently.
-- Rules for JSX
+- **JSX: stands for JavsScript XML which allows us to use write html-like syntax inside javascript and vice versa**. react module has babbel inside of it that helps us to run jsx. JSX is similar like HTML but it is more dynamic. JSX and React are independent things and they can be used independently.
 
-  - 1. We can return single element using JSX, for multiple elements we can use a wrapper. We can also use Fragment here.
+Rules for JSX
+
+1. We can return single element using JSX, for multiple elements we can use a wrapper. We can also use Fragment here.
 
     - why we can not return multiple elements in JSX needs to be rendered?
-      - jsx is javascript object and we can return 2 objetcs from a function so we need to use array syntax and wrap everything inside one array
+      jsx is javascript object and we can return 2 objetcs from a function so we need to use array syntax and wrap everything inside one array
+  
     - **Code Example - 3 (render single element)**
 
       ```js
@@ -175,7 +204,7 @@ npm start
     - **React render function can render only one element**
     - **Code Example - 4 (Rendering multiple elements)**
 
-      ```js
+      ```jsx
       import React from "react";
       import ReactDOM from "react-dom/client";
 
@@ -218,11 +247,10 @@ npm start
           </main>
           <footer>this is a footer</footer>
       </div>
-
       ```
 
-      - React.Fragment or <> </> helps us to avoid div soup or unncessary div nesting
-      - **Code Example - 5 (Fragment)**
+    - React.Fragment or <> </> helps us to avoid div soup or unncessary div nesting
+    - **Code Example - 5 (Fragment)**
 
         ```js
         <>
@@ -239,8 +267,9 @@ npm start
         <>
         ```
 
-  - 2. Remember to close all tags - `<img />`
-  - 3. Camelcase - className
+2. Remember to close all tags - `<img />`
+
+3. Camelcase - className
 
 - We can use Javascript expression inside JSX
 - **Code Example - 6 (JS Expression in JSX)**
@@ -302,7 +331,7 @@ npm start
   );
   ```
 
-## [5. How React works under the hood](https://youtu.be/kj0cxv_dC9M)
+#### [How React works under the hood](https://youtu.be/kj0cxv_dC9M)
 
 - **Code Example - 7 (React under the hood)**
 
