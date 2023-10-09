@@ -1987,6 +1987,37 @@ export default Product;
 
 ## [19. useState Hooks](https://youtu.be/skUOiqcVurY)
 
+- without state management
+```js
+const Counter = () => {
+  let count = 0;
+
+  const handleIncrement = () => {
+    count++;
+    alert(count);
+  };
+  const handleDecrement = () => {
+    count--;
+    alert(count);
+  };
+  const handleReset = () => {
+    count = 0;
+    alert(count);
+  };
+
+  return (
+    <div>
+      <h2>Count: {count}</h2>
+      <button onClick={handleIncrement}>+</button>
+      <button onClick={handleReset}>0</button>
+      <button onClick={handleDecrement}>-</button>
+    </div>
+  );
+};
+
+export default Counter;
+```
+
 - state is a memory for component where we can update value and re-render the component
 - state is a global variable thats why when you even re-render it fetch the last updated value
 - hooks are function which we can implement in our component - useState, useEffect
