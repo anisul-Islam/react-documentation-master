@@ -876,7 +876,7 @@ Inline styling, CSS Stylesheet, CSS module [why you should use css module], thir
       export default Footer;
     ```
 
-## [8. Props and destructuring](https://youtu.be/GQx58yfYqxo)
+### [1.5 Props and destructuring](https://youtu.be/GQx58yfYqxo)
 
 - **props object: we can pass information from one component to another using props object. components communicate with each others via props. props is an object. props are like attributes in our HTML tag. props are readonly**
   - how to pass, recieve, set default props
@@ -1081,7 +1081,7 @@ const Products = ({ products }) => {
 export default Products;
 ```
 
-## [9. Mapping & rednering components](https://youtu.be/OwwmIzH7FzI)
+### [1.6 Mapping & rednering components](https://youtu.be/OwwmIzH7FzI)
 
 - learn how to use map() and filter() from an array of Data.
 - **Code Example - 19 (Map component with for loop)**
