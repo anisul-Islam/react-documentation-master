@@ -168,8 +168,7 @@ cd appName
 npm start
 ```
 
-- Method 3: create react app with bundler with vite `npm create vite@latest` swc(speedy web compiler)
-
+Method 3: create react app with bundler with vite `npm create vite@latest` swc(speedy web compiler)
 
 #### Understand File structure
 
@@ -182,7 +181,7 @@ npm start
 
 ### [1.2 JSX and JS Expression](https://youtu.be/6-r6pBA4eUY)
 
-- **JSX: stands for JavsScript XML which allows us to use write html-like syntax inside javascript and vice versa**. react module has babbel inside of it that helps us to run jsx. JSX is similar like HTML but it is more dynamic. JSX and React are independent things and they can be used independently.
+**JSX: stands for JavsScript XML which allows us to use write html-like syntax inside javascript and vice versa**. react module has babbel inside of it that helps us to run jsx. JSX is similar like HTML but it is more dynamic. JSX and React are independent things and they can be used independently.
 
 Rules for JSX
 
@@ -364,12 +363,12 @@ const Todo = () => {
 };
 ```
 
-## [6. Component](https://youtu.be/qgLZSNppJOU)
+### [1.3 Component](https://youtu.be/qgLZSNppJOU)
 
 - **Component: A _reusable_, _nestable_ _building block_ constrcut with mainly Javascript function and HTML; CSS can be added**
-- Component VS Function: Component should always start with capital letter and return JSX
-- There are 2 main types of components: functional component and class component
-- keep a blank line when importing your components for separting built in modules
+  - Component VS Function: Component should always start with capital letter and return JSX
+  - There are 2 main types of components: functional component and class component
+  - keep a blank line when importing your components for separting built in modules
 - **Code Example - 8 (Create a reusable functional component)**
 
   ```javascript
@@ -457,82 +456,82 @@ const Todo = () => {
 
 - **Code Example - 10 (App root component, Nested components)**
 
-```js
-import React from "react";
-import ReactDOM from "react-dom/client";
+  ```js
+  import React from "react";
+  import ReactDOM from "react-dom/client";
 
-const Products = () => {
-  const imageSource1 = "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
-  const title1 = "iPhone 9";
-  const description1 = "An apple mobile which is nothing like apple";
-  const price1 = 549;
-  const rating1 = 4.6;
-  const brand1 = "Apple";
-  const category1 = "smartphones";
+  const Products = () => {
+    const imageSource1 = "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
+    const title1 = "iPhone 9";
+    const description1 = "An apple mobile which is nothing like apple";
+    const price1 = 549;
+    const rating1 = 4.6;
+    const brand1 = "Apple";
+    const category1 = "smartphones";
 
-  const imageSource2 = "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
-  const title2 = "iPhone X";
-  const description2 =
-    "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
-  const price2 = 899;
-  const rating2 = 4.44;
-  const brand2 = "Apple";
-  const category2 = "smartphones";
+    const imageSource2 = "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
+    const title2 = "iPhone X";
+    const description2 =
+      "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
+    const price2 = 899;
+    const rating2 = 4.44;
+    const brand2 = "Apple";
+    const category2 = "smartphones";
 
-  return (
-    <section>
-      <article>
-        <img src={imageSource1} alt="iPhone 9" />
-        <h2>{title1}</h2>
-        <p>description: {description1}</p>
-        <p>Price: {price1}</p>
-        <p>rating: {rating1}</p>
-        <p>brand: {brand1}</p>
-        <p>category: {category1}</p>
-      </article>
-      <article>
-        <img src={imageSource2} alt="iPhone X" />
-        <h2>{title2}</h2>
-        <p>description: {description2}</p>
-        <p>Price: {price2}</p>
-        <p>rating: {rating2}</p>
-        <p>brand: {brand2}</p>
-        <p>category: {category2}</p>
-      </article>
-    </section>
-  );
-};
+    return (
+      <section>
+        <article>
+          <img src={imageSource1} alt="iPhone 9" />
+          <h2>{title1}</h2>
+          <p>description: {description1}</p>
+          <p>Price: {price1}</p>
+          <p>rating: {rating1}</p>
+          <p>brand: {brand1}</p>
+          <p>category: {category1}</p>
+        </article>
+        <article>
+          <img src={imageSource2} alt="iPhone X" />
+          <h2>{title2}</h2>
+          <p>description: {description2}</p>
+          <p>Price: {price2}</p>
+          <p>rating: {rating2}</p>
+          <p>brand: {brand2}</p>
+          <p>category: {category2}</p>
+        </article>
+      </section>
+    );
+  };
 
-const Header = () => {
-  return (
-    <header>
-      <h2>Anis Express</h2>
-    </header>
-  );
-};
-const Sidebar = () => {
-  return <aside>this is sidebar</aside>;
-};
-const Footer = () => {
-  return <footer>this is a footer</footer>;
-};
+  const Header = () => {
+    return (
+      <header>
+        <h2>Anis Express</h2>
+      </header>
+    );
+  };
+  const Sidebar = () => {
+    return <aside>this is sidebar</aside>;
+  };
+  const Footer = () => {
+    return <footer>this is a footer</footer>;
+  };
 
-const App = () => {
-  return (
-    <div>
-      <Header />
-      <main>
-        <Sidebar />
-        <Products />
-      </main>
-      <Footer />
-    </div>
-  );
-};
+  const App = () => {
+    return (
+      <div>
+        <Header />
+        <main>
+          <Sidebar />
+          <Products />
+        </main>
+        <Footer />
+      </div>
+    );
+  };
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
-```
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(<App />);
+  ```
 
 - **Code Example - 11 (export, import modular component)**
 
@@ -631,246 +630,242 @@ root.render(<App />);
   - **Code Example - 13 (More export, import)**
   - separate all the components
 
-## [7. Adding CSS Styling part-1](https://youtu.be/02YWKDxLpwk)
+### [1.4 Adding CSS Styling](https://youtu.be/02YWKDxLpwk)
 
-- Inline styling
-- CSS Stylesheet
-- CSS module [why you should use css module]
-- third party packages such as Material UI, styled components
+- Inline styling, CSS Stylesheet, CSS module [why you should use css module], third party packages such as Material UI, styled components
 
 - **Code Example - 14 (Styling component with CSS)**
-- create and import App.css
 
-  ```css
-  /*code for the App.css */
-  /* reset code and common starts here  */
-  :root {
-    --primary-color: rgb(11, 181, 48);
-    --secondary-color: rgba(36, 122, 55, 0.9);
-    --padding: 0.5rem;
-    --transition: all 0.3s;
-    --border-radius: 0.6rem;
-    --box-shadow: 0.1rem 0.2rem 0.8rem rgba(205, 202, 202, 0.5);
-  }
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    list-style-type: none;
-    outline: none;
-  }
-  html {
-    scroll-behavior: smooth;
-  }
-  .flex-space-around {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-  .flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  /* reset code and common ends here  */
-
-  /* header starts here  */
-  .header {
-    height: 10vh;
-    background-color: var(--primary-color);
-    color: white;
-  }
-  /* header ends here  */
-
-  /* main starts here  */
-  main {
-    height: 80vh;
-  }
-  .sidebar {
-    flex: 1;
-    padding: var(--padding);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
-    align-self: flex-start;
-    background-color: #e6e3e3;
-    height: 100%;
-    border-right: 1px solid var(--primary-color);
-  }
-  .main-content {
-    flex: 3;
-    height: 100%;
-    padding: var(--padding);
-    overflow: scroll;
-  }
-  .products {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2rem;
-    padding: 2rem 0;
-  }
-  .product__img {
-    width: 100%;
-    height: 15rem;
-    filter: saturate(0);
-    transition: var(--transition);
-  }
-  /* main ends here  */
-
-  /* footer starts here  */
-  .footer {
-    min-height: 10vh;
-    padding: var(--padding);
-    background-color: var(--primary-color);
-    color: white;
-    font-size: 1.1rem;
-  }
-  /* footer ends here  */
-
-  /* responsiveness starts here  */
-  @media (max-width: 992px) {
-    .flex-space-around,
-    .flex-center {
-      flex-direction: column;
-      gap: 1rem;
-      padding: 1rem 0;
+    ```css
+    /*code for the App.css */
+    /* reset code and common starts here  */
+    :root {
+      --primary-color: rgb(11, 181, 48);
+      --secondary-color: rgba(36, 122, 55, 0.9);
+      --padding: 0.5rem;
+      --transition: all 0.3s;
+      --border-radius: 0.6rem;
+      --box-shadow: 0.1rem 0.2rem 0.8rem rgba(205, 202, 202, 0.5);
     }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      text-decoration: none;
+      list-style-type: none;
+      outline: none;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    .flex-space-around {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .flex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* reset code and common ends here  */
+
+    /* header starts here  */
     .header {
-      min-height: 10vh;
+      height: 10vh;
+      background-color: var(--primary-color);
+      color: white;
+    }
+    /* header ends here  */
+
+    /* main starts here  */
+    main {
+      height: 80vh;
     }
     .sidebar {
+      flex: 1;
+      padding: var(--padding);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      align-self: flex-start;
+      background-color: #e6e3e3;
+      height: 100%;
+      border-right: 1px solid var(--primary-color);
+    }
+    .main-content {
+      flex: 3;
+      height: 100%;
+      padding: var(--padding);
+      overflow: scroll;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2rem;
+      padding: 2rem 0;
+    }
+    .product__img {
       width: 100%;
+      height: 15rem;
+      filter: saturate(0);
+      transition: var(--transition);
     }
-    .products {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* main ends here  */
+
+    /* footer starts here  */
+    .footer {
+      min-height: 10vh;
+      padding: var(--padding);
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 1.1rem;
     }
-  }
+    /* footer ends here  */
 
-  @media (max-width: 768px) {
-    .products {
-      grid-template-columns: repeat(1, minmax(0, 1fr));
+    /* responsiveness starts here  */
+    @media (max-width: 992px) {
+      .flex-space-around,
+      .flex-center {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 0;
+      }
+      .header {
+        min-height: 10vh;
+      }
+      .sidebar {
+        width: 100%;
+      }
+      .products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
-  }
-  /* responsiveness ends here  */
-  ```
 
-  ```js
-  // App.js
-  import React from "react";
+    @media (max-width: 768px) {
+      .products {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+      }
+    }
+    /* responsiveness ends here  */
+    ```
 
-  import Header from "./components/Header";
-  import Sidebar from "./components/Sidebar";
-  import Footer from "./components/Footer";
-  import Products from "./components/Products";
-
-  import "./App.css";
-
-  const App = () => {
-    return (
-      <div>
-        <Header />
-        <main className="flex-center">
-          <Sidebar />
-          <div className="main-content">
-            <Products />
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  };
-
-  export default App;
-
-  // Header.js
+    ```js
+    // App.js
     import React from "react";
 
-    const Header = () => {
+    import Header from "./components/Header";
+    import Sidebar from "./components/Sidebar";
+    import Footer from "./components/Footer";
+    import Products from "./components/Products";
+
+    import "./App.css";
+
+    const App = () => {
       return (
-        <header className="header flex-center">
-          <h2 className="header__title">Anis Express</h2>
-        </header>
-      );
-    };
-    export default Header;
-
-  // Sidebar.js
-  import React from "react";
-
-  const Sidebar = () => {
-    return <aside className="sidebar">this is sidebar</aside>;
-  };
-  export default Sidebar;
-
-  // Products.js
-  import React from "react";
-
-
-  const Products = () => {
-    const imageSource1 =
-      "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
-    const title1 = "iPhone 9";
-    const description1 = "An apple mobile which is nothing like apple";
-    const price1 = 549;
-    const rating1 = 4.6;
-    const brand1 = "Apple";
-    const category1 = "smartphones";
-
-    const imageSource2 =
-      "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
-    const title2 = "iPhone X";
-    const description2 =
-      "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
-    const price2 = 899;
-    const rating2 = 4.44;
-    const brand2 = "Apple";
-    const category2 = "smartphones";
-
-    return (
-      <section className="products">
-        <article className="product">
-          <img src={imageSource1} alt="iPhone 9" className="product__img"/>
-          <h2>{title1}</h2>
-          <p>description: {description1}</p>
-          <p>Price: {price1}</p>
-          <p>rating: {rating1}</p>
-          <p>brand: {brand1}</p>
-          <p>category: {category1}</p>
-        </article>
-        <article className="product">
-          <img src={imageSource2} alt="iPhone X" className="product__img"/>
-          <h2>{title2}</h2>
-          <p>description: {description2}</p>
-          <p>Price: {price2}</p>
-          <p>rating: {rating2}</p>
-          <p>brand: {brand2}</p>
-          <p>category: {category2}</p>
-        </article>
-      </section>
-    );
-  };
-  export default Products;
-
-  // Footer.js
-  import React from "react";
-
-    const Footer = () => {
-      return (
-        <footer className="footer flex-space-around">
-          <div className="footer__left">
-            <p className="footer__title">&copy;Copyright by Anisul Islam</p>
-          </div>
-          <div className="footer__right">
-            <p>social media icons</p>
-          </div>
-        </footer>
+        <div>
+          <Header />
+          <main className="flex-center">
+            <Sidebar />
+            <div className="main-content">
+              <Products />
+            </div>
+          </main>
+          <Footer />
+        </div>
       );
     };
 
-    export default Footer;
-  ```
+    export default App;
+
+    // Header.js
+      import React from "react";
+
+      const Header = () => {
+        return (
+          <header className="header flex-center">
+            <h2 className="header__title">Anis Express</h2>
+          </header>
+        );
+      };
+      export default Header;
+
+    // Sidebar.js
+    import React from "react";
+
+    const Sidebar = () => {
+      return <aside className="sidebar">this is sidebar</aside>;
+    };
+    export default Sidebar;
+
+    // Products.js
+    import React from "react";
+
+
+    const Products = () => {
+      const imageSource1 =
+        "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
+      const title1 = "iPhone 9";
+      const description1 = "An apple mobile which is nothing like apple";
+      const price1 = 549;
+      const rating1 = 4.6;
+      const brand1 = "Apple";
+      const category1 = "smartphones";
+
+      const imageSource2 =
+        "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
+      const title2 = "iPhone X";
+      const description2 =
+        "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
+      const price2 = 899;
+      const rating2 = 4.44;
+      const brand2 = "Apple";
+      const category2 = "smartphones";
+
+      return (
+        <section className="products">
+          <article className="product">
+            <img src={imageSource1} alt="iPhone 9" className="product__img"/>
+            <h2>{title1}</h2>
+            <p>description: {description1}</p>
+            <p>Price: {price1}</p>
+            <p>rating: {rating1}</p>
+            <p>brand: {brand1}</p>
+            <p>category: {category1}</p>
+          </article>
+          <article className="product">
+            <img src={imageSource2} alt="iPhone X" className="product__img"/>
+            <h2>{title2}</h2>
+            <p>description: {description2}</p>
+            <p>Price: {price2}</p>
+            <p>rating: {rating2}</p>
+            <p>brand: {brand2}</p>
+            <p>category: {category2}</p>
+          </article>
+        </section>
+      );
+    };
+    export default Products;
+
+    // Footer.js
+    import React from "react";
+
+      const Footer = () => {
+        return (
+          <footer className="footer flex-space-around">
+            <div className="footer__left">
+              <p className="footer__title">&copy;Copyright by Anisul Islam</p>
+            </div>
+            <div className="footer__right">
+              <p>social media icons</p>
+            </div>
+          </footer>
+        );
+      };
+
+      export default Footer;
+    ```
 
 ## [8. Props and destructuring](https://youtu.be/GQx58yfYqxo)
 
