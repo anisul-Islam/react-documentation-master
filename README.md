@@ -8,11 +8,27 @@
 
 1. [Basic React.js Topics](#1-basic-reactjs)
 
-   [1.1 Introduction to React]()
+   [1.1 Introduction to React](#11-introduction-to-react)
+
+   [1.2 JSX and JS Expression](#12-jsx-and-js-expression)
+
+   [1.3 Component](#13-component)
+
+   [1.4 Adding CSS Styling](#14-adding-css-styling)
+
+   [1.5 Props and destructuring](#15-props-and-destructuring)
+
+   [1.6 Mapping components](#16-mapping--rednering-components)
+
+   [1.7 Proptotypes](#17-proptypes)
+
+   [1.8 Conditional rendering](#18-conditional-rendering)
 
 2. [Intermediate React.js Topics]()
 
 3. [Advanced React.js Topics]()
+4. Assignments
+   [Assignment-1](https://github.com/anisul-Islam/react-assignment-1-products-listing-app)
 
 ## 1. Basic React.js
 
@@ -876,6 +892,42 @@ Inline styling, CSS Stylesheet, CSS module [why you should use css module], thir
       export default Footer;
     ```
 
+- CSS module: create a file name such as fileName.module.css as shown below
+
+    ```css
+    footer {
+      height: 5vh;
+      background-color: bisque;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .copyright {
+      font-size: 0.9rem;
+    }
+    ```
+
+  - use it in from another file as shown below
+
+    ```js
+    import React from "react";
+
+    import styles from "./footer.module.css";
+
+    const Footer = () => {
+      return (
+        <footer>
+          <p className={styles.copyright}>
+            All rights reserved by Anisul Islam
+          </p>
+        </footer>
+      );
+    };
+
+    export default Footer;
+    ```
+
 ### [1.5 Props and destructuring](https://youtu.be/GQx58yfYqxo)
 
 - **props object: we can pass information from one component to another using props object. components communicate with each others via props. props is an object. props are like attributes in our HTML tag. props are readonly**
@@ -1164,10 +1216,10 @@ export default Products;
   export default Products;
   ```
 
-## [10. Adding unique key to each child](https://youtu.be/Dj7ynTdhy1Q)
+#### [Adding unique key to each child](https://youtu.be/Dj7ynTdhy1Q)
 
-- we need to map each children of list uniquly so that react can identify them wor properly
-- Keys are unique. we can use same keys for JSX nodes in different arrays.
+we need to map each children of list uniquly so that react can identify them wor properly.Keys are unique. we can use same keys for JSX nodes in different arrays.
+
 - Where I can find key?
 
   - from database
@@ -1220,10 +1272,8 @@ export default Products;
   // Now add the unique Id in App.js
   ```
 
-## [11. More about props](https://youtu.be/Dj7ynTdhy1Q)
+#### [jsx spread syntax]
 
-- default props
-- jsx spread syntax
 - **Code Example - 23 (jsx spread syntax)**
 
 ```js
@@ -1275,7 +1325,7 @@ export default Product;
 
 ```
 
-## [12. PropTypes](https://youtu.be/mnPJrxHUarA)
+### [1.7 PropTypes](https://youtu.be/mnPJrxHUarA)
 
 - [documentation is here](https://reactjs.org/docs/typechecking-with-proptypes.html)
 - **catch bugs with typechecking.**
@@ -1353,7 +1403,7 @@ export default Product;
 
   ```
 
-## [13. Conditional rendering](https://youtu.be/roSfZjXp5us)
+### [1.8 Conditional rendering](https://youtu.be/roSfZjXp5us)
 
 - rendering components based on if-else, element variable, ternary, short circuit
 
@@ -1433,59 +1483,11 @@ export default Product;
   );
   ```
 
-## [14. Assignment 1: products-listing-app](https://github.com/anisul-Islam/react-assignment-1-products-listing-app)
+### [Assignment 1: products-listing-app](https://github.com/anisul-Islam/react-assignment-1-products-listing-app)
 
-## [15. Adding CSS Styling part-2](https://youtu.be/02YWKDxLpwk)
+### [1.9 developer tools and extension](https://youtu.be/m1paEcDlC5U)
 
-- Inline styling
-
-  ```html
-    <div style={{ width: "300px", backgroundColor: "pink" }}>
-        Inline styling
-      </div>
-  ```
-
-- CSS module
-
-  - create a file name such as fileName.module.css as shown below
-
-    ```css
-    footer {
-      height: 5vh;
-      background-color: bisque;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .copyright {
-      font-size: 0.9rem;
-    }
-    ```
-
-  - use it in from another file as shown below
-
-    ```js
-    import React from "react";
-
-    import styles from "./footer.module.css";
-
-    const Footer = () => {
-      return (
-        <footer>
-          <p className={styles.copyright}>
-            All rights reserved by Anisul Islam
-          </p>
-        </footer>
-      );
-    };
-
-    export default Footer;
-    ```
-
-## [16. developer tools and extension](https://youtu.be/m1paEcDlC5U)
-
-## [17. add font awesome / react icons](https://youtu.be/jHDP6myBXRM)
+### [1.10 add font awesome / react icons](https://youtu.be/jHDP6myBXRM)
 
 - [How to use react-icons](https://react-icons.github.io/react-icons/)
 - **Code Example - 29 (Adding & styling react icons )**
@@ -1716,9 +1718,9 @@ export default Product;
 
   ```
 
-## Part-3 (event handler, state,useState hook, controlled component, state lifting, more on css, class component)
+<!-- ## Part-3 (event handler, state,useState hook, controlled component, state lifting, more on css, class component) -->
 
-## [18. Adding Interactivity - event & event handler]
+### [1.11 Adding Interactivity - event & event handler]
 
 - Event: any user interaction like clicking button, hovering button, giving values in input field etc.
 - Event handler: your response to user interactions. create a function for handling the interaction.
