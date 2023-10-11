@@ -3,7 +3,6 @@
 - prerequisities: HTML, CSS, Javascript
 - [React.js official Site](https://reactjs.org/)
 
-
 ## Table of Contents
 
 1. [Basic React.js Topics](#1-basic-reactjs)
@@ -39,6 +38,8 @@
 React is an open-source JavaScript library for building user interfaces. It was developed in 2013 and is maintained by Facebook. React is known for its performance, flexibility, and component-based architecture, which allows developers to build reusable UI components and efficiently manage the state of an application.
 
 #### Why React / Features of React.js
+
+![React](images/Untitled-2023-10-07-1651.png)
 
 Here are some key features and concepts associated with React:
 
@@ -1988,6 +1989,7 @@ export default Product;
 ## [19. useState Hooks](https://youtu.be/skUOiqcVurY)
 
 - without state management
+
 ```js
 const Counter = () => {
   let count = 0;
