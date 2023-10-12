@@ -5,7 +5,7 @@
 
 ## Table of Contents
 
-1. [Basic React.js Topics](#1-basic-reactjs)
+1. [Basic React.js Topics](#1-basic-reactjs-topics)
 
    [1.1 Introduction to React](#11-introduction-to-react)
 
@@ -22,14 +22,40 @@
    [1.7 Proptotypes](#17-proptypes)
 
    [1.8 Conditional rendering](#18-conditional-rendering)
+  
+   [1.9 developer tools, react and font-awesome icons](#19-developer-tools-react-and-font-awesome-icons)
 
-2. [Intermediate React.js Topics]()
+   [1.10 Adding Interactivity - event & event handler](#110-adding-interactivity---event--event-handler)
+
+   [1.11 useState Hooks](#111-usestate-hooks)
+
+   [1.12 Forms and Controlled components](#112-forms-and-controlled-components)
+
+   [1.13 data passing: child to parent component, state lifting](#113-data-passing-child-to-parent-component-state-lifting)
+
+   [1.14 useRef hook - Uncontrolled component](#114-useref-hook---uncontrolled-component)
+
+2. [Intermediate React.js Topics](#2-intermediate-reactjs-topics)
+
+    [2.1 life cycle methods of a class component](#21-life-cycle-methods-of-a-class-component)
+
+    [2.2 useEffect Hook](#22-useeffect-hook)
 
 3. [Advanced React.js Topics]()
-4. Assignments
-   [Assignment-1](https://github.com/anisul-Islam/react-assignment-1-products-listing-app)
 
-## 1. Basic React.js
+4. Assignments
+
+   [Assignment 1: product listing App](https://github.com/anisul-Islam/react-assignment-1-products-listing-app)
+
+   [Assignment 2: Counter App](https://github.com/anisul-Islam/react-assignment-2-counter-app)
+
+   [Assignment 3: Add New Product](https://github.com/anisul-Islam/react-assignment-3-add-new-product)
+
+   [Assignment 4: fetch products](https://github.com/anisul-Islam/react-assignment-4-fetch-products)
+
+   [Assignment-5]()
+
+## 1. Basic React.js Topics
 
 ### [1.1 Introduction to React](https://youtu.be/fRXL0X2WSK4)
 
@@ -1486,9 +1512,11 @@ export default Product;
 
 ### [Assignment 1: products-listing-app](https://github.com/anisul-Islam/react-assignment-1-products-listing-app)
 
-### [1.9 developer tools and extension](https://youtu.be/m1paEcDlC5U)
+### 1.9 developer tools, react and font-awesome icons
 
-### [1.10 add font awesome / react icons](https://youtu.be/jHDP6myBXRM)
+- [developer tools and extension](https://youtu.be/m1paEcDlC5U)
+
+- [1.10 add font awesome / react icons](https://youtu.be/jHDP6myBXRM)
 
 - [How to use react-icons](https://react-icons.github.io/react-icons/)
 - **Code Example - 29 (Adding & styling react icons )**
@@ -1721,7 +1749,7 @@ export default Product;
 
 <!-- ## Part-3 (event handler, state,useState hook, controlled component, state lifting, more on css, class component) -->
 
-### [1.11 Adding Interactivity - event & event handler]
+### [1.10 Adding Interactivity - event & event handler]
 
 - Event: any user interaction like clicking button, hovering button, giving values in input field etc.
 - Event handler: your response to user interactions. create a function for handling the interaction.
@@ -1986,7 +2014,7 @@ export default Product;
 
 - **Code Example - 36 (onSubmit Event )**
 
-## [19. useState Hooks](https://youtu.be/skUOiqcVurY)
+### [1.11 useState Hooks](https://youtu.be/skUOiqcVurY)
 
 - without state management
 
@@ -2152,9 +2180,9 @@ export default Counter;
       };
   ```
 
-## [20. Assignment - 2: Counter App](https://github.com/anisul-Islam/react-assignment-2-counter-app)
+### [Assignment - 2: Counter App](https://github.com/anisul-Islam/react-assignment-2-counter-app)
 
-## [21. Form Controlled components](https://youtu.be/kvGNlTh3rNQ)
+### [1.12 Forms and Controlled components](https://youtu.be/kvGNlTh3rNQ)
 
 - create a new resouce such as NewProduct, NewUser, NewTodo etc.
 - **Code Example - 39 (get data from a form)**
@@ -2165,7 +2193,7 @@ export default Counter;
 
 - [How to create forms in react using react-hook-form](https://www.freecodecamp.org/news/how-to-create-forms-in-react-using-react-hook-form/)
 
-## [22. upating object in state](https://beta.reactjs.org/learn/updating-objects-in-state)
+#### [upating object in state](https://beta.reactjs.org/learn/updating-objects-in-state)
 
 - **Code Example - 40 (updating object in state)**
 
@@ -2242,7 +2270,7 @@ export default Counter;
 
   ```
 
-## [23. upating array in state](https://beta.reactjs.org/learn/updating-arrays-in-state)
+#### [Upating array in state](https://beta.reactjs.org/learn/updating-arrays-in-state)
 
 - **Code Example - 42 (updating array in state)**
 
@@ -2250,7 +2278,9 @@ export default Counter;
 
   ```
 
-## [24. data passing: child to parent component, state lifting](https://youtu.be/xdW2uFA-SOg)
+#### [Form Validation without library](https://github.com/anisul-Islam/form-validation-without-library)
+
+### [1.13 data passing: child to parent component, state lifting](https://youtu.be/xdW2uFA-SOg)
 
 - Another practical example: https://youtu.be/h7yq5lfDZc8
 - [Freecodecamp doc](https://www.freecodecamp.org/news/what-is-lifting-state-up-in-react/)
@@ -2354,9 +2384,9 @@ export default Counter;
     };
     ```
 
-## [25. Form Validation without library](https://github.com/anisul-Islam/form-validation-without-library)
 
-## [26. useRef hook - Uncontrolled component](https://youtu.be/l5z137GWakU)
+
+### [1.14 useRef hook - Uncontrolled component](https://youtu.be/l5z137GWakU)
 
 - If we look at the AddTodo component then you will see we are not using those title and desc state inside the component that much so we can avoid state and make the component stateless
 - **Code Example - 45 (useRef hook for getting form value)**
@@ -2417,7 +2447,7 @@ export default Counter;
   export default AddTodo;
   ```
 
-## [27. dynamic styling in React](https://youtu.be/Eru9-kZfhw4)
+### [1.15 dynamic styling in React](https://youtu.be/Eru9-kZfhw4)
 
 - Now lets add some coditional styling
 - **Code Example - 46 (conditional styling)**
@@ -2515,11 +2545,11 @@ export default Counter;
   export default AddTodo;
   ```
 
-## [28. Assignment - 3: Add New Product](https://github.com/anisul-Islam/react-assignment-3-add-new-product)
+### [Assignment - 3: Add New Product](https://github.com/anisul-Islam/react-assignment-3-add-new-product)
 
-## [29. class component](https://youtu.be/fu76idgpuEI)
+### [1.16 class component](https://youtu.be/fu76idgpuEI)
 
-## [30. state, setState, event handler](https://youtu.be/9AtJ4dM2xOU)
+### [1.17 state, setState, event handler](https://youtu.be/9AtJ4dM2xOU)
 
 - state is a js object for storing current situation of a component
 
@@ -2572,13 +2602,15 @@ export default Counter;
   }
   ```
 
-## [31. react todo projects]
+### [1.18 react todo projects]
 
 - [react todo project](https://github.com/anisul-Islam/react-todo-project)
 
-## Part-4 (life cycle method of class component, useEffect Hook, custom hook, services)
+<!-- ## Part-4 (life cycle method of class component, useEffect Hook, custom hook, services) -->
 
-## [32. life cycle methods of a class component](https://youtu.be/Yz5qTOmSt0M)
+## 2. Intermediate React.js Topics
+
+### [2.1 life cycle methods of a class component](https://youtu.be/Yz5qTOmSt0M)
 
 - **Code Example - 48 (life cycle methods of a class component)**
 
@@ -2656,20 +2688,113 @@ export default Counter;
 
   ```
 
-## [33. useEffect Hook](https://youtu.be/XEU3jlV9syI)
+### [2.2 useEffect Hook](https://youtu.be/XEU3jlV9syI)
+
+The `useEffect` hook in React allows you to perform side effects in your functional components. Side effects can include data fetching, DOM manipulation, setting up subscriptions, and more. It's a crucial hook for managing the lifecycle of your components.
+
+Rule: Don’t call Hooks inside loops, conditions, or nested functions
+
+useEffct = componentDidMount + componentDidUpdate + componentWillUnmount
+
+Here's how to use the `useEffect` hook in a React component:
+
+```javascript
+import React, { useState, useEffect } from 'react';
+
+function ExampleComponent() {
+  // State and other code here
+
+  useEffect(() => {
+    // This function will run after the component renders
+
+    // Place your side effect code here
+    console.log('Component has rendered');
+
+    // If needed, you can return a cleanup function
+    return () => {
+      // This code will run before the component unmounts
+      console.log('Component will unmount');
+    };
+  }, []); // Dependency array (optional)
+
+  return (
+    // JSX to render
+  );
+}
+
+export default ExampleComponent;
+```
+
+Key points about the `useEffect` hook:
+
+1. The `useEffect` hook takes two arguments:
+   - The first argument is a function that contains your side effect code.
+   - The second argument is an array of dependencies. If any of these dependencies change, the side effect function will be re-executed. If you want the side effect to run only once (similar to `componentDidMount` in class components), you can pass an empty array (`[]`) as the second argument.
+
+2. The side effect function is run after the component has rendered. It can run multiple times if the dependencies change (if provided in the dependency array).
+
+3. You can return a cleanup function from the side effect function. This cleanup function will run before the component unmounts. It's useful for unsubscribing from subscriptions, canceling network requests, or any cleanup work.
+
+Here's a breakdown of how you might use the `useEffect` hook for common scenarios:
+
+- **Data Fetching**: Fetch data when the component mounts, and clean up any resources when it unmounts.
+
+```javascript
+useEffect(() => {
+  const fetchData = async () => {
+    // Fetch data here
+  };
+
+  fetchData();
+
+  return () => {
+    // Cleanup resources (e.g., cancel network request)
+  };
+}, []);
+```
+
+- **Updating the Title**: Change the document title when the component mounts.
+
+```javascript
+useEffect(() => {
+  document.title = 'New Page Title';
+
+  return () => {
+    document.title = 'Previous Page Title';
+  };
+}, []);
+```
+
+- **Listening for State Changes**: Execute code when specific state values change.
+
+```javascript
+useEffect(() => {
+  // Execute code when someStateValue changes
+}, [someStateValue]);
+```
+
+- **Subscription Management**: Subscribe to a service and unsubscribe when the component unmounts.
+
+```javascript
+useEffect(() => {
+  const subscription = service.subscribe(data => {
+    // Handle data
+  });
+
+  return () => {
+    subscription.unsubscribe();
+  };
+}, []);
+```
+
+The `useEffect` hook is a versatile tool for managing side effects in your React components and can help you keep your code clean and efficient.
 
 - **Code Example - 49 (useEffect hook)**
 
   ```js
   import React, { useEffect, useState } from "react";
 
-  // Rule: Don’t call Hooks inside loops, conditions, or nested functions
-
-  // The useEffect Hook allows to perform side effects (fetching data, timers, directly manullay updating the DOM) in components.
-
-  // useEffct = componentDidMount + componentDidUpdate + componentWillUnmount
-
-  const UseEffectHook = () => {
+   const UseEffectHook = () => {
     const [count, setCount] = useState(0);
 
     // useEffect(() => {
@@ -2753,7 +2878,7 @@ export default Counter;
   export default UseEffectExample;
   ```
 
-## [34. fatch data using useEffect Hook](https://youtu.be/Z-EkslDJTJI)
+#### [fatch data using useEffect Hook](https://youtu.be/Z-EkslDJTJI)
 
 - **Code Example - 50 (fetch data using useEffect hook)**
 
@@ -2828,6 +2953,9 @@ export default Counter;
         const response = await fetch(
           "https://jsonplaceholder.typicode.com/users"
         );
+        if (!response.ok) {
+          throw new Error(`Request failed with status: ${response.status}`);
+        }
         const result = await response.json();
         setUsers(result);
         setIsLoading(false);
@@ -2867,7 +2995,7 @@ export default Counter;
   export default App;
   ```
 
-## [35. how to create custom hook](https://youtu.be/ZWschU7H_20)
+#### [How to create custom hook](https://youtu.be/ZWschU7H_20)
 
 - **Code Example - 52 (custom hook)**
 
@@ -2902,7 +3030,7 @@ export default Counter;
   export default useFetch;
   ```
 
-## [36. create services for making http requests]
+#### [Create services for making http requests]
 
 - **Code Example - 53 (services for http requests)**
 
@@ -2991,11 +3119,11 @@ export default Counter;
   export default App;
   ```
 
-## [37. Assignment 4 - fetch products](https://github.com/anisul-Islam/react-assignment-4-fetch-products)
+### [Assignment 4 - fetch products](https://github.com/anisul-Islam/react-assignment-4-fetch-products)
 
-## Part-5 (useReducer Hook, modal, dynamic styling)
+<!-- ## Part-5 (useReducer Hook, modal, dynamic styling) -->
 
-## [38. useReducer hook](https://youtu.be/l_BhBNhNwhE)
+### [2.3 useReducer hook](https://youtu.be/l_BhBNhNwhE)
 
 - useState and useReducers helps us to manage states
 - useReducer is a good choice if you have multiple & complex states (objects, arrays)
@@ -3202,9 +3330,9 @@ export default Counter;
   export default App;
   ```
 
-## Part-6 (react routing)
+<!-- ### Part-6 (react routing) -->
 
-## [39. Introduction to Routing](https://youtu.be/1_powatXjds)
+### [2.4 Introduction to Routing](https://youtu.be/1_powatXjds)
 
 - [react-routing-project](https://github.com/anisul-Islam/react-routing-project)
 - react-router
