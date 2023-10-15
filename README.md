@@ -41,6 +41,16 @@
 
     [2.2 useEffect Hook](#22-useeffect-hook)
 
+    [2.3 useReducer Hook](#23-usereducer-hook)
+
+    [2.4 Routing](#24-routing)
+
+    [2.5 CRUD Operations - http methods - user management app](#25-crud-operations---http-methods---user-management-app)
+
+    [2.6 Optimization memo, useCallback and useMemo](#26-optimization-reactmemo-usecallback-usememo)
+
+    [2.7 props drilling, useContext Hook](#27-props-drilling-usecontext-hook)
+
 3. [Advanced React.js Topics]()
 
 4. Assignments
@@ -3332,7 +3342,7 @@ The `useEffect` hook is a versatile tool for managing side effects in your React
 
 <!-- ### Part-6 (react routing) -->
 
-### [2.4 Introduction to Routing](https://youtu.be/1_powatXjds)
+### [2.4 Routing](https://youtu.be/1_powatXjds)
 
 - [react-routing-project](https://github.com/anisul-Islam/react-routing-project)
 - react-router
@@ -3365,7 +3375,7 @@ const App = () => {
 export default App;
 ```
 
-## [40. Navigation and redirect](https://youtu.be/DooqgS1JDg0)
+#### [Navigation and redirect](https://youtu.be/DooqgS1JDg0)
 
 - **Code Example - 57 (basic routing with Navbar)**
 
@@ -3460,7 +3470,7 @@ const Error = () => {
 export default Error;
 ```
 
-## [41. dynamic routing using useParams](https://youtu.be/g5B0Vq3jHbA)
+#### [Dynamic routing using useParams](https://youtu.be/g5B0Vq3jHbA)
 
 - **Code Example - 59 (dynamic routing)**
 - based on the parameters show dynamic data in a page
@@ -3570,7 +3580,7 @@ const Blog = () => {
 export default Blog;
 ```
 
-## [42. useLocation hook](https://youtu.be/EKmr00ZKkCg)
+#### [useLocation hook](https://youtu.be/EKmr00ZKkCg)
 
 - **Code Example - 60 (pass data using useLocation hook)**
 
@@ -3609,9 +3619,9 @@ const Blog = () => {
 export default Blog;
 ```
 
-## [43. route parameter, query parameter](https://youtu.be/uQtNSOUepVE)
+#### [route parameter, query parameter](https://youtu.be/uQtNSOUepVE)
 
-## [44. https://youtu.be/MqFZ-tewuW0](https://youtu.be/MqFZ-tewuW0)
+#### [Protected Routing](https://youtu.be/MqFZ-tewuW0)
 
 - **Code Example - 61 (protected routing)**
 
@@ -3676,24 +3686,24 @@ export default Index;
 
 ```
 
-## Part-7 [CRUD Operations - http methods - user management app](https://github.com/anisul-Islam/user-mgt-crud-react-app)
+### [2.5 CRUD Operations - http methods - user management app](https://github.com/anisul-Islam/user-mgt-crud-react-app)
 
 - running a json server in react -> `npm i json-server && npx json-server -p 3001 -w database/db.json`
 
-## [45. Read Users](https://youtu.be/gnHdHFqlfew)
+#### [Read Users](https://youtu.be/gnHdHFqlfew)
 
-## [46. Delete User](https://youtu.be/IX-1n_eHF0s)
+#### [Delete User](https://youtu.be/IX-1n_eHF0s)
 
-## [47. Create User](https://youtu.be/JOAiEGOqAmo)
+#### [Create User](https://youtu.be/JOAiEGOqAmo)
 
-## [48. Update User](https://youtu.be/msrcslJPsjY)
+#### [Update User](https://youtu.be/msrcslJPsjY)
 
-## Part-8 (Optimization: React.memo(), useCallback(), useMemo())
+### [2.6 Optimization: React.memo(), useCallback(), useMemo()]
+
+#### [react memo](https://youtu.be/pwh4oyGpVPk)
 
 - components re-render when state or props changes
-- A good reference: https://dmitripavlutin.com/use-react-memo-wisely/
-
-## [49. react memo](https://youtu.be/pwh4oyGpVPk)
+- A good reference: <https://dmitripavlutin.com/use-react-memo-wisely/>
 
 - It helps to avoid unnecessary components rendering
 
@@ -3737,7 +3747,7 @@ export default Index;
     export default memo(Message);
   ```
 
-## [50. useCallback Hook](https://youtu.be/t9qUJ0SRQuE)
+#### [useCallback Hook](https://youtu.be/t9qUJ0SRQuE)
 
 - It helps to avoid unnecessary components rendering for defining callback methods
 - only component will be rendered when some states or props change
@@ -3791,7 +3801,7 @@ export default Index;
 
   ```
 
-## [51. useMemo Hook](https://youtu.be/_namSWWPMeU)
+#### [useMemo Hook](https://youtu.be/_namSWWPMeU)
 
 - It helps to avoid taking unnecessary time for same kind of complex calculation for each rendering
 
@@ -3846,9 +3856,9 @@ export default Index;
 
   ```
 
-## Part-9 (props drilling, useContext Hook)
+### [2.7 props drilling, useContext Hook]
 
-## [52. Props drilling](https://youtu.be/_JNIQXYSUu4)
+#### [Props drilling](https://youtu.be/_JNIQXYSUu4)
 
 ```js
 import React, { useState } from "react";
@@ -3922,7 +3932,7 @@ export default Component4;
 
 ```
 
-## [53. useContext Hook](https://youtu.be/RYeRn5_xL7k)
+#### [useContext Hook](https://youtu.be/RYeRn5_xL7k)
 
 - it helps us to create component level, app level or global states. It also helps us to avoid state lifting.
 - Context lets the parent component make some information available to any component in the tree below it—no matter how deep—without passing it explicitly through props. (collected from react documentation)
@@ -4111,7 +4121,7 @@ export default NewUser;
 
 ```
 
-## [54. Theme change project using useContext]
+#### [Theme change project using useContext]
 
 ```js
 import React, { useState, useContext } from 'react';
@@ -4148,7 +4158,7 @@ export default App;
 }
 ```
 
-## [55. useReducer + useContext]
+#### [useReducer + useContext]
 
 - [A good reference](https://www.youtube.com/watch?v=awGFsGc9oCM&ab_channel=DesignCode)
 
