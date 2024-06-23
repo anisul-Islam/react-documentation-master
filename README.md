@@ -13,13 +13,13 @@
 
    [1.3 Component](#13-component)
 
-   [1.4 Adding CSS Styling](#14-adding-css-styling)
+   [1.4 Adding CSS & SASS Styling](#14-adding-css--sass-styling)
 
    [1.5 Props and destructuring](#15-props-and-destructuring)
 
-   [1.6 Mapping components](#16-mapping--rednering-components)
+   [1.6 prop-types](#16-prop-types)
 
-   [1.7 Proptotypes](#17-proptypes)
+   [1.7 Mapping components](#17-mapping--rednering-components)
 
    [1.8 Conditional rendering](#18-conditional-rendering)
   
@@ -697,11 +697,9 @@ const Todo = () => {
 };
 ```
 
-### [1.4 Adding CSS Styling](https://youtu.be/02YWKDxLpwk)
+### [1.4 Adding CSS & SASS Styling](https://youtu.be/02YWKDxLpwk)
 
 - **DO NOT FOCUS ON STYLING CAUSE IT IS NOT A CSS OR STYLING SERIES. Copy the css code and paste it.**
-
-Inline styling, CSS Stylesheet, CSS module [why you should use css module], third party packages such as Material UI, styled components
 
 - 1. Inline styling
 
@@ -1032,119 +1030,176 @@ Inline styling, CSS Stylesheet, CSS module [why you should use css module], thir
       export default Button;
       ```
 
-- adding multiple class in modules
-In React, when using CSS Modules, you can add multiple class names to an element by combining them using the `classnames` library or by using template literals. Both approaches allow you to conditionally apply multiple class names based on certain conditions.
+  - adding multiple class in modules
+  In React, when using CSS Modules, you can add multiple class names to an element by combining them using the `classnames` library or by using template literals. Both approaches allow you to conditionally apply multiple class names based on certain conditions.
 
-#### Using the `classnames` Library
+    - Using the `classnames` Library
 
-The `classnames` library is a popular utility for conditionally combining class names. It simplifies the process of adding multiple classes and is particularly useful when you need to apply classes conditionally.
+    The `classnames` library is a popular utility for conditionally combining class names. It simplifies the process of adding multiple classes and is particularly useful when you need to apply classes conditionally.
 
-1. **Install the `classnames` Library**:
+    1. **Install the `classnames` Library**:
 
-   You can install the `classnames` library via npm or yarn:
+      You can install the `classnames` library via npm or yarn:
 
-   ```bash
-   npm install classnames
-   ```
+      ```bash
+      npm install classnames
+      ```
 
-   or
+      or
 
-   ```bash
-   yarn add classnames
-   ```
+      ```bash
+      yarn add classnames
+      ```
 
-2. **Combine Classes Using `classnames`**:
+    2. **Combine Classes Using `classnames`**:
 
-   Here’s an example demonstrating how to use `classnames` with CSS Modules:
+      Here’s an example demonstrating how to use `classnames` with CSS Modules:
 
-   ```jsx
-   // Button.js
-   import React from 'react';
-   import classnames from 'classnames';
-   import styles from './Button.module.css';
+      ```jsx
+      // Button.js
+      import React from 'react';
+      import classnames from 'classnames';
+      import styles from './Button.module.css';
 
-   const Button = ({ children, onClick, primary, secondary }) => {
-     const buttonClass = classnames(styles.button, {
-       [styles.primary]: primary,
-       [styles.secondary]: secondary,
-     });
+      const Button = ({ children, onClick, primary, secondary }) => {
+        const buttonClass = classnames(styles.button, {
+          [styles.primary]: primary,
+          [styles.secondary]: secondary,
+        });
 
-     return (
-       <button className={buttonClass} onClick={onClick}>
-         {children}
-       </button>
-     );
-   };
+        return (
+          <button className={buttonClass} onClick={onClick}>
+            {children}
+          </button>
+        );
+      };
 
-   export default Button;
-   ```
+      export default Button;
+      ```
 
-   ```css
-   /* Button.module.css */
-   .button {
-     padding: 10px 20px;
-     border: none;
-     border-radius: 5px;
-     cursor: pointer;
-   }
+      ```css
+      /* Button.module.css */
+      .button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
 
-   .primary {
-     background-color: #4caf50;
-     color: white;
-   }
+      .primary {
+        background-color: #4caf50;
+        color: white;
+      }
 
-   .secondary {
-     background-color: #008cba;
-     color: white;
-   }
-   ```
+      .secondary {
+        background-color: #008cba;
+        color: white;
+      }
+      ```
 
-#### Using Template Literals
+    - Using Template Literals
 
-If you prefer not to use an additional library, you can also use JavaScript template literals to combine class names.
+    If you prefer not to use an additional library, you can also use JavaScript template literals to combine class names.
 
-1. **Combine Classes Using Template Literals**:
+    1. **Combine Classes Using Template Literals**:
 
-   Here’s an example demonstrating how to use template literals with CSS Modules:
+      Here’s an example demonstrating how to use template literals with CSS Modules:
 
-   ```jsx
-   // Button.js
-   import React from 'react';
-   import styles from './Button.module.css';
+      ```jsx
+      // Button.js
+      import React from 'react';
+      import styles from './Button.module.css';
 
-   const Button = ({ children, onClick, primary, secondary }) => {
-     const buttonClass = `${styles.button} ${primary ? styles.primary : ''} ${secondary ? styles.secondary : ''}`;
+      const Button = ({ children, onClick, primary, secondary }) => {
+        const buttonClass = `${styles.button} ${primary ? styles.primary : ''} ${secondary ? styles.secondary : ''}`;
 
-     return (
-       <button className={buttonClass} onClick={onClick}>
-         {children}
-       </button>
-     );
-   };
+        return (
+          <button className={buttonClass} onClick={onClick}>
+          <button className={`${style.title1} ${style.title2}`} onClick={onClick}>
+            {children}
+          </button>
+        );
+      };
 
-   export default Button;
-   ```
+      export default Button;
+      ```
 
-   ```css
-   /* Button.module.css */
-   .button {
-     padding: 10px 20px;
-     border: none;
-     border-radius: 5px;
-     cursor: pointer;
-   }
+      ```css
+      /* Button.module.css */
+      .button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
 
-   .primary {
-     background-color: #4caf50;
-     color: white;
-   }
+      .primary {
+        background-color: #4caf50;
+        color: white;
+      }
 
-   .secondary {
-     background-color: #008cba;
-     color: white;
-   }
-   ```
+      .secondary {
+        background-color: #008cba;
+        color: white;
+      }
+      ```
 
+- 4. SASS
+  - [sass official doc](https://sass-lang.com/documentation/)
+  - [my sass doc](https://github.com/anisul-Islam/sass-documentation)
+
+  ```bash
+    # .scss and .sass
+
+    npm add -D sass
+
+    # .less
+
+    npm add -D less
+
+    # .styl and .stylus
+
+    npm add -D stylus
+  ```
+
+  - create scss file
+
+  ```css
+    .product {
+      background: #000;
+      .product__title {
+        color: red;
+      }
+      .product-desc {
+        color: green;
+      }
+    }
+  ```
+
+  - use it from component
+
+  ```js
+    import React from 'react';
+    import PropTypes from 'prop-types';
+
+    import styles from './product.module.scss';
+
+    const Product = (props) => {
+      const { product } = props;
+      return (
+        <article className={styles.product}>
+          <img className="product__img" src={product.image} alt={product.title} />
+          <p className={styles.product__title}>{product.title}</p>
+          <p className={styles['product-desc']}> // for accessing kebab case use []
+            {product.description.substring(0, 40)}
+            ...
+          </p>
+        </article>
+      );
+    };
+
+  ```
+  
 ### [1.5 Props and destructuring](https://youtu.be/GQx58yfYqxo)
 
 - **props object: Properties are called as props. we can pass information from one component to another using props object. components communicate with each others via props. props is an object. props are like attributes in our HTML tag. props are readonly**
@@ -1427,84 +1482,45 @@ export default Products;
 ### [1.7 Mapping & rednering components](https://youtu.be/OwwmIzH7FzI)
 
 - learn how to use map() and filter() from an array of Data.
-- **Code Example - 13 (Map component with for loop)**
-
-```js
-import React from "react";
-import Product from "./Product";
-
-const Products = ({ products }) => {
-  const productsElement = [];
-  for (let index = 0; index < products.length; index++) {
-    productsElement.push(
-      <Product
-        imageSource={products[index].thumbnail}
-        title={products[index].title}
-        description={products[index].description}
-        price={products[index].price}
-        rating={products[index].rating}
-        brand={products[index].brand}
-        category={products[index].category}
-      />
-    );
-  }
-  return <section className="products">{productsElement}</section>;
-};
-export default Products;
-```
-
-- **Code Example - 20 (Map component with forEach higher order Array function)**
+- **Code Example - 14 (Map component with for loop)**
 
   ```js
-  import React from "react";
-  import Product from "./Product";
+  const Products = (props) => {
+    const { products } = props;
 
-  const Products = ({ products }) => {
     const productsElement = [];
 
-    products.forEach((product) => {
-      productsElement.push(
-        <Product
-          imageSource={product.thumbnail}
-          title={product.title}
-          description={product.description}
-          price={product.price}
-          rating={product.rating}
-          brand={product.brand}
-          category={product.category}
-        />
-      );
-    });
+    for (let index = 0; index < products.length; index++) {
+      productsElement.push(<Product product={products[index]} />);
+    }
 
     return <section className="products">{productsElement}</section>;
   };
-  export default Products;
   ```
 
-- **Code Example - 21 (Map component with map higher order Array function)**
+- **Code Example - 15 (Map component with forEach higher order Array function)**
 
   ```js
-  import React from "react";
-  import Product from "./Product";
+    const Products = (props) => {
+      const { products } = props;
+      const productsElement = [];
+      products.forEach((product) => {
+        return productsElement.push(<Product product={product} />);
+      });
+      return <section className="products">{productsElement}</section>;
+    };
+  ```
 
-  const Products = ({ products }) => {
-    const productsElement = products.map((product) => {
-      return (
-        <Product
-          imageSource={product.thumbnail}
-          title={product.title}
-          description={product.description}
-          price={product.price}
-          rating={product.rating}
-          brand={product.brand}
-          category={product.category}
-        />
-      );
-    });
+- **Code Example - 16 (Map component with map higher order Array function)**
 
-    return <section className="products">{productsElement}</section>;
-  };
-  export default Products;
+  ```js
+    const Products = (props) => {
+      const { products } = props;
+      const productsElement = products.map((product) => {
+        return <Product product={product} />;
+      });
+      return <section className="products">{productsElement}</section>;
+    };
   ```
 
 #### [Adding unique key to each child](https://youtu.be/Dj7ynTdhy1Q)
@@ -1526,174 +1542,194 @@ we need to map each children of list uniquely so that react can identify them wo
 
       ```
 
-- **Code Example - 22 (Adding unique key)**
+- **Code Example - 17 (Adding unique key)**
 
   ```js
   // first use index
   // second use the available id
-  // thirs use the uuid if id is not available inside the data
+  // third use the uuid if id is not available inside the data
+    import React from 'react';
+    import PropTypes from 'prop-types';
+    import { nanoid } from 'nanoid';
 
-  import React from "react";
-  import Product from "./Product";
+    import Product from './Product';
 
-  const Products = ({ products }) => {
-    const productsElement = products.map((product) => {
-      return (
-        <Product
-          key={product.id}
-          imageSource={product.thumbnail}
-          title={product.title}
-          description={product.description}
-          price={product.price}
-          rating={product.rating}
-          brand={product.brand}
-          category={product.category}
-        />
-      );
-    });
+    const Products = (props) => {
+      const { products } = props;
 
-    return <section className="products">{productsElement}</section>;
-  };
-  export default Products;
+      const productsElement = products.map((product) => {
+        return <Product product={product} key={nanoid()} />;
+      });
+      return <section className="products">{productsElement}</section>;
+    };
 
   // get a uniqueId -> utility/getUniqueId.js
   import { v4 as uuidv4 } from "uuid";
   export const getUniqueId = () => uuidv4();
-
-  // Now add the unique Id in App.js
   ```
 
 #### [jsx spread syntax]
 
-- **Code Example - 23 (jsx spread syntax)**
+- **Code Example - 18 (jsx spread syntax)**
 
-```js
-import React from "react";
-import Product from "./Product";
+  ```js
+  const Products = (props) => {
+    const { products } = props;
 
-const Products = ({ products }) => {
-  const productsElement = products.map((product) => {
-    return <Product key={product.id} {...product} />;
-  });
+    const productsElement = products.map((product) => {
+      return <Product {...product} key={nanoid()} />;
+    });
+    return <section className="products">{productsElement}</section>;
+  };
 
-  return <section className="products">{productsElement}</section>;
-};
-export default Products;
-```
-
-- **Code Example - 24 (passing jsx as children)**
-
-```js
-import React from "react";
-
-const Card = ({ children }) => {
-  return <div className="card">{children}</div>;
-};
-
-export default Card;
-
-import React from "react";
-import Card from "./Card";
-
-const Product = (props) => {
-  const { thumbnail, title, description, price, rating, brand, category } =
-    props;
+  const Product = ({...product}) => {
   return (
-    <Card>
-      <article className="product">
-        <img src={thumbnail} alt="iPhone 9" className="product__img" />
-        <h2>{title}</h2>
-        <p>description: {description}</p>
-        <p>Price: {price}</p>
-        <p>rating: {rating}</p>
-        <p>brand: {brand}</p>
-        <p>category: {category}</p>
-      </article>
-    </Card>
-  );
-};
-export default Product;
+    <article className="product card">
+      <img className="product__img" src={product.image} alt={product.title} />
+      <p className="product__title">{product.title}</p>
+      <p className="product__description">
+        {product.description.substring(0, 40)}
+        ...
+      </p>
+      <p className="product__price">Price: {product.price}</p>
+      <p>Category: {product.category}</p>
+      <p>Rating: {product.rating.rate}/5</p>
+    </article>
+    );
+  };
 
-```
+  ```
+
+- **Code Example - 19 (passing jsx as children)**
+
+  ```js
+    // Card.jsx
+    import React from 'react';
+    const Card = (props) => {
+      return <div className="card">{props.children}</div>;
+    };
+    export default Card;
+
+
+    // Product.jsx
+    import React from 'react';
+    import PropTypes from 'prop-types';
+    import Card from './Card';
+    const Product = (props) => {
+      const { product } = props;
+      return (
+        <Card>
+          <article className="product">
+            <img className="product__img" src={product.image} alt={product.title} />
+            <p className="product__title">{product.title}</p>
+            <p className="product__description">
+              {product.description.substring(0, 40)}
+              ...
+            </p>
+            <p className="product__price">Price: {product.price}</p>
+            <p>Category: {product.category}</p>
+            <p>Rating: {product.rating.rate}/5</p>
+          </article>
+        </Card>
+      );
+    };
+
+    Product.propTypes = {
+      product: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string,
+        price: PropTypes.number,
+        description: PropTypes.string,
+        category: PropTypes.string,
+        image: PropTypes.string,
+        rating: PropTypes.shape({
+          rate: PropTypes.number,
+          count: PropTypes.number,
+        }),
+      }),
+    };
+
+    export default Product;
+  ```
 
 ### [1.8 Conditional rendering](https://youtu.be/roSfZjXp5us)
 
 - rendering components based on if-else, element variable, ternary, short circuit
 
-- **Code Example - 26 (Conditional rendering: element variable)**
+- **Code Example - 20 (Conditional rendering: element variable)**
 
   ```js
-  // Inside App.js make adjustments
-  let productsElement;
-  if (products.length > 0) {
-    productsElement = <Products products={products} />;
-  } else {
-    productsElement = <p>Product list is empty</p>;
-  }
-  return (
-    <div>
-      <Header />
-      <main className="flex-center">
-        <Sidebar />
-        <div className="main-content">{productsElement}</div>
-      </main>
-      <Footer />
-    </div>
-  );
+  const Products = (props) => {
+    const { products } = props;
+
+    let productsElement;
+    if (products && products.length > 0) {
+      productsElement = products.map((product) => {
+        return <Product product={product} key={nanoid()} />;
+      });
+    } else {
+      return <p>No products available</p>;
+    }
+    return <section className="products">{productsElement}</section>;
+  };
+
   ```
 
-- **Code Example - 27 (Conditional rendering: iternary)**
+- **Code Example - 21 (Conditional rendering: ternary)**
 
   ```js
-  // Inside App.js make adjustments
-  let productsElement =
-    products.length > 0 ? (
-      <Products products={products} />
-    ) : (
-      <p>products list is empty</p>
-    );
+  const Products = (props) => {
+  const { products } = props;
 
-  return (
-    <div>
-      <Header />
-      <main className="flex-center">
-        <Sidebar />
-        <div className="main-content">{productsElement}</div>
-      </main>
-      <Footer />
-    </div>
-  );
+    let productsElement =
+      products && products.length > 0 ? (
+        products.map((product) => {
+          return <Product product={product} key={nanoid()} />;
+        })
+      ) : (
+        <p>No products available</p>
+      );
+
+    return <section className="products">{productsElement}</section>;
+
+  };
 
   // An alternative - we can use ternary inside return () function
-  return (
-    <div>
-      <Header />
-      <main className="flex-center">
-        <Sidebar />
-        <div className="main-content">
-          {products.length > 0 ? (
-            <Products products={products} />
-          ) : (
-            <p>products list is empty</p>
-          )}
-        </div>
-      </main>
-      <Footer />
-    </div>
-  );
+    const Products = (props) => {
+    const { products } = props;
+
+    return (
+      <section className="products">
+        {products && products.length > 0 ? (
+          products.map((product) => {
+            return <Product product={product} key={nanoid()} />;
+          })
+        ) : (
+          <p>No products available</p>
+        )}
+      </section>
+    );
+
+  };
+
   ```
 
-- **Code Example - 28 (Conditional rendering: short circuit)**
+- **Code Example - 22 (Conditional rendering: short circuit)**
 
   ```js
-  // Inside App.js return() make following adjustments
-  return (
-    <div>
-      <Header />
-      <main>{products.length > 0 && <Products products={products} />}</main>
-      <Footer />
-    </div>
-  );
+  const Products = (props) => {
+    const { products } = props;
+
+    return (
+      <section className="products">
+        {products.length > 0 &&
+          products.map((product) => (
+            <Product product={product} key={product.id} />
+          ))}
+        {products.length === 0 && <p>No products available</p>}
+      </section>
+    );
+  };
   ```
 
 ### [Assignment 1: products-listing-app](https://github.com/anisul-Islam/react-assignment-1-products-listing-app)
