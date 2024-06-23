@@ -71,15 +71,19 @@
 
 #### What is React?
 
-React is an open-source JavaScript library for building user interfaces. It was developed in 2013 and is maintained by Facebook. React is known for its performance, flexibility, and component-based architecture, which allows developers to build reusable UI components and efficiently manage the state of an application.
+- React is an open-source JavaScript library for building user interfaces. It was developed in 2013 and is maintained by Facebook. React is known for its performance, flexibility, and component-based architecture, which allows developers to build reusable UI components and efficiently manage the state of an application.
 
 #### Why React / Features of React.js
+
+- high demand for front-end jobs
+- you can build mobile (react native), desktop (Electron) and web application
+- Electron is a framework for building desktop applications using web technologies such as JavaScript, HTML, and CSS. It can be used as the runtime environment for a React application. Electron allows React applications to run on desktop operating systems such as Windows, macOS, and Linux.
 
 ![React](images/Untitled-2023-10-07-1651.png)
 
 Here are some key features and concepts associated with React:
 
-  1. **Component-Based:** React applications are built using components, which are self-contained, reusable building blocks for user interfaces. Components encapsulate both the UI and the logic associated with it. It helps us to create reusable components (small and isloated pieces of code using html, css, js). It helps us to render UI. Think about youtube's website
+  1. **Component-Based:** React applications are built using components, which are self-contained, reusable building blocks for user interfaces. It helps us to create reusable components (small and isolated pieces of code using html, css, js). It helps us to render UI. Think about youtube's website
       - Single Page Application (SPA) allows us to render as much as we need for reducing unnecessary rendering such as loading navbar, footer etc. in all the pages
       - think about html tag and creating your own tag with react
 
@@ -88,7 +92,7 @@ Here are some key features and concepts associated with React:
 
   3. **Declarative Syntax:** React uses a declarative approach to building UIs. Developers describe what the UI should look like based on the application's state, and React takes care of updating the DOM to match that state.
 
-  4. **Unidirectional Data Flow:** React enforces a one-way data flow, which means data flows down the component hierarchy from parent components to child components. This helps maintain predictable and debuggable code.
+  4. **Unidirectional Data Flow:** React enforces a one-way data flow, which means data flows down the component hierarchy from parent components to child components. This helps maintain predictable and debugable code.
 
   5. **JSX (JavaScript XML):** React allows you to write UI components using JSX, which is a syntax extension for JavaScript. JSX allows you to write HTML-like code within your JavaScript files, making it easier to define UI elements.
 
@@ -102,115 +106,23 @@ Here are some key features and concepts associated with React:
 
   10. **Example of React app and competitors** - facebook, twitter, airbnb, netflix etc. competitor: Vue.js, Angular (more full-fledged / developed no need 3rd party library just like react-router-dom)
 
-Overall, React is a powerful and popular choice for building modern web applications, and it's widely adopted by developers and organizations for its efficiency and developer-friendly approach to UI development.
+  Overall, React is a powerful and popular choice for building modern web applications, and it's widely adopted by developers and organizations for its efficiency and developer-friendly approach to UI development.
+
+#### Prerequisites
+
+- HTML, CSS, JS
 
 #### [Environment setup](https://youtu.be/4wjI8fh77GM)
 
 - VSCode (code editor)
 - node.js (Download LTS: Long Term Support one)
   (npm is included in node.js by default)
-- React Developer tools extention for google, firefox, edge
+- React Developer tools extensions for google, firefox, edge
 - Extension: ES7 react, JS JSX snippets + “editior.snipperSuggestions”: “top”, react developer tools, material theme, setup eslint and prettier
 
 #### [First react app](https://youtu.be/_yYO_ly9hmY?si=ruoWbevzoJrj0pqS)
 
-Method 1: add React to a website with CDN
-
-- **Code Example - 1 (create React app)**
-
-  ```html
-  <!-- without JSX -->
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Document</title>
-      <script
-        crossorigin
-        src="https://unpkg.com/react@18/umd/react.development.js"
-      ></script>
-      <script
-        crossorigin
-        src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-      ></script>
-
-      <style>
-        .title {
-          background-color: brown;
-          color: white;
-          text-align: center;
-        }
-      </style>
-    </head>
-    <body>
-      <div id="root"></div>
-
-      <script>
-        const headingElement = React.createElement(
-          "h1",
-          { id: "heading", className: "title" },
-          "Welcome to React"
-        );
-        const root = ReactDOM.createRoot(document.getElementById("root"));
-        root.render(headingElement);
-      </script>
-    </body>
-  </html>
-  ```
-
-  - **Code Example - 2 (create React app)**
-
-    ```html
-    <!-- With JSX -->
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-
-        <!-- adding React  -->
-        <script
-          crossorigin
-          src="https://unpkg.com/react@18/umd/react.development.js"
-        ></script>
-
-        <!-- adding ReactDOM  -->
-        <script
-          crossorigin
-          src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-        ></script>
-
-        <!-- add the babel and allow jsx  -->
-        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
-        <style>
-          .title {
-            background-color: brown;
-            color: white;
-            text-align: center;
-          }
-        </style>
-      </head>
-      <body>
-        <div id="root"></div>
-
-        <script type="text/babel">
-          const root = ReactDOM.createRoot(document.getElementById("root"));
-          root.render(
-            <h1 id="heading" className="title">
-              Welcome to React
-            </h1>
-          );
-        </script>
-      </body>
-    </html>
-    ```
-
-Method 2: create and run react app with npx
+Method 1: create and run react app with npx
 
 ```js
 // create react app command
@@ -221,7 +133,21 @@ cd appName
 npm start
 ```
 
-Method 3: create react app with bundler with vite `npm create vite@latest` swc(speedy web compiler)
+Method 2: create react app with bundler with vite `npm create vite@latest` swc(speedy web compiler)
+
+#### Code Example - 1 (create React app)
+
+  ```jsx
+    // Code Example - 1 (create React app)
+    import React from 'react';
+    import ReactDOM from 'react-dom/client';
+
+    ReactDOM.createRoot(document.getElementById('root')).render(
+      <React.StrictMode>
+        Anis Express
+      </React.StrictMode>
+    );
+  ```
 
 #### Understand File structure
 
@@ -234,156 +160,513 @@ Method 3: create react app with bundler with vite `npm create vite@latest` swc(s
 
 ### [1.2 JSX and JS Expression](https://youtu.be/6-r6pBA4eUY)
 
-**JSX: stands for JavsScript XML which allows us to use write html-like syntax inside javascript and vice versa**. react module has babbel inside of it that helps us to run jsx. JSX is similar like HTML but it is more dynamic. JSX and React are independent things and they can be used independently.
+**JSX: stands for JavaScript XML which allows us to use write html-like syntax inside javascript and vice versa**. react module has babbel inside of it that helps us to run jsx. JSX is similar like HTML but it is more dynamic. JSX and React are independent things and they can be used independently.
 
-Rules for JSX
+#### Rules for JSX
 
-1. We can return single element using JSX, for multiple elements we can use a wrapper. We can also use Fragment here.
+1. **We can return single element using JSX, for multiple elements we can use a wrapper. We can also use Fragment here.**
 
     - why we can not return multiple elements in JSX needs to be rendered?
-      jsx is javascript object and we can return 2 objetcs from a function so we need to use array syntax and wrap everything inside one array
-  
-    - **Code Example - 3 (render single element)**
+      jsx is javascript object and we can not return 2 objects from a function so we need to use array syntax and wrap everything inside one array.
+
+      - Code Example - 2 (render single element)
 
       ```js
+      // Code Example - 2 (render single element)
       import React from "react";
       import ReactDOM from "react-dom/client";
 
       const root = ReactDOM.createRoot(document.getElementById("root"));
-      root.render(<h2>Anis Ecommerce website</h2>);
+      root.render(<h1>Anis Express</h1>);
       ```
 
     - **React render function can render only one element**
-    - **Code Example - 4 (Rendering multiple elements)**
 
       ```jsx
-      import React from "react";
-      import ReactDOM from "react-dom/client";
+      // Code Example - 3 (Rendering multiple elements)
+      import React from 'react';
+      import ReactDOM from 'react-dom/client';
 
-      const root = ReactDOM.createRoot(document.getElementById("root"));
-
-      root.render(
-         <div>
-          <header><h2>Anis Express</h2></header>
-          <main>
-          <aside>this is sidebar</aside>
-            <section>
-                <article>
-                  <img
-                    src="https://i.dummyjson.com/data/products/1/thumbnail.jpg"
-                    alt="iPhone 9"
-                  />
-                  <h2>iPhone 9</h2>
-                  <p>description: An apple mobile which is nothing like apple</p>
-                  <p>Price: $549</p>
-                  <p>rating: 4.69</p>
-                  <p>brand: Apple</p>
-                  <p>category: smartphones</p>
-                <article>
-
-                <article>
-                  <img
-                    src="https://i.dummyjson.com/data/products/2/thumbnail.jpg"
-                    alt="iPhone X"
-                  />
-                  <h2>iPhone X</h2>
-                  <p>description: SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...</p>
-                  <p>Price: $899</p>
-                  <p>rating: 4.44</p>
-                  <p>brand: Apple</p>
-                  <p>category: smartphones</p>
-                <article>
-            </section>
-          </main>
-          <footer>this is a footer</footer>
-      </div>
+      ReactDOM.createRoot(document.getElementById('root')).render(
+        <React.StrictMode>
+          <div>
+            <header>
+              <h1>Anis Express</h1>
+            </header>
+            <main>
+               <aside>
+                  <h3>Add Filter By Price</h3>
+                  <h3>Add Filter By Categories</h3>
+                </aside>
+              <section>
+                <article>product info goes here</article>
+              </section>
+            </main>
+            <footer>
+              <p>Copyright by @Anisul Islam</p>
+            </footer>
+          </div>
+        </React.StrictMode>
+      );
       ```
 
-    - React.Fragment or <> </> helps us to avoid div soup or unncessary div nesting
-    - **Code Example - 5 (Fragment)**
+    - **React.Fragment or <> </> helps us to avoid div soup or unnecessary div nesting.**
 
         ```js
-        <>
-          <img
-            src="https://i.dummyjson.com/data/products/1/thumbnail.jpg"
-            alt="iPhone 9"
-          />
-          <h2>iPhone 9</h2>
-          <p>description: An apple mobile which is nothing like apple",</p>
-          <p>Price: $549</p>
-          <p>rating: 4.69</p>
-          <p>category: smartphones</p>
-          );
-        <>
+        // Code Example - 4 (Fragment)
+        import React, {Fragment} from 'react';
+
+        import ReactDOM from 'react-dom/client';
+
+        ReactDOM.createRoot(document.getElementById('root')).render(
+          <React.StrictMode>
+            <Fragment>
+              <header>
+                <h1>Anis Express</h1>
+              </header>
+              <main>
+                 <aside>
+                    <h3>Add Filter By Price</h3>
+                    <h3>Add Filter By Categories</h3>
+                  </aside>
+                <section>
+                  <article>product info goes here</article>
+                </section>
+              </main>
+              <footer>
+                <p>Copyright by @Anisul Islam</p>
+              </footer>
+            </Fragment>
+          </React.StrictMode>
+        );
+
         ```
 
-2. Remember to close all tags - `<img />`
+2. **Remember to close all tags - `<img />`**
 
-3. Camelcase - className
+3. **Camelcase - className, FunctionName**
 
-- We can use Javascript expression inside JSX
-- **Code Example - 6 (JS Expression in JSX)**
+#### We can use Javascript expression inside JSX
 
   ```js
-  import React from "react";
-  import ReactDOM from "react-dom/client";
+ // Code Example - 5 (JS Expressions in JSX)
 
-  const imageSource1 = "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
-  const title1 = "iPhone 9";
-  const description1 = "An apple mobile which is nothing like apple";
-  const price1 = 549;
-  const rating1 = 4.69;
-  const brand1 = "Apple";
-  const category1 = "smartphones";
+    import React, { Fragment } from 'react';
+    import ReactDOM from 'react-dom/client';
 
-  const imageSource2 = "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
-  const title2 = "iPhone X";
-  const description2 =
-    "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
-  const price2 = 899;
-  const rating2 = 4.44;
-  const brand2 = "Apple";
-  const category2 = "smartphones";
+    // get 5 products from fakestore api
+    export const productsData = [
+      {
+        id: 1,
+        title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
+        price: 109.95,
+        description:
+          'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
+        category: "men's clothing",
+        image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
+        rating: {
+          rate: 3.9,
+          count: 120,
+        },
+      },
+      {
+        id: 2,
+        title: 'Mens Casual Premium Slim Fit T-Shirts ',
+        price: 22.3,
+        description:
+          'Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.',
+        category: "men's clothing",
+        image:
+          'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
+        rating: {
+          rate: 4.1,
+          count: 259,
+        },
+      },
+      {
+        id: 3,
+        title: 'Mens Cotton Jacket',
+        price: 55.99,
+        description:
+          'great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.',
+        category: "men's clothing",
+        image: 'https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg',
+        rating: {
+          rate: 4.7,
+          count: 500,
+        },
+      },
+      {
+        id: 4,
+        title: 'Mens Casual Slim Fit',
+        price: 15.99,
+        description:
+          'The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.',
+        category: "men's clothing",
+        image: 'https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg',
+        rating: {
+          rate: 2.1,
+          count: 430,
+        },
+      },
+      {
+        id: 5,
+        title:
+          "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+        price: 695,
+        description:
+          "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
+        category: 'jewelery',
+        image: 'https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg',
+        rating: {
+          rate: 4.6,
+          count: 400,
+        },
+      },
+    ];
 
-  const root = ReactDOM.createRoot(document.getElementById("root"));
+    ReactDOM.createRoot(document.getElementById('root')).render(
+      <React.StrictMode>
+        <Fragment>
+          <header>
+            <h1>Anis Express</h1>
+          </header>
+          <main>
+            <aside>
+              <h3>Add Filter By Price</h3>
+              <h3>Add Filter By Categories</h3>
+            </aside>
+            <section>
+              <article>
+                <img src={productsData[0].image} alt={productsData[0].title} />
+                <h2>{productsData[0].id}</h2>
+                <p>{productsData[0].title}</p>
+                <p>{productsData[0].description}</p>
+                <p>Price: {productsData[0].price}</p>
+                <p>Category: {productsData[0].category}</p>
+                <p>Rating: {productsData[0].rating.rate}/5</p>
+              </article>
 
-  root.render(
-    <div>
-      <header>
-        <h2>Anis Express</h2>
-      </header>
-
-      <main>
-        <aside>this is sidebar</aside>
-        <section>
-          <article>
-            <img src={imageSource1} alt="iPhone 9" />
-            <h2>{title1}</h2>
-            <p>description: {description1}</p>
-            <p>Price: {price1}</p>
-            <p>rating: {rating1}</p>
-            <p>brand: {brand1}</p>
-            <p>category: {category1}</p>
-          </article>
-          <article>
-            <img src={imageSource2} alt="iPhone 9" />
-            <h2>{title2}</h2>
-            <p>description: {description2}</p>
-            <p>Price: {price2}</p>
-            <p>rating: {rating2}</p>
-            <p>brand: {brand2}</p>
-            <p>category: {category2}</p>
-          </article>
-        </section>
-      </main>
-      <footer>this is a footer</footer>
-    </div>
-  );
+              <article>
+                <img src={productsData[1].image} alt={productsData[1].title} />
+                <h2>{productsData[1].id}</h2>
+                <p>{productsData[1].title}</p>
+                <p>{productsData[1].description}</p>
+                <p>Price: {productsData[1].price}</p>
+                <p>Category: {productsData[1].category}</p>
+                <p>Rating: {productsData[1].rating.rate}/5</p>
+              </article>
+            </section>
+          </main>
+          <footer>
+            <p>Copyright by @Anisul Islam</p>
+          </footer>
+        </Fragment>
+      </React.StrictMode>
+    );
   ```
+
+### [1.3 Component](https://youtu.be/qgLZSNppJOU)
+
+- **Component: A _reusable_, _nestable_ _building block_ constrcut with mainly Javascript function and HTML; CSS can be added**
+  - Component VS Function: Component should always start with capital letter and return JSX
+  - There are 2 main types of components: functional component and class component
+  - keep a blank line when importing your components for separating built in modules
+
+  ```jsx
+  // Code Example 6 - Create a reusable functional component for Header, Sidebar, Footer, Products, 
+  
+  // Create App.jsx component and move everything there and start doing decomposition
+
+  // Create Page: pages/Home.jsx page
+
+  // components/Header.jsx
+  import React from 'react';
+  const Header = () => {
+    return (
+      <header>
+        <h1>Anis Express</h1>
+      </header>
+    );
+  };
+  export default Header;
+
+  // components/Sidebar.jsx
+  import React from 'react';
+  const Sidebar = () => {
+    return (
+      <aside>
+        <h3>Add Filter By Price</h3>
+        <h3>Add Filter By Categories</h3>
+      </aside>
+    );
+  };
+  export default Sidebar;
+
+  // components/Products.jsx
+  import React from 'react';
+
+  export const productsData = [
+    {
+      id: 1,
+      title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
+      price: 109.95,
+      description:
+        'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
+      category: "men's clothing",
+      image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
+      rating: {
+        rate: 3.9,
+        count: 120,
+      },
+    },
+    {
+      id: 2,
+      title: 'Mens Casual Premium Slim Fit T-Shirts ',
+      price: 22.3,
+      description:
+        'Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.',
+      category: "men's clothing",
+      image:
+        'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
+      rating: {
+        rate: 4.1,
+        count: 259,
+      },
+    },
+    {
+      id: 3,
+      title: 'Mens Cotton Jacket',
+      price: 55.99,
+      description:
+        'great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.',
+      category: "men's clothing",
+      image: 'https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg',
+      rating: {
+        rate: 4.7,
+        count: 500,
+      },
+    },
+    {
+      id: 4,
+      title: 'Mens Casual Slim Fit',
+      price: 15.99,
+      description:
+        'The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.',
+      category: "men's clothing",
+      image: 'https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg',
+      rating: {
+        rate: 2.1,
+        count: 430,
+      },
+    },
+    {
+      id: 5,
+      title:
+        "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+      price: 695,
+      description:
+        "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
+      category: 'jewelery',
+      image: 'https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg',
+      rating: {
+        rate: 4.6,
+        count: 400,
+      },
+    },
+  ];
+
+  const Products = () => {
+    return (
+      <section>
+        <article>
+          <img src={productsData[0].image} alt={productsData[0].title} />
+          <h2>{productsData[0].id}</h2>
+          <p>{productsData[0].title}</p>
+          <p>{productsData[0].description.substring(0,50)...}</p>
+          <p>Price: {productsData[0].price}</p>
+          <p>Category: {productsData[0].category}</p>
+          <p>Rating: {productsData[0].rating.rate}/5</p>
+        </article>
+
+        <article>
+          <img src={productsData[1].image} alt={productsData[1].title} />
+          <h2>{productsData[1].id}</h2>
+          <p>{productsData[1].title}</p>
+          <p>{productsData[0].description.substring(0,50)...}</p>
+          <p>Price: {productsData[1].price}</p>
+          <p>Category: {productsData[1].category}</p>
+          <p>Rating: {productsData[1].rating.rate}/5</p>
+        </article>
+      </section>
+    );
+  };
+  export default Products;
+
+  // components/Footer.jsx
+  import React from 'react';
+  const Footer = () => {
+    return (
+      <footer>
+        <p>Copyright by @Anisul Islam</p>
+      </footer>
+    );
+  };
+  export default Footer;
+
+  // Home.jsx
+  import React from 'react';
+
+  import Sidebar from '../components/Sidebar';
+  import Products from '../components/Products';
+  const Home = () => {
+    return (
+      <div>
+        <Sidebar />
+        <div>
+          <Products />
+        </div>
+      </div>
+    );
+  };
+  export default Home;
+
+  // App.jsx
+  import React, { Fragment } from 'react';
+
+  import Sidebar from './components/Sidebar';
+  import Products from './components/Products';
+  import Footer from './components/Footer';
+  import Header from './components/Header';
+
+  const App = () => {
+    return (
+      <Fragment>
+        <Header />
+        <main>
+         <Home/>
+        </main>
+        <Footer />
+      </Fragment>
+    );
+  };
+  export default App;
+  ```
+
+#### Code Example - 7 (export, import modular component)
+
+- export default can be used once in a file where multiple exports can be used
+- importing export default does not require {} and you can name anything on the other hand only exports requires {} and naming is strict
+
+```js
+// src/data.js
+export const productsData = [
+  {
+    id: 1,
+    title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
+    price: 109.95,
+    description:
+      'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
+    category: "men's clothing",
+    image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
+    rating: {
+      rate: 3.9,
+      count: 120,
+    },
+  },
+  {
+    id: 2,
+    title: 'Mens Casual Premium Slim Fit T-Shirts ',
+    price: 22.3,
+    description:
+      'Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.',
+    category: "men's clothing",
+    image:
+      'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
+    rating: {
+      rate: 4.1,
+      count: 259,
+    },
+  },
+  {
+    id: 3,
+    title: 'Mens Cotton Jacket',
+    price: 55.99,
+    description:
+      'great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.',
+    category: "men's clothing",
+    image: 'https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg',
+    rating: {
+      rate: 4.7,
+      count: 500,
+    },
+  },
+  {
+    id: 4,
+    title: 'Mens Casual Slim Fit',
+    price: 15.99,
+    description:
+      'The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.',
+    category: "men's clothing",
+    image: 'https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg',
+    rating: {
+      rate: 2.1,
+      count: 430,
+    },
+  },
+  {
+    id: 5,
+    title:
+      "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+    price: 695,
+    description:
+      "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
+    category: 'jewelery',
+    image: 'https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg',
+    rating: {
+      rate: 4.6,
+      count: 400,
+    },
+  },
+];
+
+// components/Products.js
+import React from 'react';
+
+import { productsData } from '../data';
+
+const Products = () => {
+  return (
+    <section>
+      <article>
+        <img src={productsData[0].image} alt={productsData[0].title} />
+        <h2>{productsData[0].id}</h2>
+        <p>{productsData[0].title}</p>
+        <p>{productsData[0].description}</p>
+        <p>Price: {productsData[0].price}</p>
+        <p>Category: {productsData[0].category}</p>
+        <p>Rating: {productsData[0].rating.rate}/5</p>
+      </article>
+
+      <article>
+        <img src={productsData[1].image} alt={productsData[1].title} />
+        <h2>{productsData[1].id}</h2>
+        <p>{productsData[1].title}</p>
+        <p>{productsData[1].description}</p>
+        <p>Price: {productsData[1].price}</p>
+        <p>Category: {productsData[1].category}</p>
+        <p>Rating: {productsData[1].rating.rate}/5</p>
+      </article>
+    </section>
+  );
+};
+
+export default Products;
+```
 
 #### [How React works under the hood](https://youtu.be/kj0cxv_dC9M)
 
-- **Code Example - 7 (React under the hood)**
+- **Code Example - 8 (React under the hood)**
 
 ```javascript
 const Message = () => {
@@ -414,278 +697,13 @@ const Todo = () => {
 };
 ```
 
-### [1.3 Component](https://youtu.be/qgLZSNppJOU)
-
-- **Component: A _reusable_, _nestable_ _building block_ constrcut with mainly Javascript function and HTML; CSS can be added**
-  - Component VS Function: Component should always start with capital letter and return JSX
-  - There are 2 main types of components: functional component and class component
-  - keep a blank line when importing your components for separting built in modules
-- **Code Example - 8 (Create a reusable functional component)**
-
-  ```javascript
-  // reusable component
-  import React from "react";
-  import ReactDOM from "react-dom/client";
-
-  const Products = () => {
-    const imageSource1 =
-      "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
-    const title1 = "iPhone 9";
-    const description1 = "An apple mobile which is nothing like apple";
-    const price1 = 549;
-    const rating1 = 4.6;
-    const brand1 = "Apple";
-    const category1 = "smartphones";
-
-    const imageSource2 =
-      "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
-    const title2 = "iPhone X";
-    const description2 =
-      "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
-    const price2 = 899;
-    const rating2 = 4.44;
-    const brand2 = "Apple";
-    const category2 = "smartphones";
-
-    return (
-      <section>
-        <article>
-          <img src={imageSource1} alt="iPhone 9" />
-          <h2>{title1}</h2>
-          <p>description: {description1}</p>
-          <p>Price: {price1}</p>
-          <p>rating: {rating1}</p>
-          <p>brand: {brand1}</p>
-          <p>category: {category1}</p>
-        </article>
-        <article>
-          <img src={imageSource2} alt="iPhone X" />
-          <h2>{title2}</h2>
-          <p>description: {description2}</p>
-          <p>Price: {price2}</p>
-          <p>rating: {rating2}</p>
-          <p>brand: {brand2}</p>
-          <p>category: {category2}</p>
-        </article>
-      </section>
-    );
-  };
-
-  const root = ReactDOM.createRoot(document.getElementById("root"));
-  root.render(
-    <div>
-      <header>
-        <h2>Anis Express</h2>
-      </header>
-      <main>
-        <aside>this is sidebar</aside>
-        <Products />
-        <Products />
-      </main>
-      <footer>this is a footer</footer>
-    </div>
-  );
-  ```
-
-- **Code Example - 9 (create Header, Sidebar, Footer component)**
-
-  ```js
-  const Header = () => {
-    return (
-      <header>
-        <h2>Anis Express</h2>
-      </header>
-    );
-  };
-  const Sidebar = () => {
-    return <aside>this is sidebar</aside>;
-  };
-  const Footer = () => {
-    return <footer>this is a footer</footer>;
-  };
-  ```
-
-- **Code Example - 10 (App root component, Nested components)**
-
-  ```js
-  import React from "react";
-  import ReactDOM from "react-dom/client";
-
-  const Products = () => {
-    const imageSource1 = "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
-    const title1 = "iPhone 9";
-    const description1 = "An apple mobile which is nothing like apple";
-    const price1 = 549;
-    const rating1 = 4.6;
-    const brand1 = "Apple";
-    const category1 = "smartphones";
-
-    const imageSource2 = "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
-    const title2 = "iPhone X";
-    const description2 =
-      "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
-    const price2 = 899;
-    const rating2 = 4.44;
-    const brand2 = "Apple";
-    const category2 = "smartphones";
-
-    return (
-      <section>
-        <article>
-          <img src={imageSource1} alt="iPhone 9" />
-          <h2>{title1}</h2>
-          <p>description: {description1}</p>
-          <p>Price: {price1}</p>
-          <p>rating: {rating1}</p>
-          <p>brand: {brand1}</p>
-          <p>category: {category1}</p>
-        </article>
-        <article>
-          <img src={imageSource2} alt="iPhone X" />
-          <h2>{title2}</h2>
-          <p>description: {description2}</p>
-          <p>Price: {price2}</p>
-          <p>rating: {rating2}</p>
-          <p>brand: {brand2}</p>
-          <p>category: {category2}</p>
-        </article>
-      </section>
-    );
-  };
-
-  const Header = () => {
-    return (
-      <header>
-        <h2>Anis Express</h2>
-      </header>
-    );
-  };
-  const Sidebar = () => {
-    return <aside>this is sidebar</aside>;
-  };
-  const Footer = () => {
-    return <footer>this is a footer</footer>;
-  };
-
-  const App = () => {
-    return (
-      <div>
-        <Header />
-        <main>
-          <Sidebar />
-          <Products />
-        </main>
-        <Footer />
-      </div>
-    );
-  };
-
-  const root = ReactDOM.createRoot(document.getElementById("root"));
-  root.render(<App />);
-  ```
-
-- **Code Example - 11 (export, import modular component)**
-
-  - export default can be used once in a file where multiple exports can be used
-  - importing export default does not require {} and you can name anything on the other hand only exports requires {} and naming is strict
-  - export App component
-
-  ```js
-  // App.js
-
-  import React from "react";
-  import ReactDOM from "react-dom/client";
-
-  const Products = () => {
-    const imageSource1 =
-      "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
-    const title1 = "iPhone 9";
-    const description1 = "An apple mobile which is nothing like apple";
-    const price1 = 549;
-    const rating1 = 4.6;
-    const brand1 = "Apple";
-    const category1 = "smartphones";
-
-    const imageSource2 =
-      "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
-    const title2 = "iPhone X";
-    const description2 =
-      "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
-    const price2 = 899;
-    const rating2 = 4.44;
-    const brand2 = "Apple";
-    const category2 = "smartphones";
-
-    return (
-      <section>
-        <article>
-          <img src={imageSource1} alt="iPhone 9" />
-          <h2>{title1}</h2>
-          <p>description: {description1}</p>
-          <p>Price: {price1}</p>
-          <p>rating: {rating1}</p>
-          <p>brand: {brand1}</p>
-          <p>category: {category1}</p>
-        </article>
-        <article>
-          <img src={imageSource2} alt="iPhone X" />
-          <h2>{title2}</h2>
-          <p>description: {description2}</p>
-          <p>Price: {price2}</p>
-          <p>rating: {rating2}</p>
-          <p>brand: {brand2}</p>
-          <p>category: {category2}</p>
-        </article>
-      </section>
-    );
-  };
-
-  const Header = () => {
-    return (
-      <header>
-        <h2>Anis Express</h2>
-      </header>
-    );
-  };
-  const Sidebar = () => {
-    return <aside>this is sidebar</aside>;
-  };
-  const Footer = () => {
-    return <footer>this is a footer</footer>;
-  };
-  const App = () => {
-    return (
-      <div>
-        <Header />
-        <main>
-          <Sidebar />
-          <Products />
-        </main>
-        <Footer />
-      </div>
-    );
-  };
-
-  export default App;
-
-  // import in index.js
-  import React from "react";
-  import ReactDOM from "react-dom/client";
-  import App from "./App";
-
-  const root = ReactDOM.createRoot(document.getElementById("root"));
-  root.render(<App />);
-  ```
-
-- More practice for export,import
-  - **Code Example - 13 (More export, import)**
-  - separate all the components
-
 ### [1.4 Adding CSS Styling](https://youtu.be/02YWKDxLpwk)
+
+- **DO NOT FOCUS ON STYLING CAUSE IT IS NOT A CSS OR STYLING SERIES. Copy the css code and paste it.**
 
 Inline styling, CSS Stylesheet, CSS module [why you should use css module], third party packages such as Material UI, styled components
 
-- Inline styling
+- 1. Inline styling
 
     ```js
       const headingStyle = { color: 'red', fontSize: '3rem' };
@@ -694,486 +712,722 @@ Inline styling, CSS Stylesheet, CSS module [why you should use css module], thir
       </aside>
     ```
 
-- CSS Stylesheet
+- 2. CSS Stylesheet / global CSS
 
-  - **Code Example - 14 (Styling component with CSS)**
+  - **Code Example - 9 (Styling component with CSS)**
 
     ```css
-    /*code for the App.css */
-    /* reset code and common starts here  */
-    :root {
-      --primary-color: rgb(11, 181, 48);
-      --secondary-color: rgba(36, 122, 55, 0.9);
-      --padding: 0.5rem;
-      --transition: all 0.3s;
-      --border-radius: 0.6rem;
-      --box-shadow: 0.1rem 0.2rem 0.8rem rgba(205, 202, 202, 0.5);
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      text-decoration: none;
-      list-style-type: none;
-      outline: none;
-    }
-    html {
-      scroll-behavior: smooth;
-    }
-    .flex-space-around {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-    }
-    .flex-center {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    /* reset code and common ends here  */
+      /*reset code and common ends here*/
 
-    /* header starts here  */
-    .header {
-      height: 10vh;
-      background-color: var(--primary-color);
-      color: white;
-    }
-    /* header ends here  */
+      :root {
+        --primary-color: #0bb530; /*Updated to a more vibrant green */
+        --secondary-color: rgba(36, 122, 55, 0.9);
+        --background-color: #f5f5f5; /* Light background color */
+        --text-color: #333; /* Darker text color for better readability */
+        --padding: 0.5rem;
+        --transition: all 0.3s;
+        --border-radius: 0.6rem;
+        --box-shadow: 0.1rem 0.2rem 0.8rem rgba(0, 0, 0, 0.1); /*Softer shadow*/
+      }
 
-    /* main starts here  */
-    main {
-      height: 80vh;
-    }
-    .sidebar {
-      flex: 1;
-      padding: var(--padding);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 1rem;
-      align-self: flex-start;
-      background-color: #e6e3e3;
-      height: 100%;
-      border-right: 1px solid var(--primary-color);
-    }
-    .main-content {
-      flex: 3;
-      height: 100%;
-      padding: var(--padding);
-      overflow: scroll;
-    }
-    .products {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 2rem;
-      padding: 2rem 0;
-    }
-    .product__img {
-      width: 100%;
-      height: 15rem;
-      filter: saturate(0);
-      transition: var(--transition);
-    }
-    /* main ends here  */
+      *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        list-style-type: none;
+        outline: none;
+      }
 
-    /* footer starts here  */
-    .footer {
-      min-height: 10vh;
-      padding: var(--padding);
-      background-color: var(--primary-color);
-      color: white;
-      font-size: 1.1rem;
-    }
-    /* footer ends here  */
+      html {
+        scroll-behavior: smooth;
+      }
 
-    /* responsiveness starts here  */
-    @media (max-width: 992px) {
-      .flex-space-around,
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+      }
+
+      .flex-space-around {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+
       .flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+
+      /_reset code and common ends here_/
+
+      /_header starts here_/
+      .header {
+        height: 10vh;
+        background-color: var(--primary-color);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2rem;
+      }
+      /_header ends here_/
+
+      /_main starts here_/
+      main {
+        min-height: 80vh;
+        padding: 2rem;
+      }
+
+      .container {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .sidebar {
+        flex: 1;
+        padding: var(--padding);
+        display: flex;
         flex-direction: column;
         gap: 1rem;
-        padding: 1rem 0;
+        background-color: white;
+        border: 1px solid var(--primary-color);
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
       }
-      .header {
-        min-height: 10vh;
-      }
-      .sidebar {
-        width: 100%;
-      }
-      .products {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
 
-    @media (max-width: 768px) {
-      .products {
-        grid-template-columns: repeat(1, minmax(0, 1fr));
+      .main-content {
+        flex: 3;
+        padding: var(--padding);
       }
-    }
-    /* responsiveness ends here  */
+
+      .products {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2rem;
+      }
+
+      .card {
+        background-color: white;
+        padding: var(--padding);
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        transition: var(--transition);
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0.2rem 0.4rem 1rem rgba(0, 0, 0, 0.2);
+      }
+
+      .product__img {
+        width: 100%;
+        height: 15rem;
+        object-fit: cover;
+        border-radius: var(--border-radius);
+      }
+
+      .product__title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 0.5rem 0;
+      }
+
+      .product__description {
+        font-size: 0.9rem;
+        color: var(--secondary-color);
+        margin: 0.5rem 0;
+      }
+
+      .product__price {
+        font-size: 1rem;
+        color: var(--primary-color);
+        font-weight: bold;
+        margin: 0.5rem 0;
+      }
+
+      .button {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .button:hover {
+        background-color: var(--secondary-color);
+      }
+      /_main ends here_/
+
+      /_footer starts here_/
+      .footer {
+        height: 10vh;
+        padding: var(--padding);
+        background-color: var(--primary-color);
+        color: white;
+        font-size: 1.1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+      }
+
+      .footer a {
+        color: white;
+        font-weight: bold;
+      }
+
+      .footer .social-media a {
+        margin: 0 0.5rem;
+        font-size: 1.2rem;
+      }
+      /_footer ends here_/
+
+      /_responsiveness starts here_/
+      @media (max-width: 992px) {
+        .flex-space-around,
+        .flex-center {
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .header {
+          flex-direction: column;
+          padding: 1rem 0;
+        }
+        .sidebar {
+          width: 100%;
+        }
+        .products {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .products {
+          grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+      }
+      /_responsiveness ends here_/
     ```
 
-    ```js
-    // App.js
-    import React from "react";
+    ```jsx
+     // Code Example - 9 (Styling component with CSS)
+      import React from 'react';
 
-    import Header from "./components/Header";
-    import Sidebar from "./components/Sidebar";
-    import Footer from "./components/Footer";
-    import Products from "./components/Products";
+      import Sidebar from '../components/Sidebar';
+      import Products from '../components/Products';
 
-    import "./App.css";
-
-    const App = () => {
-      return (
-        <div>
-          <Header />
-          <main className="flex-center">
+      const Home = () => {
+        return (
+          <div className="container flex-space-around">
             <Sidebar />
             <div className="main-content">
               <Products />
             </div>
-          </main>
-          <Footer />
-        </div>
-      );
-    };
-
-    export default App;
-
-    // Header.js
-      import React from "react";
-
-      const Header = () => {
-        return (
-          <header className="header flex-center">
-            <h2 className="header__title">Anis Express</h2>
-          </header>
-        );
-      };
-      export default Header;
-
-    // Sidebar.js
-    import React from "react";
-
-    const Sidebar = () => {
-      return <aside className="sidebar">this is sidebar</aside>;
-    };
-    export default Sidebar;
-
-    // Products.js
-    import React from "react";
-
-
-    const Products = () => {
-      const imageSource1 =
-        "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
-      const title1 = "iPhone 9";
-      const description1 = "An apple mobile which is nothing like apple";
-      const price1 = 549;
-      const rating1 = 4.6;
-      const brand1 = "Apple";
-      const category1 = "smartphones";
-
-      const imageSource2 =
-        "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
-      const title2 = "iPhone X";
-      const description2 =
-        "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
-      const price2 = 899;
-      const rating2 = 4.44;
-      const brand2 = "Apple";
-      const category2 = "smartphones";
-
-      return (
-        <section className="products">
-          <article className="product">
-            <img src={imageSource1} alt="iPhone 9" className="product__img"/>
-            <h2>{title1}</h2>
-            <p>description: {description1}</p>
-            <p>Price: {price1}</p>
-            <p>rating: {rating1}</p>
-            <p>brand: {brand1}</p>
-            <p>category: {category1}</p>
-          </article>
-          <article className="product">
-            <img src={imageSource2} alt="iPhone X" className="product__img"/>
-            <h2>{title2}</h2>
-            <p>description: {description2}</p>
-            <p>Price: {price2}</p>
-            <p>rating: {rating2}</p>
-            <p>brand: {brand2}</p>
-            <p>category: {category2}</p>
-          </article>
-        </section>
-      );
-    };
-    export default Products;
-
-    // Footer.js
-    import React from "react";
-
-      const Footer = () => {
-        return (
-          <footer className="footer flex-space-around">
-            <div className="footer__left">
-              <p className="footer__title">&copy;Copyright by Anisul Islam</p>
-            </div>
-            <div className="footer__right">
-              <p>social media icons</p>
-            </div>
-          </footer>
+          </div>
         );
       };
 
-      export default Footer;
+      export default Home;
     ```
 
-- CSS module: create a file name such as fileName.module.css as shown below
+- 3. CSS module: create a file name such as fileName.module.css as shown below
 
-    ```css
-    footer {
-      height: 5vh;
-      background-color: bisque;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  CSS Modules offer a robust solution for styling React components by providing scoped styles, preventing global namespace pollution, and making it easier to maintain and manage styles in large applications. They align well with the modular nature of React components and help ensure that styles are predictable and encapsulated.
 
-    .copyright {
-      font-size: 0.9rem;
-    }
-    ```
+  - Benefits of Using CSS Modules in React
 
-  - use it in from another file as shown below
+      1. **Scoped Styles**:
+        - CSS Modules automatically scope the CSS to the component it is imported into. This prevents styles from one component from unintentionally affecting styles in another component.
+        - This is particularly useful in large applications where naming conflicts can be a common issue.
 
-    ```js
-    import React from "react";
+      2. **Avoid Global Namespace**:
+        - Traditional CSS is global, meaning that all class names are in the global namespace. CSS Modules mitigate this by generating unique class names for each component, thus avoiding the risk of naming conflicts.
 
-    import styles from "./footer.module.css";
+      3. **Easier Maintenance**:
+        - Scoped styles make it easier to maintain and update the CSS for individual components without worrying about side effects on other parts of the application.
+        - This modular approach aligns with the component-based architecture of React.
 
-    const Footer = () => {
-      return (
-        <footer>
-          <p className={styles.copyright}>
-            All rights reserved by Anisul Islam
-          </p>
-        </footer>
-      );
-    };
+      4. **Improved Readability**:
+        - CSS Modules can lead to better-organized code. Styles are co-located with the component logic, making it easier to see how a component is styled without needing to search through a large, separate CSS file.
 
-    export default Footer;
-    ```
+      5. **Dynamic Class Names**:
+        - CSS Modules support dynamic class names, allowing you to conditionally apply styles based on component state or props.
+        - This can simplify the process of applying different styles based on user interaction or other conditions.
+
+      6. **Integration with CSS Preprocessors**:
+        - CSS Modules can be used with CSS preprocessors like Sass or Less, allowing you to leverage their features (e.g., variables, mixins) while still benefiting from scoped styles.
+
+  - How to Use CSS Modules in React
+
+    1. **Create a CSS Module File**:
+      Create a CSS file with the `.module.css` extension (e.g., `Button.module.css`).
+
+      ```css
+      /* Button.module.css */
+      .button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .button:hover {
+        background-color: #45a049;
+      }
+      ```
+
+    2. **Import and Use the CSS Module in a React Component**:
+      Import the CSS Module into your React component and use it.
+
+      ```jsx
+      // Button.js
+      import React from 'react';
+      import styles from './Button.module.css';
+
+      const Button = ({ children, onClick }) => {
+        return (
+          <button className={styles.button} onClick={onClick}>
+            {children}
+          </button>
+        );
+      };
+
+      export default Button;
+      ```
+
+    3. **Dynamic Class Names**:
+      You can conditionally apply class names using the `classnames` library or template literals.
+
+      ```jsx
+      import React from 'react';
+      import styles from './Button.module.css';
+      import classnames from 'classnames';
+
+      const Button = ({ children, onClick, primary }) => {
+        return (
+          <button
+            className={classnames(styles.button, {
+              [styles.primary]: primary
+            })}
+            onClick={onClick}
+          >
+            {children}
+          </button>
+        );
+      };
+
+      export default Button;
+      ```
+
+- adding multiple class in modules
+In React, when using CSS Modules, you can add multiple class names to an element by combining them using the `classnames` library or by using template literals. Both approaches allow you to conditionally apply multiple class names based on certain conditions.
+
+#### Using the `classnames` Library
+
+The `classnames` library is a popular utility for conditionally combining class names. It simplifies the process of adding multiple classes and is particularly useful when you need to apply classes conditionally.
+
+1. **Install the `classnames` Library**:
+
+   You can install the `classnames` library via npm or yarn:
+
+   ```bash
+   npm install classnames
+   ```
+
+   or
+
+   ```bash
+   yarn add classnames
+   ```
+
+2. **Combine Classes Using `classnames`**:
+
+   Here’s an example demonstrating how to use `classnames` with CSS Modules:
+
+   ```jsx
+   // Button.js
+   import React from 'react';
+   import classnames from 'classnames';
+   import styles from './Button.module.css';
+
+   const Button = ({ children, onClick, primary, secondary }) => {
+     const buttonClass = classnames(styles.button, {
+       [styles.primary]: primary,
+       [styles.secondary]: secondary,
+     });
+
+     return (
+       <button className={buttonClass} onClick={onClick}>
+         {children}
+       </button>
+     );
+   };
+
+   export default Button;
+   ```
+
+   ```css
+   /* Button.module.css */
+   .button {
+     padding: 10px 20px;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+   }
+
+   .primary {
+     background-color: #4caf50;
+     color: white;
+   }
+
+   .secondary {
+     background-color: #008cba;
+     color: white;
+   }
+   ```
+
+#### Using Template Literals
+
+If you prefer not to use an additional library, you can also use JavaScript template literals to combine class names.
+
+1. **Combine Classes Using Template Literals**:
+
+   Here’s an example demonstrating how to use template literals with CSS Modules:
+
+   ```jsx
+   // Button.js
+   import React from 'react';
+   import styles from './Button.module.css';
+
+   const Button = ({ children, onClick, primary, secondary }) => {
+     const buttonClass = `${styles.button} ${primary ? styles.primary : ''} ${secondary ? styles.secondary : ''}`;
+
+     return (
+       <button className={buttonClass} onClick={onClick}>
+         {children}
+       </button>
+     );
+   };
+
+   export default Button;
+   ```
+
+   ```css
+   /* Button.module.css */
+   .button {
+     padding: 10px 20px;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+   }
+
+   .primary {
+     background-color: #4caf50;
+     color: white;
+   }
+
+   .secondary {
+     background-color: #008cba;
+     color: white;
+   }
+   ```
 
 ### [1.5 Props and destructuring](https://youtu.be/GQx58yfYqxo)
 
-- **props object: we can pass information from one component to another using props object. components communicate with each others via props. props is an object. props are like attributes in our HTML tag. props are readonly**
-  - how to pass, recieve, set default props
+- **props object: Properties are called as props. we can pass information from one component to another using props object. components communicate with each others via props. props is an object. props are like attributes in our HTML tag. props are readonly**
+  - how to pass, receive, set default props
   - how to pass JSX to component,
-- **Code Example - 15 (Props sending)**
+- **Code Example - 10 (Props sending)**
 
 ```js
-import React from "react";
-import Product from "./Product";
-
-const Products = () => {
-  const imageSource1 = "https://i.dummyjson.com/data/products/1/thumbnail.jpg";
-  const title1 = "iPhone 9";
-  const description1 = "An apple mobile which is nothing like apple";
-  const price1 = 549;
-  const rating1 = 4.6;
-  const brand1 = "Apple";
-  const category1 = "smartphones";
-
-  const imageSource2 = "https://i.dummyjson.com/data/products/2/thumbnail.jpg";
-  const title2 = "iPhone X";
-  const description2 =
-    "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...";
-  const price2 = 899;
-  const rating2 = 4.44;
-  const brand2 = "Apple";
-  const category2 = "smartphones";
-
-  return (
-    <section className="products">
-      <Product
-        imageSource={imageSource1}
-        title={title1}
-        description={description1}
-        price={price1}
-        rating={rating1}
-        brand={brand1}
-        category={category1}
-      />
-      <Product
-        imageSource={imageSource2}
-        title={title2}
-        description={description2}
-        price={price2}
-        rating={rating2}
-        brand={brand2}
-        category={category2}
-      />
-    </section>
-  );
+// component without props is flexible?
+import React from 'react';
+const Message = () => {
+  return <div>Anisul Islam you have received 12 messages</div>;
 };
-export default Products;
-```
+export default Message;
 
-- **Code Example - 16 (props recieveing & Destructuring)**
-
-  ```js
-  import React from "react";
-
-  const Product = (props) => {
-    const { imageSource, title, description, price, rating, brand, category } =
-      props;
-    return (
-      <article className="product">
-        <img src={thumbnail} alt="iPhone 9" className="product__img" />
-        <div className="product__body">
-          <h2 className="product__title">{title}</h2>
-          <p className="product__description">description: {description}</p>
-          <p className="product__price">Price: {price}</p>
-          <p className="product__rating">rating: {rating}</p>
-          <p className="product__brand">brand: {brand}</p>
-          <p className="product__category">category: {category}</p>
-        </div>
-      </article>
-    );
-  };
-  export default Product;
-  ```
-
-- **Code Example - 17 (props for complex data)**
-
-  ```js
-  // Products.js
-  import React from "react";
-  import Product from "./Product";
-
-  const Products = () => {
-    const products = [
-      {
-        id: 1,
-        title: "iPhone 9",
-        description: "An apple mobile which is nothing like apple",
-        price: 549,
-        discountPercentage: 12.96,
-        rating: 4.69,
-        stock: 94,
-        brand: "Apple",
-        category: "smartphones",
-        thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
-      },
-      {
-        id: 2,
-        title: "iPhone X",
-        description:
-          "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-        price: 899,
-        discountPercentage: 17.94,
-        rating: 4.44,
-        stock: 34,
-        brand: "Apple",
-        category: "smartphones",
-        thumbnail: "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
-      },
-    ];
-    return (
-      <section className="products">
-        <Product
-          imageSource={products[0].thumbnail}
-          title={products[0].title}
-          description={products[0].description}
-          price={products[0].price}
-          rating={products[0].rating}
-          brand={products[0].brand}
-          category={products[0].category}
-        />
-        <Product
-          imageSource={products[1].thumbnail}
-          title={products[1].title}
-          description={products[1].description}
-          price={products[1].price}
-          rating={products[1].rating}
-          brand={products[1].brand}
-          category={products[1].category}
-        />
-      </section>
-    );
-  };
-  export default Products;
-  ```
-
-- create data.js in src folder and move all the todos dummy data there and import in App.js for using it.
-- Can you load all the data from App.js to Products.js as props
-- **Code Example - 18 (import data from another file and pass as props)**
-
-```js
-// App.js
-import React from "react";
-
-import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
-import Footer from "./components/Footer";
-import Products from "./components/Products";
-import { products } from "./data";
-
-import "./App.css";
-
+import React, { Fragment } from 'react';
+import Message from './components/Message';
 const App = () => {
   return (
-    <div>
-      <Header />
-      <main className="flex-center">
-        <Sidebar />
-        <div className="main-content">
-          <Products products={products} />
-        </div>
-      </main>
-      <Footer />
-    </div>
+    <Fragment>
+      <Message />
+    </Fragment>
   );
 };
 
 export default App;
 
-// Products.js
-import React from "react";
-import Product from "./Product";
+// lets pass data to components
+// pass number  num={12}
+// pass string num="12"
+// pass boolean bool="true"; String(props.bool)
+// pass object
+// pass array
+import React, { Fragment } from 'react';
+import Message from './components/Message';
+const App = () => {
+  return (
+    <Fragment>
+       <Message numberOfMessages={12} name="Anisul Islam" />
+    </Fragment>
+  );
+};
+export default App;
 
-const Products = ({ products }) => {
+import React from 'react';
+const Message = (props) => {
+  return (
+    <div>{props.name} you have received {props.numberOfMessages} messages</div>
+  );
+};
+export default Message;
+
+// destructure method 1
+import React from 'react';
+const Message = (props) => {
+  const {name, numberOfMessages} = props;
+  return (
+    <div>{props.name} you have received {props.numberOfMessages} messages</div>
+  );
+};
+export default Message;
+
+// destructure method 2
+import React from 'react';
+const Message = ({name, numberOfMessages}) => {
+  return (
+    <div>{props.name} you have received {props.numberOfMessages} messages</div>
+  );
+};
+export default Message;
+```
+
+- create data.js in src folder and move all the products dummy data there and import in Home.js for passing it as props to Products component.
+- **Code Example - 11 (props and destructure complex example)**
+
+```js
+// data.js
+
+// Home.js
+import React from 'react';
+
+import Sidebar from '../components/Sidebar';
+import Products from '../components/Products';
+import { products } from '../data';
+
+const Home = () => {
+  return (
+    <div className="container flex-space-around">
+      <Sidebar />
+      <div className="main-content">
+        <Products products={products} />
+      </div>
+    </div>
+  );
+};
+export default Home;
+
+
+// Products.js
+import React from 'react';
+const Products = (props) => {
+  const { products } = props;
+
   return (
     <section className="products">
-      <Product
-        imageSource={products[0].thumbnail}
-        title={products[0].title}
-        description={products[0].description}
-        price={products[0].price}
-        rating={products[0].rating}
-        brand={products[0].brand}
-        category={products[0].category}
-      />
-      <Product
-        imageSource={products[1].thumbnail}
-        title={products[1].title}
-        description={products[1].description}
-        price={products[1].price}
-        rating={products[1].rating}
-        brand={products[1].brand}
-        category={products[1].category}
-      />
+      <article className="product card">
+        <img
+          className="product__img"
+          src={products[0].image}
+          alt={products[0].title}
+        />
+        <h2>{products[0].id}</h2>
+        <p className="product__title">{products[0].title}</p>
+        <p className="product__description">
+          {products[0].description.substring(0, 80)}
+          ...
+        </p>
+        <p className="product__price">Price: {products[0].price}</p>
+        <p>Category: {products[0].category}</p>
+        <p>Rating: {products[0].rating.rate}/5</p>
+      </article>
+
+      <article className="product card">
+        <img
+          className="product__img"
+          src={products[1].image}
+          alt={products[1].title}
+        />
+        <h2>{products[1].id}</h2>
+        <p className="product__title">{products[1].title}</p>
+        {products[1].description.substring(0, 80)}...
+        <p className="product__price">Price: {products[1].price}</p>
+        <p>Category: {products[1].category}</p>
+        <p>Rating: {products[1].rating.rate}/5</p>
+      </article>
     </section>
   );
 };
+
 export default Products;
 ```
 
-### [1.6 Mapping & rednering components](https://youtu.be/OwwmIzH7FzI)
+- **Code Example - 12 (more decomposition example)**
+
+```js
+// Product.jsx
+import React from 'react';
+
+const Product = (props) => {
+  const { product } = props;
+  return (
+    <article className="product card">
+      <img className="product__img" src={product.image} alt={product.title} />
+      <p className="product__title">{product.title}</p>
+      <p className="product__description">
+        {product.description.substring(0, 40)}
+        ...
+      </p>
+      <p className="product__price">Price: {product.price}</p>
+      <p>Category: {product.category}</p>
+      <p>Rating: {product.rating.rate}/5</p>
+    </article>
+  );
+};
+
+export default Product;
+
+
+// Products.jsx
+import React from 'react';
+import Product from './Product';
+
+const Products = (props) => {
+  const { products } = props;
+
+  return (
+    <section className="products">
+      <Product product={products[0]} />
+      <Product product={products[1]} />
+      <Product product={products[2]} />
+      <Product product={products[3]} />
+      <Product product={products[4]} />
+    </section>
+  );
+};
+
+export default Products;
+```
+
+### [1.6 prop-types](https://youtu.be/mnPJrxHUarA)
+
+- [documentation is here](https://reactjs.org/docs/typechecking-with-proptypes.html)
+- **catch bugs with typechecking.**
+- We can use Typescript or Flow for checking types in the entire application for sure but use the prop-types library can be the first guard here for checking types.
+- [how to use the library](https://www.npmjs.com/package/prop-types)
+
+- **Code Example - 13 (prop-types)**
+
+  ```js
+  // Products.jsx
+  import React from 'react';
+
+    import PropTypes from 'prop-types';
+
+    import Product from './Product';
+
+    const Products = (props) => {
+      const { products } = props;
+
+      return (
+        <section className="products">
+          <Product product={products[0]} />
+          <Product product={products[1]} />
+          <Product product={products[2]} />
+          <Product product={products[3]} />
+          <Product product={products[4]} />
+        </section>
+      );
+    };
+
+    Products.propTypes = {
+      products: PropTypes.arrayOf( // PropTypes.arrayOf() will allow us to pass object
+        PropTypes.shape({ //   PropTypes.shape() will allow us to pass object
+         id: PropTypes.number.isRequired,
+          title: PropTypes.string,
+          price: PropTypes.number,
+          description: PropTypes.string,
+          category: PropTypes.string,
+          image: PropTypes.string,
+          rating: PropTypes.shape({
+            rate: PropTypes.number,
+            count: PropTypes.number,
+          }),
+        })
+      ),
+    };
+
+    export default Products;
+
+  // Product.jsx
+  import React from 'react';
+
+  import PropTypes from 'prop-types';
+
+  const Product = (props) => {
+    const { product } = props;
+    return (
+      <article className="product card">
+        <img className="product__img" src={product.image} alt={product.title} />
+        <p className="product__title">{product.title}</p>
+        <p className="product__description">
+          {product.description.substring(0, 40)}
+          ...
+        </p>
+        <p className="product__price">Price: {product.price}</p>
+        <p>Category: {product.category}</p>
+        <p>Rating: {product.rating.rate}/5</p>
+      </article>
+    );
+  };
+
+  Product.propTypes = {
+    product: PropTypes.shape({
+     id: PropTypes.number.isRequired,
+      title: PropTypes.string,
+      price: PropTypes.number,
+      description: PropTypes.string,
+      category: PropTypes.string,
+      image: PropTypes.string,
+      rating: PropTypes.shape({
+        rate: PropTypes.number,
+        count: PropTypes.number,
+      }),
+    }),
+  };
+
+  export default Product;
+  ```
+
+### [1.7 Mapping & rednering components](https://youtu.be/OwwmIzH7FzI)
 
 - learn how to use map() and filter() from an array of Data.
-- **Code Example - 19 (Map component with for loop)**
+- **Code Example - 13 (Map component with for loop)**
 
 ```js
 import React from "react";
@@ -1255,7 +1509,7 @@ export default Products;
 
 #### [Adding unique key to each child](https://youtu.be/Dj7ynTdhy1Q)
 
-we need to map each children of list uniquly so that react can identify them wor properly.Keys are unique. we can use same keys for JSX nodes in different arrays.
+we need to map each children of list uniquely so that react can identify them wor properly.Keys are unique. we can use same keys for JSX nodes in different arrays.
 
 - Where I can find key?
 
@@ -1361,84 +1615,6 @@ const Product = (props) => {
 export default Product;
 
 ```
-
-### [1.7 PropTypes](https://youtu.be/mnPJrxHUarA)
-
-- [documentation is here](https://reactjs.org/docs/typechecking-with-proptypes.html)
-- **catch bugs with typechecking.**
-- We can use Typescript or Flow for checking types in the entire application for sure but PropTypes can be the first guard here for checking types.
-
-- default props is essential when first time running without any value passing to props
-
-  ```js
-    // lets think value can be primary or secondary one of two valyes
-    <List background = 'primary' >
-
-    // checking prop types
-    background: PropTypes.oneOf([
-      'primary',
-      'secondary'
-    ])
-  ```
-
-- **Code Example - 25 (PropTypes)**
-
-  ```js
-  // Todos.js
-  import React from "react";
-  import PropTypes from "prop-types";
-
-  import Todo from "./Todo";
-
-  const Todos = (props) => {
-    const { todos } = props;
-
-    const renderTodosElement = todos.map((todo) => (
-      <Todo key={todo.id} todo={todo} />
-    ));
-
-    return <section className="todos">{renderTodosElement}</section>;
-  };
-  Todos.defaultProps = {
-    todos: [],
-  };
-    Todos.propTypes = {
-    todos: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string,
-        title: PropTypes.string,
-        desc: PropTypes.string,
-      })
-    ),
-  };
-
-
-  export default Todos;
-
-  // Todo.js
-  import React from "react";
-  import PropTypes from "prop-types";
-
-  const Todo = (props) => {
-    const { todo } = props;
-    return (
-      <article className="todo" key={todo.id}>
-        <h3>{todo.title}</h3>
-        <p>{todo.desc} </p>
-      </article>
-    );
-  };
-
-  Todo.propTypes = {
-    todo: PropTypes.shape({
-      title: PropTypes.string,
-      desc: PropTypes.string,
-    }),
-  };
-
-  export default Todo;
-
-  ```
 
 ### [1.8 Conditional rendering](https://youtu.be/roSfZjXp5us)
 
