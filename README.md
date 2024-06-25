@@ -31,9 +31,18 @@
 
    [1.12 Controlled components and Form](#112-controlled-components-and-form)
 
-   [1.13 data passing: child to parent component, state lifting](#113-data-passing-child-to-parent-component-state-lifting)
+   [1.13 Form Validation](#113-form-validation)
+   [1.14 data passing: child to parent component, state lifting](#114-data-passing-child-to-parent-component-state-lifting)
 
-   [1.14 useRef hook - Uncontrolled component](#114-useref-hook---uncontrolled-component)
+   [1.15 useRef hook - Uncontrolled component](#115-useref-hook---uncontrolled-component)
+
+   [1.16 dynamic styling in React](#116-dynamic-styling-in-react)
+
+   [1.17 class component](#117-class-component)
+
+   [1.18 state, setState, event handler](#118-state-setstate-event-handler)
+
+   [1.19 react todo projects](#119-react-todo-projects)
 
 2. [Intermediate React.js Topics](#2-intermediate-reactjs-topics)
 
@@ -4351,13 +4360,203 @@ export default SignUp;
   };
 
   export default NewProduct;
+
+  // Home.jsx
+    const handleAddNewProduct = (newProduct) => {
+      setProducts((prevProducts) => [...prevProducts, newProduct]);
+    };
   
   ```
+
+- **Code Example - 41 (state lifting for delete operation)**
+
+  ```js
+  // In Home.jsx
+    const handleDeleteProduct = (id) => {
+      console.log(id);
+    };
+
+  // pass function to children component
+  <Products
+    products={products}
+    onHandleDeleteProduct={handleDeleteProduct}
+  />
+  
+  // receive function
+   const handleDeleteProduct = (id) => {
+    props.onHandleDeleteProduct(id);
+  };
+
+  // In Home.jsx
+    const handleDeleteProduct = (id) => {
+      const filteredProducts = products.filter((product) => product.id !== id);
+      setProducts(filteredProducts);
+    };
+  ```
+
+- **Code Example - 42 (use the useState function)**
+
+```jsx
+import React, { useState } from 'react';
+
+import Sidebar from '../components/Sidebar';
+import Products from '../components/Products';
+import { products as productsData } from '../data';
+import NewProduct from '../components/NewProduct';
+
+const Home = () => {
+  const [products, setProducts] = useState(productsData);
+
+  return (
+    <div className="container flex-space-around">
+      <Sidebar />
+      <div className="main-content">
+        <NewProduct setProducts={setProducts} />
+        <Products products={products} setProducts={setProducts} />
+      </div>
+    </div>
+  );
+};
+
+export default Home;
+
+// Products.jsx
+import React from 'react';
+import PropTypes from 'prop-types';
+import { nanoid } from 'nanoid';
+
+import Product from './Product';
+
+const Products = (props) => {
+  const { products } = props;
+
+  return (
+    <section className="products">
+      {products.length > 0 &&
+        products.map((product) => (
+          <Product
+            product={product}
+            key={product.id}
+            products={products}
+            setProducts={props.setProducts}
+          />
+        ))}
+      {products.length === 0 && <p>No products available</p>}
+    </section>
+  );
+};
+
+Products.propTypes = {
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      price: PropTypes.number,
+      description: PropTypes.string,
+      category: PropTypes.string,
+      image: PropTypes.string,
+      rating: PropTypes.shape({
+        rate: PropTypes.number,
+        count: PropTypes.number,
+      }),
+    })
+  ),
+  setProducts: PropTypes.func.isRequired,
+};
+
+export default Products;
+
+// Product.jsx
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import Card from './Card';
+
+const Product = (props) => {
+  const { product } = props;
+
+  const handleShowDetails = (product) => {
+    alert(JSON.stringify(product));
+  };
+  const handleAddToCart = (product) => {
+    alert(JSON.stringify(product));
+  };
+  const handleDeleteProduct = (id) => {
+    const filteredProducts = props.products.filter(
+      (product) => product.id !== id
+    );
+    props.setProducts(filteredProducts);
+  };
+
+  return (
+    <Card>
+      <article className="product">
+        <img className="product__img" src={product.image} alt={product.title} />
+        <p className="product__title">{product.title}</p>
+        <p className="product__description">
+          {product.description.substring(0, 40)}
+          ...
+        </p>
+        <p className="product__price">Price: {product.price}</p>
+        <p>Category: {product.category}</p>
+        <p>Rating: {product.rating.rate}/5</p>
+        <div className="product__btns flex-space-around">
+          <button className="button" onClick={() => handleShowDetails(product)}>
+            Show Details
+          </button>
+          <button className="button" onClick={() => handleAddToCart(product)}>
+            Add To Cart
+          </button>
+          <button
+            className="button"
+            onClick={() => handleDeleteProduct(product.id)}
+          >
+            Delete Product
+          </button>
+        </div>
+      </article>
+    </Card>
+  );
+};
+
+Product.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string,
+    price: PropTypes.number,
+    description: PropTypes.string,
+    category: PropTypes.string,
+    image: PropTypes.string,
+    rating: PropTypes.shape({
+      rate: PropTypes.number,
+      count: PropTypes.number,
+    }),
+  }),
+  setProducts: PropTypes.func.isRequired,
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      price: PropTypes.number,
+      description: PropTypes.string,
+      category: PropTypes.string,
+      image: PropTypes.string,
+      rating: PropTypes.shape({
+        rate: PropTypes.number,
+        count: PropTypes.number,
+      }),
+    })
+  ),
+};
+
+export default Product;
+
+```
 
 ### [1.15 useRef hook - Uncontrolled component](https://youtu.be/l5z137GWakU)
 
 - If we look at the AddTodo component then you will see we are not using those title and desc state inside the component that much so we can avoid state and make the component stateless
-- **Code Example - 41 (useRef hook for getting form value)**
+- **Code Example - 43 (useRef hook for getting form value)**
 
   ```js
   import React, { useRef } from "react";
@@ -4415,10 +4614,10 @@ export default SignUp;
   export default AddTodo;
   ```
 
-### [1.15 dynamic styling in React](https://youtu.be/Eru9-kZfhw4)
+### [1.16 dynamic styling in React](https://youtu.be/Eru9-kZfhw4)
 
-- Now lets add some coditional styling
-- **Code Example - 46 (conditional styling)**
+- Now lets add some conditional styling
+- **Code Example - 44 (conditional styling)**
 
   ```js
   import React, { useState, useEffect } from "react";
@@ -4515,13 +4714,13 @@ export default SignUp;
 
 ### [Assignment - 3: Add New Product](https://github.com/anisul-Islam/react-assignment-3-add-new-product)
 
-### [1.16 class component](https://youtu.be/fu76idgpuEI)
+### [1.17 class component](https://youtu.be/fu76idgpuEI)
 
-### [1.17 state, setState, event handler](https://youtu.be/9AtJ4dM2xOU)
+### [1.18 state, setState, event handler](https://youtu.be/9AtJ4dM2xOU)
 
 - state is a js object for storing current situation of a component
 
-- **Code Example - 47 (Counter App using class component)**
+- **Code Example - 44 (Counter App using class component)**
 
   ```js
   // App.js
@@ -4570,7 +4769,7 @@ export default SignUp;
   }
   ```
 
-### [1.18 react todo projects]
+### [1.19 react todo projects]
 
 - [react todo project](https://github.com/anisul-Islam/react-todo-project)
 
