@@ -790,8 +790,9 @@ const Todo = () => {
 
       /_main starts here_/
       main {
-        min-height: 80vh;
+        height: 80vh;
         padding: 2rem;
+        overflow: scroll;
       }
 
       .container {
@@ -4779,7 +4780,7 @@ export default Product;
 
 ### [2.1 life cycle methods of a class component](https://youtu.be/Yz5qTOmSt0M)
 
-- **Code Example - 48 (life cycle methods of a class component)**
+- **Code Example - 45 (life cycle methods of a class component)**
 
   ```js
   // Counter App
@@ -4857,9 +4858,9 @@ export default Product;
 
 ### [2.2 useEffect Hook](https://youtu.be/XEU3jlV9syI)
 
-The `useEffect` hook in React allows you to perform side effects in your functional components. Side effects can include data fetching, DOM manipulation, setting up subscriptions, and more. It's a crucial hook for managing the lifecycle of your components.
+- A very important hook that every react developers should know. The `useEffect` hook in React allows you to perform side effects (outside of the scope of your app) in your functional components. Side effects can include making a network request to an API outside of your app for fetching data, manually DOM manipulation, setting up subscriptions, browser scrolling, and more. It's a crucial hook for managing the lifecycle of your components.
 
-Rule: Don’t call Hooks inside loops, conditions, or nested functions
+- **Rule: Don’t call Hooks inside loops, conditions, or nested functions**
 
 useEffct = componentDidMount + componentDidUpdate + componentWillUnmount
 
@@ -4902,61 +4903,7 @@ Key points about the `useEffect` hook:
 
 3. You can return a cleanup function from the side effect function. This cleanup function will run before the component unmounts. It's useful for unsubscribing from subscriptions, canceling network requests, or any cleanup work.
 
-Here's a breakdown of how you might use the `useEffect` hook for common scenarios:
-
-- **Data Fetching**: Fetch data when the component mounts, and clean up any resources when it unmounts.
-
-```javascript
-useEffect(() => {
-  const fetchData = async () => {
-    // Fetch data here
-  };
-
-  fetchData();
-
-  return () => {
-    // Cleanup resources (e.g., cancel network request)
-  };
-}, []);
-```
-
-- **Updating the Title**: Change the document title when the component mounts.
-
-```javascript
-useEffect(() => {
-  document.title = 'New Page Title';
-
-  return () => {
-    document.title = 'Previous Page Title';
-  };
-}, []);
-```
-
-- **Listening for State Changes**: Execute code when specific state values change.
-
-```javascript
-useEffect(() => {
-  // Execute code when someStateValue changes
-}, [someStateValue]);
-```
-
-- **Subscription Management**: Subscribe to a service and unsubscribe when the component unmounts.
-
-```javascript
-useEffect(() => {
-  const subscription = service.subscribe(data => {
-    // Handle data
-  });
-
-  return () => {
-    subscription.unsubscribe();
-  };
-}, []);
-```
-
-The `useEffect` hook is a versatile tool for managing side effects in your React components and can help you keep your code clean and efficient.
-
-- **Code Example - 49 (useEffect hook)**
+- **Code Example - 46 (useEffect hook)**
 
   ```js
   import React, { useEffect, useState } from "react";
@@ -5045,121 +4992,453 @@ The `useEffect` hook is a versatile tool for managing side effects in your React
   export default UseEffectExample;
   ```
 
+Here's a breakdown of how you might use the `useEffect` hook for common scenarios:
+
+- **Data Fetching**: Fetch data when the component mounts, and clean up any resources when it unmounts.
+
+```javascript
+useEffect(() => {
+  const fetchData = async () => {
+    // Fetch data here
+  };
+
+  fetchData();
+
+  return () => {
+    // Cleanup resources (e.g., cancel network request)
+  };
+}, []);
+```
+
+- **Updating the Title**: Change the document title when the component mounts.
+
+```javascript
+useEffect(() => {
+  document.title = 'New Page Title';
+
+  return () => {
+    document.title = 'Previous Page Title';
+  };
+}, []);
+```
+
+- **Listening for State Changes**: Execute code when specific state values change.
+
+```javascript
+useEffect(() => {
+  // Execute code when someStateValue changes
+}, [someStateValue]);
+```
+
+- **Subscription Management**: Subscribe to a service and unsubscribe when the component unmounts.
+
+```javascript
+useEffect(() => {
+  const subscription = service.subscribe(data => {
+    // Handle data
+  });
+
+  return () => {
+    subscription.unsubscribe();
+  };
+}, []);
+```
+
 #### [fatch data using useEffect Hook](https://youtu.be/Z-EkslDJTJI)
 
-- **Code Example - 50 (fetch data using useEffect hook)**
+- **Code Example - 47 (fetch data using useEffect hook)**
 
   ```js
-  import React, { useEffect, useState } from "react";
+  import React, { useEffect, useState } from 'react';
 
-  import "./App.css";
+  import Sidebar from '../components/Sidebar';
+  import Products from '../components/Products';
+  import NewProduct from '../components/NewProduct';
 
-  const App = () => {
-    const [users, setUsers] = useState([]);
+  // <https://fakestoreapi.com/docs>
+
+  const Home = () => {
+    const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
+    const fetchData = () => {
       setIsLoading(true);
-      fetch("https://jsonplaceholder.typicode.com/users")
+      setError(null);
+
+      fetch('https://fakestoreapi.com/products')
         .then((res) => {
           if (!res.ok) {
-            throw new Error("could not fetch the data");
+            throw new Error('Could not fetch the data');
           }
           return res.json();
         })
-        .then((result) => {
-          setUsers(result);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setIsLoading(false);
-          setError(error.message);
-        });
+        .then((data) => setProducts(data))
+        .catch((error) => setError(error.message))
+        .finally(() => setIsLoading(false));
+    };
+
+    useEffect(() => {
+      fetchData();
     }, []);
-    console.log(users);
-    const renderUsers = users.map((user) => {
-      const { id, name, username, email, phone, website } = user;
-      return (
-        <article key={id} style={{ margin: "2rem" }}>
-          <h2>{id}</h2>
-          <h3>{name}</h3>
-          <p>{username}</p>
-          <p>{email}</p>
-          <p>{phone}</p>
-          <p>{website}</p>
-        </article>
-      );
-    });
 
     return (
-      <div>
-        {isLoading && <p>Loading...</p>}
-        {error ? <p>{error}</p> : <section>{renderUsers}</section>}
+      <div className="container flex-space-around">
+        <Sidebar />
+        <div className="main-content">
+          <NewProduct setProducts={setProducts} />
+          {isLoading && <p>Products are loading...</p>}
+          {error && <p>{error}</p>}
+          {!isLoading && !error && (
+            <Products products={products} setProducts={setProducts} />
+          )}
+        </div>
       </div>
     );
   };
 
-  export default App;
+  export default Home;
   ```
 
-- **Code Example - 51 (fetch data using useEffect hook - async await)**
+- **Code Example - 48 (fetch data using useEffect hook - async await)**
 
   ```js
-  import React, { useEffect, useState } from "react";
+  import React, { useEffect, useState } from 'react';
 
-  import "./App.css";
+  import Sidebar from '../components/Sidebar';
+  import Products from '../components/Products';
+  import NewProduct from '../components/NewProduct';
 
-  const App = () => {
-    const [users, setUsers] = useState([]);
+  // <https://fakestoreapi.com/docs>
+
+  const Home = () => {
+    const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const fetchUsers = async () => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      setError(null);
+
       try {
-        const response = await fetch(
-          "https://jsonplaceholder.typicode.com/users"
-        );
-        if (!response.ok) {
-          throw new Error(`Request failed with status: ${response.status}`);
+        const res = await fetch('https://fakestoreapi.com/products');
+        if (!res.ok) {
+          throw new Error('Could not fetch the data');
         }
-        const result = await response.json();
-        setUsers(result);
+        const data = await res.json();
+        setProducts(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
         setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        setError(error.message);
       }
     };
 
     useEffect(() => {
-      setIsLoading(true);
-      fetchUsers();
+      fetchData();
     }, []);
 
-    const renderUsers = users.map((user) => {
-      const { id, name, username, email, phone, website } = user;
-      return (
-        <article key={id} style={{ margin: "2rem" }}>
-          <h2>{id}</h2>
-          <h3>{name}</h3>
-          <p>{username}</p>
-          <p>{email}</p>
-          <p>{phone}</p>
-          <p>{website}</p>
-        </article>
-      );
-    });
-
     return (
-      <div>
-        {isLoading && <p>Loading...</p>}
-        {error ? <p>{error}</p> : <section>{renderUsers}</section>}
+      <div className="container flex-space-around">
+        <Sidebar />
+        <div className="main-content">
+          <NewProduct setProducts={setProducts} />
+          {isLoading && <p>Products are loading...</p>}
+          {error && <p>{error}</p>}
+          {!isLoading && !error && (
+            <Products products={products} setProducts={setProducts} />
+          )}
+        </div>
       </div>
     );
   };
 
-  export default App;
+  export default Home;
+  ```
+
+#### [AbortController and cleanup function]
+
+- **Code Example - 49 (AbortController)**
+
+```js
+import React, { useEffect, useState } from 'react';
+
+import Sidebar from '../components/Sidebar';
+import Products from '../components/Products';
+import NewProduct from '../components/NewProduct';
+
+const Home = () => {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    const fetchData = async () => {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const response = await fetch('https://fakestoreapi.com/products', {
+          signal,
+        });
+        if (!response.ok) {
+          throw new Error('Could not fetch the data');
+        }
+        console.log(signal);
+
+        const data = await response.json();
+        setProducts(data);
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          setError(err.message);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      controller.abort();
+      console.log(signal);
+    };
+  }, []);
+
+  return (
+    <div className="container flex-space-around">
+      <Sidebar />
+      <div className="main-content">
+        <NewProduct setProducts={setProducts} />
+        {isLoading && <p>Products are loading...</p>}
+        {error && <p>{error}</p>}
+        {!isLoading && !error && (
+          <Products products={products} setProducts={setProducts} />
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Home;
+
+```
+
+#### [How to make a POST request]
+
+- **code example - 50 (POST Request / Create Resource)**
+
+```js
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
+import Card from './Card';
+
+const NewProduct = (props) => {
+  const [product, setProduct] = useState({
+    title: '',
+    description: '',
+    price: '',
+    category: '',
+    image: '',
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const errors = {};
+    if (!product.title) errors.title = 'Title is required';
+    else if (product.title.length < 2) {
+      errors.title = 'Title must have at least 2 characters';
+    }
+    if (!product.description) errors.description = 'Description is required';
+    if (!product.price) errors.price = 'Price is required';
+    if (!product.category) errors.category = 'Category is required';
+    if (!product.image) errors.image = 'Image URL is required';
+    return errors;
+  };
+
+  const handleChange = (event) => {
+    setProduct((prevState) => ({
+      ...prevState,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+    } else {
+      // make api call
+      fetch('https://fakestoreapi.com/products', {
+        method: 'POST',
+        body: JSON.stringify({ ...product }),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error('Could not fetch the data');
+          }
+          return res.json();
+        })
+        .then((json) => {
+          console.log('product is created');
+          console.log(json);
+        });
+      const newProduct = {
+        id: new Date().getTime(),
+        ...product,
+      };
+      console.log(typeof newProduct.id);
+      props.setProducts((prevProducts) => [...prevProducts, newProduct]);
+      setErrors({});
+    }
+  };
+
+  return (
+    <Card>
+      <div className="new-product">
+        <h2>Add Product</h2>
+        <form className="product-form" onSubmit={handleSubmit}>
+          <div className="form__control">
+            <label htmlFor="title">Title: </label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={product.title}
+              onChange={handleChange}
+            />
+            {errors.title && <p className="error">{errors.title}</p>}
+          </div>
+
+          <div className="form__control">
+            <label htmlFor="price">Price: </label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              value={product.price}
+              onChange={handleChange}
+            />
+            {errors.price && <p className="error">{errors.price}</p>}
+          </div>
+
+          <div className="form__control">
+            <label htmlFor="description">Description: </label>
+            <textarea
+              id="description"
+              name="description"
+              value={product.description}
+              onChange={handleChange}
+            />
+            {errors.description && (
+              <p className="error">{errors.description}</p>
+            )}
+          </div>
+
+          <div className="form__control">
+            <label htmlFor="category">Category: </label>
+            <select
+              id="category"
+              name="category"
+              value={product.category}
+              onChange={handleChange}
+            >
+              <option value="">Select a category</option>
+              <option value="men's clothing">men's clothing</option>
+              <option value="jewelery">jewelery</option>
+              <option value="electronics">Electronics</option>
+              <option value="books">Books</option>
+              <option value="furniture">Furniture</option>
+            </select>
+            {errors.category && <p className="error">{errors.category}</p>}
+          </div>
+
+          <div className="form__control">
+            <label htmlFor="image">Image URL: </label>
+            <textarea
+              id="image"
+              name="image"
+              onChange={handleChange}
+              value={product.image}
+            />
+            {errors.image && <p className="error">{errors.image}</p>}
+          </div>
+
+          <button className="button" type="submit">
+            Create Product
+          </button>
+        </form>
+      </div>
+    </Card>
+  );
+};
+
+NewProduct.propTypes = {
+  setProducts: PropTypes.func.isRequired,
+};
+
+export default NewProduct;
+```
+
+#### [Create services for making http requests]
+
+- **code example - 51 (create service)**
+
+  ```js
+  // create a services folder
+  // services/productServices.js
+  const BASE_URL = 'https://fakestoreapi.com/';
+
+  const createProduct = async (product) => {
+    try {
+      const response = await fetch(`${BASE_URL}/products`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...product }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Could not create the product');
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
+  };
+
+  // use it from a component
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+    } else {
+      try {
+        const newProduct = await createProduct(product);
+        // const newProduct = {
+        //   id: new Date().getTime(),
+        //   ...product,
+        // };
+
+        props.setProducts((prevProducts) => [...prevProducts, newProduct]);
+        setErrors({});
+      } catch (error) {
+        console.error('Failed to create product:', error);
+      }
+    }
+  };
+
   ```
 
 #### [How to create custom hook](https://youtu.be/ZWschU7H_20)
@@ -5197,94 +5476,7 @@ The `useEffect` hook is a versatile tool for managing side effects in your React
   export default useFetch;
   ```
 
-#### [Create services for making http requests]
-
-- **Code Example - 53 (services for http requests)**
-
-  ```js
-  // UserService.js
-  import axios from "axios";
-
-  const BASE_URL = "https://jsonplaceholder.typicode.com";
-
-  // using axios
-  export const getAllUsers = async () => {
-    const response = await axios.get(`${BASE_URL}/users/202`);
-    return response.data;
-  };
-
-  // using fetch
-  export const createUser = async () => {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-      method: "POST",
-      body: JSON.stringify({
-        title: "foo",
-        body: "bar",
-        userId: 1,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
-    return response;
-  };
-
-  // App.js
-  import React, { useEffect, useState } from "react";
-  import { ToastContainer, toast } from "react-toastify";
-  import "react-toastify/dist/ReactToastify.css";
-
-  import "./App.css";
-  import { getAllUsers } from "./services/UserService";
-
-  const App = () => {
-    const [users, setUsers] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
-
-    const fetchUsers = async () => {
-      try {
-        const result = await getAllUsers();
-        console.log(result);
-        setUsers(result);
-        setIsLoading(false);
-      } catch (err) {
-        setIsLoading(false);
-        setError(err.message);
-        toast(err.message);
-      }
-    };
-
-    useEffect(() => {
-      setIsLoading(true);
-      fetchUsers();
-    }, []);
-
-    const renderUsers = users.map((user) => {
-      const { id, name, username, email, phone, website } = user;
-      return (
-        <article key={id} style={{ margin: "2rem" }}>
-          <h2>{id}</h2>
-          <h3>{name}</h3>
-          <p>{username}</p>
-          <p>{email}</p>
-          <p>{phone}</p>
-          <p>{website}</p>
-        </article>
-      );
-    });
-
-    return (
-      <div>
-        <ToastContainer />
-        {isLoading && <p>Loading...</p>}
-        {error ? <p>{error}</p> : <section>{renderUsers}</section>}
-      </div>
-    );
-  };
-
-  export default App;
-  ```
+#### CRUD API requests
 
 ### [Assignment 4 - fetch products](https://github.com/anisul-Islam/react-assignment-4-fetch-products)
 
@@ -5499,132 +5691,191 @@ The `useEffect` hook is a versatile tool for managing side effects in your React
 
 <!-- ### Part-6 (react routing) -->
 
-### [2.4 Routing](https://youtu.be/1_powatXjds)
+### [2.4 Routing]()
 
 - [react-routing-project](https://github.com/anisul-Islam/react-routing-project)
-- react-router
+- [Learn from react-router official side](https://reactrouter.com/en/main/start/tutorial)
+- install the package `npm install react-router-dom`
+- create few pages inside pages folder: Create the components for Home, About, Contact, and NotFound pages.
 - **Code Example - 56 (basic routing)**
 
 ```js
-// create few pages -> Home.js, About.js, Contact.js, Error.js
-import React from "react";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Home from "./pages/Home";
-import Error from "./pages/Error";
-const App = () => {
+// create few pages -> Home.js, Products.js, Contact.js, Error.js
+const Home = () => {
   return (
     <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-      </BrowserRouter>
+      <h1>home page</h1>
+      <p>Welcome to home page</p>
     </div>
   );
 };
 
+export default Home;
+
+
+const Contact = () => {
+  return (
+    <div>
+      <h1>Contact page</h1>
+      <p>Welcome to Contact Page</p>
+    </div>
+  );
+};
+
+export default Contact;
+
+
+const NotFound = () => {
+  return (
+    <div>
+      <h1>404 Page not found</h1>
+      <p>The page you are looking for does not exist.</p>
+    </div>
+  );
+};
+
+export default NotFound;
+
+const Products = () => {
+  return (
+    <div>
+      <h2>Products page</h2>
+      <p>all the products here</p>
+    </div>
+  );
+};
+
+export default Products;
+
+
+// App.tsx
+import Home from './pages/Home';
+import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
+
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home />,
+  },
+  {
+    path: '/contact',
+    element: <Contact />,
+  },
+   {
+    path: '/products',
+    element: <Products />,
+  },
+  {
+    path: '*',
+    element: <NotFound />,
+  },
+]);
+
+const App = () => {
+  return <RouterProvider router={router} />;
+};
+
 export default App;
+
 ```
 
-#### [Navigation and redirect](https://youtu.be/DooqgS1JDg0)
+#### [Child Route or nested route]
+
+```tsx
+import Home from './pages/Home';
+import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
+
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import Products from './pages/Products';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home />,
+    children: [
+      // first render parent then child
+      {
+        // got to paranet and add outlet
+        path: '/contact',
+        element: <Contact />,
+      },
+    ],
+  },
+
+  {
+    path: '/products',
+    element: <Products />,
+  },
+  {
+    path: '*',
+    element: <NotFound />,
+  },
+]);
+
+const App = () => {
+  return <RouterProvider router={router} />;
+};
+
+export default App;
+
+// Home.tsx
+import { Outlet } from 'react-router-dom';
+
+const Home = () => {
+  return (
+    <div>
+      <h1>home page</h1>
+      <p>Welcome to home page</p>
+      <Outlet />
+    </div>
+  );
+};
+
+export default Home;
+
+```
+
+#### [Navigation and redirect]()
 
 - **Code Example - 57 (basic routing with Navbar)**
 
 ```js
-import React from "react";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Home from "./pages/Home";
-import Error from "./pages/Error";
-
-const App = () => {
+const Navbar = () => {
   return (
-    <div>
-      <BrowserRouter>
-        <nav>
-          <Link to="/" className="nav__link">
-            Home
-          </Link>
-          <Link to="/about" className="nav__link">
-            About
-          </Link>
-          <Link to="/contact" className="nav__link">
-            Contact
-          </Link>
-        </nav>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/contact">Contact</a>
+          </li>
+          <li>
+            <a href="/products">Products</a>
+          </li>
+          <li>
+            <a href="/about">About</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
   );
 };
 
-export default App;
-
-// create a separate Navbar.js component inside layout folder
-
-// Active Link
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-
-const Navbar = () => {
-    return (
-        <nav>
-            <NavLink to="/" className="nav__link">
-                Home
-            </NavLink>
-            <NavLink to="/about" className="nav__link">
-                About
-            </NavLink>
-            <NavLink to="/contact" className="nav__link">
-                Contact
-            </NavLink>
-        </nav>
-    );
-};
-
 export default Navbar;
-.active {
-    color: orange;
-}
+
 ```
 
 - **Code Example - 58 (navigate with useNavigate)**
 
 ```js
-import React from "react";
-import { useNavigate } from "react-router-dom";
 
-const Error = () => {
-  const navigate = useNavigate();
-
-  return (
-    <div>
-      <h2>Error Page</h2>
-      <button
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        Go to Home Page
-      </button>
-    </div>
-  );
-};
-
-export default Error;
 ```
 
 #### [Dynamic routing using useParams](https://youtu.be/g5B0Vq3jHbA)
