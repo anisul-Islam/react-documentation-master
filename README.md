@@ -29,7 +29,7 @@
 
    [1.11 useState Hooks](#111-usestate-hooks)
 
-   [1.12 Forms and Controlled components](#112-forms-and-controlled-components)
+   [1.12 Controlled components and Form](#112-controlled-components-and-form)
 
    [1.13 data passing: child to parent component, state lifting](#113-data-passing-child-to-parent-component-state-lifting)
 
@@ -1738,19 +1738,22 @@ we need to map each children of list uniquely so that react can identify them wo
 
 - [developer tools and extension](https://youtu.be/m1paEcDlC5U)
 
-- [1.10 add font awesome / react icons](https://youtu.be/jHDP6myBXRM)
+- [Add font awesome / react icons](https://youtu.be/jHDP6myBXRM)
 
 - [How to use react-icons](https://react-icons.github.io/react-icons/)
-- **Code Example - 29 (Adding & styling react icons )**
+- install `npm install react-icons --save`
+- **Code Example - 23 (Adding & styling react icons )**
 
   ```js
-  import React from "react";
-  import { FaFacebookF, FaYoutube, FaTwitter } from "react-icons/fa";
+  import React from 'react';
+
+  import { FaFacebookF, FaYoutube, FaTwitter } from 'react-icons/fa';
+
   const Footer = () => {
     return (
-      <footer className="footer flex-space-around">
+      <footer className="footer">
         <div className="footer__left">
-          <p className="footer__title">&copy;Copyright by Anisul Islam</p>
+          <p>Copyright by @Anisul Islam</p>
         </div>
         <div className="footer__right">
           <FaFacebookF />
@@ -1762,186 +1765,6 @@ we need to map each children of list uniquely so that react can identify them wo
   };
 
   export default Footer;
-
-  // Product.js
-  import React from "react";
-  import { FaCartPlus } from "react-icons/fa";
-
-  import Card from "./Card";
-
-  const Product = (props) => {
-    const { thumbnail, title, description, price, rating, brand, category } =
-      props;
-    return (
-      <Card>
-        <article className="product">
-          <img src={thumbnail} alt="iPhone 9" className="product__img" />
-          <div className="product__body">
-            <h2 className="product__title">{title}</h2>
-            <p className="product__description">description: {description}</p>
-            <p className="product__price">Price: {price}</p>
-            <p className="product__rating">rating: {rating}</p>
-            <p className="product__brand">brand: {brand}</p>
-            <p className="product__category">category: {category}</p>
-            <button className="btn product__btn icon">
-              <FaCartPlus className="icon" /> Add To Cart
-            </button>
-          </div>
-        </article>
-            </Card>
-          );
-        };
-        export default Product;
-
-
-  // App.css
-  /* reset code and common starts here  */
-    :root {
-      --primary-color: rgb(11, 181, 48);
-      --secondary-color: rgba(36, 122, 55, 0.9);
-      --padding: 0.5rem;
-      --transition: all 0.3s;
-      --border-radius: 0.6rem;
-      --box-shadow: 0.1rem 0.2rem 0.8rem rgba(205, 202, 202, 0.5);
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      text-decoration: none;
-      list-style-type: none;
-      outline: none;
-    }
-    html {
-      scroll-behavior: smooth;
-    }
-    .flex-space-around {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-    }
-    .flex-center {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .card {
-      box-shadow: var(--box-shadow);
-      border-radius: var(--border-radius);
-      /* padding: var(--padding); */
-      transition: var(--transition);
-    }
-    img {
-      width: 100%;
-      height: auto;
-    }
-    .btn {
-      border: none;
-      padding: var(--padding);
-      border-radius: var(--border-radius);
-      transition: all 0.3s;
-      color: var(--secondary-color);
-    }
-    .btn:hover {
-      background-color: orange;
-      color: black;
-    }
-    /* reset code and common ends here  */
-
-    /* header starts here  */
-    .header {
-      height: 10vh;
-      background-color: var(--primary-color);
-      color: white;
-    }
-    /* header ends here  */
-
-    /* main starts here  */
-    main {
-      height: 80vh;
-    }
-    .sidebar {
-      flex: 1;
-      padding: var(--padding);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 1rem;
-      align-self: flex-start;
-      background-color: #e6e3e3;
-      height: 100%;
-      border-right: 1px solid var(--primary-color);
-    }
-    .main-content {
-      flex: 3;
-      height: 100%;
-      padding: var(--padding);
-      overflow: scroll;
-    }
-    .products {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 2rem;
-    }
-    .product {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    .product__body {
-      padding: var(--padding);
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    .product__img {
-      width: 100%;
-      height: 15rem;
-      filter: saturate(0);
-      transition: var(--transition);
-    }
-    /* main ends here  */
-
-    /* footer starts here  */
-    .footer {
-      min-height: 10vh;
-      padding: var(--padding);
-      background-color: var(--primary-color);
-      color: white;
-      font-size: 1.1rem;
-    }
-    .footer__right {
-      display: flex;
-      gap: 1rem;
-    }
-    /* footer ends here  */
-
-    /* responsiveness starts here  */
-    @media (max-width: 992px) {
-      .flex-space-around,
-      .flex-center {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem 0;
-      }
-      .header {
-        min-height: 10vh;
-      }
-      .sidebar {
-        width: 100%;
-      }
-      .products {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 768px) {
-      .products {
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-      }
-    }
-    /* responsiveness ends here  */
-  ```
 
 - How to use font awesome icons directly
 
@@ -1976,269 +1799,1100 @@ we need to map each children of list uniquely so that react can identify them wo
 - Event: any user interaction like clicking button, hovering button, giving values in input field etc.
 - Event handler: your response to user interactions. create a function for handling the interaction.
 - state - value of anything can be changed based on your interaction and you may want to update UI based on state.
-- **Code Example - 30 (event - onClick )**
+
+- add 2 buttons: show details, addToCart.
+
+```css
+/*reset code and common ends here*/
+:root {
+  --primary-color: #0bb530; /* Updated to a more vibrant green */
+  --secondary-color: rgba(36, 122, 55, 0.9);
+  --background-color: #f5f5f5; /* Light background color */
+  --text-color: #333; /* Darker text color for better readability */
+  --padding: 0.5rem;
+  --transition: all 0.3s;
+  --border-radius: 0.6rem;
+  --box-shadow: 0.1rem 0.2rem 0.8rem rgba(0, 0, 0, 0.1); /* Softer shadow */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style-type: none;
+  outline: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.flex-space-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.card {
+  background-color: white;
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0.2rem 0.4rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.button:hover {
+  background-color: var(--secondary-color);
+}
+
+/*reset code and common ends here*/
+
+/*header starts here*/
+.header {
+  height: 10vh;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+/*header ends here*/
+
+/*main starts here*/
+main {
+  min-height: 80vh;
+  padding: 2rem;
+}
+
+.container {
+  display: flex;
+  gap: 2rem;
+}
+
+.sidebar {
+  flex: 1;
+  padding: var(--padding);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: white;
+  border: 1px solid var(--primary-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.main-content {
+  flex: 3;
+  padding: var(--padding);
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.product {
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.product__img {
+  width: 100%;
+  height: 10rem;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+}
+
+.product__title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.product__description {
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+  margin: 0.5rem 0;
+}
+
+.product__price {
+  font-size: 1rem;
+  color: var(--primary-color);
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.product__btns {
+  gap: 0.1rem;
+}
+
+/*main ends here*/
+
+/*footer starts here*/
+.footer {
+  height: 10vh;
+  padding: var(--padding);
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.footer a {
+  color: white;
+  font-weight: bold;
+}
+
+.footer .social-media a {
+  margin: 0 0.5rem;
+  font-size: 1.2rem;
+}
+/*footer ends here*/
+
+/*responsiveness starts here*/
+@media (max-width: 992px) {
+  .flex-space-around,
+  .flex-center {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .header {
+    flex-direction: column;
+    padding: 1rem 0;
+  }
+  .sidebar {
+    width: 100%;
+  }
+  .products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .products {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+/*responsiveness ends here*/
+```
+
+- **Code Example - 24 (event & Handler)**
 
   ```js
-  <button
-    className="btn product__btn"
-    onClick={alert("product is added to the cart")} // not depends on user inetractivity
-  >
-    <FaCartPlus className="icon" /> Add To Cart
-  </button>
-  ```
+  // method 1
+  import React from 'react';
+  import PropTypes from 'prop-types';
 
-- **Code Example - 31 (event Handler)**
+  import Card from './Card';
 
-  ```js
-  const handleClick = () => {
-    alert("product is added to the cart");
+  const Product = (props) => {
+    const { product } = props;
+
+    const handleShowDetails = () => {
+      alert('product details is here');
+    };
+    const handleAddToCart = () => {
+      alert('product is added to cart');
+    };
+
+    return (
+      <Card>
+        <article className="product">
+          <img className="product__img" src={product.image} alt={product.title} />
+          <p className="product__title">{product.title}</p>
+          <p className="product__description">
+            {product.description.substring(0, 40)}
+            ...
+          </p>
+          <p className="product__price">Price: {product.price}</p>
+          <p>Category: {product.category}</p>
+          <p>Rating: {product.rating.rate}/5</p>
+          <div className="product__btns flex-space-around">
+            <button className="button" onClick={() => {
+                alert('product details is here');
+              }}>
+              Show Details
+            </button>
+            <button className="button" onClick={handleAddToCart}>
+              Add To Cart
+            </button>
+          </div>
+        </article>
+      </Card>
+    );
   };
 
-  // method 1
-  <button
-    className="btn product__btn"
-    onClick={() => {
-      alert("product is added to the cart");
-    }} // depends on user inetractivity as we definied the function and it is not running until we click the button
-  >
-    <FaCartPlus className="icon" /> Add To Cart
-  </button>
+  Product.propTypes = {
+    product: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string,
+      price: PropTypes.number,
+      description: PropTypes.string,
+      category: PropTypes.string,
+      image: PropTypes.string,
+      rating: PropTypes.shape({
+        rate: PropTypes.number,
+        count: PropTypes.number,
+      }),
+    }),
+  };
+
+  export default Product;
 
   // method 2
-  <button
-    className="btn product__btn"
-    onClick={handleClick} // do not call just define the function
-  >
-    <FaCartPlus className="icon" /> Add To Cart
-  </button>
 
-  // we can create own custom Button component
-  import React from "react";
+  ```
 
-  const Button = (props) => {
-    console.log(props);
+- **Code Example - 25 (Pass parameter with event )**
 
-    const handleClick = () => {
-      // we can use condition for calling multiple functions
-      props.onHandleAddProduct();
+  ```js
+  import React from 'react';
+
+  import PropTypes from 'prop-types';
+
+  import Card from './Card';
+
+  const Product = (props) => {
+    const { product } = props;
+
+    // const handleShowDetails = () => {
+    //   alert('product details is here');
+    // };
+    // const handleAddToCart = () => {
+    //   alert('product is added to cart');
+    // };
+    return (
+      <Card>
+        <article className="product">
+          <img className="product__img" src={product.image} alt={product.title} />
+          <p className="product__title">{product.title}</p>
+          <p className="product__description">
+            {product.description.substring(0, 40)}
+            ...
+          </p>
+          <p className="product__price">Price: {product.price}</p>
+          <p>Category: {product.category}</p>
+          <p>Rating: {product.rating.rate}/5</p>
+          <div className="product__btns flex-space-around">
+            <button
+              className="button"
+              onClick={() => {
+                alert(JSON.stringify(product));
+              }}
+            >
+              Show Details
+            </button>
+            <button
+              className="button"
+              onClick={() => {
+                alert(JSON.stringify(product));
+              }}
+            >
+              Add To Cart
+            </button>
+          </div>
+        </article>
+      </Card>
+    );
+  };
+
+  Product.propTypes = {
+    product: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string,
+      price: PropTypes.number,
+      description: PropTypes.string,
+      category: PropTypes.string,
+      image: PropTypes.string,
+      rating: PropTypes.shape({
+        rate: PropTypes.number,
+        count: PropTypes.number,
+      }),
+    }),
+  };
+
+  export default Product;
+
+  // method 2
+  import React from 'react';
+  import PropTypes from 'prop-types';
+
+  import Card from './Card';
+
+  const Product = (props) => {
+    const { product } = props;
+
+    const handleShowDetails = (product) => {
+      alert(JSON.stringify(product));
+    };
+    const handleAddToCart = (product) => {
+      alert(JSON.stringify(product));
     };
 
-   const handleAddProduct = (product) => {
-    alert(JSON.stringify(product, null, 4));
-  };
-
     return (
-      <button className={props.className} onClick={props.onClick} type={props.type}>
-      {props.children}
-    </button>
+      <Card>
+        <article className="product">
+          <img className="product__img" src={product.image} alt={product.title} />
+          <p className="product__title">{product.title}</p>
+          <p className="product__description">
+            {product.description.substring(0, 40)}
+            ...
+          </p>
+          <p className="product__price">Price: {product.price}</p>
+          <p>Category: {product.category}</p>
+          <p>Rating: {product.rating.rate}/5</p>
+          <div className="product__btns flex-space-around">
+            <button className="button" onClick={() => handleShowDetails(product)}>
+              Show Details
+            </button>
+            <button className="button" onClick={() => handleAddToCart(product)}>
+              Add To Cart
+            </button>
+          </div>
+        </article>
+      </Card>
     );
   };
 
-  export default Button;
-
-  // more simplified
-  import React from "react";
-
-  const Button = (props) => {
-    return (
-      <button className={props.className} onClick={props.onClick}>
-        {props.children}
-      </button>
-    );
+  Product.propTypes = {
+    product: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string,
+      price: PropTypes.number,
+      description: PropTypes.string,
+      category: PropTypes.string,
+      image: PropTypes.string,
+      rating: PropTypes.shape({
+        rate: PropTypes.number,
+        count: PropTypes.number,
+      }),
+    }),
   };
 
-  export default Button;
+  export default Product;
   ```
 
-- **Code Example - 32 (Pass parameter with event )**
+- **Code Example - 26 (Create a form for adding new product)**
 
   ```js
-  const handleAddProduct = (e, product) => {
-    e.stopPropagation();
-    console.log("Product Event: ", e);
-    alert(JSON.stringify(product, null, 4));
-  };
+  import React from 'react';
 
-  <Button
-    className="btn product__btn"
-    onClick={(e) => {
-      handleAddProduct(e, product);
-    }}
-  >
-    <FaCartPlus className="icon" /> Add To Cart
-  </Button>;
-  ```
-
-- **Code Example - 33 (onChange Event )**
-
-  ```js
-  import React from "react";
+  import Card from './Card';
 
   const NewProduct = () => {
-    const handleChange = (event) => {
-      console.log(event.target.value);
-    };
+
     return (
-      <div className="new-user">
-        <h2>Create Product</h2>
+      <Card>
+        <div className="new-product">
+          <h2>Add Product</h2>
+          <form className="product-form">
+            <div className="form__control">
+              <label htmlFor="title">Title: </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                required
+              />
+            </div>
 
-        <div className="form__control">
-          <label htmlFor="title">Title: </label>
-          <input
-            className="form__input"
-            type="text"
-            placeholder="Enter product title"
-            name="title"
-            onChange={handleChange}
-            required={true}
-          />
-        </div>
+            <div className="form__control">
+              <label htmlFor="price">Price: </label>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                required
+              />
+            </div>
 
-        <div className="form__control">
-          <label htmlFor="price">Price: </label>
-          <input
-            className="form__input"
-            type="number"
-            placeholder="Enter product price here"
-            name="price"
-            onChange={handleChange}
-            required={true}
-          />
+            <div className="form__control">
+              <label htmlFor="description">Description: </label>
+              <textarea
+                id="description"
+                name="description"
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="description">Category: </label>
+              <select
+                id="category"
+                name="category"
+                required
+              >
+                <option value="">Select a category</option>
+                <option value="men's clothing">men's clothing</option>
+                <option value="jewelery">jewelery</option>
+                <option value="electronics">Electronics</option>
+                <option value="books">Books</option>
+                <option value="furniture">Furniture</option>
+              </select>
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="image">Image URL: </label>
+              <textarea
+                id="image"
+                name="image"
+                required
+              />
+            </div>
+
+            <button className="button" type="submit">
+              Add Product
+            </button>
+          </form>
         </div>
-      </div>
+      </Card>
     );
   };
 
   export default NewProduct;
   ```
 
-- **Code Example - 34 (More complex example of onChange Event )**
+  ```css
+  /* add product form starts here */
 
-  ```js
-  import React from "react";
+    .new-product h2 {
+      text-align: center;
+    }
+    .product-form {
+      padding: 20px;
+    }
 
-  const NewProduct = () => {
-    const inputs = [
-      {
-        id: 1,
-        type: "text",
-        name: "title",
-        placeholder: "Enter product title",
-        required: true,
-      },
-      {
-        id: 2,
-        type: "number",
-        name: "price",
-        placeholder: "Enter product price",
-        required: true,
-      },
-    ];
-    const handleChange = (event) => {
-      console.log(event.target.value);
-    };
+    .form__control {
+      margin-bottom: 10px;
+    }
+    .product-form label {
+      display: block;
+      margin-bottom: 5px;
+    }
 
-    return (
-      <div className="new-user">
-        <h2>Create Product</h2>
+    .product-form input,
+    .product-form select,
+    .product-form textarea {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
 
-        <input
-          className="form__input"
-          type={inputs[0].type}
-          placeholder={inputs[0].placeholder}
-          name={inputs[0].name}
-          onChange={handleChange}
-          required={inputs[0].required}
-        />
+    .product-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
 
-        <input
-          className="form__input"
-          type={inputs[1].type}
-          placeholder={inputs[1].placeholder}
-          name={inputs[1].name}
-          onChange={handleChange}
-          required={inputs[1].required}
-        />
-      </div>
-    );
-  };
+    .product-form button:hover {
+      background-color: #45a049;
+    }
 
-  // More simplified
-  const NewProduct = () => {
-    const inputs = [
-      {
-        id: 1,
-        type: "text",
-        name: "title",
-        placeholder: "Enter product title",
-        required: true,
-      },
-      {
-        id: 2,
-        type: "number",
-        name: "price",
-        placeholder: "Enter product price",
-        required: true,
-      },
-    ];
-    const handleChange = (event) => {
-      console.log(event.target.value);
-    };
-
-    const renderInputs = inputs.map((input) => {
-      return (
-        <Input
-          key={input.id}
-          className="form__input"
-          type={input.type}
-          placeholder={input.placeholder}
-          name={input.name}
-          onChange={handleChange}
-          required={input.required}
-        />
-      );
-    });
-
-    return (
-      <div className="new-user">
-        <h2>Create Product</h2>
-        {renderInputs}
-      </div>
-    );
-  };
-
-  // more simplified
-  <Input key={input.id} {...input} onChange={handleChange} />;
-
-  // Input.js
-  import React from "react";
-  const Input = (props) => {
-    const { onChange, ...inputProps } = props; // getting onChnage from props and putting rest of the things inside inputProps
-
-    console.log([inputProps]);
-    return (
-      <input className="form__input" {...inputProps} onChange={onChange} />
-    );
-  };
-
-  export default Input;
+    /*add product form ends here*/           
   ```
 
-- **Code Example - 35 (Event Bubbling - child event can effect parent event )**
+- **Assignment - 27 (Create a form for user registration)**
+- **Assignment - 28 (Create a form for user login)**
+
+- **Code Example - 29 (onChange Event )**
 
   ```js
-  const handleAddProduct = (e, product) => {
-    e.stopPropagation();
-    console.log("Product Event: ", e);
-    alert(JSON.stringify(product, null, 4));
+  import React from 'react';
+
+  import Card from './Card';
+
+  const NewProduct = () => {
+    const handleTitleChange = (event) => {
+      console.log(event.target.value);
+    };
+    const handlePriceChange = (event) => {
+      console.log(event.target.value);
+    };
+    const handleDescriptionChange = (event) => {
+      console.log(event.target.value);
+    };
+    const handleImageChange = (event) => {
+      console.log(event.target.value);
+    };
+    const handleCategoryChange = (event) => {
+      console.log(event.target.value);
+    };
+    return (
+      <Card>
+        <div className="new-product">
+          <h2>Add Product</h2>
+          <form className="product-form">
+            <div className="form__control">
+              <label htmlFor="title">Title: </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                onChange={handleTitleChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="price">Price: </label>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                onChange={handlePriceChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="description">Description: </label>
+              <textarea
+                id="description"
+                name="description"
+                onChange={handleDescriptionChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="description">Category: </label>
+              <select
+                id="category"
+                name="category"
+                onChange={handleCategoryChange}
+                required
+              >
+                <option value="">Select a category</option>
+                <option value="men's clothing">men's clothing</option>
+                <option value="jewelery">jewelery</option>
+                <option value="electronics">Electronics</option>
+                <option value="books">Books</option>
+                <option value="furniture">Furniture</option>
+              </select>
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="image">Image URL: </label>
+              <textarea
+                id="image"
+                name="image"
+                onChange={handleImageChange}
+                required
+              />
+            </div>
+
+            <button className="button" type="submit">
+              Add Product
+            </button>
+          </form>
+        </div>
+      </Card>
+    );
   };
+
+  export default NewProduct;
   ```
 
-- **Code Example - 36 (onSubmit Event )**
+- **Code Example - 30 (onSubmit Event )**
+
+```js
+import React from 'react';
+import Card from './Card';
+
+const NewProduct = () => {
+  const handleTitleChange = (event) => {
+   console.log(event.target.value);
+  };
+  const handlePriceChange = (event) => {
+    console.log(event.target.value);
+  };
+  const handleDescriptionChange = (event) => {
+    console.log(event.target.value);
+  };
+  const handleImageChange = (event) => {
+    console.log(event.target.value);
+  };
+  const handleCategoryChange = (event) => {
+    console.log(event.target.value);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('new product is created');
+  };
+
+  return (
+    <Card>
+      <div className="new-product">
+        <h2>Add Product</h2>
+        <form className="product-form" onSubmit={handleSubmit}>
+          <div className="form__control">
+            <label htmlFor="title">Title: </label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              onChange={handleTitleChange}
+              required
+            />
+          </div>
+
+          <div className="form__control">
+            <label htmlFor="price">Price: </label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              onChange={handlePriceChange}
+              required
+            />
+          </div>
+
+          <div className="form__control">
+            <label htmlFor="description">Description: </label>
+            <textarea
+              id="description"
+              name="description"
+              onChange={handleDescriptionChange}
+              required
+            />
+          </div>
+
+          <div className="form__control">
+            <label htmlFor="description">Category: </label>
+            <select
+              id="category"
+              name="category"
+              onChange={handleCategoryChange}
+              required
+            >
+              <option value="">Select a category</option>
+              <option value="men's clothing">men's clothing</option>
+              <option value="jewelery">jewelery</option>
+              <option value="electronics">Electronics</option>
+              <option value="books">Books</option>
+              <option value="furniture">Furniture</option>
+            </select>
+          </div>
+
+          <div className="form__control">
+            <label htmlFor="image">Image URL: </label>
+            <textarea
+              id="image"
+              name="image"
+              onChange={handleImageChange}
+              required
+            />
+          </div>
+
+          <button className="button" type="submit">
+            Create Product
+          </button>
+        </form>
+      </div>
+    </Card>
+  );
+};
+
+export default NewProduct;
+```
 
 ### [1.11 useState Hooks](https://youtu.be/skUOiqcVurY)
 
-- without state management
+- **Code Example - 31 (Example 1: without state management NewProduct Example: do not re-render when value updates)**
+
+```js
+import React from 'react';
+import Card from './Card';
+
+const NewProduct = () => {
+  let title = '';
+  const handleTitleChange = (event) => {
+    title = event.target.value;
+    console.log(title);
+  };
+  const handlePriceChange = (event) => {
+    console.log(event.target.value);
+  };
+  const handleDescriptionChange = (event) => {
+    console.log(event.target.value);
+  };
+  const handleImageChange = (event) => {
+    console.log(event.target.value);
+  };
+  const handleCategoryChange = (event) => {
+    console.log(event.target.value);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('new product is created');
+  };
+
+  return (
+    <Card>
+      <div className="new-product">
+        <h2>Add Product</h2>
+        <form className="product-form" onSubmit={handleSubmit}>
+          <div className="form__control">
+            <label htmlFor="title">Title: </label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              onChange={handleTitleChange}
+              required
+            />
+          </div>
+
+          <div className="form__control">
+            <label htmlFor="price">Price: </label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              onChange={handlePriceChange}
+              required
+            />
+          </div>
+
+          <div className="form__control">
+            <label htmlFor="description">Description: </label>
+            <textarea
+              id="description"
+              name="description"
+              onChange={handleDescriptionChange}
+              required
+            />
+          </div>
+
+          <div className="form__control">
+            <label htmlFor="description">Category: </label>
+            <select
+              id="category"
+              name="category"
+              onChange={handleCategoryChange}
+              required
+            >
+              <option value="">Select a category</option>
+              <option value="men's clothing">men's clothing</option>
+              <option value="jewelery">jewelery</option>
+              <option value="electronics">Electronics</option>
+              <option value="books">Books</option>
+              <option value="furniture">Furniture</option>
+            </select>
+          </div>
+
+          <div className="form__control">
+            <label htmlFor="image">Image URL: </label>
+            <textarea
+              id="image"
+              name="image"
+              onChange={handleImageChange}
+              required
+            />
+          </div>
+
+          <button className="button" type="submit">
+            Add Product
+          </button>
+
+          <p>{title}</p>
+        </form>
+      </div>
+    </Card>
+  );
+};
+
+export default NewProduct;
+
+```
+
+#### state and useState() hook
+
+- state is a memory for component where we can update value and re-render the component
+- state is a global variable thats why when you even re-render it fetch the last updated value
+- hooks are function which we can implement in our component - useState, useEffect
+- useState() hook helps us to track state in a functional component.
+
+- **Code Example - 32 (Example 1: with state management Products Example: re-render when value updates)**
+
+  ```js
+  import React, { useState } from 'react';
+
+  import Card from './Card';
+
+  const NewProduct = () => {
+    const [title, setTitle] = useState('');
+    const [price, setPrice] = useState('');
+    const [description, setDescription] = useState('');
+    const [category, setCategory] = useState('');
+    const [image, setImage] = useState('');
+
+    const handleTitleChange = (event) => {
+      setTitle(event.target.value);
+    };
+    const handlePriceChange = (event) => {
+      setPrice(event.target.value);
+    };
+    const handleDescriptionChange = (event) => {
+      setDescription(event.target.value);
+    };
+    const handleImageChange = (event) => {
+      setImage(event.target.value);
+    };
+    const handleCategoryChange = (event) => {
+      setCategory(event.target.value);
+    };
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      console.log('new product is created');
+    };
+
+    return (
+      <Card>
+        <div className="new-product">
+          <h2>Add Product</h2>
+          <form className="product-form" onSubmit={handleSubmit}>
+            <div className="form__control">
+              <label htmlFor="title">Title: </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                onChange={handleTitleChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="price">Price: </label>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                onChange={handlePriceChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="description">Description: </label>
+              <textarea
+                id="description"
+                name="description"
+                onChange={handleDescriptionChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="description">Category: </label>
+              <select
+                id="category"
+                name="category"
+                onChange={handleCategoryChange}
+                required
+              >
+                <option value="">Select a category</option>
+                <option value="men's clothing">men's clothing</option>
+                <option value="jewelery">jewelery</option>
+                <option value="electronics">Electronics</option>
+                <option value="books">Books</option>
+                <option value="furniture">Furniture</option>
+              </select>
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="image">Image URL: </label>
+              <textarea
+                id="image"
+                name="image"
+                onChange={handleImageChange}
+                required
+              />
+            </div>
+
+            <button className="button" type="submit">
+              Create Product
+            </button>
+
+            <div>
+              <p>{title}</p>
+              <p>{price}</p>
+              <p>{description}</p>
+              <p>{category}</p>
+              <p>{image}</p>
+            </div>
+          </form>
+        </div>
+      </Card>
+    );
+  };
+
+  export default NewProduct;
+
+  // create the new pRODUCT
+  import React, { useState } from 'react';
+
+  import Card from './Card';
+
+  const NewProduct = () => {
+    const [title, setTitle] = useState('');
+    const [price, setPrice] = useState('');
+    const [description, setDescription] = useState('');
+    const [category, setCategory] = useState('');
+    const [image, setImage] = useState('');
+
+    const handleTitleChange = (event) => {
+      setTitle(event.target.value);
+    };
+    const handlePriceChange = (event) => {
+      setPrice(event.target.value);
+    };
+    const handleDescriptionChange = (event) => {
+      setDescription(event.target.value);
+    };
+    const handleImageChange = (event) => {
+      setImage(event.target.value);
+    };
+    const handleCategoryChange = (event) => {
+      setCategory(event.target.value);
+    };
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const newProduct = {
+        id: new Date().getTime().toString(),
+        title: title,
+        price: price,
+        description: description,
+        category: category,
+        image: image,
+      };
+      console.log(newProduct);
+    };
+
+    return (
+      <Card>
+        <div className="new-product">
+          <h2>Add Product</h2>
+          <form className="product-form" onSubmit={handleSubmit}>
+            <div className="form__control">
+              <label htmlFor="title">Title: </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                onChange={handleTitleChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="price">Price: </label>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                onChange={handlePriceChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="description">Description: </label>
+              <textarea
+                id="description"
+                name="description"
+                onChange={handleDescriptionChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="description">Category: </label>
+              <select
+                id="category"
+                name="category"
+                onChange={handleCategoryChange}
+                required
+              >
+                <option value="">Select a category</option>
+                <option value="men's clothing">men's clothing</option>
+                <option value="jewelery">jewelery</option>
+                <option value="electronics">Electronics</option>
+                <option value="books">Books</option>
+                <option value="furniture">Furniture</option>
+              </select>
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="image">Image URL: </label>
+              <textarea
+                id="image"
+                name="image"
+                onChange={handleImageChange}
+                required
+              />
+            </div>
+
+            <button className="button" type="submit">
+              Create Product
+            </button>
+          </form>
+        </div>
+      </Card>
+    );
+  };
+
+  export default NewProduct;
+
+  ```
+
+- **Code Example - 33 (Example 2: without state management Counter Example: do not re-render when value updates)**
 
 ```js
 const Counter = () => {
@@ -2270,11 +2924,7 @@ const Counter = () => {
 export default Counter;
 ```
 
-- state is a memory for component where we can update value and re-render the component
-- state is a global variable thats why when you even re-render it fetch the last updated value
-- hooks are function which we can implement in our component - useState, useEffect
-- useState() hook helps us to track state in a functional component.
-- **Code Example - 36 (Counter App )**
+- **Code Example - 34 (Counter App )**
 
   ```js
   // App.js
@@ -2314,62 +2964,9 @@ export default Counter;
   export default Counter;
   ```
 
-  - we can also use name attribute for identifying element and use 1 function instead of many. from ebent handler we can use event.target.name and then decide what to do or not? - [1 handler for multiple elements] (https://github.com/anisul-Islam/react-counter-app-1-function/blob/master/src/components/Counter.js)
+- **Code Example - 35 (why update data based on prevState?)**
 
-- **Code Example - 37 (store data in state )**
-
-  ```js
-  import React, { useState } from "react";
-  import { FaCartPlus } from "react-icons/fa";
-  import Button from "./Button";
-
-  import Card from "./Card";
-
-  const Product = (props) => {
-    const { thumbnail, title, description, price, rating, brand, category } =
-      props;
-    const product = props;
-    const [cartProducts, setCartProducts] = useState([]);
-    const handleAddProduct = (e, product) => {
-      e.stopPropagation();
-      setCartProducts((prevState) => {
-        return [...prevState, product];
-      });
-    };
-    console.log(cartProducts);
-    return (
-      <Card>
-        <article className="product">
-          <img src={thumbnail} alt="iPhone 9" className="product__img" />
-          <div className="product__body">
-            <h2 className="product__title">{title}</h2>
-            <p className="product__description">description: {description}</p>
-            <p className="product__price">Price: {price}</p>
-            <p className="product__rating">rating: {rating}</p>
-            <p className="product__brand">brand: {brand}</p>
-            <p className="product__category">category: {category}</p>
-            {/* <button className="btn product__btn icon">
-              <FaCartPlus className="icon" /> Add To Cart
-            </button> */}
-            <Button
-              className="btn product__btn"
-              onClick={(e) => {
-                handleAddProduct(e, product);
-              }}
-            >
-              <FaCartPlus className="icon" /> Add To Cart
-            </Button>
-          </div>
-        </article>
-      </Card>
-    );
-  };
-  export default Product;
-  ```
-
-- **Code Example - 38 (why update data based on prevState?)**
-
-  - update state based on prev value - `setCount (count => count + 1)`
+- update state based on prev value - `setCount (count => count + 1)`
 
   ```js
       const handleIncrement = (e) => {
@@ -2402,216 +2999,1365 @@ export default Counter;
       };
   ```
 
-### [Assignment - 2: Counter App](https://github.com/anisul-Islam/react-assignment-2-counter-app)
-
-### [1.12 Forms and Controlled components](https://youtu.be/kvGNlTh3rNQ)
-
-- create a new resouce such as NewProduct, NewUser, NewTodo etc.
-- **Code Example - 39 (get data from a form)**
-
-  ```js
-
-  ```
-
-- [How to create forms in react using react-hook-form](https://www.freecodecamp.org/news/how-to-create-forms-in-react-using-react-hook-form/)
-
 #### [upating object in state](https://beta.reactjs.org/learn/updating-objects-in-state)
 
-- **Code Example - 40 (updating object in state)**
+- **Code Example - 36 (updating object in state)**
 
   ```js
-  import React, { useState } from "react";
+  // example with problem when updating states
+  import React, { useState } from 'react';
 
-  const NewUser = () => {
-    const [user, setUser] = useState({
-      name: "",
-      email: "",
-      password: "",
+  import Card from './Card';
+
+  const NewProduct = () => {
+    const [product, setProduct] = useState({
+      title: '',
+      description: '',
+      price: '',
+      category: '',
+      image: '',
     });
-    const handleChange = (event) => {
-      event.stopPropagation();
-      setUser((prevUser) => {
-        return { ...prevUser, [event.target.name]: event.target.value };
+
+    const handleTitleChange = (event) => {
+      setProduct({
+        title: event.target.value,
+        description: '',
+        price: '',
+        category: '',
+        image: '',
       });
+    };
+    const handlePriceChange = (event) => {
+      setProduct({
+        title: '',
+        description: '',
+        price: event.target.value,
+        category: '',
+        image: '',
+      });
+    };
+    const handleDescriptionChange = (event) => {
+      setProduct({
+        title: '',
+        description: event.target.value,
+        price: '',
+        category: '',
+        image: '',
+      });
+    };
+    const handleImageChange = (event) => {
+      setProduct({
+        title: '',
+        description: '',
+        price: '',
+        category: '',
+        image: event.target.value,
+      });
+    };
+    const handleCategoryChange = (event) => {
+      setProduct({
+        title: '',
+        description: '',
+        price: '',
+        category: event.target.value,
+        image: '',
+      });
+    };
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const newProduct = {
+        id: new Date().getTime().toString(),
+        ...product,
+      };
+      console.log(newProduct);
+    };
+
+  };
+
+  export default NewProduct;
+
+  // solution
+  const NewProduct = () => {
+    const [product, setProduct] = useState({
+      title: '',
+      description: '',
+      price: '',
+      category: '',
+      image: '',
+    });
+
+    const handleTitleChange = (event) => {
+      setProduct((prevState) => ({
+        ...prevState,
+        [event.target.name]: event.target.value,
+      }));
+    };
+    const handlePriceChange = (event) => {
+      setProduct((prevState) => ({
+        ...prevState,
+        [event.target.name]: event.target.value,
+      }));
+    };
+    const handleDescriptionChange = (event) => {
+      setProduct((prevState) => ({
+        ...prevState,
+        [event.target.name]: event.target.value,
+      }));
+    };
+    const handleImageChange = (event) => {
+      setProduct((prevState) => ({
+        ...prevState,
+        [event.target.name]: event.target.value,
+      }));
+    };
+    const handleCategoryChange = (event) => {
+      setProduct((prevState) => ({
+        ...prevState,
+        [event.target.name]: event.target.value,
+      }));
+    };
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const newProduct = {
+        id: new Date().getTime().toString(),
+        ...product,
+      };
+      console.log(newProduct);
+    };
+  }
+  ```
+
+- we can also use name attribute for identifying element and use 1 function instead of many. from event handler we can use event.target.name and then decide what to do or not? - [1 handler for multiple elements] (<https://github.com/anisul-Islam/react-counter-app-1-function/blob/master/src/components/Counter.js>)
+- **Code Example - 37 (1 event handler for multiple elements)**
+
+  ```js
+  import React, { useState } from 'react';
+
+  import Card from './Card';
+
+  const NewProduct = () => {
+    const [product, setProduct] = useState({
+      title: '',
+      description: '',
+      price: '',
+      category: '',
+      image: '',
+    });
+
+    const handleChange = (event) => {
+      setProduct((prevState) => ({
+        ...prevState,
+        [event.target.name]: event.target.value,
+      }));
     };
 
     const handleSubmit = (event) => {
       event.preventDefault();
-      console.log("submitted");
-      alert(JSON.stringify(user));
+      const newProduct = {
+        id: new Date().getTime().toString(),
+        ...product,
+      };
+      console.log(newProduct);
     };
 
     return (
-      <div>
-        <form action="" className="form" onSubmit={handleSubmit}>
-          <div className="form__control">
-            <label htmlFor="name">name: </label>
-            <input
-              type="text"
-              placeholder="Enter Name"
-              name="name"
-              value={user.name}
-              onChange={handleChange}
-              required={true}
-            />
-          </div>
-          <div className="form__control">
-            <label htmlFor="email">email: </label>
-            <input
-              type="email"
-              placeholder="Enter Email"
-              name="email"
-              value={user.email}
-              onChange={handleChange}
-              required={true}
-            />
-          </div>
-          <div className="form__control">
-            <label htmlFor="password">password: </label>
-            <input
-              type="password"
-              placeholder="Enter password"
-              name="password"
-              value={user.password}
-              onChange={handleChange}
-              required={true}
-            />
-          </div>
-          <button type="submit">Add User</button>
-        </form>
-      </div>
+      <Card>
+        <div className="new-product">
+          <h2>Add Product</h2>
+          <form className="product-form" onSubmit={handleSubmit}>
+            <div className="form__control">
+              <label htmlFor="title">Title: </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="price">Price: </label>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="description">Description: </label>
+              <textarea
+                id="description"
+                name="description"
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="description">Category: </label>
+              <select
+                id="category"
+                name="category"
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select a category</option>
+                <option value="men's clothing">men's clothing</option>
+                <option value="jewelery">jewelery</option>
+                <option value="electronics">Electronics</option>
+                <option value="books">Books</option>
+                <option value="furniture">Furniture</option>
+              </select>
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="image">Image URL: </label>
+              <textarea
+                id="image"
+                name="image"
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <button className="button" type="submit">
+              Create Product
+            </button>
+          </form>
+        </div>
+      </Card>
     );
   };
 
-  export default NewUser;
-  ```
-
-- **Code Example - 41 (updating nested object in state)**
-
-  ```js
+  export default NewProduct;
 
   ```
 
 #### [Upating array in state](https://beta.reactjs.org/learn/updating-arrays-in-state)
 
-- **Code Example - 42 (updating array in state)**
+### [Assignment - 2: Counter App](https://github.com/anisul-Islam/react-assignment-2-counter-app)
+
+### [1.12 Controlled components and Form](https://youtu.be/kvGNlTh3rNQ)
+
+- **Code Example - 39 (reset the form and control component)**
 
   ```js
+  // input fields => update states
+  // update states => input fields
+
+  import React, { useState } from 'react';
+
+  import Card from './Card';
+
+  const NewProduct = () => {
+    const [product, setProduct] = useState({
+      title: '',
+      description: '',
+      price: '',
+      category: '',
+      image: '',
+    });
+
+    const handleChange = (event) => {
+      setProduct((prevState) => ({
+        ...prevState,
+        [event.target.name]: event.target.value,
+      }));
+    };
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const newProduct = {
+        id: new Date().getTime().toString(),
+        ...product,
+      };
+      console.log(newProduct);
+      setProduct({
+        title: '',
+        description: '',
+        price: '',
+        category: '',
+        image: '',
+      });
+    };
+
+    return (
+      <Card>
+        <div className="new-product">
+          <h2>Add Product</h2>
+          <form className="product-form" onSubmit={handleSubmit}>
+            <div className="form__control">
+              <label htmlFor="title">Title: </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                value={product.title}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="price">Price: </label>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                value={product.price}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="description">Description: </label>
+              <textarea
+                id="description"
+                name="description"
+                value={product.description}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="description">Category: </label>
+              <select
+                id="category"
+                name="category"
+                value={product.category}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select a category</option>
+                <option value="men's clothing">men's clothing</option>
+                <option value="jewelery">jewelery</option>
+                <option value="electronics">Electronics</option>
+                <option value="books">Books</option>
+                <option value="furniture">Furniture</option>
+              </select>
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="image">Image URL: </label>
+              <textarea
+                id="image"
+                name="image"
+                onChange={handleChange}
+                value={product.image}
+                required
+              />
+            </div>
+
+            <button className="button" type="submit">
+              Create Product
+            </button>
+          </form>
+        </div>
+      </Card>
+    );
+  };
+
+  export default NewProduct;
+
 
   ```
 
-#### [Form Validation without library](https://github.com/anisul-Islam/form-validation-without-library)
+### [1.13 Form Validation]
 
-### [1.13 data passing: child to parent component, state lifting](https://youtu.be/xdW2uFA-SOg)
+#### Add validation to form without any library
 
-- Another practical example: https://youtu.be/h7yq5lfDZc8
-- [Freecodecamp doc](https://www.freecodecamp.org/news/what-is-lifting-state-up-in-react/)
-- **Code Example - 43 (state lifting)**
+```js
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
+import Card from './Card';
+
+const NewProduct = (props) => {
+  const [product, setProduct] = useState({
+    title: '',
+    description: '',
+    price: '',
+    category: '',
+    image: '',
+  });
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const errors = {};
+    if (!product.title) errors.title = 'Title is required';
+    else if (product.title.length > 1) {
+      errors.title = 'Title must have atleast 2 characters';
+    }
+    if (!product.description) errors.description = 'Description is required';
+    if (!product.price) errors.price = 'Price is required';
+    if (!product.category) errors.category = 'Category is required';
+    if (!product.image) errors.image = 'Image URL is required';
+    return errors;
+  };
+
+  const handleChange = (event) => {
+    setProduct((prevState) => ({
+      ...prevState,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+    } else {
+      console.log('Product Created:', product);
+      const newProduct = {
+        id: new Date().getTime().toString(),
+        ...product,
+      };
+      props.onHandleAddNewProduct(newProduct);
+      setErrors({});
+    }
+  };
+
+  return (
+    <Card>
+      <div className="new-product">
+        <h2>Add Product</h2>
+        <form className="product-form" onSubmit={handleSubmit}>
+          <div className="form__control">
+            <label htmlFor="title">Title: </label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={product.title}
+              onChange={handleChange}
+            />
+            {errors.title && <p className="error">{errors.title}</p>}
+          </div>
+
+          <div className="form__control">
+            <label htmlFor="price">Price: </label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              value={product.price}
+              onChange={handleChange}
+            />
+            {errors.price && <p className="error">{errors.price}</p>}
+          </div>
+
+          <div className="form__control">
+            <label htmlFor="description">Description: </label>
+            <textarea
+              id="description"
+              name="description"
+              value={product.description}
+              onChange={handleChange}
+            />
+            {errors.description && (
+              <p className="error">{errors.description}</p>
+            )}
+          </div>
+
+          <div className="form__control">
+            <label htmlFor="category">Category: </label>
+            <select
+              id="category"
+              name="category"
+              value={product.category}
+              onChange={handleChange}
+            >
+              <option value="">Select a category</option>
+              <option value="men's clothing">men's clothing</option>
+              <option value="jewelery">jewelery</option>
+              <option value="electronics">Electronics</option>
+              <option value="books">Books</option>
+              <option value="furniture">Furniture</option>
+            </select>
+            {errors.category && <p className="error">{errors.category}</p>}
+          </div>
+
+          <div className="form__control">
+            <label htmlFor="image">Image URL: </label>
+            <textarea
+              id="image"
+              name="image"
+              onChange={handleChange}
+              value={product.image}
+            />
+            {errors.image && <p className="error">{errors.image}</p>}
+          </div>
+
+          <button className="button" type="submit">
+            Create Product
+          </button>
+        </form>
+      </div>
+    </Card>
+  );
+};
+
+NewProduct.propTypes = {
+  onHandleAddNewProduct: PropTypes.func,
+};
+
+export default NewProduct;
+
+```
+
+#### React-hook-form validation
+
+-[my react hook form documentation](https://github.com/anisul-Islam/react-hook-form-doc)
+
+- [official website](https://react-hook-form.com/)
+
+##### 1. why do we need form?
+
+For Users in an application:
+
+1. **Data Collection**: Forms are used to collect various types of data from users, such as text inputs, checkboxes, radio buttons, and file uploads.
+
+2. **User Authentication and Authorization**: Forms are commonly used for user authentication and authorization processes, such as login and registration forms. They enable users to access secure areas of the application by providing credentials.
+
+3. **User Feedback and Surveys**: Forms can be used to gather feedback from users or conduct surveys to collect valuable insights for improving the application or understanding user preferences.
+
+4. **Data Submission**: Users can submit data through forms, triggering actions on the server-side, such as processing orders, saving information to a database, or sending messages.
+
+For developers:
+
+- As a developer we need to create a form, collect data from a form, apply validation in a form and show the error message
+
+- **Validation**: Forms often include validation mechanisms to ensure that the data submitted by users meets certain criteria (e.g., required fields, correct data format). This helps maintain data integrity and improves the user experience by providing feedback on errors.
+
+##### 2. what is react hook form?
+
+- a library to deal with form in React. from their official website: "Performant, flexible and extensible forms with easy-to-use validation.". It will help us to manage, submit form data and add validation with visual feedback
+
+##### 3. An example without react-hook-form
+
+- create 2 forms: one for usual way to collect data (state management, changeManagement, re-render issues) and another for better performance (no re-render, no direct state + change management)
+
+```js
+// make this one 2 copies
+import React, { useState } from 'react';
+
+const Signup = () => {
+
+  return (
+    <div>
+      <h2>User SignUp</h2>
+      <form>
+        <div className="field-group">
+          <label htmlFor="fullname">Fullname</label>
+          <input type="text" id="fullname" name="fullname" />
+        </div>
+        <div className="field-group">
+          <label htmlFor="email">Email</label>
+          <input type="email" id="email" name="email" />
+        </div>
+        <div className="field-group">
+          <label htmlFor="password">Password</label>
+          <input type="password" id="password" name="password" />
+        </div>
+        <div className="field-group">
+          <button type="submit">Register</button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default Signup;
+
+```
+
+```css
+// index.css
+form {
+  background-color: #213547;
+  color: #f9f9f9;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 1.5rem;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+input {
+  width: 20rem;
+}
+```
+
+- add states, handle change, handle submit and add error handler
+
+  - Name: Must not be empty.
+  - Email: Must be a valid email format.
+  - Password: Must be at least 6 characters long.
+
+```tsx
+import React, { ChangeEvent, FormEvent, useState } from 'react';
+
+const Signup = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState<{ name?: string; email?: string; password?: string }>({});
+
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
+  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+
+  const validate = () => {
+    const newErrors: { name?: string; email?: string; password?: string } = {};
+    if (!name) {
+      newErrors.name = 'Name is required';
+    }
+    if (!email) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Email is invalid';
+    }
+    if (!password) {
+      newErrors.password = 'Password is required';
+    } else if (password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+    return newErrors;
+  };
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+    } else {
+      console.log('form is submitted');
+      // Clear the form and errors after submission
+      setName('');
+      setEmail('');
+      setPassword('');
+      setErrors({});
+    }
+  };
+
+  return (
+    <div>
+      <h2>User SignUp</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="field-group">
+          <label htmlFor="fullname">Fullname</label>
+          <input
+            type="text"
+            id="fullname"
+            name="fullname"
+            value={name}
+            onChange={handleNameChange}
+          />
+          {errors.name && <span className="error">{errors.name}</span>}
+        </div>
+        <div className="field-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
+          {errors.email && <span className="error">{errors.email}</span>}
+        </div>
+        <div className="field-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          {errors.password && <span className="error">{errors.password}</span>}
+        </div>
+        <div className="field-group">
+          <button type="submit">Register</button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default Signup;
+```
+
+###### Explanation without library
+
+1. **State for Errors**: Added a `errors` state to keep track of validation errors.
+
+    ```tsx
+    const [errors, setErrors] = useState<{ name?: string; email?: string; password?: string }>({});
+    ```
+
+2. **Validation Function**: A `validate` function checks for errors in the input fields and returns an object containing any errors found.
+
+    ```tsx
+    const validate = () => {
+      const newErrors: { name?: string; email?: string; password?: string } = {};
+      if (!name) {
+        newErrors.name = 'Name is required';
+      }
+      if (!email) {
+        newErrors.email = 'Email is required';
+      } else if (!/\S+@\S+\.\S+/.test(email)) {
+        newErrors.email = 'Email is invalid';
+      }
+      if (!password) {
+        newErrors.password = 'Password is required';
+      } else if (password.length < 6) {
+        newErrors.password = 'Password must be at least 6 characters';
+      }
+      return newErrors;
+    };
+    ```
+
+3. **Handle Submit**: The `handleSubmit` function now validates the inputs before submitting the form. If there are errors, it sets the `errors` state.
+
+    ```tsx
+    const handleSubmit = (event: FormEvent) => {
+      event.preventDefault();
+      const validationErrors = validate();
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+      } else {
+        console.log('form is submitted');
+        // Clear the form and errors after submission
+        setName('');
+        setEmail('');
+        setPassword('');
+        setErrors({});
+      }
+    };
+    ```
+
+4. **Display Errors**: Display error messages below each input field if there are any validation errors.
+
+    ```tsx
+    {errors.name && <span className="error">{errors.name}</span>}
+    {errors.email && <span className="error">{errors.email}</span>}
+    {errors.password && <span className="error">{errors.password}</span>}
+    ```
+
+This ensures that the form is validated before submission, providing immediate feedback to the user if any fields are invalid.
+
+##### 4. Add useForm Hook
+
+- install the package `npm install react-hook-form`
+- use the useForm hook (in react hook is function) the main thing to work. It will help us to manage form data, submit the data, add validation ans show the error
+- it does not re-render when we update states when we work with react-hook form but when we work with plain form in react every single key stroke will re-render the component and its children (controlled components)
+
+##### 5. handle form states with register function
+
+```tsx
+import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
+
+const Signup2 = () => {
+  const { register, control } = useForm();
+  // register will replace the state and handleChange
+
+  const handleSubmit = (event: FormEvent) => {};
+
+  return (
+    <div>
+      <h2>User SignUp</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="field-group">
+          <label htmlFor="fullname">Fullname</label>
+          <input type="text" id="fullname" {...register('fullname')} />
+        </div>
+        <div className="field-group">
+          <label htmlFor="email">Email</label>
+          <input type="email" id="email" {...register('email')} />
+        </div>
+        <div className="field-group">
+          <label htmlFor="password">Password</label>
+          <input type="password" id="password" {...register('password')} />
+        </div>
+        <div className="field-group">
+          <button type="submit">Register</button>
+        </div>
+      </form>
+      <DevTool control={control} /> {/* set up the dev tool */}
+    </div>
+  );
+};
+
+export default Signup2;
+
+```
+
+##### 6. [watch the changes]()
+
+```tsx
+ const { register, watch } = useForm<Inputs>();
+console.log(watch('fullName'));
+```
+
+##### 7. [set up the DevTool](https://react-hook-form.com/dev-tools)
+
+- React Hook Form DevTools to help debug forms with validation.
+- install `npm install -D @hookform/devtools`
+- import it `import { DevTool } from '@hookform/devtools';`
+- set it up inside the component after the form
+
+  ```js
+    const { register, control } = useForm();
+
+    <form> </form>
+    <DevTool control={control} /> {/* set up the dev tool */}
+  ```
+
+##### 8. Form Submission
+
+```tsx
+import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
+
+type Inputs = {
+  fullName: string;
+  email: string;
+  password: string;
+};
+
+const Signup2 = () => {
+  const { register, control, handleSubmit } = useForm<Inputs>();
+  // register will replace the state and handleChange
+
+  const onSubmit = (data: Inputs) => {
+    alert(JSON.stringify(data));
+  };
+
+  return (
+    <div>
+      <h2>User SignUp</h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="field-group">
+          <label htmlFor="fullName">Fullname</label>
+          <input type="text" id="fullName" {...register('fullName')} />
+        </div>
+        <div className="field-group">
+          <label htmlFor="email">Email</label>
+          <input type="email" id="email" {...register('email')} />
+        </div>
+        <div className="field-group">
+          <label htmlFor="password">Password</label>
+          <input type="password" id="password" {...register('password')} />
+        </div>
+        <div className="field-group">
+          <button type="submit">Register</button>
+        </div>
+      </form>
+      <DevTool control={control} /> {/* set up the dev tool */}
+    </div>
+  );
+};
+
+export default Signup2;
+```
+
+##### 9. More complex example
+
+```tsx
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
+
+enum GenderEnum {
+  female = 'female',
+  male = 'male',
+  other = 'other',
+}
+
+type Inputs = {
+  fullName: string;
+  email: string;
+  password: string;
+  age: number;
+  gender: GenderEnum;
+};
+
+const SignUp = () => {
+  const { register, control, handleSubmit } = useForm<Inputs>();
+
+  const onSubmit = (data: Inputs) => {
+    console.log(data);
+  };
+
+  return (
+    <div>
+      <h2>User SignUp</h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="field-group">
+          <label htmlFor="fullName">Fullname</label>
+          <input type="text" id="fullName" {...register('fullName')} />
+        </div>
+        <div className="field-group">
+          <label htmlFor="email">Email</label>
+          <input type="email" id="email" {...register('email')} />
+        </div>
+        <div className="field-group">
+          <label htmlFor="password">Password</label>
+          <input type="password" id="password" {...register('password')} />
+        </div>
+        <div className="field-group">
+          <label htmlFor="age">Age</label>
+          <input type="number" id="age" {...register('age')} />
+        </div>
+        <div className="field-group">
+          <select {...register('gender')}>
+            <option value="female">female</option>
+            <option value="male">male</option>
+            <option value="other">other</option>
+          </select>
+        </div>
+        <div className="field-group">
+          <button type="submit">Register</button>
+        </div>
+      </form>
+      <DevTool control={control} /> {/* set up the dev tool */}
+    </div>
+  );
+};
+
+export default SignUp;
+```
+
+##### 10. [Apply Form Validation](https://react-hook-form.com/get-started#Applyvalidation)
+
+- required, min, max, minLength, maxLength, pattern, validate
+
+```tsx
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
+
+enum GenderEnum {
+  female = 'female',
+  male = 'male',
+  other = 'other',
+}
+
+type Inputs = {
+  fullName: string;
+  email: string;
+  password: string;
+  age: number;
+  gender: GenderEnum;
+};
+
+const SignUp = () => {
+  const { register, control, handleSubmit } = useForm<Inputs>();
+
+  const onSubmit = (data: Inputs) => {
+    console.log(data);
+  };
+
+  return (
+    <div>
+      <h2>User SignUp</h2>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <div className="field-group">
+          <label htmlFor="fullName">Fullname</label>
+          <input
+            type="text"
+            id="fullName"
+            {...register('fullName', {
+              required: {
+                value: true,
+                message: 'fullName is required',
+              },
+              minLength: {
+                value: 2,
+                message: 'FullName must have atleast 2 characters',
+              },
+            })}
+          />
+        </div>
+        <div className="field-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            {...register('email', {
+              required: {
+                value: true,
+                message: 'email is required',
+              },
+              pattern: {
+                value:
+                  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                message: 'not a valid email format',
+              },
+            })}
+          />
+        </div>
+        <div className="field-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            {...register('password', {
+              required: {
+                value: true,
+                message: 'password is required',
+              },
+              minLength: {
+                value: 6,
+                message: 'password must have atleast 6 characters',
+              },
+              maxLength: {
+                value: 15,
+                message: 'password can have maximum 15 characters',
+              },
+            })}
+          />
+        </div>
+        <div className="field-group">
+          <label htmlFor="age">Age</label>
+          <input
+            type="number"
+            id="age"
+            {...register('age', {
+              required: {
+                value: true,
+                message: 'Age is required',
+              },
+              min: {
+                value: 18,
+                message: 'Minimum age can be 18',
+              },
+            })}
+          />
+        </div>
+        <div className="field-group">
+          <select {...register('gender')}>
+            <option value="female">female</option>
+            <option value="male">male</option>
+            <option value="other">other</option>
+          </select>
+        </div>
+        <div className="field-group">
+          <button type="submit">Register</button>
+        </div>
+      </form>
+      <DevTool control={control} /> {/* set up the dev tool */}
+    </div>
+  );
+};
+
+export default SignUp;
+```
+
+##### 11. Show Error Message
+
+```tsx
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
+
+enum GenderEnum {
+  female = 'female',
+  male = 'male',
+  other = 'other',
+}
+
+type Inputs = {
+  fullName: string;
+  email: string;
+  password: string;
+  age: number;
+  gender: GenderEnum;
+};
+
+const SignUp = () => {
+  const { register, control, handleSubmit, formState } = useForm<Inputs>();
+  const { errors } = formState;
+
+  const onSubmit = (data: Inputs) => {
+    console.log(data);
+  };
+
+  return (
+    <div>
+      <h2>User SignUp</h2>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <div className="field-group">
+          <label htmlFor="fullName">Fullname</label>
+          <input
+            type="text"
+            id="fullName"
+            {...register('fullName', {
+              required: {
+                value: true,
+                message: 'fullName is required',
+              },
+              minLength: {
+                value: 2,
+                message: 'FullName must have atleast 2 characters',
+              },
+            })}
+          />
+          {errors.fullName && (
+            <span className="error">{errors.fullName.message}</span>
+          )}
+        </div>
+        <div className="field-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            {...register('email', {
+              required: {
+                value: true,
+                message: 'email is required',
+              },
+              pattern: {
+                value:
+                  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                message: 'not a valid email format',
+              },
+            })}
+          />
+          {errors.email && (
+            <span className="error">{errors.email.message}</span>
+          )}
+        </div>
+        <div className="field-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            {...register('password', {
+              required: {
+                value: true,
+                message: 'password is required',
+              },
+              minLength: {
+                value: 6,
+                message: 'password must have atleast 6 characters',
+              },
+              maxLength: {
+                value: 15,
+                message: 'password can have maximum 15 characters',
+              },
+            })}
+          />
+          {errors.password && (
+            <span className="error">{errors.password.message}</span>
+          )}
+        </div>
+        <div className="field-group">
+          <label htmlFor="age">Age</label>
+          <input
+            type="number"
+            id="age"
+            {...register('age', {
+              required: {
+                value: true,
+                message: 'Age is required',
+              },
+              min: {
+                value: 18,
+                message: 'Minimum age can be 18',
+              },
+            })}
+          />
+          {errors.age && <span className="error">{errors.age.message}</span>}
+        </div>
+        <div className="field-group">
+          <select {...register('gender')}>
+            <option value="female">female</option>
+            <option value="male">male</option>
+            <option value="other">other</option>
+          </select>
+        </div>
+        <div className="field-group">
+          <button type="submit">Register</button>
+        </div>
+      </form>
+      <DevTool control={control} /> {/* set up the dev tool */}
+    </div>
+  );
+};
+
+export default SignUp;
+```
+
+### [1.14 data passing: child to parent component, state lifting](https://youtu.be/xdW2uFA-SOg)
+
+- **Code Example - 40 (state lifting)**
 
   ```js
   // App.js
   step 1: create a callback function that will help us to get the data from child component
-   const handleAddNewTodo = (newTodo) => {
-    console.log(newTodo);
-  };
+    const handleAddNewProduct = (newProduct) => {
+      console.log(newProduct);
+    };
 
    step 2: pass the function as props to child to component
-  <AddTodo onHandleAddNewTodo={handleAddNewTodo} />
+   <NewProduct onHandleAddNewProduct={handleAddNewProduct} />
 
   step 3: receive the function props and use it for passing the data from child to parent
-  // AddTodo.js
-  import PropTypes from "prop-types";
+  // NewProduct.js
+  import React, { useState } from 'react';
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const newTodo = { id: getUniqueId(), title, desc };
-    setTitle("");
-    setDesc("");
-    props.onHandleAddNewTodo(newTodo);
-  };
+  import PropTypes from 'prop-types';
 
-  AddTodo.propTypes = {
-    onHandleAddNewTodo: PropTypes.func,
-  };
+  import Card from './Card';
 
+  const NewProduct = (props) => {
+    const [product, setProduct] = useState({
+      title: '',
+      description: '',
+      price: '',
+      category: '',
+      image: '',
+    });
 
-  // Another Example
-    function App() {
-      const [users, setUsers] = useState([
-        { name: 'alex', email: 'alex@gmail.com' },
-      ]);
+    const handleChange = (event) => {
+      setProduct((prevState) => ({
+        ...prevState,
+        [event.target.name]: event.target.value,
+      }));
+    };
 
-      console.log(users);
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const newProduct = {
+        id: new Date().getTime().toString(),
+        ...product,
+      };
+      props.onHandleAddNewProduct(newProduct);
+      setProduct({
+        title: '',
+        description: '',
+        price: '',
+        category: '',
+        image: '',
+      });
+    };
 
-      return (
-        <div className="container">
-          <Test setUsers={setUsers} />
+    return (
+      <Card>
+        <div className="new-product">
+          <h2>Add Product</h2>
+          <form className="product-form" onSubmit={handleSubmit}>
+            <div className="form__control">
+              <label htmlFor="title">Title: </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                value={product.title}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="price">Price: </label>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                value={product.price}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="description">Description: </label>
+              <textarea
+                id="description"
+                name="description"
+                value={product.description}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="description">Category: </label>
+              <select
+                id="category"
+                name="category"
+                value={product.category}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select a category</option>
+                <option value="men's clothing">men's clothing</option>
+                <option value="jewelery">jewelery</option>
+                <option value="electronics">Electronics</option>
+                <option value="books">Books</option>
+                <option value="furniture">Furniture</option>
+              </select>
+            </div>
+
+            <div className="form__control">
+              <label htmlFor="image">Image URL: </label>
+              <textarea
+                id="image"
+                name="image"
+                onChange={handleChange}
+                value={product.image}
+                required
+              />
+            </div>
+
+            <button className="button" type="submit">
+              Create Product
+            </button>
+          </form>
         </div>
-        )
-    }
+      </Card>
+    );
+  };
 
-    const Test = (props) => {
-      const { setUsers } = props;
+  NewProduct.propTypes = {
+    onHandleAddNewProduct: PropTypes.func,
+  };
 
-      const [user, setUser] = useState({ name: '', email: '' });
-      const handleSubmit = (event) => {
-        event.preventDefault();
-        setUsers((users) => [...users, user]);
-        setUser({
-          name: '',
-          email: '',
-        });
-      };
-      const handleChange = (event) => {
-        const name = event.target.name;
-        setUser({ ...user, [name]: event.target.value });
-      };
-   }
+  export default NewProduct;
+  
   ```
 
-  - **Code Example - 44 (state lifting and delete item)**
-
-    ```js
-    // App.js
-    step 1: create a function that will help us to get the id from child component Todo.js
-    const handleDeleteTodo = (id) => {
-      console.log(id);
-    };
-
-    step 2: pass the function as props to App.js -> Todos.js -> Todo.js
-    <Todos onHandleDeleteTodo={handleDeleteTodo} />
-
-    step 3: After passing the function from App.js to Todo.js now lets handle the button click and get the id so that we pass the id to App.js with the help of the function onHandleDeleteTodo
-    // Todo.js
-
-    const { todo, onHandleDeleteTodo } = props;
-
-    const handleDelete = (id) => {
-      onHandleDeleteTodo(id);
-    };
-
-    <button
-            className="btn"
-            onClick={() => {
-              handleDelete(todo.id);
-            }}
-          >
-            <FaTrash className="icon" />
-    </button>
-
-    step 4: finally with the help of the id lets delete the item from todos state inside App.js
-
-    const handleDeleteTodo = (id) => {
-      setTodos(todos.filter((todo) => todo.id !== id));
-    };
-    ```
-
-
-
-### [1.14 useRef hook - Uncontrolled component](https://youtu.be/l5z137GWakU)
+### [1.15 useRef hook - Uncontrolled component](https://youtu.be/l5z137GWakU)
 
 - If we look at the AddTodo component then you will see we are not using those title and desc state inside the component that much so we can avoid state and make the component stateless
-- **Code Example - 45 (useRef hook for getting form value)**
+- **Code Example - 41 (useRef hook for getting form value)**
 
   ```js
   import React, { useRef } from "react";
