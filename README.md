@@ -2,6 +2,9 @@
 
 - prerequisities: HTML, CSS, Javascript
 - [React.js official Site](https://reactjs.org/)
+- some API for http requests
+      - [dummy json](https://dummyjson.com/)
+      - [pagination testing](https://reqres.in/api/users?page=2)
 
 ## Table of Contents
 
@@ -4992,6 +4995,55 @@ Key points about the `useEffect` hook:
   export default UseEffectExample;
   ```
 
+- A good example of cleanup function in useEffect
+
+```js
+import React, { useState, useEffect } from 'react';
+
+const Timer = () => {
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds((prevSeconds) => prevSeconds + 1);
+    }, 1000);
+
+    // Cleanup function to clear the interval when the component unmounts
+    return () => {
+      console.log('unmount');
+      clearInterval(interval);
+    };
+  }, []); // Empty dependency array means this effect runs once on mount and cleans up on unmount
+
+  return (
+    <div>
+      <h2>Timer: {seconds} seconds</h2>
+    </div>
+  );
+};
+
+const App = () => {
+  const [showTimer, setShowTimer] = useState(true);
+
+  const toggleTimer = () => {
+    setShowTimer(!showTimer);
+  };
+
+  return (
+    <div>
+      <h1>React Component Unmounting Example</h1>
+      <button onClick={toggleTimer}>
+        {showTimer ? 'Hide Timer' : 'Show Timer'}
+      </button>
+      {showTimer && <Timer />}
+    </div>
+  );
+};
+
+export default App;
+
+```
+
 Here's a breakdown of how you might use the `useEffect` hook for common scenarios:
 
 - **Data Fetching**: Fetch data when the component mounts, and clean up any resources when it unmounts.
@@ -5691,12 +5743,12 @@ export default NewProduct;
 
 <!-- ### Part-6 (react routing) -->
 
-### [2.4 Routing]()
+### [2.4 Routing](https://github.com/anisul-Islam/react-routing-project)
 
 - [react-routing-project](https://github.com/anisul-Islam/react-routing-project)
 - [Learn from react-router official side](https://reactrouter.com/en/main/start/tutorial)
-- install the package `npm install react-router-dom`
-- create few pages inside pages folder: Create the components for Home, About, Contact, and NotFound pages.
+- install the package `npm install -D react-router-dom`, if you are using react-router 5 `npm i -D react-router-dom@latest`
+- create few pages inside pages folder: Home, Contact, About, Products,NotFound, Layout.
 - **Code Example - 56 (basic routing)**
 
 ```js
@@ -6035,62 +6087,90 @@ export default Blog;
 
 ```js
 // Protected.js
-import React from "react";
-import { Navigate } from "react-router-dom";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import SignIn from '../pages/SignIn';
 
-const Protected = ({ isLoggedIn, children }) => {
-  if (!isLoggedIn) {
-    return <Navigate to="/" replace />;
-  }
-  return children;
+const PortectedRoute = () => {
+  const isSignedIn = false;
+  return isSignedIn ? <Outlet /> : <SignIn />;
 };
 
-export default Protected;
+export default PortectedRoute;
 
 // index.js - routing
-import React, { useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Navbar from '../layout/Navbar';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import About from '../pages/About';
-import Blog from '../pages/Blog';
-import Blogs from '../pages/Blogs';
-import Contact from '../pages/Contact';
-import Error from '../pages/Error';
-import Home from '../pages/Home';
-import Protected from './Protected';
+import App from './App.jsx';
+import './index.css';
+import Home from './pages/Home.jsx';
+import Products from './pages/Products.jsx';
+import About from './pages/About.jsx';
+import Contact from './pages/Contact.jsx';
+import NotFound from './pages/NotFound.jsx';
 
-const Index = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    return (
-        <BrowserRouter>
-            <Navbar />
-            <button
-                onClick={() => {
-                    setIsLoggedIn(!isLoggedIn);
-                }}>
-                {isLoggedIn ? 'logout' : 'login'}
-            </button>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route
-                    path="/blogs"
-                    element={
-                        <Protected isLoggedIn={isLoggedIn}>
-                            <Blogs />
-                        </Protected>
-                    }
-                />
-                <Route path="/blogs/:title" element={<Blog />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="*" element={<Error />} />
-            </Routes>
-        </BrowserRouter>
-    );
-};
+import Header from './layout/Header.jsx';
+import SignIn from './pages/SignIn.jsx';
+import Profile from './pages/Profile.jsx';
+import ProductDetails from './components/ProductDetails.jsx';
+import PortectedRoute from './routes/PortectedRoute.jsx';
 
-export default Index;
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Header />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: '/',
+        element: <Home />,
+      },
+      {
+        path: '/signin',
+        element: <SignIn />,
+      },
+      {
+        path: '/profile',
+        element: <Profile />,
+      },
+      {
+        path: '/products',
+        element: <Products />,
+      },
+      {
+        path: '/products/:id',
+        element: <ProductDetails />,
+      },
+      {
+        path: '/contact',
+        element: <Contact />,
+      },
+      {
+        path: '/about',
+        element: <About />,
+      },
+      {
+        path: '/dashboard',
+        element: <PortectedRoute />,
+        children: [
+          {
+            path: 'user/profile',
+            element: <Profile />,
+          },
+        ],
+      },
+    ],
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
+
 
 ```
 
