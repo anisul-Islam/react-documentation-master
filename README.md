@@ -147,6 +147,8 @@ npm start
 
 Method 2: create react app with bundler with vite `npm create vite@latest` swc(speedy web compiler)
 
+- `npx create vite@latest . --template react`
+
 #### Code Example - 1 (create React app)
 
   ```jsx
@@ -5528,7 +5530,368 @@ export default NewProduct;
   export default useFetch;
   ```
 
-#### CRUD API requests
+#### Pagination, Searching, Sorting, Filtering
+
+##### pagination
+
+```jsx
+  // pagination
+  const itemsPerPage = 12;
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // make the api request when currentPage change
+
+  <Pagination totalPages={totalPages} currentPage={currentPage} onHandleCurrentPage={handleCurrentPage} />
+
+  import React from 'react';
+const Pagination = ({ totalPages, currentPage, onHandleCurrentPage }) => {
+  return (
+    <div className="pagination">
+      {Array.from({ length: totalPages }, (_, index) => {
+        return (
+          <button
+            key={index}
+            onClick={() => onHandleCurrentPage(index)}
+            className={currentPage === index + 1 ? 'active' : ''}
+          >
+            {index + 1}
+          </button>
+        );
+      })}
+    </div>
+  );
+};
+
+export default Pagination;
+```
+
+- add previous, next, first, last option
+
+```jsx
+import React from 'react';
+import PropTypes from 'prop-types';
+
+const Pagination = ({ totalPages, currentPage, onHandleCurrentPage }) => {
+  const handleFirstPage = () => {
+    onHandleCurrentPage(1);
+  };
+  const handleLastPage = () => {
+    onHandleCurrentPage(totalPages);
+  };
+  const handlePreviousChange = () => {
+    if (currentPage > 1) {
+      onHandleCurrentPage(currentPage - 1);
+    }
+  };
+  const handleNextChange = () => {
+    if (currentPage < totalPages) {
+      onHandleCurrentPage(currentPage + 1);
+    }
+  };
+
+  return (
+    <div className="pagination">
+      <button onClick={handleFirstPage} disabled={currentPage === 1} aria-label="First Page">
+        &laquo;&laquo;
+      </button>
+      <button onClick={handlePreviousChange} disabled={currentPage === 1} aria-label="Previous Page">
+        &laquo;
+      </button>
+      <div className="pagination__pages">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => onHandleCurrentPage(index + 1)}
+            className={currentPage === index + 1 ? 'active' : ''}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
+      <button onClick={handleNextChange} disabled={currentPage === totalPages} aria-label="Next Page">
+        &raquo;
+      </button>
+      <button onClick={handleLastPage} disabled={currentPage === totalPages} aria-label="Last Page">
+        &raquo;&raquo;
+      </button>
+    </div>
+  );
+};
+
+Pagination.propTypes = {
+  totalPages: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  onHandleCurrentPage: PropTypes.func.isRequired,
+};
+
+export default Pagination;
+
+```
+
+- Not showing all page numbers at once, implement a more sophisticated pagination control that displays only a few page numbers at a time, with options to navigate to the first, previous, next, and last pages.
+
+```jsx
+import React from 'react';
+
+const Pagination = ({ totalPages, currentPage, onHandleCurrentPage }) => {
+  const handleFirstPage = () => {
+    onHandleCurrentPage(1);
+  };
+  const handleLastPage = () => {
+    onHandleCurrentPage(totalPages);
+  };
+  const handlePreviousChange = () => {
+    if (currentPage > 1) {
+      onHandleCurrentPage(currentPage - 1);
+    }
+  };
+  const handleNextChange = () => {
+    if (currentPage < totalPages) {
+      onHandleCurrentPage(currentPage + 1);
+    }
+  };
+
+  const getVisiblePageNumbers = () => {
+    const visiblePages = 5;
+    const pages = [];
+
+    let startPage = Math.max(1, currentPage - Math.floor(visiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + visiblePages - 1);
+
+    if (endPage - startPage < visiblePages - 1) {
+      startPage = Math.max(1, endPage - visiblePages + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+
+    return pages;
+  };
+
+  const visilePageNumbers = getVisiblePageNumbers();
+
+  return (
+    <div className="pagination">
+      <button
+        onClick={handleFirstPage}
+        disabled={currentPage === 1}
+        aria-label="First Page"
+      >
+        &laquo;&laquo;
+      </button>
+      <button
+        onClick={handlePreviousChange}
+        disabled={currentPage === 1}
+        aria-label="Previos page"
+      >
+        &laquo;
+      </button>
+      {visilePageNumbers.map((pageNumber) => {
+        return (
+          <button
+            key={pageNumber}
+            onClick={() => onHandleCurrentPage(pageNumber)}
+            className={currentPage === pageNumber ? 'active' : ''}
+          >
+            {pageNumber}
+          </button>
+        );
+      })}
+      <button
+        onClick={handleNextChange}
+        disabled={currentPage === totalPages}
+        aria-label="Next Page"
+      >
+        &raquo;
+      </button>
+      <button
+        onClick={handleLastPage}
+        disabled={currentPage === totalPages}
+        aria-label="Last Page"
+      >
+        &raquo; &raquo;
+      </button>
+    </div>
+  );
+};
+
+export default Pagination;
+
+```
+
+##### searching
+
+- Method 1: Search in the same page
+
+```jsx
+// Method 1: search in the same page
+// step 1. Search State: Added searchTerm state to store the search input value.
+// step 2. Search Input: Added an input field for searching products.
+// step 3. Filter Products: Filtered the products based on the search term.
+// step 4. Display Filtered Products: Display the filtered products in the UI.
+
+
+// step 1. in the main component
+const [searchTerm, setSearchTerm] = useState('');
+
+ const handleSearchChange = (event) => {
+  const { value } = event.target;
+  setSearchTerm(value);
+};
+
+// step 2: Search Input
+import React from 'react'
+
+const Search = ({searchTerm, onHandleSearchChange}) => {
+  return (
+    <div className="search">
+      <input
+        type="text"
+        placeholder="Search products..."
+        value={searchTerm}
+        onChange={onHandleSearchChange}
+      />
+    </div>
+  );
+}
+
+export default Search
+
+
+// Step 3: filter products in the same page
+// search in the same page
+const filterProducts = products.filter((product) =>
+  product.title.toLowerCase().includes(searchTerm.toLowerCase())
+);
+
+// Step 4: Now display the filtered products
+```
+
+- Method 2: Search in the entire db
+
+```jsx
+// step 1: Update the fetchData function to accept a search query.
+// step 2: Call the API endpoint for searching when the search term changes.
+// step 3: Update the state with the search results.
+
+
+const [searchTerm, setSearchTerm] = useState('');
+
+// step 1: inside useEffect
+const fetchData = (currentPage, searchQuery = '') => {
+    setIsLoading(true);
+    setError(null);
+    let url = `https://dummyjson.com/products?limit=${itemsPerPage}&skip=${(currentPage - 1) * itemsPerPage}`;
+
+    if (searchQuery) {
+      url = `https://dummyjson.com/products/search?q=${searchQuery}&limit=${itemsPerPage}&skip=${(currentPage - 1) * itemsPerPage}`;
+    }
+
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Data could not be fetched');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setProducts(data.products);
+        setTotalPages(Math.ceil(data.total / itemsPerPage));
+      })
+      .catch((error) => setError(error.message))
+      .finally(() => setIsLoading(false));
+  };
+
+  useEffect(() => {
+    fetchData(currentPage, searchTerm);
+  }, [currentPage, searchTerm]);
+
+const handleSearchChange = (event) => {
+  const { value } = event.target;
+  setSearchTerm(value);
+  setCurrentPage(1); // Reset to first page on new search
+};
+```
+
+- sorting
+
+```jsx
+import React from 'react';
+
+const Sort = ({ sortCriteria, onHandleSortChange }) => {
+  return (
+    <div className="sort">
+      <label htmlFor="sort">Sort By: </label>
+      <select
+        id="sort"
+        value={sortCriteria}
+        onChange={onHandleSortChange}
+        className="sort-select"
+      >
+        <option value="">Sort By</option>
+        <option value="title-asc">Tilte: A to Z</option>
+        <option value="title-desc">Tilte: Z to A</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="rating-asc">Rating: Low to High</option>
+        <option value="rating-desc">Rating: High to Low</option>
+      </select>
+    </div>
+  );
+};
+
+export default Sort;
+
+// In another component
+  const [sortCriteria, setSortCriteria] = useState('');
+const fetchData = (currentPage, searchTerm, sortCriteria) => {
+    setIsLoading(true);
+    setError(null);
+    let url = `https://dummyjson.com/products?limit=${itemsPerPage}&skip=${
+      (currentPage - 1) * itemsPerPage
+    }`;
+    if (searchTerm !== '') {
+      url = `https://dummyjson.com/products/search?q=${searchTerm}&limit=${itemsPerPage}&skip=${
+        (currentPage - 1) * itemsPerPage
+      }`;
+    }
+    if (sortCriteria) {
+      // title-asc
+      const spiltSortCriteria = sortCriteria.split('-');
+      console.log(spiltSortCriteria);
+      url += `&sortBy=${spiltSortCriteria[0]}&order=${spiltSortCriteria[1]}`;
+    }
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Data could not be fetched');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setProducts(data.products);
+        console.log(data.products);
+        console.log(currentPage);
+        setTotalPages(Math.ceil(data.total / itemsPerPage));
+      })
+      .catch((error) => setError(error.message))
+      .finally(() => setIsLoading(false));
+  };
+  useEffect(() => {
+    fetchData(currentPage, searchTerm, sortCriteria);
+  }, [currentPage, searchTerm, sortCriteria]);
+
+  const handleSortChange = (event) => {
+    setSortCriteria(event.target.value);
+  };
+
+  <Sort
+      sortCriteria={sortCriteria}
+      onHandleSortChange={handleSortChange}
+    />
+```
 
 ### [Assignment 4 - fetch products](https://github.com/anisul-Islam/react-assignment-4-fetch-products)
 
@@ -7706,5 +8069,81 @@ export default Data;
 
 - [A complete CRUD APP using RTK Query
   ](https://github.com/anisul-Islam/rtk-query-crud-app)
+
+### RTK (new version)
+
+- RTK Query is a powerful data fetching and caching tool built into Redux Toolkit. It simplifies the process of fetching, caching, synchronizing, and updating data in your application.
+
+- basic project setup
+  - `npx create vite@latest projectName --template react`
+  - `npm install @reduxjs/toolkit react-redux`
+  - clean up the project
+
+- create service or slice in RTK Query
+  - create app/service/dummyData.js
+  - create store.js inside app folder
+  - createApi(): The core of RTK Query's functionality. It allows you to define a set of endpoints describe how to retrieve data from a series of endpoints, including configuration of how to fetch and transform that data. In most cases, you should use this once per app, with "one API slice per base URL" as a rule of thumb. define endpoints for fetching data + configure how to fetch and transform data.
+  - fetchBaseQuery(): A small wrapper around fetch that aims to simplify requests. Intended as the recommended baseQuery to be used in createApi for the majority of users.
+- create first endpoint
+
+  ```jsx
+  // features/api/apiSlice.js = logic goes here
+
+  import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+  export const productApi = createApi({
+    reducerPath: "products",
+    baseQuery: fetchBaseQuery({baseUrl: "<https://dummyjson.com"}>),
+    endpoints: (builder)=> ({
+      // get all products (Reading)
+      getAllProducts: builder.query({
+        query: () => '/products'
+      })
+    })
+  })
+
+  // RTK will create hooks for us automatically
+  // `useQuery` for making just call and getting something
+  // `useMutation` for updating
+  export const {useGetAllProductsQuery} = productApi;
+  ```
+
+- register service in the store
+
+```jsx
+import postsReducer from '../features/posts/postsSlice'
+import usersReducer from '../features/users/usersSlice'
+import notificationsReducer from '../features/notifications/notificationsSlice'
+import { apiSlice } from '../features/api/apiSlice'
+
+export default configureStore({
+  reducer: {
+    posts: postsReducer,
+    users: usersReducer,
+    notifications: notificationsReducer,
+    [apiSlice.reducerPath]: apiSlice.reducer
+  },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(apiSlice.middleware)
+})
+
+// in my case
+import { configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
+import { productApi } from './service/dummyData';
+
+export const store = configureStore({
+  reducer: {
+    [productApi.reducerPath]: productApi.reducer,
+  },
+  // do not worry about this as it is for caching
+   middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(productApi.middleware)
+})
+
+
+```
+
+- use rtk in react
 
 ## Part-12 (React + Typescript)
