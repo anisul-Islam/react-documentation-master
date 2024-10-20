@@ -3387,137 +3387,269 @@ export default Counter;
 
 #### Add validation to form without any library
 
-```js
+```jsx
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
-import Card from './Card';
+// Styles (for inline styling)
+const styles = {
+  form: {
+    width: '300px',
+    margin: '0 auto',
+    padding: '20px',
+    border: '1px solid #ccc',
+    borderRadius: '5px',
+  },
+  formGroup: {
+    marginBottom: '15px',
+  },
+  input: {
+    width: '100%',
+    padding: '8px',
+    boxSizing: 'border-box',
+  },
+  textarea: {
+    width: '100%',
+    padding: '8px',
+    height: '80px',
+    boxSizing: 'border-box',
+  },
+  button: {
+    width: '100%',
+    padding: '10px',
+    backgroundColor: '#007bff',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+  },
+  error: {
+    color: 'red',
+    fontSize: '12px',
+    marginTop: '5px',
+  },
+};
 
-const NewProduct = (props) => {
-  const [product, setProduct] = useState({
-    title: '',
+const AddProductForm = () => {
+  // State to manage form data
+  const [formData, setFormData] = useState({
+    productName: '',
     description: '',
     price: '',
+    quantity: '',
     category: '',
     image: '',
   });
+
+  // State to manage validation errors
   const [errors, setErrors] = useState({});
 
-  const validate = () => {
-    const errors = {};
-    if (!product.title) errors.title = 'Title is required';
-    else if (product.title.length > 1) {
-      errors.title = 'Title must have atleast 2 characters';
-    }
-    if (!product.description) errors.description = 'Description is required';
-    if (!product.price) errors.price = 'Price is required';
-    if (!product.category) errors.category = 'Category is required';
-    if (!product.image) errors.image = 'Image URL is required';
-    return errors;
-  };
-
-  const handleChange = (event) => {
-    setProduct((prevState) => ({
-      ...prevState,
-      [event.target.name]: event.target.value,
+  // Handle input changes
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [id]: value,
     }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-    } else {
-      console.log('Product Created:', product);
+  // Handle image input separately
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      image: file,
+    }));
+  };
+
+  // Validation logic
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Product Name validation
+    if (!formData.productName.trim()) {
+      newErrors.productName = 'Product name is required';
+    }
+
+    // Description validation (at least 10 characters)
+    if (formData.description.length < 10) {
+      newErrors.description =
+        'Description should be at least 10 characters long';
+    }
+
+    // Price validation (positive number)
+    if (!formData.price || parseFloat(formData.price) <= 0) {
+      newErrors.price = 'Price must be a positive number';
+    }
+
+    // Quantity validation (positive integer)
+    if (!formData.quantity || parseInt(formData.quantity, 10) <= 0) {
+      newErrors.quantity = 'Quantity must be a positive integer';
+    }
+
+    // Category validation (must be selected)
+    if (!formData.category) {
+      newErrors.category = 'Please select a category';
+    }
+
+    // Image validation (must be uploaded)
+    if (!formData.image) {
+      newErrors.image = 'Please upload a product image';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // Return true if no errors
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate the form
+    if (validateForm()) {
       const newProduct = {
-        id: new Date().getTime().toString(),
-        ...product,
+        productName: formData.productName,
+        description: formData.description,
+        price: parseFloat(formData.price),
+        quantity: parseInt(formData.quantity, 10),
+        category: formData.category,
+        image: formData.image, // File object
       };
-      props.onHandleAddNewProduct(newProduct);
+
+      console.log('Product Submitted: ', newProduct);
+
+      // Reset form after submission
+      setFormData({
+        productName: '',
+        description: '',
+        price: '',
+        quantity: '',
+        category: '',
+        image: '',
+      });
       setErrors({});
+      e.target.reset(); // Reset file input manually
+    } else {
+      console.log('Form contains errors. Please fix them.');
     }
   };
 
   return (
-    <Card>
-      <div className="new-product">
-        <h2>Add Product</h2>
-        <form className="product-form" onSubmit={handleSubmit}>
-          <div className="form__control">
-            <label htmlFor="title">Title: </label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              value={product.title}
-              onChange={handleChange}
-            />
-            {errors.title && <p className="error">{errors.title}</p>}
-          </div>
+    <form onSubmit={handleSubmit} style={styles.form}>
+      <h2>Add a New Product</h2>
 
-          <div className="form__control">
-            <label htmlFor="price">Price: </label>
-            <input
-              type="number"
-              id="price"
-              name="price"
-              value={product.price}
-              onChange={handleChange}
-            />
-            {errors.price && <p className="error">{errors.price}</p>}
-          </div>
-
-          <div className="form__control">
-            <label htmlFor="description">Description: </label>
-            <textarea
-              id="description"
-              name="description"
-              value={product.description}
-              onChange={handleChange}
-            />
-            {errors.description && (
-              <p className="error">{errors.description}</p>
-            )}
-          </div>
-
-          <div className="form__control">
-            <label htmlFor="category">Category: </label>
-            <select
-              id="category"
-              name="category"
-              value={product.category}
-              onChange={handleChange}
-            >
-              <option value="">Select a category</option>
-              <option value="men's clothing">men's clothing</option>
-              <option value="jewelery">jewelery</option>
-              <option value="electronics">Electronics</option>
-              <option value="books">Books</option>
-              <option value="furniture">Furniture</option>
-            </select>
-            {errors.category && <p className="error">{errors.category}</p>}
-          </div>
-
-          <div className="form__control">
-            <label htmlFor="image">Image URL: </label>
-            <textarea
-              id="image"
-              name="image"
-              onChange={handleChange}
-              value={product.image}
-            />
-            {errors.image && <p className="error">{errors.image}</p>}
-          </div>
-
-          <button className="button" type="submit">
-            Create Product
-          </button>
-        </form>
+      {/* Product Name */}
+      <div style={styles.formGroup}>
+        <label htmlFor="productName">Product Name:</label>
+        <input
+          type="text"
+          id="productName"
+          value={formData.productName}
+          onChange={handleChange}
+          required
+          style={styles.input}
+        />
+        {errors.productName && <p style={styles.error}>{errors.productName}</p>}
       </div>
-    </Card>
+
+      {/* Description */}
+      <div style={styles.formGroup}>
+        <label htmlFor="description">Description:</label>
+        <textarea
+          id="description"
+          value={formData.description}
+          onChange={handleChange}
+          required
+          style={styles.textarea}
+        />
+        {errors.description && <p style={styles.error}>{errors.description}</p>}
+      </div>
+
+      {/* Price */}
+      <div style={styles.formGroup}>
+        <label htmlFor="price">Price:</label>
+        <input
+          type="number"
+          id="price"
+          value={formData.price}
+          onChange={handleChange}
+          required
+          style={styles.input}
+          step="0.01"
+          min="0"
+        />
+        {errors.price && <p style={styles.error}>{errors.price}</p>}
+      </div>
+
+      {/* Quantity */}
+      <div style={styles.formGroup}>
+        <label htmlFor="quantity">Quantity:</label>
+        <input
+          type="number"
+          id="quantity"
+          value={formData.quantity}
+          onChange={handleChange}
+          required
+          style={styles.input}
+          min="1"
+        />
+        {errors.quantity && <p style={styles.error}>{errors.quantity}</p>}
+      </div>
+
+      {/* Category */}
+      <div style={styles.formGroup}>
+        <label htmlFor="category">Category:</label>
+        <select
+          id="category"
+          value={formData.category}
+          onChange={handleChange}
+          required
+          style={styles.input}
+        >
+          <option value="">Select a category</option>
+          <option value="electronics">Electronics</option>
+          <option value="clothing">Clothing</option>
+          <option value="furniture">Furniture</option>
+          <option value="books">Books</option>
+          <option value="accessories">Accessories</option>
+          <option value="sports">Sports</option>
+        </select>
+        {errors.category && <p style={styles.error}>{errors.category}</p>}
+      </div>
+
+      {/* Image Upload */}
+      <div style={styles.formGroup}>
+        <label htmlFor="image">Product Image:</label>
+        <input
+          type="file"
+          id="image"
+          onChange={handleImageChange}
+          required
+          style={styles.input}
+          accept="image/*"
+        />
+        {/* photo preview and get photo  */}
+        {formData.image && (
+          <div>
+            <img
+              className="user-img"
+              src={URL.createObjectURL(formData.image)}
+              alt=" user"
+            />
+          </div>
+        )}
+        {errors.image && <p style={styles.error}>{errors.image}</p>}
+      </div>
+
+      {/* Submit Button */}
+      <button type="submit" style={styles.button}>
+        Add Product
+      </button>
+    </form>
   );
 };
+
+export default AddProductForm;
+
 
 NewProduct.propTypes = {
   onHandleAddNewProduct: PropTypes.func,
@@ -5542,6 +5674,36 @@ export default NewProduct;
 
   // make the api request when currentPage change
 
+
+  const fetchData = (currentPage) => {
+    setIsLoading(true);
+    setError(null);
+    let url = `https://dummyjson.com/products?limit=${itemsPerPage}&skip=${
+      (currentPage - 1) * itemsPerPage
+    }`;
+    
+   
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Data could not be fetched');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setProducts(data.products);
+        console.log(data.products);
+        console.log(currentPage);
+        setTotalPages(Math.ceil(data.total / itemsPerPage));
+      })
+      .catch((error) => setError(error.message))
+      .finally(() => setIsLoading(false));
+  };
+  useEffect(() => {
+    fetchData(currentPage);
+  }, [currentPage]);
+
+
   <Pagination totalPages={totalPages} currentPage={currentPage} onHandleCurrentPage={handleCurrentPage} />
 
   import React from 'react';
@@ -5721,6 +5883,40 @@ export default Pagination;
 
 ```
 
+```css
+/* pagination starts here  */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.pagination button {
+  padding: 10px 15px;
+  margin: 0 2px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination button.active,
+.pagination button.hover {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+}
+
+.pagination button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+/* pagination ends here  */
+```
+
 ##### searching
 
 - Method 1: Search in the same page
@@ -5891,6 +6087,37 @@ const fetchData = (currentPage, searchTerm, sortCriteria) => {
       sortCriteria={sortCriteria}
       onHandleSortChange={handleSortChange}
     />
+```
+
+- add styling for sorting and searching
+
+```css
+/* search and sort starts here  */
+.actions {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.search input {
+  margin-bottom: 1.2rem;
+  padding: 0.5rem;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.5rem;
+}
+.sort {
+  margin-bottom: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sort-select {
+  margin-left: 0.6rem;
+  padding: 0.5rem;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.5rem;
+}
+/* search and sort ends here  */
 ```
 
 ### [Assignment 4 - fetch products](https://github.com/anisul-Islam/react-assignment-4-fetch-products)
@@ -7806,12 +8033,12 @@ export default App;
 
 ## [59. shppoing-cart-useReducer-usecontext](https://github.com/anisul-Islam/shppoing-cart-useReducer-usecontext)
 
-## Part-11 (redux, redex toolkit)
+## Part-11 [redux, redex toolkit](https://github.com/anisul-Islam/redux-toolkit-doc)
 
-- [redux documentation](https://github.com/anisul-Islam/redux-reduxtoolkit-tutorial)
-- redux = useContext + useReducer
-- check redux videos and then redux-toolkit
-- how to use redux devtools
+- [My redux documentation](https://github.com/anisul-Islam/redux-reduxtoolkit-tutorial)
+  - redux = useContext + useReducer
+  - check redux videos and then redux-toolkit
+  - how to use redux devtools
 
 ## [60. Counter App using Redux-toolkit](https://youtu.be/1aOGY0rRBQk)
 
