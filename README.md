@@ -731,34 +731,48 @@ const Todo = () => {
     ```css
       /*reset code and common ends here*/
 
+     /* reset and common styles */
+
       :root {
-        --primary-color: #0bb530; /*Updated to a more vibrant green */
-        --secondary-color: rgba(36, 122, 55, 0.9);
-        --background-color: #f5f5f5; /* Light background color */
-        --text-color: #333; /* Darker text color for better readability */
-        --padding: 0.5rem;
-        --transition: all 0.3s;
-        --border-radius: 0.6rem;
-        --box-shadow: 0.1rem 0.2rem 0.8rem rgba(0, 0, 0, 0.1); /*Softer shadow*/
+        --primary-color: #4CAF50;
+        --secondary-color: #2E7D32;
+        --background-color: #f5f5f5;
+        --text-color: #333;
+        --padding: 1rem;
+        --transition: all 0.3s ease;
+        --border-radius: 0.5rem;
+        --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
 
-      *{
+      - {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
         text-decoration: none;
-        list-style-type: none;
+        list-style: none;
         outline: none;
-      }
-
-      html {
-        scroll-behavior: smooth;
       }
 
       body {
         font-family: 'Arial', sans-serif;
         background-color: var(--background-color);
         color: var(--text-color);
+        margin: 0;
+      }
+
+      h1, h2, h3, p {
+        margin-bottom: 1rem;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+        border-radius: var(--border-radius);
+      }
+
+
+      html {
+        scroll-behavior: smooth;
       }
 
       .flex-space-around {
@@ -824,22 +838,27 @@ const Todo = () => {
 
       .products {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        /* grid-template-columns: repeat(3, minmax(0, 1fr)); */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 2rem;
+        padding: 1rem;
       }
+
+
+     /* Card component styles */
 
       .card {
         background-color: white;
-        padding: var(--padding);
         border-radius: var(--border-radius);
         box-shadow: var(--box-shadow);
+        overflow: hidden;
         transition: var(--transition);
       }
 
       .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0.2rem 0.4rem 1rem rgba(0, 0, 0, 0.2);
+        transform: scale(1.02);
       }
+
 
       .product__img {
         width: 100%;
