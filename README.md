@@ -3388,6 +3388,8 @@ export default Counter;
 #### Add validation to form without any library
 
 ```jsx
+//@ts-nocheck
+//@ts-nocheck
 import React, { useState } from 'react';
 
 // Styles (for inline styling)
@@ -3438,6 +3440,8 @@ const AddProductForm = () => {
     quantity: '',
     category: '',
     image: '',
+    isOnSale: false,
+    condition: '',
   });
 
   // State to manage validation errors
@@ -3445,10 +3449,10 @@ const AddProductForm = () => {
 
   // Handle input changes
   const handleChange = (e) => {
-    const { id, value } = e.target;
+    const { id, value, type, checked, name } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [id]: value,
+      [name || id]: type === 'checkbox' ? checked : value,
     }));
   };
 
@@ -3464,37 +3468,19 @@ const AddProductForm = () => {
   // Validation logic
   const validateForm = () => {
     const newErrors = {};
-
-    // Product Name validation
-    if (!formData.productName.trim()) {
+    if (!formData.productName.trim())
       newErrors.productName = 'Product name is required';
-    }
-
-    // Description validation (at least 10 characters)
-    if (formData.description.length < 10) {
+    if (formData.description.length < 10)
       newErrors.description =
         'Description should be at least 10 characters long';
-    }
-
-    // Price validation (positive number)
-    if (!formData.price || parseFloat(formData.price) <= 0) {
+    if (!formData.price || parseFloat(formData.price) <= 0)
       newErrors.price = 'Price must be a positive number';
-    }
-
-    // Quantity validation (positive integer)
-    if (!formData.quantity || parseInt(formData.quantity, 10) <= 0) {
+    if (!formData.quantity || parseInt(formData.quantity, 10) <= 0)
       newErrors.quantity = 'Quantity must be a positive integer';
-    }
-
-    // Category validation (must be selected)
-    if (!formData.category) {
-      newErrors.category = 'Please select a category';
-    }
-
-    // Image validation (must be uploaded)
-    if (!formData.image) {
-      newErrors.image = 'Please upload a product image';
-    }
+    if (!formData.category) newErrors.category = 'Please select a category';
+    if (!formData.condition)
+      newErrors.condition = 'Please select the product condition';
+    if (!formData.image) newErrors.image = 'Please upload a product image';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0; // Return true if no errors
@@ -3503,8 +3489,6 @@ const AddProductForm = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Validate the form
     if (validateForm()) {
       const newProduct = {
         productName: formData.productName,
@@ -3512,7 +3496,9 @@ const AddProductForm = () => {
         price: parseFloat(formData.price),
         quantity: parseInt(formData.quantity, 10),
         category: formData.category,
-        image: formData.image, // File object
+        image: formData.image,
+        isOnSale: formData.isOnSale,
+        condition: formData.condition,
       };
 
       console.log('Product Submitted: ', newProduct);
@@ -3525,6 +3511,8 @@ const AddProductForm = () => {
         quantity: '',
         category: '',
         image: '',
+        isOnSale: false,
+        condition: '',
       });
       setErrors({});
       e.target.reset(); // Reset file input manually
@@ -3543,6 +3531,7 @@ const AddProductForm = () => {
         <input
           type="text"
           id="productName"
+          name="productName" // Added name
           value={formData.productName}
           onChange={handleChange}
           required
@@ -3556,6 +3545,7 @@ const AddProductForm = () => {
         <label htmlFor="description">Description:</label>
         <textarea
           id="description"
+          name="description" // Added name
           value={formData.description}
           onChange={handleChange}
           required
@@ -3570,6 +3560,7 @@ const AddProductForm = () => {
         <input
           type="number"
           id="price"
+          name="price" // Added name
           value={formData.price}
           onChange={handleChange}
           required
@@ -3586,6 +3577,7 @@ const AddProductForm = () => {
         <input
           type="number"
           id="quantity"
+          name="quantity" // Added name
           value={formData.quantity}
           onChange={handleChange}
           required
@@ -3600,6 +3592,7 @@ const AddProductForm = () => {
         <label htmlFor="category">Category:</label>
         <select
           id="category"
+          name="category" // Added name
           value={formData.category}
           onChange={handleChange}
           required
@@ -3622,22 +3615,75 @@ const AddProductForm = () => {
         <input
           type="file"
           id="image"
+          name="image" // Added name
           onChange={handleImageChange}
           required
           style={styles.input}
           accept="image/*"
         />
-        {/* photo preview and get photo  */}
         {formData.image && (
           <div>
             <img
               className="user-img"
               src={URL.createObjectURL(formData.image)}
-              alt=" user"
+              alt="Selected Preview"
+              style={{ maxWidth: '100%', height: 'auto', marginTop: '10px' }}
             />
           </div>
         )}
         {errors.image && <p style={styles.error}>{errors.image}</p>}
+      </div>
+
+      {/* Checkbox: On Sale */}
+      <div style={styles.formGroup}>
+        <label htmlFor="isOnSale">
+          <input
+            type="checkbox"
+            id="isOnSale"
+            name="isOnSale" // Added name
+            checked={formData.isOnSale}
+            onChange={handleChange}
+          />{' '}
+          On Sale
+        </label>
+      </div>
+
+      {/* Radio Buttons: Product Condition */}
+      <div style={styles.formGroup}>
+        <label>Condition:</label>
+        <div>
+          <label>
+            <input
+              type="radio"
+              name="condition" // Use name for grouping
+              value="new"
+              checked={formData.condition === 'new'}
+              onChange={handleChange}
+            />{' '}
+            New
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="condition" // Use name for grouping
+              value="used"
+              checked={formData.condition === 'used'}
+              onChange={handleChange}
+            />{' '}
+            Used
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="condition" // Use name for grouping
+              value="refurbished"
+              checked={formData.condition === 'refurbished'}
+              onChange={handleChange}
+            />{' '}
+            Refurbished
+          </label>
+        </div>
+        {errors.condition && <p style={styles.error}>{errors.condition}</p>}
       </div>
 
       {/* Submit Button */}
@@ -3654,8 +3700,6 @@ export default AddProductForm;
 NewProduct.propTypes = {
   onHandleAddNewProduct: PropTypes.func,
 };
-
-export default NewProduct;
 
 ```
 
