@@ -4405,6 +4405,184 @@ const SignUp = () => {
 export default SignUp;
 ```
 
+### [Upload image to cloudinary]
+
+### add image for user sign up && cloudinary url for storing image
+
+- create the image input field
+- show the preview
+- register in cloudinary, set upload preset with unsigned: Go to settings => then go to upload and get the unsigned value that will be needed
+
+```tsx
+// Register.tsx
+import { registerUser } from '@/tookit/slices/userSlice';
+import { AppDispatch } from '@/tookit/store';
+import { uploadImageToCloudinary } from '@/utils/cloudinary';
+import React, { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+type FormData = {
+  name: string;
+  email: string;
+  password: string;
+  image: FileList;
+  phone: string;
+  address: string;
+};
+
+export const Register = () => {
+  const navigate = useNavigate();
+  const dispatch: AppDispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
+
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    try {
+      let imageUrl = '';
+      if (data.image && data.image.length > 0) {
+        const file = data.image[0];
+
+        imageUrl = await uploadImageToCloudinary(file);
+        console.log(imageUrl);
+      }
+      const userData = {
+        ...data,
+        image: imageUrl,
+      };
+      const response = await dispatch(registerUser(userData));
+      console.log('Response from Register: ' + response);
+      toast.success(response.payload.message);
+      navigate('/login');
+    } catch (error: any) {
+      toast.error(error.message || 'Registration failed');
+    }
+  };
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
+
+  return (
+    <div className="register">
+      <h2>User Registration</h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="form-field">
+          <label htmlFor="name"> Name: </label>
+          <input
+            type="text"
+            {...register('name', {
+              required: 'Name is required',
+              minLength: {
+                value: 2,
+                message: 'Name must be at least 2 characters',
+              },
+            })}
+          />
+          {errors.name && <p>{errors.name.message}</p>}
+        </div>
+        <div className="form-field">
+          <label htmlFor="name"> Email: </label>
+          <input
+            type="email"
+            {...register('email', {
+              required: 'Email is required',
+              pattern: {
+                value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                message: 'Email is not valid',
+              },
+            })}
+          />
+          {errors.email && <p>{errors.email.message}</p>}
+        </div>
+
+        <div className="form-field">
+          <label htmlFor="name"> password: </label>
+          <input
+            type="password"
+            {...register('password', {
+              required: 'Password is required',
+              minLength: {
+                value: 6,
+                message: 'Pssword must be at least 6 characters',
+              },
+            })}
+          />
+          {errors.password && <p>{errors.password.message}</p>}
+        </div>
+
+        <div className="form-field">
+          <label htmlFor="address"> Address: </label>
+          <textarea id="" {...register('address')}></textarea>
+        </div>
+
+        <div className="form-field">
+          <label htmlFor="image"> Image: </label>
+          <input
+            type="file"
+            accept="image/*"
+            {...register('image')}
+            onChange={handleImageChange}
+          />
+          {imagePreview && (
+            <img
+              src={imagePreview}
+              alt="Image Preview"
+              className="image-preview"
+            />
+          )}
+        </div>
+
+        <button className="btn" type="submit">
+          Register
+        </button>
+      </form>
+    </div>
+  );
+};
+
+// we will add image -> for user register
+// login function
+
+// utils/cloudinary.ts
+export const uploadImageToCloudinary = async (file: File): Promise<string> => {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', 'ulifygv2'); // Ensure you have set up an upload preset in Cloudinary
+  formData.append('folder', 'e-commerce-sda2'); // Specify the folder where you want to store the image
+
+  try {
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/anisul-cloud/image/upload`,
+      {
+        method: 'POST',
+        body: formData,
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error('Failed to upload image');
+    }
+
+    const data = await response.json();
+    return data.secure_url; // Return the secure URL of the uploaded image
+  } catch (error) {
+    console.error('Error uploading image to Cloudinary:', error);
+    throw error;
+  }
+};
+```
+
 ### [1.14 data passing: child to parent component, state lifting](https://youtu.be/xdW2uFA-SOg)
 
 - **Code Example - 40 (state lifting)**
