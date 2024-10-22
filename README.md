@@ -36,8 +36,7 @@
 
    [1.13 Form Validation](#113-form-validation)
 
-   [1.14 data passing: child to parent component, state lifting]
-   (#114-data-passing-child-to-parent-component-state-lifting)
+   [1.14 data passing: child to parent component, state lifting](#114-data-passing-child-to-parent-component-state-lifting)
 
    [1.15 useRef hook - Uncontrolled component](#115-useref-hook---uncontrolled-component)
 
@@ -65,7 +64,7 @@
 
     [2.7 props drilling, useContext Hook](#27-props-drilling-usecontext-hook)
 
-3. [Advanced React.js Topics]()
+3. [Advanced React.js Topics (coming soon)]
 
 4. Assignments
 
@@ -6574,7 +6573,9 @@ const fetchData = (currentPage, searchTerm, sortCriteria) => {
 
 <!-- ### Part-6 (react routing) -->
 
-### [2.4 Routing](https://github.com/anisul-Islam/react-routing-project)
+### [2.4 Routing](https://youtu.be/5reN4CpCOZA?si=4wmfDBrHiWuLCfXV)
+
+- [A github repo for routing](https://github.com/anisul-Islam/react-routing-project)
 
 #### What is Routing?
 
@@ -6654,7 +6655,7 @@ export default App;
 
 ```
 
-#### [Handle Not Found Errors]
+#### Handle Not Found Errors with useRouteError()
 
 - create an Error Page
 
@@ -6719,7 +6720,7 @@ export default App;
 
 ```
 
-#### [Child Route or nested route]
+#### Child Route or nested route with `<Outlet />`
 
 ```jsx
 // layout/Navbar.jsx
@@ -6787,7 +6788,7 @@ export default App;
 
 ```
 
-#### [Link Component]
+#### Link Component
 
 - stop the auto refresh
 
@@ -6839,7 +6840,7 @@ export default Contact;
 
 ```
 
-#### Pass and receive data when navigating
+#### Pass data with useNavigate() and receive the data with useLocation()
 
 - state and useLocation
 
@@ -6946,7 +6947,7 @@ const Profile = () => {
 export default Profile;
 ```
 
-#### [Dynamic routing using useParams](https://youtu.be/g5B0Vq3jHbA)
+#### Dynamic routing with useParams()
 
 - based on the parameters show dynamic data in a page
   - step 1: setup the dynamic parameter in the createBrowserRouter such as `/products/:id` or `categories/:id` in route
@@ -7105,83 +7106,67 @@ const ProductDetails = () => {
 export default ProductDetails;
 ```
 
-#### [useLocation hook](https://youtu.be/EKmr00ZKkCg)
+#### [Route parameter with useParams(), Query parameter with useSearchParams()](https://youtu.be/uQtNSOUepVE)
 
-- **Code Example - 60 (pass data using useLocation hook)**
+- `/users?id=101&age=23`
 
-```js
-// what do we have inside useLocation
-// we have state for passing data
-// Blog.js
-import { useParams, useLocation } from "react-router-dom";
-const Blog = () => {
-  const location = useLocation();
-  console.log(location);
-};
+```jsx
+import * as React from "react";
+import { useSearchParams } from "react-router-dom";
 
-//pass data using state in Link
-<Link className="link" to={title} state={{ id, title, body }}>
-  Learn More
-</Link>;
+function App() {
+  let [searchParams, setSearchParams] = useSearchParams();
 
-import React from "react";
-import { useParams, useLocation } from "react-router-dom";
-
-const Blog = () => {
-  const location = useLocation();
-  const { title } = useParams();
+  function handleSubmit(event) {
+    event.preventDefault();
+    // The serialize function here would be responsible for
+    // creating an object of { key: value } pairs from the
+    // fields in the form that make up the query.
+    let params = serializeFormQuery(event.target);
+    setSearchParams(params);
+  }
 
   return (
     <div>
-      <div>
-        <h2>{title}</h2>
-        {location.state.body && <p>{location.state.body}</p>}
-      </div>
+      <form onSubmit={handleSubmit}>{/* ... */}</form>
+      <h2> {searchParams.get("id")} </h2>
+      <h2> {searchParams.get("age")} </h2>
     </div>
   );
-};
-
-export default Blog;
+}
 ```
-
-#### [route parameter, query parameter](https://youtu.be/uQtNSOUepVE)
 
 #### [Protected Routing](https://youtu.be/MqFZ-tewuW0)
 
-- **Code Example - 61 (protected routing)**
+- layout planning for the dashboard
+  - first create few 2 sidebars `UserSidebar.jsx` and `AdminSidebar.jsx`
+  - then create few 2 components `UserDashboard.jsx` and `AdminDashboard.jsx`
+- Why do you need route protection?
+  - `/dashboard/users/profile` => IsSignedIn => UserProfile Component
+  - `/dashboard/users/orders` => IsSignedIn => UserOrders Component
+  - `/dashboard/admin/profile` => IsSignedIn and IsAdmin => AdminProfile Component
+  - `/dashboard/admin/products` => IsSignedIn and IsAdmin => AdminProducts Component
+  - `/dashboard/admin/categories` => IsSignedIn and IsAdmin => AdminCategories Component
+  - `/dashboard/admin/orders` => IsSignedIn and IsAdmin => AdminOrders Component
+
+- Protect Route based on login status
 
 ```js
-// Protected.js
+// routes/Protected.js
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import SignIn from '../pages/SignIn';
 
 const PortectedRoute = () => {
-  const isSignedIn = false;
+  // api call
+  // redux-store ->user login or not?
+  const isSignedIn = true;
   return isSignedIn ? <Outlet /> : <SignIn />;
 };
 
 export default PortectedRoute;
 
 // index.js - routing
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-import App from './App.jsx';
-import './index.css';
-import Home from './pages/Home.jsx';
-import Products from './pages/Products.jsx';
-import About from './pages/About.jsx';
-import Contact from './pages/Contact.jsx';
-import NotFound from './pages/NotFound.jsx';
-
-import Header from './layout/Header.jsx';
-import SignIn from './pages/SignIn.jsx';
-import Profile from './pages/Profile.jsx';
-import ProductDetails from './components/ProductDetails.jsx';
-import PortectedRoute from './routes/PortectedRoute.jsx';
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -7197,32 +7182,16 @@ const router = createBrowserRouter([
         element: <SignIn />,
       },
       {
-        path: '/profile',
-        element: <Profile />,
-      },
-      {
-        path: '/products',
-        element: <Products />,
-      },
-      {
-        path: '/products/:id',
-        element: <ProductDetails />,
-      },
-      {
-        path: '/contact',
-        element: <Contact />,
-      },
-      {
-        path: '/about',
-        element: <About />,
-      },
-      {
-        path: '/dashboard',
+        path: '/dashboard/users',
         element: <PortectedRoute />,
         children: [
           {
-            path: 'user/profile',
-            element: <Profile />,
+            path: 'profile',
+            element: <UserProfile />,
+          },
+          {
+            path: 'orders',
+            element: <UserOrders />,
           },
         ],
       },
@@ -7235,8 +7204,75 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <RouterProvider router={router} />
   </React.StrictMode>
 );
+```
+
+- step 3: Protect route based on Admin status
+
+```jsx
+// create the AdminRoute component
+
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import SignIn from '../pages/SignIn';
+
+const AdminRoute = () => {
+  // api call
+  // redux-store ->user login or not?
+  const isSignedIn = true;
+  const isAdmin = true;
+  return isSignedIn && isAdmin ? <Outlet /> : <SignIn />;
+};
+
+export default PortectedRoute;
 
 
+// now protect the routes
+// index.js - routing
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Header />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: '/',
+        element: <Home />,
+      },
+      {
+        path: '/signin',
+        element: <SignIn />,
+      },
+      {
+        path: '/dashboard/users',
+        element: <PortectedRoute />,
+        children: [
+          {
+            path: 'profile',
+            element: <UserProfile />,
+          },
+        ],
+      },
+      {
+        path: '/dashboard/admin',
+        element: <AdminRoute />,
+        children: [
+          {
+            path: 'profile',
+            element: <AdminProfile />,
+          },
+          {
+            path: 'orders',
+            element: <AdminProducts />,
+          },
+          {
+            path: 'orders',
+            element: <AdminOrders />,
+          },
+        ],
+      },
+    ],
+  },
+]);
 ```
 
 ### [2.5 CRUD Operations - http methods - user management app](https://github.com/anisul-Islam/user-mgt-crud-react-app)
