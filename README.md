@@ -35,7 +35,9 @@
    [1.12 Controlled components and Form](#112-controlled-components-and-form)
 
    [1.13 Form Validation](#113-form-validation)
-   [1.14 data passing: child to parent component, state lifting](#114-data-passing-child-to-parent-component-state-lifting)
+
+   [1.14 data passing: child to parent component, state lifting]
+   (#114-data-passing-child-to-parent-component-state-lifting)
 
    [1.15 useRef hook - Uncontrolled component](#115-useref-hook---uncontrolled-component)
 
@@ -67,6 +69,8 @@
 
 4. Assignments
 
+   [All React Assignments are here](https://github.com/anisul-Islam/all-react-assignments)
+
    [Assignment 1: product listing App](https://github.com/anisul-Islam/react-assignment-1-products-listing-app)
 
    [Assignment 2: Counter App](https://github.com/anisul-Islam/react-assignment-2-counter-app)
@@ -74,8 +78,10 @@
    [Assignment 3: Add New Product](https://github.com/anisul-Islam/react-assignment-3-add-new-product)
 
    [Assignment 4: fetch products](https://github.com/anisul-Islam/react-assignment-4-fetch-products)
+   
+   [Assignment 5: fetch users](https://github.com/anisul-Islam/react-assignment-4-users-management-app)
 
-   [Assignment-5]()
+   [Assignment-6](https://github.com/anisul-Islam/react-assignment-5-users-management-app-2?tab=readme-ov-file)
 
 ## 1. Basic React.js Topics
 
