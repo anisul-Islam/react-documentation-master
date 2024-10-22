@@ -3288,13 +3288,14 @@ export default Counter;
   import Card from './Card';
 
   const NewProduct = () => {
-    const [product, setProduct] = useState({
-      title: '',
-      description: '',
-      price: '',
-      category: '',
-      image: '',
-    });
+    const initialState = {
+        title: '',
+        description: '',
+        price: '',
+        category: '',
+        image: '',
+      }
+    const [product, setProduct] = useState(initalState);
 
     const handleChange = (event) => {
       setProduct((prevState) => ({
@@ -3309,14 +3310,7 @@ export default Counter;
         id: new Date().getTime().toString(),
         ...product,
       };
-      console.log(newProduct);
-      setProduct({
-        title: '',
-        description: '',
-        price: '',
-        category: '',
-        image: '',
-      });
+      setProduct(initalState);
     };
 
     return (
@@ -6576,14 +6570,19 @@ const fetchData = (currentPage, searchTerm, sortCriteria) => {
 
 ### [2.4 Routing](https://github.com/anisul-Islam/react-routing-project)
 
-- [react-routing-project](https://github.com/anisul-Islam/react-routing-project)
+#### What is Routing?
+
+- Navigating from one route to another
+
+#### Basic Routing setup
+
 - [Learn from react-router official side](https://reactrouter.com/en/main/start/tutorial)
 - install the package `npm install -D react-router-dom`, if you are using react-router 5 `npm i -D react-router-dom@latest`
-- create few pages inside pages folder: Home, Contact, About, Products,NotFound, Layout.
+- create few pages inside pages folder: Home, Contact, About, Products.
 - **Code Example - 56 (basic routing)**
 
 ```js
-// create few pages -> Home.js, Products.js, Contact.js, Error.js
+// create few pages -> Home.js, Products.js, Contact.js, NotFound.js
 const Home = () => {
   return (
     <div>
@@ -6606,18 +6605,6 @@ const Contact = () => {
 };
 
 export default Contact;
-
-
-const NotFound = () => {
-  return (
-    <div>
-      <h1>404 Page not found</h1>
-      <p>The page you are looking for does not exist.</p>
-    </div>
-  );
-};
-
-export default NotFound;
 
 const Products = () => {
   return (
@@ -6650,11 +6637,7 @@ const router = createBrowserRouter([
    {
     path: '/products',
     element: <Products />,
-  },
-  {
-    path: '*',
-    element: <NotFound />,
-  },
+  }
 ]);
 
 const App = () => {
@@ -6662,213 +6645,458 @@ const App = () => {
 };
 
 export default App;
+
+```
+
+#### [Handle Not Found Errors]
+
+- create an Error Page
+
+```jsx
+import React from 'react'
+
+import { useRouteError } from 'react-router-dom';
+
+export default function ErrorPage() {
+  const error = useRouteError();
+  console.error(error);
+
+  return (
+    <div id="error-page">
+      <h1>Oops!</h1>
+      <p>Sorry, an unexpected error has occurred.</p>
+      <p>
+        <i>{error.statusText || error.message}</i>
+      </p>
+    </div>
+  );
+}
+
+// App.jsx
+import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Navbar from './layout/Navbar';
+import ErrorPage from './pages/NotFound';
+
+const App = () => {
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Navbar />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: '/',
+          element: <Home />,
+        },
+        {
+          path: '/contact',
+          element: <Contact />,
+        },
+        {
+          path: '/about',
+          element: <About />,
+        },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
+};
+
+export default App;
+
 
 ```
 
 #### [Child Route or nested route]
 
-```tsx
-import Home from './pages/Home';
-import Contact from './pages/Contact';
-import NotFound from './pages/NotFound';
-
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-import Products from './pages/Products';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home />,
-    children: [
-      // first render parent then child
-      {
-        // got to paranet and add outlet
-        path: '/contact',
-        element: <Contact />,
-      },
-    ],
-  },
-
-  {
-    path: '/products',
-    element: <Products />,
-  },
-  {
-    path: '*',
-    element: <NotFound />,
-  },
-]);
-
-const App = () => {
-  return <RouterProvider router={router} />;
-};
-
-export default App;
-
-// Home.tsx
+```jsx
+// layout/Navbar.jsx
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-const Home = () => {
-  return (
-    <div>
-      <h1>home page</h1>
-      <p>Welcome to home page</p>
-      <Outlet />
-    </div>
-  );
-};
-
-export default Home;
-
-```
-
-#### [Navigation and redirect]()
-
-- **Code Example - 57 (basic routing with Navbar)**
-
-```js
 const Navbar = () => {
   return (
-    <header>
+    <>
       <nav>
         <ul>
           <li>
             <a href="/">Home</a>
           </li>
           <li>
-            <a href="/contact">Contact</a>
-          </li>
-          <li>
-            <a href="/products">Products</a>
-          </li>
-          <li>
             <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/contact">Contact</a>
           </li>
         </ul>
       </nav>
-    </header>
+      <Outlet />
+    </>
   );
 };
 
 export default Navbar;
 
+// App.jsx
+import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Navbar from './layout/Navbar';
+
+const App = () => {
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Navbar />,
+      children: [
+        {
+          path: '/',
+          element: <Home />,
+        },
+        {
+          path: '/contact',
+          element: <Contact />,
+        },
+        {
+          path: '/about',
+          element: <About />,
+        }
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
+};
+
+export default App;
+
 ```
 
-- **Code Example - 58 (navigate with useNavigate)**
+#### [Link Component]
 
-```js
+- stop the auto refresh
 
+```jsx
+import React from 'react';
+import { Link, Outlet } from 'react-router-dom';
+
+const Navbar = () => {
+  return (
+    <>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
+        </ul>
+      </nav>
+      <Outlet />
+    </>
+  );
+};
+
+export default Navbar;
+```
+
+#### Programmatically routing with useNavigate()
+
+```jsx
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const Contact = () => {
+  const navigate = useNavigate();
+  return (
+    <div>
+      <h2>Contact Page</h2>
+      <button onClick={() => navigate('/')}>Go To Home</button>
+    </div>
+  );
+};
+
+export default Contact;
+
+```
+
+#### Pass and receive data when navigating
+
+- state and useLocation
+
+```jsx
+// pass data when routing:  navigate('/profile', { state: userData });
+//@ts-nocheck
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const SignIn = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUser((prevUser) => {
+      return { ...prevUser, [name]: value };
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // user.email
+    // user.password
+
+    // make a request to backend api /api/users/login
+    const userData = {
+      id: Date.now().toString(),
+      name: 'Anisul Islam',
+      email: 'anisul2010s@yahoo.co.uk',
+      password: '123456',
+      address: 'sylhet, Bangladesh',
+    };
+
+    if (user.email === userData.email && user.password === userData.password) {
+      console.log('successfully signed in');
+      navigate('/profile', { state: userData });
+    } else {
+      navigate('/signin');
+    }
+  };
+  return (
+    <div>
+      <h2>User Sign In</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="email">Email: </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={user.email}
+            onChange={handleChange}
+          />
+        </div>
+        <br />
+        <div>
+          <label htmlFor="password">Password: </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={user.password}
+            onChange={handleChange}
+          />
+        </div>
+        <br />
+
+        <button type="submit">Signin</button>
+      </form>
+    </div>
+  );
+};
+
+export default SignIn;
+
+
+// receieve the data
+// const location = useLocation();
+// const {state} = useLocation();
+// console.log(location);
+
+// {state ? do something: do something else}
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+
+const Profile = () => {
+  const { state } = useLocation();
+  console.log(state);
+  return (
+    <div>
+      <h2>Profile Page</h2>
+      <h3>Name: {state.name}</h3>
+      <h3>Email: {state.email}</h3>
+      <h3>address: {state.address}</h3>
+    </div>
+  );
+};
+
+export default Profile;
 ```
 
 #### [Dynamic routing using useParams](https://youtu.be/g5B0Vq3jHbA)
 
-- **Code Example - 59 (dynamic routing)**
 - based on the parameters show dynamic data in a page
-- step 1: create some dummy data
+  - step 1: setup the dynamic parameter in the createBrowserRouter such as `/products/:id` or `categories/:id` in route
+  - step 2: pass the params when routing such as `<Link to={`/products/${product.id}`}>Show details</Link>`
+  - step 3: use the params to load the data for specific item `const { id } = useParams();`
 
-```js
-export const blogsData = [
-  {
-    id: 1,
-    title: "html",
-    body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe doloremque impedit cumque aperiam dignissimos cum eveniet reiciendis iste asperiores voluptates repudiandae et, deserunt nobis commodi hic! Ratione accusamus assumenda alias rerum, esse et aperiam nihil sunt amet nobis quod libero sapiente! Harum reiciendis quos tempora blanditiis recusandae impedit iusto ipsum?",
-  },
-  {
-    id: 2,
-    title: "css",
-    body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe doloremque impedit cumque aperiam dignissimos cum eveniet reiciendis iste asperiores voluptates repudiandae et, deserunt nobis commodi hic! Ratione accusamus assumenda alias rerum, esse et aperiam nihil sunt amet nobis quod libero sapiente! Harum reiciendis quos tempora blanditiis recusandae impedit iusto ipsum?",
-  },
-  {
-    id: 3,
-    title: "js",
-    body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe doloremque impedit cumque aperiam dignissimos cum eveniet reiciendis iste asperiores voluptates repudiandae et, deserunt nobis commodi hic! Ratione accusamus assumenda alias rerum, esse et aperiam nihil sunt amet nobis quod libero sapiente! Harum reiciendis quos tempora blanditiis recusandae impedit iusto ipsum?",
-  },
-  {
-    id: 4,
-    title: "react.js",
-    body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe doloremque impedit cumque aperiam dignissimos cum eveniet reiciendis iste asperiores voluptates repudiandae et, deserunt nobis commodi hic! Ratione accusamus assumenda alias rerum, esse et aperiam nihil sunt amet nobis quod libero sapiente! Harum reiciendis quos tempora blanditiis recusandae impedit iusto ipsum?",
-  },
-];
-```
+```jsx
+// step 1: set up the router
+import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-- step 2: load and map the data in Blogs.js page
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import ErrorPage from './pages/ErrorPage';
+import Navbar from './layout/Navbar';
+import SignIn from './pages/SignIn';
+import Profile from './pages/Profile';
+import ProductDetails from './pages/ProductDetails';
 
-```js
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
-import { blogsData } from "../data";
-const Blogs = () => {
-  const [blogs, setBlogs] = useState(blogsData);
-
-  const truncateString = (str, number) => {
-    if (str.length > number) {
-      return str.slice(0, number) + "...";
-    } else return str;
-  };
-
-  const renderBlogsElement = blogs.map((blog) => {
-    return (
-      <article key={blog.id} className="blog">
-        <h3>{blog.title}</h3>
-        <p>{truncateString(blog.body, 100)}</p>
-        <Link className="link" to={blog.title}>
-          Learn More
-        </Link>
-      </article>
-    );
-  });
+const App = () => {
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Navbar />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: '/',
+          element: <Home />,
+        },
+        {
+          path: '/about',
+          element: <About />,
+        },
+        {
+          path: '/contact',
+          element: <Contact />,
+        },
+        {
+          path: '/signin',
+          element: <SignIn />,
+        },
+        {
+          path: '/profile',
+          element: <Profile />,
+        },
+        {
+          path: '/products/:id',
+          element: <ProductDetails />,
+        },
+      ],
+    },
+  ]);
 
   return (
-    <div>
-      <h2>Blogs Page</h2>
-      <section className="blogs">{renderBlogsElement}</section>
-    </div>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 };
 
-export default Blogs;
-// blogs/html -> HTML.JS -> Blog.JS
-// blogs/css -> CSS.JS -> Blog.JS
-// blogs/js -> JS.JS -> Blog.JS
-// blogs/react -> React.JS -> Blog.JS
-```
+export default App;
 
-- step 3: set and get parameter
+// product/1   => details of product 1 => ProductDetails1.jsx
+// product/2   => details of product 2 => ProductDetails2.jsx
+// product/3   => details of product 2 => ProductDetails3.jsx
+// product/4   => details of product 2 => ProductDetails4.jsx
 
-```js
-// in route setup
-<Route path="/blogs/:title" element={<Blog />} />;
+// product/1   => details of product 1 => ProductDetails.jsx
+// product/2   => details of product 2 => ProductDetails.jsx
+// product/3   => details of product 3 => ProductDetails.jsx
+// product/4   => details of product 4 => ProductDetails.jsx
 
-// where we wish to recieve the dynamic params
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { blogsData } from "../data";
 
-const Blog = () => {
-  const { title } = useParams();
-  const [blogs, setBlogs] = useState(blogsData);
-  const [singleBlog, setSingleBlog] = useState();
+// Load some data in a component to make things interesting
+import React, { useEffect, useState } from 'react';
+import Products from '../components/Products';
+
+const Home = () => {
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const blogData = blogs.find((blog) => blog.title === title);
-    setSingleBlog(blogData);
-  }, [blogs, title]);
-
-  console.log(singleBlog);
+    fetch('https://fakestoreapi.com/products')
+      .then((res) => res.json())
+      .then((json) => setProducts(json));
+  }, []);
 
   return (
     <div>
-      <div>
-        <h2>{title}</h2>
-        {singleBlog && <p>{singleBlog.body}</p>}
-      </div>
+      <Products products={products} />
     </div>
   );
 };
 
-export default Blog;
+export default Home;
+
+// step 2: pass the params when routing
+//@ts-nocheck
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const Products = ({ products }) => {
+  return (
+    <div className="products">
+      {products.map((product) => {
+        return (
+          <div key={product.id}>
+            <img src={product.image} alt={product.title} />
+            <h2>{product.title}</h2>
+            <p>price: {product.price}</p>
+            <p>category: {product.category}</p>
+            <Link to={`/products/${product.id}`}>Show details</Link>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default Products;
+
+// step 3: use the params to fetch an item
+//@ts-nocheck
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+const ProductDetails = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    fetch(`https://fakestoreapi.com/products/${id}`)
+      .then((res) => res.json())
+      .then((json) => setProduct(json));
+  }, []);
+
+  if (!product) {
+    return <h2>No data for the product</h2>;
+  }
+
+  const { image, title, description, price, rating } = product;
+
+  return (
+    <div>
+      <h2>Product Details Page</h2>
+      <img src={image} alt={title} />
+      <h3>{title}</h3>
+      <p>{description}</p>
+      <p>price: {price}</p>
+      <p>rating: {rating && rating.rate}/5</p>
+    </div>
+  );
+};
+
+export default ProductDetails;
 ```
 
 #### [useLocation hook](https://youtu.be/EKmr00ZKkCg)
