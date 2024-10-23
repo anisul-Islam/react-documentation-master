@@ -7275,6 +7275,14 @@ const router = createBrowserRouter([
 ]);
 ```
 
+#### [handle navbar programatically]
+
+```jsx
+// when you sign in set the data in localstorage
+
+// use the local storage in the Navbar and Protect Route as well
+```
+
 ### [2.5 CRUD Operations - http methods - user management app](https://github.com/anisul-Islam/user-mgt-crud-react-app)
 
 - running a json server in react -> `npm i json-server && npx json-server -p 3001 -w database/db.json`
@@ -7746,6 +7754,783 @@ export default App;
     color: #000;
 }
 ```
+
+#### UseCases of useContext()
+
+The `useContext` hook in React is used to share state or functions between components without needing to pass props manually at every level. It allows for easier state management across different components, making the code more readable and maintainable when the same data is needed by multiple components.
+
+#### Common Use Cases for `useContext`
+
+1. **Global State Management**:
+   Instead of passing props through every component in the tree, you can use `useContext` to share state globally across different parts of your app. This is useful for authentication, user preferences, or theme settings.
+
+2. **Theming**:
+   Sharing a theme (dark mode, light mode) across components is a typical use case where `useContext` helps avoid prop drilling.
+
+3. **Authentication**:
+   You can store the current authenticated user or authentication state (logged in or logged out) in context and use it across multiple components.
+
+4. **Language/Localization**:
+   Managing and updating the language across different components is another use case. You can store the current language in context, and all components can access and react to changes in the language.
+
+5. **Settings or Configuration**:
+   When you have shared configuration settings (e.g., API endpoints, application settings) across multiple components, `useContext` is handy.
+
+---
+
+#### Example 1: Global Theme using `useContext`
+
+Here’s a simple example where a global theme (light/dark mode) is shared across components:
+
+```js
+import React, { useState, createContext, useContext } from 'react';
+
+// Create a ThemeContext
+const ThemeContext = createContext();
+
+// ThemeProvider component to provide theme value to the entire app
+const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+const ThemeToggler = () => {
+  // Use the theme from context
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
+  return (
+    <div>
+      <p>Current Theme: {theme}</p>
+      <button onClick={toggleTheme}>Toggle Theme</button>
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <ThemeProvider>
+      <div>
+        <h1>Theme Context Example</h1>
+        <ThemeToggler />
+      </div>
+    </ThemeProvider>
+  );
+};
+
+export default App;
+```
+
+In this example:
+
+- The `ThemeContext` is created and provided to all components in the app using the `ThemeProvider`.
+- `ThemeToggler` consumes the theme using `useContext` and allows the user to toggle the theme between light and dark.
+
+---
+
+#### Example 2: User Authentication using `useContext`
+
+This example demonstrates how to manage user authentication state globally using `useContext`:
+
+```js
+import React, { useState, createContext, useContext } from 'react';
+
+// Create an AuthContext
+const AuthContext = createContext();
+
+// AuthProvider component to manage auth state
+const AuthProvider = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const login = () => setIsAuthenticated(true);
+  const logout = () => setIsAuthenticated(false);
+
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+// Component that displays login/logout buttons based on authentication status
+const AuthButtons = () => {
+  const { isAuthenticated, login, logout } = useContext(AuthContext);
+
+  return (
+    <div>
+      {isAuthenticated ? (
+        <button onClick={logout}>Logout</button>
+      ) : (
+        <button onClick={login}>Login</button>
+      )}
+    </div>
+  );
+};
+
+// Another component that conditionally renders content based on auth status
+const Dashboard = () => {
+  const { isAuthenticated } = useContext(AuthContext);
+
+  return (
+    <div>
+      {isAuthenticated ? <h2>Welcome, User!</h2> : <h2>Please log in to continue</h2>}
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <div>
+        <h1>Authentication Context Example</h1>
+        <AuthButtons />
+        <Dashboard />
+      </div>
+    </AuthProvider>
+  );
+};
+
+export default App;
+```
+
+In this example:
+
+- The `AuthContext` is created to manage the authentication state globally.
+- `AuthButtons` and `Dashboard` use `useContext` to access authentication state (`isAuthenticated`) and update functions (`login`, `logout`) without passing them down as props.
+
+---
+
+#### Example 3: Language Context using `useContext`
+
+This is an example of using `useContext` for language/localization in an app:
+
+```js
+import React, { useState, createContext, useContext } from 'react';
+
+// Create a LanguageContext
+const LanguageContext = createContext();
+
+// LanguageProvider component
+const LanguageProvider = ({ children }) => {
+  const [language, setLanguage] = useState('en');
+
+  const switchLanguage = (lang) => setLanguage(lang);
+
+  return (
+    <LanguageContext.Provider value={{ language, switchLanguage }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+};
+
+// Component to select language
+const LanguageSelector = () => {
+  const { language, switchLanguage } = useContext(LanguageContext);
+
+  return (
+    <div>
+      <p>Current Language: {language}</p>
+      <button onClick={() => switchLanguage('en')}>English</button>
+      <button onClick={() => switchLanguage('es')}>Spanish</button>
+    </div>
+  );
+};
+
+// Component to display content in selected language
+const Content = () => {
+  const { language } = useContext(LanguageContext);
+
+  return <p>{language === 'en' ? 'Hello!' : '¡Hola!'}</p>;
+};
+
+const App = () => {
+  return (
+    <LanguageProvider>
+      <div>
+        <h1>Language Context Example</h1>
+        <LanguageSelector />
+        <Content />
+      </div>
+    </LanguageProvider>
+  );
+};
+
+export default App;
+```
+
+In this example:
+
+- The `LanguageContext` stores the current language (`language`) and a method to switch the language (`switchLanguage`).
+- The `LanguageSelector` component allows users to switch between languages, and the `Content` component displays content based on the selected language.
+
+Sure! I'll provide examples for the remaining use cases where `useContext` can be applied:
+
+- **Settings/Configuration**
+- **Shared Modals or Notifications**
+
+#### Example 4: Configuration/Settings Using `useContext`
+
+This example demonstrates how to use `useContext` to manage app-wide configuration or settings like an API base URL, or any application-wide settings that need to be accessed across different components.
+
+#### Code Example
+
+```js
+import React, { createContext, useContext } from 'react';
+
+// Create a ConfigurationContext
+const ConfigContext = createContext();
+
+// ConfigProvider component
+const ConfigProvider = ({ children }) => {
+  const config = {
+    apiBaseUrl: 'https://api.example.com',
+    appName: 'My App',
+    theme: 'dark',
+  };
+
+  return (
+    <ConfigContext.Provider value={config}>
+      {children}
+    </ConfigContext.Provider>
+  );
+};
+
+// Component that uses configuration context
+const DisplayConfig = () => {
+  const config = useContext(ConfigContext);
+
+  return (
+    <div>
+      <h2>App Name: {config.appName}</h2>
+      <p>API Base URL: {config.apiBaseUrl}</p>
+      <p>Current Theme: {config.theme}</p>
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <ConfigProvider>
+      <div>
+        <h1>App Configuration</h1>
+        <DisplayConfig />
+      </div>
+    </ConfigProvider>
+  );
+};
+
+export default App;
+```
+
+In this example:
+
+- The `ConfigContext` stores application-wide configuration settings.
+- The `DisplayConfig` component accesses the config using `useContext` and displays it.
+
+This pattern is very useful when you need to share settings like API endpoints, app metadata, or feature flags across multiple components.
+
+---
+
+#### Example 5: Shared Modal/Notification Using `useContext`
+
+Another great use case for `useContext` is managing modals or notifications across different parts of the application, so they can be triggered from anywhere.
+
+- Code Example
+
+```js
+import React, { useState, createContext, useContext } from 'react';
+
+// Create a ModalContext
+const ModalContext = createContext();
+
+// ModalProvider component to manage modal state
+const ModalProvider = ({ children }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  return (
+    <ModalContext.Provider value={{ isModalOpen, openModal, closeModal }}>
+      {children}
+    </ModalContext.Provider>
+  );
+};
+
+// Modal component
+const Modal = () => {
+  const { isModalOpen, closeModal } = useContext(ModalContext);
+
+  if (!isModalOpen) return null;
+
+  return (
+    <div style={{
+      position: 'fixed', top: '0', left: '0', right: '0', bottom: '0',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)', display: 'flex',
+      justifyContent: 'center', alignItems: 'center'
+    }}>
+      <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px' }}>
+        <h2>Modal Title</h2>
+        <p>This is a modal.</p>
+        <button onClick={closeModal}>Close Modal</button>
+      </div>
+    </div>
+  );
+};
+
+// Component to trigger modal
+const TriggerModal = () => {
+  const { openModal } = useContext(ModalContext);
+
+  return (
+    <button onClick={openModal}>Open Modal</button>
+  );
+};
+
+const App = () => {
+  return (
+    <ModalProvider>
+      <div>
+        <h1>Modal Context Example</h1>
+        <TriggerModal />
+        <Modal />
+      </div>
+    </ModalProvider>
+  );
+};
+
+export default App;
+```
+
+In this example:
+
+- The `ModalContext` provides a mechanism to open and close the modal globally.
+- The `Modal` component displays the modal when `isModalOpen` is true.
+- The `TriggerModal` component allows any part of the app to trigger the modal.
+
+This pattern can also be used for notifications, toast messages, or any other component that needs to be triggered from multiple places in your app.
+
+---
+
+#### Example 6: Global User Settings or Preferences
+
+You might want to save a user’s preferences globally, like preferred currency, date formats, or notification preferences. `useContext` is perfect for this kind of use case.
+
+- Code Example
+
+```js
+import React, { useState, createContext, useContext } from 'react';
+
+// Create a PreferencesContext
+const PreferencesContext = createContext();
+
+// PreferencesProvider component
+const PreferencesProvider = ({ children }) => {
+  const [preferences, setPreferences] = useState({
+    currency: 'USD',
+    dateFormat: 'MM/DD/YYYY',
+  });
+
+  const updatePreferences = (newPreferences) => {
+    setPreferences((prevPreferences) => ({
+      ...prevPreferences,
+      ...newPreferences,
+    }));
+  };
+
+  return (
+    <PreferencesContext.Provider value={{ preferences, updatePreferences }}>
+      {children}
+    </PreferencesContext.Provider>
+  );
+};
+
+// Component to update currency preference
+const CurrencyPreference = () => {
+  const { preferences, updatePreferences } = useContext(PreferencesContext);
+
+  const handleCurrencyChange = (e) => {
+    updatePreferences({ currency: e.target.value });
+  };
+
+  return (
+    <div>
+      <h3>Preferred Currency: {preferences.currency}</h3>
+      <select value={preferences.currency} onChange={handleCurrencyChange}>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="JPY">JPY</option>
+      </select>
+    </div>
+  );
+};
+
+// Component to update date format preference
+const DateFormatPreference = () => {
+  const { preferences, updatePreferences } = useContext(PreferencesContext);
+
+  const handleDateFormatChange = (e) => {
+    updatePreferences({ dateFormat: e.target.value });
+  };
+
+  return (
+    <div>
+      <h3>Preferred Date Format: {preferences.dateFormat}</h3>
+      <select value={preferences.dateFormat} onChange={handleDateFormatChange}>
+        <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+        <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+      </select>
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <PreferencesProvider>
+      <div>
+        <h1>User Preferences</h1>
+        <CurrencyPreference />
+        <DateFormatPreference />
+      </div>
+    </PreferencesProvider>
+  );
+};
+
+export default App;
+```
+
+In this example:
+
+- The `PreferencesContext` holds the user's preferences and provides a method to update them.
+- `CurrencyPreference` and `DateFormatPreference` components allow the user to update these settings.
+- All changes are reflected globally across the app using `useContext`.
+
+---
+
+#### Example 7: Fetching Data with Context and Sharing Across Components
+
+Fetching data and providing it through React's `useContext` is a common and efficient pattern, especially when you want to share fetched data across multiple components without having to pass it down through props (prop drilling). In this pattern, the fetched data is stored in a context provider, and any component that needs this data can consume it directly via `useContext`.
+
+### Example: Fetching Data with Context and Sharing Across Components
+
+We'll use an API to fetch data and make it available throughout the application using `Context` and `useContext`. In this case, let's assume we are fetching a list of products from an API.
+
+#### Step-by-Step Breakdown
+
+1. **Create a `DataContext`**: This will hold the fetched data and the logic for fetching/updating it.
+2. **Create a `DataProvider`**: This will manage the fetching logic and provide the fetched data to children components.
+3. **Fetch Data Inside the Provider**: We'll use `useEffect` to fetch data once the provider mounts.
+4. **Consume Data Using `useContext`**: Any child component can consume the data using `useContext`.
+
+---
+
+### Step 1: Create a `DataContext`
+
+```js
+import React, { createContext, useContext, useEffect, useState } from 'react';
+
+// Create a DataContext
+const DataContext = createContext();
+
+// Create a custom hook for easier access to the context
+export const useData = () => {
+  return useContext(DataContext);
+};
+```
+
+---
+
+### Step 2: Create a `DataProvider` to Fetch and Store Data
+
+This provider will handle fetching data from an API, store it in state, and make it available to all children components.
+
+```js
+// DataProvider Component
+export const DataProvider = ({ children }) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch data from an API (replace with any API URL)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://api.example.com/products');
+        const result = await response.json();
+        setData(result); // Set the fetched data
+      } catch (error) {
+        setError('Failed to fetch data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array to fetch once when component mounts
+
+  // Provide the data, loading status, and any errors to children components
+  return (
+    <DataContext.Provider value={{ data, loading, error }}>
+      {children}
+    </DataContext.Provider>
+  );
+};
+```
+
+---
+
+### Step 3: Consume Data Using `useContext`
+
+In child components, you can now consume the fetched data directly using the `useData` hook.
+
+#### Example Component 1: Display List of Products
+
+```js
+import React from 'react';
+import { useData } from './DataContext'; // Import the custom hook
+
+const ProductList = () => {
+  const { data, loading, error } = useData(); // Consume the context
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  return (
+    <div>
+      <h2>Product List</h2>
+      <ul>
+        {data.map((product) => (
+          <li key={product.id}>
+            {product.name} - ${product.price}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ProductList;
+```
+
+---
+
+### Step 4: Use the `DataProvider` in Your App
+
+In your main application file (`App.js`), wrap your application (or a section of it) in the `DataProvider` so that the data can be accessed throughout the component tree.
+
+```js
+import React from 'react';
+import { DataProvider } from './DataContext'; // Import DataProvider
+import ProductList from './ProductList';
+
+const App = () => {
+  return (
+    <DataProvider>
+      <div>
+        <h1>Product Dashboard</h1>
+        <ProductList />
+      </div>
+    </DataProvider>
+  );
+};
+
+export default App;
+```
+
+---
+
+### Explanation
+
+1. **`DataContext`**: Provides the data, loading status, and error across the app.
+2. **`DataProvider`**: Handles fetching data once on mount (using `useEffect`) and stores it in state.
+3. **`useData` Hook**: Makes it easy to access the context data and consume it in any component.
+4. **`ProductList` Component**: Accesses the fetched data and displays it in a list. It handles loading and error states as well.
+
+### Benefits of Fetching Data with Context
+
+- **Global Data Access**: Makes the fetched data available throughout the app without the need for prop drilling.
+- **Centralized State Management**: Keeps the fetching logic in one place, ensuring consistency across the app.
+- **Scalability**: You can add more data-fetching providers for other parts of your app (e.g., user data, settings, etc.) and manage them all efficiently.
+
+### Use Cases
+
+- Sharing fetched data (e.g., products, users, articles) globally in an app.
+- Caching data in context to avoid redundant fetch requests across components.
+- Centralizing app-wide states (like loading, error handling) for API data.
+
+This approach is particularly useful in apps that need to display the same data in multiple places, or when multiple components need access to the same data asynchronously.
+
+---
+
+Here’s how you can fetch data and provide it via React `useContext` without using a custom hook. Instead of a custom hook, components will directly use `useContext` to consume the data.
+
+---
+
+#### Step-by-Step Approach
+
+1. **Create the `DataContext`**: This will hold the fetched data.
+2. **Create the `DataProvider`**: It will fetch data and provide it to the components.
+3. **Consume the `DataContext`** directly using `useContext`.
+
+---
+
+#### Step 1: Create the `DataContext`
+
+```js
+import React, { createContext, useState, useEffect } from 'react';
+
+// Create the DataContext
+export const DataContext = createContext();
+```
+
+---
+
+#### Step 2: Create the `DataProvider`
+
+This component will fetch the data and store it in state. The `DataContext.Provider` will make the data available to all components wrapped inside it.
+
+```js
+// DataProvider Component
+export const DataProvider = ({ children }) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch data from an API (replace with any API URL)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://api.example.com/products');
+        const result = await response.json();
+        setData(result); // Set the fetched data
+      } catch (error) {
+        setError('Failed to fetch data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <DataContext.Provider value={{ data, loading, error }}>
+      {children}
+    </DataContext.Provider>
+  );
+};
+```
+
+---
+
+#### Step 3: Consuming the Data Using `useContext`
+
+Any component can now consume the `DataContext` using `useContext` directly.
+
+#### Example Component: Display List of Products
+
+```js
+import React, { useContext } from 'react';
+import { DataContext } from './DataContext'; // Import the context
+
+const ProductList = () => {
+  const { data, loading, error } = useContext(DataContext); // Use useContext directly
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  return (
+    <div>
+      <h2>Product List</h2>
+      <ul>
+        {data.map((product) => (
+          <li key={product.id}>
+            {product.name} - ${product.price}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ProductList;
+```
+
+---
+
+#### Step 4: Wrap the Application with `DataProvider`
+
+Wrap the main app (or any component tree that needs access to the data) with the `DataProvider` in your `App.js` file.
+
+```js
+import React from 'react';
+import { DataProvider } from './DataContext'; // Import the provider
+import ProductList from './ProductList';
+
+const App = () => {
+  return (
+    <DataProvider>
+      <div>
+        <h1>Product Dashboard</h1>
+        <ProductList />
+      </div>
+    </DataProvider>
+  );
+};
+
+export default App;
+```
+
+- Explanation
+
+- **DataContext**: Provides the fetched data, loading state, and any errors.
+- **DataProvider**: Manages the data fetching and passes the data, loading, and error state via `DataContext.Provider`.
+- **ProductList**: Directly consumes the data using `useContext`.
+
+#### Why Use `useContext` Here?
+
+- **Avoid Prop Drilling**: You don’t need to pass the fetched data through multiple layers of components.
+- **Centralized State**: Fetching logic and state (data, loading, error) is managed in a single place (`DataProvider`), making it easier to maintain.
+- **Simpler Component Logic**: Individual components, like `ProductList`, can focus on rendering logic instead of worrying about data fetching.
+
+#### Common Use Cases for Fetching Data in Context
+
+- Sharing fetched data (e.g., products, users, settings) across different components in the app.
+- Avoiding prop drilling by providing a global or shared state for components that need to access the same fetched data.
+- Managing global state like user authentication, user profiles, or other application-wide data.
+
+#### Conclusion
+
+In each of these use cases, `useContext` helps you manage state across multiple components without prop drilling. The ability to share state or methods globally within your app makes it much easier to maintain and reduces the amount of boilerplate code you need to write.
+
+**Summary of Use Cases:**
+
+1. **Theming**: Share light/dark mode across components.
+2. **Authentication**: Manage user login/logout globally.
+3. **Language/Localization**: Manage selected language for content.
+4. **Configuration/Settings**: Share app-wide configuration values (e.g., API URLs, app names).
+5. **Shared Modals or Notifications**: Trigger modals or notifications from anywhere in the app.
+6. **User Preferences**: Manage global user settings like currency or date format.
+
+Let me know if you'd like further details on any of these examples!
 
 #### [useReducer + useContext]
 
