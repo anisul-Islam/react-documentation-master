@@ -7531,9 +7531,28 @@ export default Component4;
 
 #### [useContext Hook](https://youtu.be/RYeRn5_xL7k)
 
-- it helps us to create component level, app level or global states. It also helps us to avoid state lifting.
-- Context lets the parent component make some information available to any component in the tree below it—no matter how deep—without passing it explicitly through props. (collected from react documentation)
-- use cases of context: theming, routing, managing states
+The `useContext` hook in React is used to share state or functions between components without needing to pass props manually at every level. It allows for easier state management across different components, making the code more readable and maintainable when the same data is needed by multiple components.
+
+- it helps us to create component level, app level or global states.
+- It also helps us to avoid state lifting.
+- steps to use the context
+  - step 1: create the context
+  - step 2: provide the context
+  - step 3: use the context
+
+##### Common Use Cases for `useContext`
+
+1. **Global State Management**:
+   Instead of passing props through every component in the tree, you can use `useContext` to share state globally across different parts of your app. This is useful for authentication, user preferences, or theme settings.
+2. **Theming**: Share light/dark mode across components.
+3. **Authentication**: Manage user login/logout globally.
+4. **Language/Localization**: Manage selected language for content.
+5. **Configuration/Settings**: Share app-wide configuration values (e.g., API URLs, app names).
+6. **Shared Modals or Notifications**: Trigger modals or notifications from anywhere in the app.
+7. **User Preferences**: Manage global user settings like currency or date format.
+
+##### Example 1: Basic example
+
 - step 1: create a context
 
 ```js
@@ -7587,7 +7606,7 @@ const Component4 = () => {
 export default Component4;
 ```
 
-- Another example
+##### Example 2: Basic User App
 
 ```js
 // context/UserContext.js
@@ -7718,7 +7737,7 @@ export default NewUser;
 
 ```
 
-#### [Theme change project using useContext]
+##### Example 3: Theme change project using useContext
 
 ```js
 import React, { useState, useContext } from 'react';
@@ -7755,30 +7774,9 @@ export default App;
 }
 ```
 
-#### UseCases of useContext()
-
-The `useContext` hook in React is used to share state or functions between components without needing to pass props manually at every level. It allows for easier state management across different components, making the code more readable and maintainable when the same data is needed by multiple components.
-
-#### Common Use Cases for `useContext`
-
-1. **Global State Management**:
-   Instead of passing props through every component in the tree, you can use `useContext` to share state globally across different parts of your app. This is useful for authentication, user preferences, or theme settings.
-
-2. **Theming**:
-   Sharing a theme (dark mode, light mode) across components is a typical use case where `useContext` helps avoid prop drilling.
-
-3. **Authentication**:
-   You can store the current authenticated user or authentication state (logged in or logged out) in context and use it across multiple components.
-
-4. **Language/Localization**:
-   Managing and updating the language across different components is another use case. You can store the current language in context, and all components can access and react to changes in the language.
-
-5. **Settings or Configuration**:
-   When you have shared configuration settings (e.g., API endpoints, application settings) across multiple components, `useContext` is handy.
-
 ---
 
-#### Example 1: Global Theme using `useContext`
+##### Example 4: Global Theme using `useContext`
 
 Here’s a simple example where a global theme (light/dark mode) is shared across components:
 
@@ -7836,7 +7834,7 @@ In this example:
 
 ---
 
-#### Example 2: User Authentication using `useContext`
+##### Example 5: User Authentication using `useContext`
 
 This example demonstrates how to manage user authentication state globally using `useContext`:
 
@@ -7908,7 +7906,7 @@ In this example:
 
 ---
 
-#### Example 3: Language Context using `useContext`
+##### Example 6: Language Context using `useContext`
 
 This is an example of using `useContext` for language/localization in an app:
 
@@ -7976,11 +7974,9 @@ Sure! I'll provide examples for the remaining use cases where `useContext` can b
 - **Settings/Configuration**
 - **Shared Modals or Notifications**
 
-#### Example 4: Configuration/Settings Using `useContext`
+##### Example 7: Configuration/Settings Using `useContext`
 
 This example demonstrates how to use `useContext` to manage app-wide configuration or settings like an API base URL, or any application-wide settings that need to be accessed across different components.
-
-#### Code Example
 
 ```js
 import React, { createContext, useContext } from 'react';
@@ -8039,7 +8035,7 @@ This pattern is very useful when you need to share settings like API endpoints, 
 
 ---
 
-#### Example 5: Shared Modal/Notification Using `useContext`
+##### Example 8: Shared Modal/Notification Using `useContext`
 
 Another great use case for `useContext` is managing modals or notifications across different parts of the application, so they can be triggered from anywhere.
 
@@ -8120,7 +8116,7 @@ This pattern can also be used for notifications, toast messages, or any other co
 
 ---
 
-#### Example 6: Global User Settings or Preferences
+##### Example 9: Global User Settings or Preferences
 
 You might want to save a user’s preferences globally, like preferred currency, date formats, or notification preferences. `useContext` is perfect for this kind of use case.
 
@@ -8215,15 +8211,11 @@ In this example:
 
 ---
 
-#### Example 7: Fetching Data with Context and Sharing Across Components
-
-Fetching data and providing it through React's `useContext` is a common and efficient pattern, especially when you want to share fetched data across multiple components without having to pass it down through props (prop drilling). In this pattern, the fetched data is stored in a context provider, and any component that needs this data can consume it directly via `useContext`.
-
-### Example: Fetching Data with Context and Sharing Across Components
+##### Example 10: Fetching Data with Context and Sharing Across Components
 
 We'll use an API to fetch data and make it available throughout the application using `Context` and `useContext`. In this case, let's assume we are fetching a list of products from an API.
 
-#### Step-by-Step Breakdown
+Step-by-Step Breakdown
 
 1. **Create a `DataContext`**: This will hold the fetched data and the logic for fetching/updating it.
 2. **Create a `DataProvider`**: This will manage the fetching logic and provide the fetched data to children components.
@@ -8232,7 +8224,7 @@ We'll use an API to fetch data and make it available throughout the application 
 
 ---
 
-### Step 1: Create a `DataContext`
+###### Step 1: Create a `DataContext`
 
 ```js
 import React, { createContext, useContext, useEffect, useState } from 'react';
@@ -8248,7 +8240,7 @@ export const useData = () => {
 
 ---
 
-### Step 2: Create a `DataProvider` to Fetch and Store Data
+###### Step 2: Create a `DataProvider` to Fetch and Store Data
 
 This provider will handle fetching data from an API, store it in state, and make it available to all children components.
 
@@ -8287,11 +8279,11 @@ export const DataProvider = ({ children }) => {
 
 ---
 
-### Step 3: Consume Data Using `useContext`
+###### Step 3: Consume Data Using `useContext`
 
 In child components, you can now consume the fetched data directly using the `useData` hook.
 
-#### Example Component 1: Display List of Products
+- Example Component 1: Display List of Products
 
 ```js
 import React from 'react';
@@ -8327,7 +8319,7 @@ export default ProductList;
 
 ---
 
-### Step 4: Use the `DataProvider` in Your App
+###### Step 4: Use the `DataProvider` in Your App
 
 In your main application file (`App.js`), wrap your application (or a section of it) in the `DataProvider` so that the data can be accessed throughout the component tree.
 
@@ -8352,185 +8344,18 @@ export default App;
 
 ---
 
-### Explanation
+Explanation
 
 1. **`DataContext`**: Provides the data, loading status, and error across the app.
 2. **`DataProvider`**: Handles fetching data once on mount (using `useEffect`) and stores it in state.
 3. **`useData` Hook**: Makes it easy to access the context data and consume it in any component.
 4. **`ProductList` Component**: Accesses the fetched data and displays it in a list. It handles loading and error states as well.
 
-### Benefits of Fetching Data with Context
+###### Benefits of Fetching Data with Context
 
 - **Global Data Access**: Makes the fetched data available throughout the app without the need for prop drilling.
 - **Centralized State Management**: Keeps the fetching logic in one place, ensuring consistency across the app.
 - **Scalability**: You can add more data-fetching providers for other parts of your app (e.g., user data, settings, etc.) and manage them all efficiently.
-
-### Use Cases
-
-- Sharing fetched data (e.g., products, users, articles) globally in an app.
-- Caching data in context to avoid redundant fetch requests across components.
-- Centralizing app-wide states (like loading, error handling) for API data.
-
-This approach is particularly useful in apps that need to display the same data in multiple places, or when multiple components need access to the same data asynchronously.
-
----
-
-Here’s how you can fetch data and provide it via React `useContext` without using a custom hook. Instead of a custom hook, components will directly use `useContext` to consume the data.
-
----
-
-#### Step-by-Step Approach
-
-1. **Create the `DataContext`**: This will hold the fetched data.
-2. **Create the `DataProvider`**: It will fetch data and provide it to the components.
-3. **Consume the `DataContext`** directly using `useContext`.
-
----
-
-#### Step 1: Create the `DataContext`
-
-```js
-import React, { createContext, useState, useEffect } from 'react';
-
-// Create the DataContext
-export const DataContext = createContext();
-```
-
----
-
-#### Step 2: Create the `DataProvider`
-
-This component will fetch the data and store it in state. The `DataContext.Provider` will make the data available to all components wrapped inside it.
-
-```js
-// DataProvider Component
-export const DataProvider = ({ children }) => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // Fetch data from an API (replace with any API URL)
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://api.example.com/products');
-        const result = await response.json();
-        setData(result); // Set the fetched data
-      } catch (error) {
-        setError('Failed to fetch data');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  return (
-    <DataContext.Provider value={{ data, loading, error }}>
-      {children}
-    </DataContext.Provider>
-  );
-};
-```
-
----
-
-#### Step 3: Consuming the Data Using `useContext`
-
-Any component can now consume the `DataContext` using `useContext` directly.
-
-#### Example Component: Display List of Products
-
-```js
-import React, { useContext } from 'react';
-import { DataContext } from './DataContext'; // Import the context
-
-const ProductList = () => {
-  const { data, loading, error } = useContext(DataContext); // Use useContext directly
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
-  return (
-    <div>
-      <h2>Product List</h2>
-      <ul>
-        {data.map((product) => (
-          <li key={product.id}>
-            {product.name} - ${product.price}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
-export default ProductList;
-```
-
----
-
-#### Step 4: Wrap the Application with `DataProvider`
-
-Wrap the main app (or any component tree that needs access to the data) with the `DataProvider` in your `App.js` file.
-
-```js
-import React from 'react';
-import { DataProvider } from './DataContext'; // Import the provider
-import ProductList from './ProductList';
-
-const App = () => {
-  return (
-    <DataProvider>
-      <div>
-        <h1>Product Dashboard</h1>
-        <ProductList />
-      </div>
-    </DataProvider>
-  );
-};
-
-export default App;
-```
-
-- Explanation
-
-- **DataContext**: Provides the fetched data, loading state, and any errors.
-- **DataProvider**: Manages the data fetching and passes the data, loading, and error state via `DataContext.Provider`.
-- **ProductList**: Directly consumes the data using `useContext`.
-
-#### Why Use `useContext` Here?
-
-- **Avoid Prop Drilling**: You don’t need to pass the fetched data through multiple layers of components.
-- **Centralized State**: Fetching logic and state (data, loading, error) is managed in a single place (`DataProvider`), making it easier to maintain.
-- **Simpler Component Logic**: Individual components, like `ProductList`, can focus on rendering logic instead of worrying about data fetching.
-
-#### Common Use Cases for Fetching Data in Context
-
-- Sharing fetched data (e.g., products, users, settings) across different components in the app.
-- Avoiding prop drilling by providing a global or shared state for components that need to access the same fetched data.
-- Managing global state like user authentication, user profiles, or other application-wide data.
-
-#### Conclusion
-
-In each of these use cases, `useContext` helps you manage state across multiple components without prop drilling. The ability to share state or methods globally within your app makes it much easier to maintain and reduces the amount of boilerplate code you need to write.
-
-**Summary of Use Cases:**
-
-1. **Theming**: Share light/dark mode across components.
-2. **Authentication**: Manage user login/logout globally.
-3. **Language/Localization**: Manage selected language for content.
-4. **Configuration/Settings**: Share app-wide configuration values (e.g., API URLs, app names).
-5. **Shared Modals or Notifications**: Trigger modals or notifications from anywhere in the app.
-6. **User Preferences**: Manage global user settings like currency or date format.
-
-Let me know if you'd like further details on any of these examples!
 
 #### [useReducer + useContext]
 
@@ -8648,6 +8473,301 @@ export default Books;
 ```
 
 ## Part-10 (useState, useEffect, useReducer, useContext, custom hook practice)
+
+Below is a folder structure and corresponding code to demonstrate an example of managing **users** in a **React app** using **Context**, a **custom hook** for consuming the context, a **service layer** for API requests, **CRUD operations**, and **pagination**.
+
+### **Folder Structure:**
+
+```
+src/
+│
+├── components/
+│   ├── Users/
+│   │   ├── UsersList.js
+│   │   ├── UserForm.js
+│   │   ├── Pagination.js
+│   │   └── index.js
+│   └── Layout/
+│       ├── Header.js
+│       └── Footer.js
+│
+├── context/
+│   └── UsersContext.js
+│
+├── hooks/
+│   └── useUsers.js
+│
+├── services/
+│   └── userService.js
+│
+├── App.js
+└── index.js
+```
+
+---
+
+### **1. Context (`UsersContext.js`)**
+
+We will use the context to provide the users' data and CRUD operations throughout the application.
+
+```javascript
+import React, { createContext, useState, useEffect } from 'react';
+import { getUsers } from '../services/userService';
+
+const UsersContext = createContext();
+
+export const UsersProvider = ({ children }) => {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  useEffect(() => {
+    fetchUsers(page);
+  }, [page]);
+
+  const fetchUsers = async (pageNumber = 1) => {
+    try {
+      const data = await getUsers(pageNumber);
+      setUsers(data.users);
+      setTotalPages(data.totalPages);
+      setLoading(false);
+    } catch (err) {
+      setError('Failed to load users.');
+      setLoading(false);
+    }
+  };
+
+  const addUser = (newUser) => setUsers((prev) => [...prev, newUser]);
+  const updateUser = (updatedUser) =>
+    setUsers((prev) =>
+      prev.map((user) => (user.id === updatedUser.id ? updatedUser : user))
+    );
+  const deleteUser = (id) => setUsers((prev) => prev.filter((user) => user.id !== id));
+
+  return (
+    <UsersContext.Provider
+      value={{ users, loading, error, addUser, updateUser, deleteUser, page, setPage, totalPages }}
+    >
+      {children}
+    </UsersContext.Provider>
+  );
+};
+
+export default UsersContext;
+```
+
+---
+
+### **2. Custom Hook (`useUsers.js`)**
+
+A custom hook to consume the `UsersContext`:
+
+```javascript
+import { useContext } from 'react';
+import UsersContext from '../context/UsersContext';
+
+const useUsers = () => useContext(UsersContext);
+
+export default useUsers;
+```
+
+---
+
+### **3. Service Layer (`userService.js`)**
+
+This service handles API requests, which include fetching users and CRUD operations. For simplicity, let's assume you have an API.
+
+```javascript
+import axios from 'axios';
+
+const API_URL = 'https://example.com/api/users';
+
+export const getUsers = async (page) => {
+  const response = await axios.get(`${API_URL}?page=${page}`);
+  return response.data;
+};
+
+export const createUser = async (userData) => {
+  const response = await axios.post(API_URL, userData);
+  return response.data;
+};
+
+export const updateUser = async (userId, userData) => {
+  const response = await axios.put(`${API_URL}/${userId}`, userData);
+  return response.data;
+};
+
+export const deleteUser = async (userId) => {
+  const response = await axios.delete(`${API_URL}/${userId}`);
+  return response.data;
+};
+```
+
+---
+
+### **4. Components**
+
+#### **`UsersList.js`**
+
+A component that lists all the users and supports deleting a user:
+
+```javascript
+import React from 'react';
+import useUsers from '../../hooks/useUsers';
+
+const UsersList = () => {
+  const { users, deleteUser, loading, error } = useUsers();
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+
+  return (
+    <ul>
+      {users.map((user) => (
+        <li key={user.id}>
+          {user.name} - {user.email}
+          <button onClick={() => deleteUser(user.id)}>Delete</button>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+export default UsersList;
+```
+
+#### **`UserForm.js`**
+
+A form for adding or updating users:
+
+```javascript
+import React, { useState } from 'react';
+import useUsers from '../../hooks/useUsers';
+import { createUser, updateUser } from '../../services/userService';
+
+const UserForm = ({ existingUser }) => {
+  const [name, setName] = useState(existingUser ? existingUser.name : '');
+  const [email, setEmail] = useState(existingUser ? existingUser.email : '');
+  const { addUser, updateUser: updateContextUser } = useUsers();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const userData = { name, email };
+
+    if (existingUser) {
+      const updatedUser = await updateUser(existingUser.id, userData);
+      updateContextUser(updatedUser);
+    } else {
+      const newUser = await createUser(userData);
+      addUser(newUser);
+    }
+
+    setName('');
+    setEmail('');
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <button type="submit">{existingUser ? 'Update' : 'Add'} User</button>
+    </form>
+  );
+};
+
+export default UserForm;
+```
+
+#### **`Pagination.js`**
+
+Handles pagination logic:
+
+```javascript
+import React from 'react';
+import useUsers from '../../hooks/useUsers';
+
+const Pagination = () => {
+  const { page, setPage, totalPages } = useUsers();
+
+  return (
+    <div>
+      <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+        Previous
+      </button>
+      <span>
+        Page {page} of {totalPages}
+      </span>
+      <button disabled={page === totalPages} onClick={() => setPage(page + 1)}>
+        Next
+      </button>
+    </div>
+  );
+};
+
+export default Pagination;
+```
+
+---
+
+### **5. App.js**
+
+Combining all components together:
+
+```javascript
+import React from 'react';
+import { UsersProvider } from './context/UsersContext';
+import UsersList from './components/Users/UsersList';
+import UserForm from './components/Users/UserForm';
+import Pagination from './components/Users/Pagination';
+
+const App = () => {
+  return (
+    <UsersProvider>
+      <div>
+        <h1>User Management</h1>
+        <UserForm />
+        <UsersList />
+        <Pagination />
+      </div>
+    </UsersProvider>
+  );
+};
+
+export default App;
+```
+
+---
+
+### **How it Works:**
+
+1. **Context (`UsersContext`)**:
+   - Stores the list of users and provides CRUD operations.
+   - Fetches data from the API on mount and when the page number changes.
+
+2. **Custom Hook (`useUsers`)**:
+   - A simplified way to access the context values in other components.
+
+3. **Service Layer**:
+   - Handles API requests for CRUD operations.
+
+4. **Components**:
+   - `UsersList`: Displays the list of users.
+   - `UserForm`: A form for creating or updating a user.
+   - `Pagination`: Handles pagination between user pages.
+
+This structure helps in organizing the app into **modular**, **scalable**, and **reusable** parts, making it easier to manage complex state, especially in larger applications.
 
 ## [57. user mgt crud app using useState]
 
