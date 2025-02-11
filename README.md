@@ -2,9 +2,7 @@
 
 - prerequisities: HTML, CSS, Javascript
 - [React.js official Site](https://reactjs.org/)
-- some API for http requests
-      - [dummy json](https://dummyjson.com/)
-      - [pagination testing](https://reqres.in/api/users?page=2)
+- some API for http requests - [dummy json](https://dummyjson.com/) - [pagination testing](https://reqres.in/api/users?page=2)
 
 ## Table of Contents
 
@@ -25,7 +23,7 @@
    [1.7 Mapping components](#17-mapping--rednering-components)
 
    [1.8 Conditional rendering](#18-conditional-rendering)
-  
+
    [1.9 developer tools, react and font-awesome icons](#19-developer-tools-react-and-font-awesome-icons)
 
    [1.10 Adding Interactivity - event & event handler](#110-adding-interactivity---event--event-handler)
@@ -50,19 +48,19 @@
 
 2. [Intermediate React.js Topics](#2-intermediate-reactjs-topics)
 
-    [2.1 life cycle methods of a class component](#21-life-cycle-methods-of-a-class-component)
+   [2.1 life cycle methods of a class component](#21-life-cycle-methods-of-a-class-component)
 
-    [2.2 useEffect Hook](#22-useeffect-hook)
+   [2.2 useEffect Hook](#22-useeffect-hook)
 
-    [2.3 useReducer Hook](#23-usereducer-hook)
+   [2.3 useReducer Hook](#23-usereducer-hook)
 
-    [2.4 Routing](#24-routing)
+   [2.4 Routing](#24-routing)
 
-    [2.5 CRUD Operations - http methods - user management app](#25-crud-operations---http-methods---user-management-app)
+   [2.5 CRUD Operations - http methods - user management app](#25-crud-operations---http-methods---user-management-app)
 
-    [2.6 Optimization memo, useCallback and useMemo](#26-optimization-reactmemo-usecallback-usememo)
+   [2.6 Optimization memo, useCallback and useMemo](#26-optimization-reactmemo-usecallback-usememo)
 
-    [2.7 props drilling, useContext Hook](#27-props-drilling-usecontext-hook)
+   [2.7 props drilling, useContext Hook](#27-props-drilling-usecontext-hook)
 
 3. [Advanced React.js Topics (coming soon)]
 
@@ -77,7 +75,7 @@
    [Assignment 3: Add New Product](https://github.com/anisul-Islam/react-assignment-3-add-new-product)
 
    [Assignment 4: fetch products](https://github.com/anisul-Islam/react-assignment-4-fetch-products)
-   
+
    [Assignment 5: fetch users](https://github.com/anisul-Islam/react-assignment-4-users-management-app)
 
    [Assignment-6](https://github.com/anisul-Islam/react-assignment-5-users-management-app-2?tab=readme-ov-file)
@@ -100,30 +98,32 @@
 
 Here are some key features and concepts associated with React:
 
-  1. **Component-Based:** React applications are built using components, which are self-contained, reusable building blocks for user interfaces. It helps us to create reusable components (small and isolated pieces of code using html, css, js). It helps us to render UI. Think about youtube's website
-      - Single Page Application (SPA) allows us to render as much as we need for reducing unnecessary rendering such as loading navbar, footer etc. in all the pages
-      - think about html tag and creating your own tag with react
+1. **Component-Based:** React applications are built using components, which are self-contained, reusable building blocks for user interfaces. It helps us to create reusable components (small and isolated pieces of code using html, css, js). It helps us to render UI. Think about youtube's website
 
-  2. **Virtual DOM:** React uses a virtual representation of the DOM (Document Object Model) to optimize updates. Instead of directly manipulating the actual DOM, React compares changes in the virtual DOM and efficiently updates only the necessary parts of the real DOM, reducing rendering time and improving performance.
-      - Load fast - Why React.js is faster? - virtual DOM compares with previous states
+   - Single Page Application (SPA) allows us to render as much as we need for reducing unnecessary rendering such as loading navbar, footer etc. in all the pages
+   - think about html tag and creating your own tag with react
 
-  3. **Declarative Syntax:** React uses a declarative approach to building UIs. Developers describe what the UI should look like based on the application's state, and React takes care of updating the DOM to match that state.
+2. **Virtual DOM:** React uses a virtual representation of the DOM (Document Object Model) to optimize updates. Instead of directly manipulating the actual DOM, React compares changes in the virtual DOM and efficiently updates only the necessary parts of the real DOM, reducing rendering time and improving performance.
 
-  4. **Unidirectional Data Flow:** React enforces a one-way data flow, which means data flows down the component hierarchy from parent components to child components. This helps maintain predictable and debugable code.
+   - Load fast - Why React.js is faster? - virtual DOM compares with previous states
 
-  5. **JSX (JavaScript XML):** React allows you to write UI components using JSX, which is a syntax extension for JavaScript. JSX allows you to write HTML-like code within your JavaScript files, making it easier to define UI elements.
+3. **Declarative Syntax:** React uses a declarative approach to building UIs. Developers describe what the UI should look like based on the application's state, and React takes care of updating the DOM to match that state.
 
-  6. **Component Lifecycle:** React components have lifecycle methods that allow developers to hook into specific points in a component's lifecycle, such as when it's mounted or updated. This is useful for performing actions like data fetching, initialization, or cleanup.
+4. **Unidirectional Data Flow:** React enforces a one-way data flow, which means data flows down the component hierarchy from parent components to child components. This helps maintain predictable and debugable code.
 
-  7. **State Management:** React provides a mechanism for managing component-specific state using the `useState` hook for functional components and `setState` for class components. For global state management, libraries like Redux or React Context can be used.
+5. **JSX (JavaScript XML):** React allows you to write UI components using JSX, which is a syntax extension for JavaScript. JSX allows you to write HTML-like code within your JavaScript files, making it easier to define UI elements.
 
-  8. **Routing:** React can be used in combination with routing libraries like React Router to create single-page applications with client-side routing.
+6. **Component Lifecycle:** React components have lifecycle methods that allow developers to hook into specific points in a component's lifecycle, such as when it's mounted or updated. This is useful for performing actions like data fetching, initialization, or cleanup.
 
-  9. **Community and Ecosystem:** React has a large and active community, which has led to the development of a rich ecosystem of third-party libraries and tools to enhance development and improve productivity.
+7. **State Management:** React provides a mechanism for managing component-specific state using the `useState` hook for functional components and `setState` for class components. For global state management, libraries like Redux or React Context can be used.
 
-  10. **Example of React app and competitors** - facebook, twitter, airbnb, netflix etc. competitor: Vue.js, Angular (more full-fledged / developed no need 3rd party library just like react-router-dom)
+8. **Routing:** React can be used in combination with routing libraries like React Router to create single-page applications with client-side routing.
 
-  Overall, React is a powerful and popular choice for building modern web applications, and it's widely adopted by developers and organizations for its efficiency and developer-friendly approach to UI development.
+9. **Community and Ecosystem:** React has a large and active community, which has led to the development of a rich ecosystem of third-party libraries and tools to enhance development and improve productivity.
+
+10. **Example of React app and competitors** - facebook, twitter, airbnb, netflix etc. competitor: Vue.js, Angular (more full-fledged / developed no need 3rd party library just like react-router-dom)
+
+Overall, React is a powerful and popular choice for building modern web applications, and it's widely adopted by developers and organizations for its efficiency and developer-friendly approach to UI development.
 
 #### Prerequisites
 
@@ -156,17 +156,15 @@ Method 2: create react app with bundler with vite `npm create vite@latest` swc(s
 
 #### Code Example - 1 (create React app)
 
-  ```jsx
-    // Code Example - 1 (create React app)
-    import React from 'react';
-    import ReactDOM from 'react-dom/client';
+```jsx
+// Code Example - 1 (create React app)
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 
-    ReactDOM.createRoot(document.getElementById('root')).render(
-      <React.StrictMode>
-        Anis Express
-      </React.StrictMode>
-    );
-  ```
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>Anis Express</React.StrictMode>
+);
+```
 
 #### Understand File structure
 
@@ -185,81 +183,80 @@ Method 2: create react app with bundler with vite `npm create vite@latest` swc(s
 
 1. **We can return single element using JSX, for multiple elements we can use a wrapper. We can also use Fragment here.**
 
-    - why we can not return multiple elements in JSX needs to be rendered?
-      jsx is javascript object and we can not return 2 objects from a function so we need to use array syntax and wrap everything inside one array.
+   - why we can not return multiple elements in JSX needs to be rendered?
+     jsx is javascript object and we can not return 2 objects from a function so we need to use array syntax and wrap everything inside one array.
 
-      - Code Example - 2 (render single element)
+     - Code Example - 2 (render single element)
 
-      ```js
-      // Code Example - 2 (render single element)
-      import React from "react";
-      import ReactDOM from "react-dom/client";
+     ```js
+     // Code Example - 2 (render single element)
+     import React from 'react';
+     import ReactDOM from 'react-dom/client';
 
-      const root = ReactDOM.createRoot(document.getElementById("root"));
-      root.render(<h1>Anis Express</h1>);
-      ```
+     const root = ReactDOM.createRoot(document.getElementById('root'));
+     root.render(<h1>Anis Express</h1>);
+     ```
 
-    - **React render function can render only one element**
+   - **React render function can render only one element**
 
-      ```jsx
-      // Code Example - 3 (Rendering multiple elements)
-      import React from 'react';
-      import ReactDOM from 'react-dom/client';
+     ```jsx
+     // Code Example - 3 (Rendering multiple elements)
+     import React from 'react';
+     import ReactDOM from 'react-dom/client';
 
-      ReactDOM.createRoot(document.getElementById('root')).render(
-        <React.StrictMode>
-          <div>
-            <header>
-              <h1>Anis Express</h1>
-            </header>
-            <main>
-               <aside>
-                  <h3>Add Filter By Price</h3>
-                  <h3>Add Filter By Categories</h3>
-                </aside>
-              <section>
-                <article>product info goes here</article>
-              </section>
-            </main>
-            <footer>
-              <p>Copyright by @Anisul Islam</p>
-            </footer>
-          </div>
-        </React.StrictMode>
-      );
-      ```
+     ReactDOM.createRoot(document.getElementById('root')).render(
+       <React.StrictMode>
+         <div>
+           <header>
+             <h1>Anis Express</h1>
+           </header>
+           <main>
+             <aside>
+               <h3>Add Filter By Price</h3>
+               <h3>Add Filter By Categories</h3>
+             </aside>
+             <section>
+               <article>product info goes here</article>
+             </section>
+           </main>
+           <footer>
+             <p>Copyright by @Anisul Islam</p>
+           </footer>
+         </div>
+       </React.StrictMode>
+     );
+     ```
 
-    - **React.Fragment or <> </> helps us to avoid div soup or unnecessary div nesting.**
+   - **React.Fragment or <> </> helps us to avoid div soup or unnecessary div nesting.**
 
-        ```js
-        // Code Example - 4 (Fragment)
-        import React, {Fragment} from 'react';
+     ```js
+     // Code Example - 4 (Fragment)
+     import React, { Fragment } from 'react';
 
-        import ReactDOM from 'react-dom/client';
+     import ReactDOM from 'react-dom/client';
 
-        ReactDOM.createRoot(document.getElementById('root')).render(
-          <React.StrictMode>
-            <Fragment>
-              <header>
-                <h1>Anis Express</h1>
-              </header>
-              <main>
-                 <aside>
-                    <h3>Add Filter By Price</h3>
-                    <h3>Add Filter By Categories</h3>
-                  </aside>
-                <section>
-                  <article>product info goes here</article>
-                </section>
-              </main>
-              <footer>
-                <p>Copyright by @Anisul Islam</p>
-              </footer>
-            </Fragment>
-          </React.StrictMode>
-        );
-
-        ```
+     ReactDOM.createRoot(document.getElementById('root')).render(
+       <React.StrictMode>
+         <Fragment>
+           <header>
+             <h1>Anis Express</h1>
+           </header>
+           <main>
+             <aside>
+               <h3>Add Filter By Price</h3>
+               <h3>Add Filter By Categories</h3>
+             </aside>
+             <section>
+               <article>product info goes here</article>
+             </section>
+           </main>
+           <footer>
+             <p>Copyright by @Anisul Islam</p>
+           </footer>
+         </Fragment>
+       </React.StrictMode>
+     );
+     ```
 
 2. **Remember to close all tags - `<img />`**
 
@@ -267,134 +264,135 @@ Method 2: create react app with bundler with vite `npm create vite@latest` swc(s
 
 #### We can use Javascript expression inside JSX
 
-  ```js
- // Code Example - 5 (JS Expressions in JSX)
+```js
+// Code Example - 5 (JS Expressions in JSX)
 
-    import React, { Fragment } from 'react';
-    import ReactDOM from 'react-dom/client';
+import React, { Fragment } from 'react';
+import ReactDOM from 'react-dom/client';
 
-    // get 5 products from fakestore api
-    export const productsData = [
-      {
-        id: 1,
-        title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
-        price: 109.95,
-        description:
-          'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
-        category: "men's clothing",
-        image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-        rating: {
-          rate: 3.9,
-          count: 120,
-        },
-      },
-      {
-        id: 2,
-        title: 'Mens Casual Premium Slim Fit T-Shirts ',
-        price: 22.3,
-        description:
-          'Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.',
-        category: "men's clothing",
-        image:
-          'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
-        rating: {
-          rate: 4.1,
-          count: 259,
-        },
-      },
-      {
-        id: 3,
-        title: 'Mens Cotton Jacket',
-        price: 55.99,
-        description:
-          'great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.',
-        category: "men's clothing",
-        image: 'https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg',
-        rating: {
-          rate: 4.7,
-          count: 500,
-        },
-      },
-      {
-        id: 4,
-        title: 'Mens Casual Slim Fit',
-        price: 15.99,
-        description:
-          'The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.',
-        category: "men's clothing",
-        image: 'https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg',
-        rating: {
-          rate: 2.1,
-          count: 430,
-        },
-      },
-      {
-        id: 5,
-        title:
-          "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
-        price: 695,
-        description:
-          "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
-        category: 'jewelery',
-        image: 'https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg',
-        rating: {
-          rate: 4.6,
-          count: 400,
-        },
-      },
-    ];
+// get 5 products from fakestore api
+export const productsData = [
+  {
+    id: 1,
+    title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
+    price: 109.95,
+    description:
+      'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
+    category: "men's clothing",
+    image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
+    rating: {
+      rate: 3.9,
+      count: 120,
+    },
+  },
+  {
+    id: 2,
+    title: 'Mens Casual Premium Slim Fit T-Shirts ',
+    price: 22.3,
+    description:
+      'Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.',
+    category: "men's clothing",
+    image:
+      'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
+    rating: {
+      rate: 4.1,
+      count: 259,
+    },
+  },
+  {
+    id: 3,
+    title: 'Mens Cotton Jacket',
+    price: 55.99,
+    description:
+      'great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.',
+    category: "men's clothing",
+    image: 'https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg',
+    rating: {
+      rate: 4.7,
+      count: 500,
+    },
+  },
+  {
+    id: 4,
+    title: 'Mens Casual Slim Fit',
+    price: 15.99,
+    description:
+      'The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.',
+    category: "men's clothing",
+    image: 'https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg',
+    rating: {
+      rate: 2.1,
+      count: 430,
+    },
+  },
+  {
+    id: 5,
+    title:
+      "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+    price: 695,
+    description:
+      "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
+    category: 'jewelery',
+    image: 'https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg',
+    rating: {
+      rate: 4.6,
+      count: 400,
+    },
+  },
+];
 
-    ReactDOM.createRoot(document.getElementById('root')).render(
-      <React.StrictMode>
-        <Fragment>
-          <header>
-            <h1>Anis Express</h1>
-          </header>
-          <main>
-            <aside>
-              <h3>Add Filter By Price</h3>
-              <h3>Add Filter By Categories</h3>
-            </aside>
-            <section>
-              <article>
-                <img src={productsData[0].image} alt={productsData[0].title} />
-                <h2>{productsData[0].id}</h2>
-                <p>{productsData[0].title}</p>
-                <p>{productsData[0].description}</p>
-                <p>Price: {productsData[0].price}</p>
-                <p>Category: {productsData[0].category}</p>
-                <p>Rating: {productsData[0].rating.rate}/5</p>
-              </article>
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <Fragment>
+      <header>
+        <h1>Anis Express</h1>
+      </header>
+      <main>
+        <aside>
+          <h3>Add Filter By Price</h3>
+          <h3>Add Filter By Categories</h3>
+        </aside>
+        <section>
+          <article>
+            <img src={productsData[0].image} alt={productsData[0].title} />
+            <h2>{productsData[0].id}</h2>
+            <p>{productsData[0].title}</p>
+            <p>{productsData[0].description}</p>
+            <p>Price: {productsData[0].price}</p>
+            <p>Category: {productsData[0].category}</p>
+            <p>Rating: {productsData[0].rating.rate}/5</p>
+          </article>
 
-              <article>
-                <img src={productsData[1].image} alt={productsData[1].title} />
-                <h2>{productsData[1].id}</h2>
-                <p>{productsData[1].title}</p>
-                <p>{productsData[1].description}</p>
-                <p>Price: {productsData[1].price}</p>
-                <p>Category: {productsData[1].category}</p>
-                <p>Rating: {productsData[1].rating.rate}/5</p>
-              </article>
-            </section>
-          </main>
-          <footer>
-            <p>Copyright by @Anisul Islam</p>
-          </footer>
-        </Fragment>
-      </React.StrictMode>
-    );
-  ```
+          <article>
+            <img src={productsData[1].image} alt={productsData[1].title} />
+            <h2>{productsData[1].id}</h2>
+            <p>{productsData[1].title}</p>
+            <p>{productsData[1].description}</p>
+            <p>Price: {productsData[1].price}</p>
+            <p>Category: {productsData[1].category}</p>
+            <p>Rating: {productsData[1].rating.rate}/5</p>
+          </article>
+        </section>
+      </main>
+      <footer>
+        <p>Copyright by @Anisul Islam</p>
+      </footer>
+    </Fragment>
+  </React.StrictMode>
+);
+```
 
 ### [1.3 Component](https://youtu.be/qgLZSNppJOU)
 
 - **Component: A _reusable_, _nestable_ _building block_ constrcut with mainly Javascript function and HTML; CSS can be added**
+
   - Component VS Function: Component should always start with capital letter and return JSX
   - There are 2 main types of components: functional component and class component
   - keep a blank line when importing your components for separating built in modules
 
   ```jsx
-  // Code Example 6 - Create a reusable functional component for Header, Sidebar, Footer, Products, 
-  
+  // Code Example 6 - Create a reusable functional component for Header, Sidebar, Footer, Products,
+
   // Create App.jsx component and move everything there and start doing decomposition
 
   // Create Page: pages/Home.jsx page
@@ -690,7 +688,7 @@ export default Products;
 ```javascript
 const Message = () => {
   // return <h3>Message </h3>;
-  return React.createElement("h1", {}, "welcome");
+  return React.createElement('h1', {}, 'welcome');
 };
 
 const Todo = () => {
@@ -703,13 +701,13 @@ const Todo = () => {
     // </article>
 
     React.createElement(
-      "article",
+      'article',
       {},
-      React.createElement("h2", {}, "Check students attendance"),
+      React.createElement('h2', {}, 'Check students attendance'),
       React.createElement(
-        "p",
+        'p',
         {},
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, molestiae."
+        ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, molestiae.'
       )
     )
   );
@@ -722,12 +720,10 @@ const Todo = () => {
 
 - 1. Inline styling
 
-    ```js
-      const headingStyle = { color: 'red', fontSize: '3rem' };
-      <aside style={headingStyle}>
-        sidebar goes here
-      </aside>
-    ```
+  ```js
+  const headingStyle = { color: 'red', fontSize: '3rem' };
+  <aside style={headingStyle}>sidebar goes here</aside>;
+  ```
 
 - 2. CSS Stylesheet / global CSS
 
@@ -958,24 +954,24 @@ const Todo = () => {
     ```
 
     ```jsx
-     // Code Example - 9 (Styling component with CSS)
-      import React from 'react';
+    // Code Example - 9 (Styling component with CSS)
+    import React from 'react';
 
-      import Sidebar from '../components/Sidebar';
-      import Products from '../components/Products';
+    import Sidebar from '../components/Sidebar';
+    import Products from '../components/Products';
 
-      const Home = () => {
-        return (
-          <div className="container flex-space-around">
-            <Sidebar />
-            <div className="main-content">
-              <Products />
-            </div>
+    const Home = () => {
+      return (
+        <div className="container flex-space-around">
+          <Sidebar />
+          <div className="main-content">
+            <Products />
           </div>
-        );
-      };
+        </div>
+      );
+    };
 
-      export default Home;
+    export default Home;
     ```
 
 - 3. CSS module: create a file name such as fileName.module.css as shown below
@@ -984,93 +980,99 @@ const Todo = () => {
 
   - Benefits of Using CSS Modules in React
 
-      1. **Scoped Styles**:
-        - CSS Modules automatically scope the CSS to the component it is imported into. This prevents styles from one component from unintentionally affecting styles in another component.
-        - This is particularly useful in large applications where naming conflicts can be a common issue.
+    1. **Scoped Styles**:
 
-      2. **Avoid Global Namespace**:
-        - Traditional CSS is global, meaning that all class names are in the global namespace. CSS Modules mitigate this by generating unique class names for each component, thus avoiding the risk of naming conflicts.
+       - CSS Modules automatically scope the CSS to the component it is imported into. This prevents styles from one component from unintentionally affecting styles in another component.
+       - This is particularly useful in large applications where naming conflicts can be a common issue.
 
-      3. **Easier Maintenance**:
-        - Scoped styles make it easier to maintain and update the CSS for individual components without worrying about side effects on other parts of the application.
-        - This modular approach aligns with the component-based architecture of React.
+    2. **Avoid Global Namespace**:
 
-      4. **Improved Readability**:
-        - CSS Modules can lead to better-organized code. Styles are co-located with the component logic, making it easier to see how a component is styled without needing to search through a large, separate CSS file.
+       - Traditional CSS is global, meaning that all class names are in the global namespace. CSS Modules mitigate this by generating unique class names for each component, thus avoiding the risk of naming conflicts.
 
-      5. **Dynamic Class Names**:
-        - CSS Modules support dynamic class names, allowing you to conditionally apply styles based on component state or props.
-        - This can simplify the process of applying different styles based on user interaction or other conditions.
+    3. **Easier Maintenance**:
 
-      6. **Integration with CSS Preprocessors**:
-        - CSS Modules can be used with CSS preprocessors like Sass or Less, allowing you to leverage their features (e.g., variables, mixins) while still benefiting from scoped styles.
+       - Scoped styles make it easier to maintain and update the CSS for individual components without worrying about side effects on other parts of the application.
+       - This modular approach aligns with the component-based architecture of React.
+
+    4. **Improved Readability**:
+
+       - CSS Modules can lead to better-organized code. Styles are co-located with the component logic, making it easier to see how a component is styled without needing to search through a large, separate CSS file.
+
+    5. **Dynamic Class Names**:
+
+       - CSS Modules support dynamic class names, allowing you to conditionally apply styles based on component state or props.
+       - This can simplify the process of applying different styles based on user interaction or other conditions.
+
+    6. **Integration with CSS Preprocessors**:
+
+       - CSS Modules can be used with CSS preprocessors like Sass or Less, allowing you to leverage their features (e.g., variables, mixins) while still benefiting from scoped styles.
 
   - How to Use CSS Modules in React
 
     1. **Create a CSS Module File**:
-      Create a CSS file with the `.module.css` extension (e.g., `Button.module.css`).
+       Create a CSS file with the `.module.css` extension (e.g., `Button.module.css`).
 
-      ```css
-      /* Button.module.css */
-      .button {
-        background-color: #4caf50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
+    ```css
+    /* Button.module.css */
+    .button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
 
-      .button:hover {
-        background-color: #45a049;
-      }
-      ```
+    .button:hover {
+      background-color: #45a049;
+    }
+    ```
 
     2. **Import and Use the CSS Module in a React Component**:
-      Import the CSS Module into your React component and use it.
+       Import the CSS Module into your React component and use it.
 
-      ```jsx
-      // Button.js
-      import React from 'react';
-      import styles from './Button.module.css';
+    ```jsx
+    // Button.js
+    import React from 'react';
+    import styles from './Button.module.css';
 
-      const Button = ({ children, onClick }) => {
-        return (
-          <button className={styles.button} onClick={onClick}>
-            {children}
-          </button>
-        );
-      };
+    const Button = ({ children, onClick }) => {
+      return (
+        <button className={styles.button} onClick={onClick}>
+          {children}
+        </button>
+      );
+    };
 
-      export default Button;
-      ```
+    export default Button;
+    ```
 
     3. **Dynamic Class Names**:
-      You can conditionally apply class names using the `classnames` library or template literals.
+       You can conditionally apply class names using the `classnames` library or template literals.
 
-      ```jsx
-      import React from 'react';
-      import styles from './Button.module.css';
-      import classnames from 'classnames';
+    ```jsx
+    import React from 'react';
+    import styles from './Button.module.css';
+    import classnames from 'classnames';
 
-      const Button = ({ children, onClick, primary }) => {
-        return (
-          <button
-            className={classnames(styles.button, {
-              [styles.primary]: primary
-            })}
-            onClick={onClick}
-          >
-            {children}
-          </button>
-        );
-      };
+    const Button = ({ children, onClick, primary }) => {
+      return (
+        <button
+          className={classnames(styles.button, {
+            [styles.primary]: primary,
+          })}
+          onClick={onClick}
+        >
+          {children}
+        </button>
+      );
+    };
 
-      export default Button;
-      ```
+    export default Button;
+    ```
 
   - adding multiple class in modules
-  In React, when using CSS Modules, you can add multiple class names to an element by combining them using the `classnames` library or by using template literals. Both approaches allow you to conditionally apply multiple class names based on certain conditions.
+    In React, when using CSS Modules, you can add multiple class names to an element by combining them using the `classnames` library or by using template literals. Both approaches allow you to conditionally apply multiple class names based on certain conditions.
 
     - Using the `classnames` Library
 
@@ -1078,63 +1080,63 @@ const Todo = () => {
 
     1. **Install the `classnames` Library**:
 
-      You can install the `classnames` library via npm or yarn:
+       You can install the `classnames` library via npm or yarn:
 
-      ```bash
-      npm install classnames
-      ```
+       ```bash
+       npm install classnames
+       ```
 
-      or
+       or
 
-      ```bash
-      yarn add classnames
-      ```
+       ```bash
+       yarn add classnames
+       ```
 
     2. **Combine Classes Using `classnames`**:
 
-      Here’s an example demonstrating how to use `classnames` with CSS Modules:
+       Here’s an example demonstrating how to use `classnames` with CSS Modules:
 
-      ```jsx
-      // Button.js
-      import React from 'react';
-      import classnames from 'classnames';
-      import styles from './Button.module.css';
+       ```jsx
+       // Button.js
+       import React from 'react';
+       import classnames from 'classnames';
+       import styles from './Button.module.css';
 
-      const Button = ({ children, onClick, primary, secondary }) => {
-        const buttonClass = classnames(styles.button, {
-          [styles.primary]: primary,
-          [styles.secondary]: secondary,
-        });
+       const Button = ({ children, onClick, primary, secondary }) => {
+         const buttonClass = classnames(styles.button, {
+           [styles.primary]: primary,
+           [styles.secondary]: secondary,
+         });
 
-        return (
-          <button className={buttonClass} onClick={onClick}>
-            {children}
-          </button>
-        );
-      };
+         return (
+           <button className={buttonClass} onClick={onClick}>
+             {children}
+           </button>
+         );
+       };
 
-      export default Button;
-      ```
+       export default Button;
+       ```
 
-      ```css
-      /* Button.module.css */
-      .button {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
+       ```css
+       /* Button.module.css */
+       .button {
+         padding: 10px 20px;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+       }
 
-      .primary {
-        background-color: #4caf50;
-        color: white;
-      }
+       .primary {
+         background-color: #4caf50;
+         color: white;
+       }
 
-      .secondary {
-        background-color: #008cba;
-        color: white;
-      }
-      ```
+       .secondary {
+         background-color: #008cba;
+         color: white;
+       }
+       ```
 
     - Using Template Literals
 
@@ -1142,48 +1144,49 @@ const Todo = () => {
 
     1. **Combine Classes Using Template Literals**:
 
-      Here’s an example demonstrating how to use template literals with CSS Modules:
+       Here’s an example demonstrating how to use template literals with CSS Modules:
 
-      ```jsx
-      // Button.js
-      import React from 'react';
-      import styles from './Button.module.css';
+       ```jsx
+       // Button.js
+       import React from 'react';
+       import styles from './Button.module.css';
 
-      const Button = ({ children, onClick, primary, secondary }) => {
-        const buttonClass = `${styles.button} ${primary ? styles.primary : ''} ${secondary ? styles.secondary : ''}`;
+       const Button = ({ children, onClick, primary, secondary }) => {
+         const buttonClass = `${styles.button} ${primary ? styles.primary : ''} ${secondary ? styles.secondary : ''}`;
 
-        return (
-          <button className={buttonClass} onClick={onClick}>
-          <button className={`${style.title1} ${style.title2}`} onClick={onClick}>
-            {children}
-          </button>
-        );
-      };
+         return (
+           <button className={buttonClass} onClick={onClick}>
+           <button className={`${style.title1} ${style.title2}`} onClick={onClick}>
+             {children}
+           </button>
+         );
+       };
 
-      export default Button;
-      ```
+       export default Button;
+       ```
 
-      ```css
-      /* Button.module.css */
-      .button {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
+       ```css
+       /* Button.module.css */
+       .button {
+         padding: 10px 20px;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+       }
 
-      .primary {
-        background-color: #4caf50;
-        color: white;
-      }
+       .primary {
+         background-color: #4caf50;
+         color: white;
+       }
 
-      .secondary {
-        background-color: #008cba;
-        color: white;
-      }
-      ```
+       .secondary {
+         background-color: #008cba;
+         color: white;
+       }
+       ```
 
 - 4. SASS
+
   - [sass official doc](https://sass-lang.com/documentation/)
   - [my sass doc](https://github.com/anisul-Islam/sass-documentation)
 
@@ -1204,41 +1207,42 @@ const Todo = () => {
   - create scss file
 
   ```css
-    .product {
-      background: #000;
-      .product__title {
-        color: red;
-      }
-      .product-desc {
-        color: green;
-      }
+  .product {
+    background: #000;
+    .product__title {
+      color: red;
     }
+    .product-desc {
+      color: green;
+    }
+  }
   ```
 
   - use it from component
 
   ```js
-    import React from 'react';
-    import PropTypes from 'prop-types';
+  import React from 'react';
+  import PropTypes from 'prop-types';
 
-    import styles from './product.module.scss';
+  import styles from './product.module.scss';
 
-    const Product = (props) => {
-      const { product } = props;
-      return (
-        <article className={styles.product}>
-          <img className="product__img" src={product.image} alt={product.title} />
-          <p className={styles.product__title}>{product.title}</p>
-          <p className={styles['product-desc']}> // for accessing kebab case use []
-            {product.description.substring(0, 40)}
-            ...
-          </p>
-        </article>
-      );
-    };
-
+  const Product = (props) => {
+    const { product } = props;
+    return (
+      <article className={styles.product}>
+        <img className="product__img" src={product.image} alt={product.title} />
+        <p className={styles.product__title}>{product.title}</p>
+        <p className={styles['product-desc']}>
+          {' '}
+          // for accessing kebab case use []
+          {product.description.substring(0, 40)}
+          ...
+        </p>
+      </article>
+    );
+  };
   ```
-  
+
 ### [1.5 Props and destructuring](https://youtu.be/GQx58yfYqxo)
 
 - **props object: Properties are called as props. we can pass information from one component to another using props object. components communicate with each others via props. props is an object. props are like attributes in our HTML tag. props are readonly**
@@ -1467,6 +1471,9 @@ export default Products;
           price: PropTypes.number,
           description: PropTypes.string,
           category: PropTypes.string,
+           <!-- value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+            onChange: PropTypes.func,
+            required: PropTypes.bool, -->
           image: PropTypes.string,
           rating: PropTypes.shape({
             rate: PropTypes.number,
@@ -1540,26 +1547,26 @@ export default Products;
 - **Code Example - 15 (Map component with forEach higher order Array function)**
 
   ```js
-    const Products = (props) => {
-      const { products } = props;
-      const productsElement = [];
-      products.forEach((product) => {
-        return productsElement.push(<Product product={product} />);
-      });
-      return <section className="products">{productsElement}</section>;
-    };
+  const Products = (props) => {
+    const { products } = props;
+    const productsElement = [];
+    products.forEach((product) => {
+      return productsElement.push(<Product product={product} />);
+    });
+    return <section className="products">{productsElement}</section>;
+  };
   ```
 
 - **Code Example - 16 (Map component with map higher order Array function)**
 
   ```js
-    const Products = (props) => {
-      const { products } = props;
-      const productsElement = products.map((product) => {
-        return <Product product={product} />;
-      });
-      return <section className="products">{productsElement}</section>;
-    };
+  const Products = (props) => {
+    const { products } = props;
+    const productsElement = products.map((product) => {
+      return <Product product={product} />;
+    });
+    return <section className="products">{productsElement}</section>;
+  };
   ```
 
 #### [Adding unique key to each child](https://youtu.be/Dj7ynTdhy1Q)
@@ -1587,23 +1594,23 @@ we need to map each children of list uniquely so that react can identify them wo
   // first use index
   // second use the available id
   // third use the uuid if id is not available inside the data
-    import React from 'react';
-    import PropTypes from 'prop-types';
-    import { nanoid } from 'nanoid';
+  import React from 'react';
+  import PropTypes from 'prop-types';
+  import { nanoid } from 'nanoid';
 
-    import Product from './Product';
+  import Product from './Product';
 
-    const Products = (props) => {
-      const { products } = props;
+  const Products = (props) => {
+    const { products } = props;
 
-      const productsElement = products.map((product) => {
-        return <Product product={product} key={nanoid()} />;
-      });
-      return <section className="products">{productsElement}</section>;
-    };
+    const productsElement = products.map((product) => {
+      return <Product product={product} key={nanoid()} />;
+    });
+    return <section className="products">{productsElement}</section>;
+  };
 
   // get a uniqueId -> utility/getUniqueId.js
-  import { v4 as uuidv4 } from "uuid";
+  import { v4 as uuidv4 } from 'uuid';
   export const getUniqueId = () => uuidv4();
   ```
 
@@ -1621,22 +1628,21 @@ we need to map each children of list uniquely so that react can identify them wo
     return <section className="products">{productsElement}</section>;
   };
 
-  const Product = ({...product}) => {
-  return (
-    <article className="product card">
-      <img className="product__img" src={product.image} alt={product.title} />
-      <p className="product__title">{product.title}</p>
-      <p className="product__description">
-        {product.description.substring(0, 40)}
-        ...
-      </p>
-      <p className="product__price">Price: {product.price}</p>
-      <p>Category: {product.category}</p>
-      <p>Rating: {product.rating.rate}/5</p>
-    </article>
+  const Product = ({ ...product }) => {
+    return (
+      <article className="product card">
+        <img className="product__img" src={product.image} alt={product.title} />
+        <p className="product__title">{product.title}</p>
+        <p className="product__description">
+          {product.description.substring(0, 40)}
+          ...
+        </p>
+        <p className="product__price">Price: {product.price}</p>
+        <p>Category: {product.category}</p>
+        <p>Rating: {product.rating.rate}/5</p>
+      </article>
     );
   };
-
   ```
 
 - **Code Example - 19 (passing jsx as children)**
@@ -1711,14 +1717,13 @@ we need to map each children of list uniquely so that react can identify them wo
     }
     return <section className="products">{productsElement}</section>;
   };
-
   ```
 
 - **Code Example - 21 (Conditional rendering: ternary)**
 
   ```js
   const Products = (props) => {
-  const { products } = props;
+    const { products } = props;
 
     let productsElement =
       products && products.length > 0 ? (
@@ -1730,11 +1735,10 @@ we need to map each children of list uniquely so that react can identify them wo
       );
 
     return <section className="products">{productsElement}</section>;
-
   };
 
   // An alternative - we can use ternary inside return () function
-    const Products = (props) => {
+  const Products = (props) => {
     const { products } = props;
 
     return (
@@ -1748,9 +1752,7 @@ we need to map each children of list uniquely so that react can identify them wo
         )}
       </section>
     );
-
   };
-
   ```
 
 - **Code Example - 22 (Conditional rendering: short circuit)**
@@ -1804,6 +1806,7 @@ we need to map each children of list uniquely so that react can identify them wo
   };
 
   export default Footer;
+  ```
 
 - How to use font awesome icons directly
 
@@ -2078,7 +2081,11 @@ main {
     return (
       <Card>
         <article className="product">
-          <img className="product__img" src={product.image} alt={product.title} />
+          <img
+            className="product__img"
+            src={product.image}
+            alt={product.title}
+          />
           <p className="product__title">{product.title}</p>
           <p className="product__description">
             {product.description.substring(0, 40)}
@@ -2088,9 +2095,12 @@ main {
           <p>Category: {product.category}</p>
           <p>Rating: {product.rating.rate}/5</p>
           <div className="product__btns flex-space-around">
-            <button className="button" onClick={() => {
+            <button
+              className="button"
+              onClick={() => {
                 alert('product details is here');
-              }}>
+              }}
+            >
               Show Details
             </button>
             <button className="button" onClick={handleAddToCart}>
@@ -2120,7 +2130,6 @@ main {
   export default Product;
 
   // method 2
-
   ```
 
 - **Code Example - 25 (Pass parameter with event )**
@@ -2260,7 +2269,6 @@ main {
   import Card from './Card';
 
   const NewProduct = () => {
-
     return (
       <Card>
         <div className="new-product">
@@ -2268,40 +2276,22 @@ main {
           <form className="product-form">
             <div className="form__control">
               <label htmlFor="title">Title: </label>
-              <input
-                type="text"
-                id="title"
-                name="title"
-                required
-              />
+              <input type="text" id="title" name="title" required />
             </div>
 
             <div className="form__control">
               <label htmlFor="price">Price: </label>
-              <input
-                type="number"
-                id="price"
-                name="price"
-                required
-              />
+              <input type="number" id="price" name="price" required />
             </div>
 
             <div className="form__control">
               <label htmlFor="description">Description: </label>
-              <textarea
-                id="description"
-                name="description"
-                required
-              />
+              <textarea id="description" name="description" required />
             </div>
 
             <div className="form__control">
               <label htmlFor="description">Category: </label>
-              <select
-                id="category"
-                name="category"
-                required
-              >
+              <select id="category" name="category" required>
                 <option value="">Select a category</option>
                 <option value="men's clothing">men's clothing</option>
                 <option value="jewelery">jewelery</option>
@@ -2313,11 +2303,7 @@ main {
 
             <div className="form__control">
               <label htmlFor="image">Image URL: </label>
-              <textarea
-                id="image"
-                name="image"
-                required
-              />
+              <textarea id="image" name="image" required />
             </div>
 
             <button className="button" type="submit">
@@ -2335,44 +2321,44 @@ main {
   ```css
   /* add product form starts here */
 
-    .new-product h2 {
-      text-align: center;
-    }
-    .product-form {
-      padding: 20px;
-    }
+  .new-product h2 {
+    text-align: center;
+  }
+  .product-form {
+    padding: 20px;
+  }
 
-    .form__control {
-      margin-bottom: 10px;
-    }
-    .product-form label {
-      display: block;
-      margin-bottom: 5px;
-    }
+  .form__control {
+    margin-bottom: 10px;
+  }
+  .product-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
 
-    .product-form input,
-    .product-form select,
-    .product-form textarea {
-      width: 100%;
-      padding: 8px;
-      box-sizing: border-box;
-    }
+  .product-form input,
+  .product-form select,
+  .product-form textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
 
-    .product-form button {
-      width: 100%;
-      padding: 10px;
-      background-color: #4caf50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+  .product-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
-    .product-form button:hover {
-      background-color: #45a049;
-    }
+  .product-form button:hover {
+    background-color: #45a049;
+  }
 
-    /*add product form ends here*/           
+  /*add product form ends here*/
   ```
 
 - **Assignment - 27 (Create a form for user registration)**
@@ -2485,7 +2471,7 @@ import Card from './Card';
 
 const NewProduct = () => {
   const handleTitleChange = (event) => {
-   console.log(event.target.value);
+    console.log(event.target.value);
   };
   const handlePriceChange = (event) => {
     console.log(event.target.value);
@@ -2687,7 +2673,6 @@ const NewProduct = () => {
 };
 
 export default NewProduct;
-
 ```
 
 #### state and useState() hook
@@ -2967,9 +2952,9 @@ export default Counter;
 
   ```js
   // App.js
-  import React from "react";
+  import React from 'react';
 
-  import Counter from "./components/Counter";
+  import Counter from './components/Counter';
 
   const App = () => {
     return (
@@ -2984,7 +2969,7 @@ export default Counter;
 
   ```js
   // Counter.js
-  import React, { useState } from "react";
+  import React, { useState } from 'react';
 
   function Counter() {
     const [count, setCount] = useState(0);
@@ -3037,6 +3022,8 @@ export default Counter;
         console.log("increment count: ", count);
       };
   ```
+
+#### [Counter App Code](https://github.com/anisul-Islam/counter-react-app-with-vite)
 
 #### [upating object in state](https://beta.reactjs.org/learn/updating-objects-in-state)
 
@@ -3110,7 +3097,6 @@ export default Counter;
       };
       console.log(newProduct);
     };
-
   };
 
   export default NewProduct;
@@ -3163,7 +3149,7 @@ export default Counter;
       };
       console.log(newProduct);
     };
-  }
+  };
   ```
 
 - we can also use name attribute for identifying element and use 1 function instead of many. from event handler we can use event.target.name and then decide what to do or not? - [1 handler for multiple elements] (<https://github.com/anisul-Islam/react-counter-app-1-function/blob/master/src/components/Counter.js>)
@@ -3273,7 +3259,6 @@ export default Counter;
   };
 
   export default NewProduct;
-
   ```
 
 #### [Upating array in state](https://beta.reactjs.org/learn/updating-arrays-in-state)
@@ -3294,12 +3279,12 @@ export default Counter;
 
   const NewProduct = () => {
     const initialState = {
-        title: '',
-        description: '',
-        price: '',
-        category: '',
-        image: '',
-      }
+      title: '',
+      description: '',
+      price: '',
+      category: '',
+      image: '',
+    };
     const [product, setProduct] = useState(initalState);
 
     const handleChange = (event) => {
@@ -3397,9 +3382,139 @@ export default Counter;
   };
 
   export default NewProduct;
-
-
   ```
+
+#### Form: User SignUp and SignIn Form
+
+### Spinner for loading
+
+#### 1. **Without a library**
+
+```jsx
+import React from 'react';
+
+const LoadingSpinner = () => {
+  return <div className="spinner"></div>;
+};
+
+export default LoadingSpinner;
+```
+
+```css
+// index.css
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border-left-color: #09f;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+```
+
+#### 2. **React Spinners by `react-spinners`**
+
+The [React Spinners](https://www.npmjs.com/package/react-spinners) library provides several types of loaders, including ClipLoader, BeatLoader, and more. It’s lightweight and easy to integrate.
+
+#### Installation
+
+```bash
+npm install react-spinners
+```
+
+#### Usage
+
+Import the loader component you want to use, and conditionally render it based on the `isLoading` state.
+
+```javascript
+// SignUpForm.js
+import React, { useState } from 'react';
+import ClipLoader from 'react-spinners/ClipLoader';
+import { nanoid } from 'nanoid';
+import { uploadImageToCloduinary } from '../../utility/uploadImageToCloudinary';
+import FormButton from '../form/FormButton';
+import FormGroup from '../form/FormGroup';
+import ImagePreview from '../form/ImagePreview';
+import FormSelectGroup from '../form/FormSelectGroup';
+
+const SignUpForm = () => {
+  const [isLoading, setIsLoading] = useState(false); // loading state
+
+  const handleChange = async (event) => {
+    const { name, value, type, files } = event.target;
+    if (type === 'file' && files[0]) {
+      setIsLoading(true); // start loading
+      try {
+        const imageUrl = await uploadImageToCloduinary(files[0]);
+        setUser((prevState) => ({
+          ...prevState,
+          [name]: imageUrl,
+        }));
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false); // stop loading
+      }
+    } else {
+      setUser((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
+  };
+
+  return (
+    <div>
+      {isLoading && <ClipLoader size={40} color="#09f" />}{' '}
+      {/* Show spinner if loading */}
+      <form onSubmit={handleSubmit} className="form">
+        <h2>Sign Up</h2>
+        <FormGroup
+          id="name"
+          label="Name"
+          type="text"
+          name="name"
+          value={user.name}
+          onChange={handleChange}
+          required={true}
+          error={errors.name}
+        />
+        {/* ...other form fields... */}
+        <FormButton type="submit"> Sign Up </FormButton>
+      </form>
+    </div>
+  );
+};
+
+export default SignUpForm;
+```
+
+#### 3. **React Loading by `@agney/react-loading`**
+
+[React Loading](https://www.npmjs.com/package/@agney/react-loading) provides multiple loading animations and is also highly customizable.
+
+#### Installation2
+
+```bash
+npm install @agney/react-loading
+```
+
+#### Usage2
+
+```javascript
+import ReactLoading from '@agney/react-loading';
+
+{
+  isLoading && <ReactLoading type="bars" color="#09f" height={40} width={40} />;
+}
+```
+
+Both libraries offer easy-to-use, customizable loading spinners without the need for manual styling. This approach keeps your UI more consistent and streamlined.
 
 ### [1.13 Form Validation]
 
@@ -3714,11 +3829,9 @@ const AddProductForm = () => {
 
 export default AddProductForm;
 
-
 NewProduct.propTypes = {
   onHandleAddNewProduct: PropTypes.func,
 };
-
 ```
 
 #### React-hook-form validation
@@ -3758,7 +3871,6 @@ For developers:
 import React, { useState } from 'react';
 
 const Signup = () => {
-
   return (
     <div>
       <h2>User SignUp</h2>
@@ -3784,7 +3896,6 @@ const Signup = () => {
 };
 
 export default Signup;
-
 ```
 
 ```css
@@ -3823,7 +3934,11 @@ const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState<{ name?: string; email?: string; password?: string }>({});
+  const [errors, setErrors] = useState<{
+    name?: string;
+    email?: string;
+    password?: string;
+  }>({});
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -3922,58 +4037,68 @@ export default Signup;
 
 1. **State for Errors**: Added a `errors` state to keep track of validation errors.
 
-    ```tsx
-    const [errors, setErrors] = useState<{ name?: string; email?: string; password?: string }>({});
-    ```
+   ```tsx
+   const [errors, setErrors] = useState<{
+     name?: string;
+     email?: string;
+     password?: string;
+   }>({});
+   ```
 
 2. **Validation Function**: A `validate` function checks for errors in the input fields and returns an object containing any errors found.
 
-    ```tsx
-    const validate = () => {
-      const newErrors: { name?: string; email?: string; password?: string } = {};
-      if (!name) {
-        newErrors.name = 'Name is required';
-      }
-      if (!email) {
-        newErrors.email = 'Email is required';
-      } else if (!/\S+@\S+\.\S+/.test(email)) {
-        newErrors.email = 'Email is invalid';
-      }
-      if (!password) {
-        newErrors.password = 'Password is required';
-      } else if (password.length < 6) {
-        newErrors.password = 'Password must be at least 6 characters';
-      }
-      return newErrors;
-    };
-    ```
+   ```tsx
+   const validate = () => {
+     const newErrors: { name?: string; email?: string; password?: string } = {};
+     if (!name) {
+       newErrors.name = 'Name is required';
+     }
+     if (!email) {
+       newErrors.email = 'Email is required';
+     } else if (!/\S+@\S+\.\S+/.test(email)) {
+       newErrors.email = 'Email is invalid';
+     }
+     if (!password) {
+       newErrors.password = 'Password is required';
+     } else if (password.length < 6) {
+       newErrors.password = 'Password must be at least 6 characters';
+     }
+     return newErrors;
+   };
+   ```
 
 3. **Handle Submit**: The `handleSubmit` function now validates the inputs before submitting the form. If there are errors, it sets the `errors` state.
 
-    ```tsx
-    const handleSubmit = (event: FormEvent) => {
-      event.preventDefault();
-      const validationErrors = validate();
-      if (Object.keys(validationErrors).length > 0) {
-        setErrors(validationErrors);
-      } else {
-        console.log('form is submitted');
-        // Clear the form and errors after submission
-        setName('');
-        setEmail('');
-        setPassword('');
-        setErrors({});
-      }
-    };
-    ```
+   ```tsx
+   const handleSubmit = (event: FormEvent) => {
+     event.preventDefault();
+     const validationErrors = validate();
+     if (Object.keys(validationErrors).length > 0) {
+       setErrors(validationErrors);
+     } else {
+       console.log('form is submitted');
+       // Clear the form and errors after submission
+       setName('');
+       setEmail('');
+       setPassword('');
+       setErrors({});
+     }
+   };
+   ```
 
 4. **Display Errors**: Display error messages below each input field if there are any validation errors.
 
-    ```tsx
-    {errors.name && <span className="error">{errors.name}</span>}
-    {errors.email && <span className="error">{errors.email}</span>}
-    {errors.password && <span className="error">{errors.password}</span>}
-    ```
+   ```tsx
+   {
+     errors.name && <span className="error">{errors.name}</span>;
+   }
+   {
+     errors.email && <span className="error">{errors.email}</span>;
+   }
+   {
+     errors.password && <span className="error">{errors.password}</span>;
+   }
+   ```
 
 This ensures that the form is validated before submission, providing immediate feedback to the user if any fields are invalid.
 
@@ -4022,13 +4147,12 @@ const Signup2 = () => {
 };
 
 export default Signup2;
-
 ```
 
 ##### 6. [watch the changes]()
 
 ```tsx
- const { register, watch } = useForm<Inputs>();
+const { register, watch } = useForm<Inputs>();
 console.log(watch('fullName'));
 ```
 
@@ -4423,15 +4547,122 @@ const SignUp = () => {
 export default SignUp;
 ```
 
-### [Upload image to cloudinary]
+### Upload image to cloudinary
 
-### add image for user sign up && cloudinary url for storing image
+#### add image for user sign up && cloudinary url for storing image
 
 - create the image input field
 - show the preview
 - register in cloudinary, set upload preset with unsigned: Go to settings => then go to upload and get the unsigned value that will be needed
 
-```tsx
+```css
+/* Styling for form header */
+.form h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+/* Optional: Add underline or decorative line below the heading */
+.form h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: var(--primary-color);
+  margin: 0.5rem auto 0;
+}
+
+/* General form styling */
+.form {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.form-group input[type='text'],
+.form-group input[type='email'],
+.form-group input[type='number'],
+.form-group input[type='file'],
+.form-group select {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.form-group input[type='text']:focus,
+.form-group input[type='email']:focus,
+.form-group input[type='number']:focus,
+.form-group input[type='file']:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+button[type='submit'] {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+button[type='submit']:hover {
+  background-color: var(--secondary-color);
+}
+
+.form-group img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-top: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+/* Error message styling */
+.form-group p {
+  color: #d9534f; /* Bootstrap’s “danger” red */
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+/* Error message styling with icon */
+.form-group p::before {
+  content: '⚠️ ';
+  margin-right: 0.25rem;
+  font-size: 1rem;
+  vertical-align: middle;
+}
+```
+
+```jsx
 // Register.tsx
 import { registerUser } from '@/tookit/slices/userSlice';
 import { AppDispatch } from '@/tookit/store';
@@ -4601,6 +4832,124 @@ export const uploadImageToCloudinary = async (file: File): Promise<string> => {
 };
 ```
 
+### env variable setup in vite app
+
+To set up environment variables in a Vite React app, follow these steps:
+
+#### Step 1: Create Environment Files
+
+Vite supports different environment files for development, production, or custom environments. Each environment file should be in the root of your project.
+
+1. Create a `.env` file in the root for general environment variables:
+
+   ```plaintext
+   VITE_API_URL=https://example.com/api
+   VITE_APP_NAME=MyViteApp
+   ```
+
+2. (Optional) Create environment-specific files:
+
+   - `.env.development` – For development environment
+   - `.env.production` – For production environment
+
+   Example for `.env.development`:
+
+   ```plaintext
+   VITE_API_URL=http://localhost:3000
+   ```
+
+#### Step 2: Use Environment Variables in Your App
+
+Vite requires that environment variables be prefixed with `VITE_` to be accessible in the app.
+
+```javascript
+// src/App.jsx or any other component
+import React from 'react';
+
+const App = () => {
+  const apiUrl = import.meta.env.VITE_API_URL; // Access environment variable
+  const appName = import.meta.env.VITE_APP_NAME;
+
+  return (
+    <div>
+      <h1>Welcome to {appName}</h1>
+      <p>API URL: {apiUrl}</p>
+    </div>
+  );
+};
+
+export default App;
+```
+
+#### Step 3: Run the App
+
+The `.env` or `.env.development` files will automatically be used when running the app in development mode with `npm run dev`, and `.env.production` when building for production with `npm run build`.
+
+#### Step 4: Add `.env` Files to `.gitignore` (Optional)
+
+If your environment files contain sensitive information, add them to `.gitignore`:
+
+```plaintext
+.env
+.env.development
+.env.production
+```
+
+#### Summary
+
+- Prefix all environment variables with `VITE_`.
+- Use `import.meta.env` to access them in your components.
+- Separate environment files can manage different configurations for development, testing, and production environments.
+
+### Delete Image from cloudinary
+
+```js
+// get the publicId
+const extractPublicId = (url) => {
+  const parts = url.split('/');
+  const filename = parts[parts.length - 1];
+  return filename.split('.')[0]; // Remove the file extension
+};
+
+const url =
+  'https://res.cloudinary.com/anisul-cloud/image/upload/v1730135693/user-mgt-app/cc0odyobftx8ofuaov6l.jpg';
+const publicId = extractPublicId(url);
+console.log(publicId); // Output: cc0odyobftx8ofuaov6l
+
+// delete the image
+const handleDelete = async (id, publicId) => {
+  try {
+    await deleteImageFromCloudinary(publicId);
+    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+  } catch (error) {
+    console.error('Failed to delete image:', error);
+  }
+};
+
+export const deleteImageFromCloudinary = async (publicId) => {
+  const cloudinaryCloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+
+  try {
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/resources/image/upload/${publicId}`,
+      {
+        method: 'DELETE',
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error('Failed to delete image');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error deleting image:', error);
+    throw error;
+  }
+};
+```
+
 ### [1.14 data passing: child to parent component, state lifting](https://youtu.be/xdW2uFA-SOg)
 
 - **Code Example - 40 (state lifting)**
@@ -4743,33 +5092,30 @@ export const uploadImageToCloudinary = async (file: File): Promise<string> => {
     const handleAddNewProduct = (newProduct) => {
       setProducts((prevProducts) => [...prevProducts, newProduct]);
     };
-  
+
   ```
 
 - **Code Example - 41 (state lifting for delete operation)**
 
   ```js
   // In Home.jsx
-    const handleDeleteProduct = (id) => {
-      console.log(id);
-    };
+  const handleDeleteProduct = (id) => {
+    console.log(id);
+  };
 
   // pass function to children component
-  <Products
-    products={products}
-    onHandleDeleteProduct={handleDeleteProduct}
-  />
-  
+  <Products products={products} onHandleDeleteProduct={handleDeleteProduct} />;
+
   // receive function
-   const handleDeleteProduct = (id) => {
+  const handleDeleteProduct = (id) => {
     props.onHandleDeleteProduct(id);
   };
 
   // In Home.jsx
-    const handleDeleteProduct = (id) => {
-      const filteredProducts = products.filter((product) => product.id !== id);
-      setProducts(filteredProducts);
-    };
+  const handleDeleteProduct = (id) => {
+    const filteredProducts = products.filter((product) => product.id !== id);
+    setProducts(filteredProducts);
+  };
   ```
 
 - **Code Example - 42 (use the useState function)**
@@ -4937,14 +5283,14 @@ export default Product;
 - **Code Example - 43 (useRef hook for getting form value)**
 
   ```js
-  import React, { useRef } from "react";
-  import PropTypes from "prop-types";
+  import React, { useRef } from 'react';
+  import PropTypes from 'prop-types';
 
-  import { getUniqueId } from "../utility/getUniqueId";
+  import { getUniqueId } from '../utility/getUniqueId';
 
   const AddTodo = (props) => {
-    const titleRef = useRef("");
-    const descRef = useRef("");
+    const titleRef = useRef('');
+    const descRef = useRef('');
 
     const handleSubmit = (event) => {
       event.preventDefault();
@@ -4952,8 +5298,8 @@ export default Product;
       const desc = descRef.current.value;
       const newTodo = { id: getUniqueId(), title, desc };
       props.onHandleAddNewTodo(newTodo);
-      titleRef.current.value = "";
-      descRef.current.value = "";
+      titleRef.current.value = '';
+      descRef.current.value = '';
     };
 
     return (
@@ -4998,14 +5344,14 @@ export default Product;
 - **Code Example - 44 (conditional styling)**
 
   ```js
-  import React, { useState, useEffect } from "react";
-  import PropTypes from "prop-types";
+  import React, { useState, useEffect } from 'react';
+  import PropTypes from 'prop-types';
 
-  import { getUniqueId } from "../utility/getUniqueId";
+  import { getUniqueId } from '../utility/getUniqueId';
 
   const AddTodo = (props) => {
-    const [title, setTitle] = useState("");
-    const [desc, setDesc] = useState("");
+    const [title, setTitle] = useState('');
+    const [desc, setDesc] = useState('');
 
     const [isTitleValid, setIsTitleValid] = useState(false);
     const [isDescValid, setIsDescValid] = useState(false);
@@ -5032,13 +5378,13 @@ export default Product;
 
       const newTodo = { id: getUniqueId(), title, desc };
       props.onHandleAddNewTodo(newTodo);
-      setTitle("");
-      setDesc("");
+      setTitle('');
+      setDesc('');
     };
 
     return (
       <div className="form-container">
-        <pre style={{ backgroundColor: "white" }}>
+        <pre style={{ backgroundColor: 'white' }}>
           {JSON.stringify({ id: getUniqueId(), title, desc }, undefined, 2)}
         </pre>
         <form onSubmit={handleSubmit}>
@@ -5102,9 +5448,9 @@ export default Product;
 
   ```js
   // App.js
-  import React from "react";
+  import React from 'react';
 
-  import Counter from "./components/Counter";
+  import Counter from './components/Counter';
 
   const App = () => {
     return (
@@ -5119,7 +5465,7 @@ export default Product;
 
   ```js
   // Counter.js
-  import React, { Component } from "react";
+  import React, { Component } from 'react';
 
   export default class Counter extends Component {
     constructor(props) {
@@ -5273,6 +5619,7 @@ export default ExampleComponent;
 Key points about the `useEffect` hook:
 
 1. The `useEffect` hook takes two arguments:
+
    - The first argument is a function that contains your side effect code.
    - The second argument is an array of dependencies. If any of these dependencies change, the side effect function will be re-executed. If you want the side effect to run only once (similar to `componentDidMount` in class components), you can pass an empty array (`[]`) as the second argument.
 
@@ -5283,9 +5630,9 @@ Key points about the `useEffect` hook:
 - **Code Example - 46 (useEffect hook)**
 
   ```js
-  import React, { useEffect, useState } from "react";
+  import React, { useEffect, useState } from 'react';
 
-   const UseEffectHook = () => {
+  const UseEffectHook = () => {
     const [count, setCount] = useState(0);
 
     // useEffect(() => {
@@ -5335,13 +5682,13 @@ Key points about the `useEffect` hook:
 
   ```js
   // Another example
-  import React, { useState, useEffect } from "react";
+  import React, { useState, useEffect } from 'react';
 
   const UseEffectExample = () => {
     const [count, setCount] = useState(0);
-    const [greeting, setGreeting] = useState("good morning");
+    const [greeting, setGreeting] = useState('good morning');
     useEffect(() => {
-      console.log("hello from useeffect");
+      console.log('hello from useeffect');
     }, [count]);
 
     return (
@@ -5356,7 +5703,7 @@ Key points about the `useEffect` hook:
         </button>
         <button
           onClick={() => {
-            setGreeting(greeting + "2");
+            setGreeting(greeting + '2');
           }}
         >
           greeting
@@ -5415,7 +5762,6 @@ const App = () => {
 };
 
 export default App;
-
 ```
 
 Here's a breakdown of how you might use the `useEffect` hook for common scenarios:
@@ -5460,7 +5806,7 @@ useEffect(() => {
 
 ```javascript
 useEffect(() => {
-  const subscription = service.subscribe(data => {
+  const subscription = service.subscribe((data) => {
     // Handle data
   });
 
@@ -5650,7 +5996,6 @@ const Home = () => {
 };
 
 export default Home;
-
 ```
 
 #### [How to make a POST request]
@@ -5864,7 +6209,6 @@ export default NewProduct;
       }
     }
   };
-
   ```
 
 #### [How to create custom hook](https://youtu.be/ZWschU7H_20)
@@ -5872,7 +6216,7 @@ export default NewProduct;
 - **Code Example - 52 (custom hook)**
 
   ```js
-  import React, { useState, useEffect } from "react";
+  import React, { useState, useEffect } from 'react';
 
   const useFetch = (URL) => {
     const [data, setData] = useState([]);
@@ -5907,46 +6251,47 @@ export default NewProduct;
 ##### pagination
 
 ```jsx
-  // pagination
-  const itemsPerPage = 12;
-  const [totalPages, setTotalPages] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
+// pagination
+const itemsPerPage = 12;
+const [totalPages, setTotalPages] = useState(0);
+const [currentPage, setCurrentPage] = useState(1);
 
-  // make the api request when currentPage change
+// make the api request when currentPage change
 
+const fetchData = (currentPage) => {
+  setIsLoading(true);
+  setError(null);
+  let url = `https://dummyjson.com/products?limit=${itemsPerPage}&skip=${
+    (currentPage - 1) * itemsPerPage
+  }`;
 
-  const fetchData = (currentPage) => {
-    setIsLoading(true);
-    setError(null);
-    let url = `https://dummyjson.com/products?limit=${itemsPerPage}&skip=${
-      (currentPage - 1) * itemsPerPage
-    }`;
-    
-   
-    fetch(url)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Data could not be fetched');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setProducts(data.products);
-        console.log(data.products);
-        console.log(currentPage);
-        setTotalPages(Math.ceil(data.total / itemsPerPage));
-      })
-      .catch((error) => setError(error.message))
-      .finally(() => setIsLoading(false));
-  };
-  useEffect(() => {
-    fetchData(currentPage);
-  }, [currentPage]);
+  fetch(url)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Data could not be fetched');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      setProducts(data.products);
+      console.log(data.products);
+      console.log(currentPage);
+      setTotalPages(Math.ceil(data.total / itemsPerPage));
+    })
+    .catch((error) => setError(error.message))
+    .finally(() => setIsLoading(false));
+};
+useEffect(() => {
+  fetchData(currentPage);
+}, [currentPage]);
 
+<Pagination
+  totalPages={totalPages}
+  currentPage={currentPage}
+  onHandleCurrentPage={handleCurrentPage}
+/>;
 
-  <Pagination totalPages={totalPages} currentPage={currentPage} onHandleCurrentPage={handleCurrentPage} />
-
-  import React from 'react';
+import React from 'react';
 const Pagination = ({ totalPages, currentPage, onHandleCurrentPage }) => {
   return (
     <div className="pagination">
@@ -5994,10 +6339,18 @@ const Pagination = ({ totalPages, currentPage, onHandleCurrentPage }) => {
 
   return (
     <div className="pagination">
-      <button onClick={handleFirstPage} disabled={currentPage === 1} aria-label="First Page">
+      <button
+        onClick={handleFirstPage}
+        disabled={currentPage === 1}
+        aria-label="First Page"
+      >
         &laquo;&laquo;
       </button>
-      <button onClick={handlePreviousChange} disabled={currentPage === 1} aria-label="Previous Page">
+      <button
+        onClick={handlePreviousChange}
+        disabled={currentPage === 1}
+        aria-label="Previous Page"
+      >
         &laquo;
       </button>
       <div className="pagination__pages">
@@ -6011,10 +6364,18 @@ const Pagination = ({ totalPages, currentPage, onHandleCurrentPage }) => {
           </button>
         ))}
       </div>
-      <button onClick={handleNextChange} disabled={currentPage === totalPages} aria-label="Next Page">
+      <button
+        onClick={handleNextChange}
+        disabled={currentPage === totalPages}
+        aria-label="Next Page"
+      >
         &raquo;
       </button>
-      <button onClick={handleLastPage} disabled={currentPage === totalPages} aria-label="Last Page">
+      <button
+        onClick={handleLastPage}
+        disabled={currentPage === totalPages}
+        aria-label="Last Page"
+      >
         &raquo;&raquo;
       </button>
     </div>
@@ -6028,7 +6389,6 @@ Pagination.propTypes = {
 };
 
 export default Pagination;
-
 ```
 
 - Not showing all page numbers at once, implement a more sophisticated pagination control that displays only a few page numbers at a time, with options to navigate to the first, previous, next, and last pages.
@@ -6120,7 +6480,6 @@ const Pagination = ({ totalPages, currentPage, onHandleCurrentPage }) => {
 };
 
 export default Pagination;
-
 ```
 
 ```css
@@ -6168,19 +6527,18 @@ export default Pagination;
 // step 3. Filter Products: Filtered the products based on the search term.
 // step 4. Display Filtered Products: Display the filtered products in the UI.
 
-
 // step 1. in the main component
 const [searchTerm, setSearchTerm] = useState('');
 
- const handleSearchChange = (event) => {
+const handleSearchChange = (event) => {
   const { value } = event.target;
   setSearchTerm(value);
 };
 
 // step 2: Search Input
-import React from 'react'
+import React from 'react';
 
-const Search = ({searchTerm, onHandleSearchChange}) => {
+const Search = ({ searchTerm, onHandleSearchChange }) => {
   return (
     <div className="search">
       <input
@@ -6191,10 +6549,9 @@ const Search = ({searchTerm, onHandleSearchChange}) => {
       />
     </div>
   );
-}
+};
 
-export default Search
-
+export default Search;
 
 // Step 3: filter products in the same page
 // search in the same page
@@ -6212,37 +6569,40 @@ const filterProducts = products.filter((product) =>
 // step 2: Call the API endpoint for searching when the search term changes.
 // step 3: Update the state with the search results.
 
-
 const [searchTerm, setSearchTerm] = useState('');
 
 // step 1: inside useEffect
 const fetchData = (currentPage, searchQuery = '') => {
-    setIsLoading(true);
-    setError(null);
-    let url = `https://dummyjson.com/products?limit=${itemsPerPage}&skip=${(currentPage - 1) * itemsPerPage}`;
+  setIsLoading(true);
+  setError(null);
+  let url = `https://dummyjson.com/products?limit=${itemsPerPage}&skip=${
+    (currentPage - 1) * itemsPerPage
+  }`;
 
-    if (searchQuery) {
-      url = `https://dummyjson.com/products/search?q=${searchQuery}&limit=${itemsPerPage}&skip=${(currentPage - 1) * itemsPerPage}`;
-    }
+  if (searchQuery) {
+    url = `https://dummyjson.com/products/search?q=${searchQuery}&limit=${itemsPerPage}&skip=${
+      (currentPage - 1) * itemsPerPage
+    }`;
+  }
 
-    fetch(url)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Data could not be fetched');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setProducts(data.products);
-        setTotalPages(Math.ceil(data.total / itemsPerPage));
-      })
-      .catch((error) => setError(error.message))
-      .finally(() => setIsLoading(false));
-  };
+  fetch(url)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Data could not be fetched');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      setProducts(data.products);
+      setTotalPages(Math.ceil(data.total / itemsPerPage));
+    })
+    .catch((error) => setError(error.message))
+    .finally(() => setIsLoading(false));
+};
 
-  useEffect(() => {
-    fetchData(currentPage, searchTerm);
-  }, [currentPage, searchTerm]);
+useEffect(() => {
+  fetchData(currentPage, searchTerm);
+}, [currentPage, searchTerm]);
 
 const handleSearchChange = (event) => {
   const { value } = event.target;
@@ -6281,52 +6641,49 @@ const Sort = ({ sortCriteria, onHandleSortChange }) => {
 export default Sort;
 
 // In another component
-  const [sortCriteria, setSortCriteria] = useState('');
+const [sortCriteria, setSortCriteria] = useState('');
 const fetchData = (currentPage, searchTerm, sortCriteria) => {
-    setIsLoading(true);
-    setError(null);
-    let url = `https://dummyjson.com/products?limit=${itemsPerPage}&skip=${
+  setIsLoading(true);
+  setError(null);
+  let url = `https://dummyjson.com/products?limit=${itemsPerPage}&skip=${
+    (currentPage - 1) * itemsPerPage
+  }`;
+  if (searchTerm !== '') {
+    url = `https://dummyjson.com/products/search?q=${searchTerm}&limit=${itemsPerPage}&skip=${
       (currentPage - 1) * itemsPerPage
     }`;
-    if (searchTerm !== '') {
-      url = `https://dummyjson.com/products/search?q=${searchTerm}&limit=${itemsPerPage}&skip=${
-        (currentPage - 1) * itemsPerPage
-      }`;
-    }
-    if (sortCriteria) {
-      // title-asc
-      const spiltSortCriteria = sortCriteria.split('-');
-      console.log(spiltSortCriteria);
-      url += `&sortBy=${spiltSortCriteria[0]}&order=${spiltSortCriteria[1]}`;
-    }
-    fetch(url)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Data could not be fetched');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setProducts(data.products);
-        console.log(data.products);
-        console.log(currentPage);
-        setTotalPages(Math.ceil(data.total / itemsPerPage));
-      })
-      .catch((error) => setError(error.message))
-      .finally(() => setIsLoading(false));
-  };
-  useEffect(() => {
-    fetchData(currentPage, searchTerm, sortCriteria);
-  }, [currentPage, searchTerm, sortCriteria]);
+  }
+  if (sortCriteria) {
+    // title-asc
+    const spiltSortCriteria = sortCriteria.split('-');
+    console.log(spiltSortCriteria);
+    url += `&sortBy=${spiltSortCriteria[0]}&order=${spiltSortCriteria[1]}`;
+  }
+  fetch(url)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Data could not be fetched');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      setProducts(data.products);
+      console.log(data.products);
+      console.log(currentPage);
+      setTotalPages(Math.ceil(data.total / itemsPerPage));
+    })
+    .catch((error) => setError(error.message))
+    .finally(() => setIsLoading(false));
+};
+useEffect(() => {
+  fetchData(currentPage, searchTerm, sortCriteria);
+}, [currentPage, searchTerm, sortCriteria]);
 
-  const handleSortChange = (event) => {
-    setSortCriteria(event.target.value);
-  };
+const handleSortChange = (event) => {
+  setSortCriteria(event.target.value);
+};
 
-  <Sort
-      sortCriteria={sortCriteria}
-      onHandleSortChange={handleSortChange}
-    />
+<Sort sortCriteria={sortCriteria} onHandleSortChange={handleSortChange} />;
 ```
 
 - add styling for sorting and searching
@@ -6360,7 +6717,7 @@ const fetchData = (currentPage, searchTerm, sortCriteria) => {
 /* search and sort ends here  */
 ```
 
-### [Assignment 4 - fetch products](https://github.com/anisul-Islam/react-assignment-4-fetch-products)
+#### [Assignment 4 - fetch products](https://github.com/anisul-Islam/react-assignment-4-fetch-products)
 
 <!-- ## Part-5 (useReducer Hook, modal, dynamic styling) -->
 
@@ -6374,14 +6731,14 @@ const fetchData = (currentPage, searchTerm, sortCriteria) => {
 
   ```js
   // without useReducer
-  import React, { useState } from "react";
+  import React, { useState } from 'react';
 
   // books, modalText, isModalOpen
   // add book - modalText
   // remove book - modalText
   const dummyBooks = [
-    { id: 1, title: "book1" },
-    { id: 2, title: "book2" },
+    { id: 1, title: 'book1' },
+    { id: 2, title: 'book2' },
   ];
   const Modal = ({ modalText }) => {
     return <p>{modalText}</p>;
@@ -6389,10 +6746,10 @@ const fetchData = (currentPage, searchTerm, sortCriteria) => {
   const App = () => {
     // every time update 3 relevant states
     const [books, setBooks] = useState(dummyBooks);
-    const [modalText, setModalText] = useState("");
+    const [modalText, setModalText] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const [bookTitle, setBookTitle] = useState("");
+    const [bookTitle, setBookTitle] = useState('');
 
     const handleAddBook = (event) => {
       event.stopPropagation();
@@ -6403,7 +6760,7 @@ const fetchData = (currentPage, searchTerm, sortCriteria) => {
       const filterBooks = books.filter((book) => book.id !== id);
       setBooks(filterBooks);
       setIsModalOpen(true);
-      setModalText(" book is deleted");
+      setModalText(' book is deleted');
     };
 
     const handleSubmit = (event) => {
@@ -6413,7 +6770,7 @@ const fetchData = (currentPage, searchTerm, sortCriteria) => {
         return [...prevBooks, newBook];
       });
       setIsModalOpen(true);
-      setModalText("New book is added");
+      setModalText('New book is added');
     };
 
     return (
@@ -6459,14 +6816,14 @@ const fetchData = (currentPage, searchTerm, sortCriteria) => {
 - **Code Example - 55 (with useReducer)**
 
   ```js
-  import React, { useState, useReducer } from "react";
+  import React, { useState, useReducer } from 'react';
 
   // books, modalText, isModalOpen
   // add book - modalText
   // remove book - modalText
   const dummyBooks = [
-    { id: 1, title: "book1" },
-    { id: 2, title: "book2" },
+    { id: 1, title: 'book1' },
+    { id: 2, title: 'book2' },
   ];
   const Modal = ({ modalText }) => {
     return <p>{modalText}</p>;
@@ -6476,15 +6833,15 @@ const fetchData = (currentPage, searchTerm, sortCriteria) => {
   const reducer = (state, action) => {
     // action object has action.type and action.payload
     switch (action.type) {
-      case "ADD":
+      case 'ADD':
         const allBooks = [...state.books, action.payload];
         return {
           ...state,
           books: allBooks,
           isModalOpen: true,
-          modalText: "new book is added",
+          modalText: 'new book is added',
         };
-      case "DELETE":
+      case 'DELETE':
         const filteredBooks = state.books.filter(
           (book) => book.id !== action.payload
         );
@@ -6492,7 +6849,7 @@ const fetchData = (currentPage, searchTerm, sortCriteria) => {
           ...state,
           books: filteredBooks,
           isModalOpen: true,
-          modalText: "book is deleted",
+          modalText: 'book is deleted',
         };
 
       default:
@@ -6503,7 +6860,7 @@ const fetchData = (currentPage, searchTerm, sortCriteria) => {
   const initialState = {
     books: dummyBooks,
     isModalOpen: false,
-    modalText: "",
+    modalText: '',
   };
 
   const App = () => {
@@ -6513,7 +6870,7 @@ const fetchData = (currentPage, searchTerm, sortCriteria) => {
 
     const [bookState, dispatch] = useReducer(reducer, initialState);
 
-    const [bookTitle, setBookTitle] = useState("");
+    const [bookTitle, setBookTitle] = useState('');
 
     const handleTitleChange = (event) => {
       event.stopPropagation();
@@ -6521,14 +6878,14 @@ const fetchData = (currentPage, searchTerm, sortCriteria) => {
     };
     const handleDeleteBook = (event, id) => {
       event.stopPropagation();
-      dispatch({ type: "DELETE", payload: id });
+      dispatch({ type: 'DELETE', payload: id });
     };
 
     const handleSubmit = (event) => {
       event.preventDefault();
       const newBook = { id: new Date().getTime().toString(), title: bookTitle };
-      dispatch({ type: "ADD", payload: newBook });
-      setBookTitle("");
+      dispatch({ type: 'ADD', payload: newBook });
+      setBookTitle('');
     };
 
     return (
@@ -6837,7 +7194,6 @@ const Contact = () => {
 };
 
 export default Contact;
-
 ```
 
 #### Pass data with useNavigate() and receive the data with useLocation()
@@ -7111,8 +7467,8 @@ export default ProductDetails;
 - `/users?id=101&age=23`
 
 ```jsx
-import * as React from "react";
-import { useSearchParams } from "react-router-dom";
+import * as React from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 function App() {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -7129,8 +7485,8 @@ function App() {
   return (
     <div>
       <form onSubmit={handleSubmit}>{/* ... */}</form>
-      <h2> {searchParams.get("id")} </h2>
-      <h2> {searchParams.get("age")} </h2>
+      <h2> {searchParams.get('id')} </h2>
+      <h2> {searchParams.get('age')} </h2>
     </div>
   );
 }
@@ -7142,6 +7498,7 @@ function App() {
   - first create few 2 sidebars `UserSidebar.jsx` and `AdminSidebar.jsx`
   - then create few 2 components `UserDashboard.jsx` and `AdminDashboard.jsx`
 - Why do you need route protection?
+
   - `/dashboard/users/profile` => IsSignedIn => UserProfile Component
   - `/dashboard/users/orders` => IsSignedIn => UserOrders Component
   - `/dashboard/admin/profile` => IsSignedIn and IsAdmin => AdminProfile Component
@@ -7225,54 +7582,102 @@ const AdminRoute = () => {
 
 export default PortectedRoute;
 
-
 // now protect the routes
 // index.js - routing
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Header />,
-    errorElement: <NotFound />,
-    children: [
-      {
-        path: '/',
-        element: <Home />,
-      },
-      {
-        path: '/signin',
-        element: <SignIn />,
-      },
-      {
-        path: '/dashboard/users',
-        element: <PortectedRoute />,
-        children: [
-          {
-            path: 'profile',
-            element: <UserProfile />,
-          },
-        ],
-      },
-      {
-        path: '/dashboard/admin',
-        element: <AdminRoute />,
-        children: [
-          {
-            path: 'profile',
-            element: <AdminProfile />,
-          },
-          {
-            path: 'orders',
-            element: <AdminProducts />,
-          },
-          {
-            path: 'orders',
-            element: <AdminOrders />,
-          },
-        ],
-      },
-    ],
-  },
-]);
+const Routes = () => {
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Layout />,
+      children: [
+        {
+          path: '/',
+          element: <Home />,
+        },
+        {
+          path: '/signup',
+          element: <SignUp />,
+        },
+        {
+          path: '/signin',
+          element: <SignIn />,
+        },
+        {
+          path: '/cart',
+          element: <Cart />,
+        },
+        {
+          path: '/about',
+          element: <About />,
+        },
+        {
+          path: '/products/:id',
+          element: <ProductDetails />,
+        },
+        {
+          path: '/dashboard/user',
+          element: <PortectedRoute />,
+          children: [
+            {
+              path: '',
+              element: <UserDashboard />,
+              children: [
+                {
+                  index: true, // This sets the default child route
+                  element: <UserManageProfile />, // The component to display by default
+                },
+                {
+                  path: 'profile',
+                  element: <UserManageProfile />,
+                },
+                {
+                  path: 'orders',
+                  element: <UserManageOrder />,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          path: '/dashboard/admin',
+          element: <AdminRoute />,
+          children: [
+            {
+              path: '',
+              element: <AdminDashboard />, // The parent dashboard element
+              children: [
+                {
+                  index: true, // This sets the default child route
+                  element: <AdminManageUsers />, // The component to display by default
+                },
+                {
+                  path: 'users',
+                  element: <AdminManageUsers />,
+                },
+                {
+                  path: 'products',
+                  element: <AdminMangeProducts />,
+                },
+                {
+                  path: 'categories',
+                  element: <AdminManageCategories />,
+                },
+                {
+                  path: 'orders',
+                  element: <AdminManageOrders />,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
+};
+
+export default Routes;
 ```
 
 #### [handle navbar programatically]
@@ -7556,7 +7961,7 @@ The `useContext` hook in React is used to share state or functions between compo
 - step 1: create a context
 
 ```js
-import React from "react";
+import React from 'react';
 
 // we can pass any value or object in createContext()
 export const UserContext = React.createContext(); // it allows us to use Provider and consumer (we will use useContext instead of consumer)
@@ -7565,14 +7970,14 @@ export const UserContext = React.createContext(); // it allows us to use Provide
 - step 2: provide the context - wrap the parent with the context
 
 ```js
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import Component1 from "./components/Component1";
-import { UserContext } from "./UserContext";
+import Component1 from './components/Component1';
+import { UserContext } from './UserContext';
 
 const App = () => {
-  const [user, setUser] = useState({ id: 1, name: "anisul islam" });
-  const text = "hello everyone!";
+  const [user, setUser] = useState({ id: 1, name: 'anisul islam' });
+  const text = 'hello everyone!';
   return (
     <div>
       <UserContext.Provider value={{ user, text }}>
@@ -7588,8 +7993,8 @@ export default App;
 - step 3: access the context with useContext
 
 ```js
-import React, { useContext } from "react";
-import { UserContext } from "../UserContext";
+import React, { useContext } from 'react';
+import { UserContext } from '../UserContext';
 
 const Component4 = () => {
   const { user } = useContext(UserContext);
@@ -7879,7 +8284,11 @@ const Dashboard = () => {
 
   return (
     <div>
-      {isAuthenticated ? <h2>Welcome, User!</h2> : <h2>Please log in to continue</h2>}
+      {isAuthenticated ? (
+        <h2>Welcome, User!</h2>
+      ) : (
+        <h2>Please log in to continue</h2>
+      )}
     </div>
   );
 };
@@ -7993,9 +8402,7 @@ const ConfigProvider = ({ children }) => {
   };
 
   return (
-    <ConfigContext.Provider value={config}>
-      {children}
-    </ConfigContext.Provider>
+    <ConfigContext.Provider value={config}>{children}</ConfigContext.Provider>
   );
 };
 
@@ -8068,12 +8475,26 @@ const Modal = () => {
   if (!isModalOpen) return null;
 
   return (
-    <div style={{
-      position: 'fixed', top: '0', left: '0', right: '0', bottom: '0',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)', display: 'flex',
-      justifyContent: 'center', alignItems: 'center'
-    }}>
-      <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px' }}>
+    <div
+      style={{
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        right: '0',
+        bottom: '0',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: 'white',
+          padding: '20px',
+          borderRadius: '8px',
+        }}
+      >
         <h2>Modal Title</h2>
         <p>This is a modal.</p>
         <button onClick={closeModal}>Close Modal</button>
@@ -8086,9 +8507,7 @@ const Modal = () => {
 const TriggerModal = () => {
   const { openModal } = useContext(ModalContext);
 
-  return (
-    <button onClick={openModal}>Open Modal</button>
-  );
+  return <button onClick={openModal}>Open Modal</button>;
 };
 
 const App = () => {
@@ -8472,7 +8891,7 @@ export default Books;
 
 ```
 
-## Part-10 (useState, useEffect, useReducer, useContext, custom hook practice)
+### useState, useEffect, useReducer, useContext, custom hook practice
 
 Below is a folder structure and corresponding code to demonstrate an example of managing **users** in a **React app** using **Context**, a **custom hook** for consuming the context, a **service layer** for API requests, **CRUD operations**, and **pagination**.
 
@@ -8544,11 +8963,22 @@ export const UsersProvider = ({ children }) => {
     setUsers((prev) =>
       prev.map((user) => (user.id === updatedUser.id ? updatedUser : user))
     );
-  const deleteUser = (id) => setUsers((prev) => prev.filter((user) => user.id !== id));
+  const deleteUser = (id) =>
+    setUsers((prev) => prev.filter((user) => user.id !== id));
 
   return (
     <UsersContext.Provider
-      value={{ users, loading, error, addUser, updateUser, deleteUser, page, setPage, totalPages }}
+      value={{
+        users,
+        loading,
+        error,
+        addUser,
+        updateUser,
+        deleteUser,
+        page,
+        setPage,
+        totalPages,
+      }}
     >
       {children}
     </UsersContext.Provider>
@@ -8753,13 +9183,16 @@ export default App;
 ### **How it Works:**
 
 1. **Context (`UsersContext`)**:
+
    - Stores the list of users and provides CRUD operations.
    - Fetches data from the API on mount and when the page number changes.
 
 2. **Custom Hook (`useUsers`)**:
+
    - A simplified way to access the context values in other components.
 
 3. **Service Layer**:
+
    - Handles API requests for CRUD operations.
 
 4. **Components**:
@@ -8942,33 +9375,33 @@ export default User;
 - version 2 (useReducer added)
 
 ```js
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer } from 'react';
 
-import Users from "./components/Users";
-import "./App.css";
-import NewUser from "./components/NewUser";
+import Users from './components/Users';
+import './App.css';
+import NewUser from './components/NewUser';
 
 const initialState = {
   users: [
     {
       id: 1,
-      username: "anisul",
+      username: 'anisul',
     },
     {
       id: 2,
-      username: "sakib",
+      username: 'sakib',
     },
   ],
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "ADD_USER":
+    case 'ADD_USER':
       return {
         ...state,
         users: [...state.users, action.payload],
       };
-    case "DELETE_USER":
+    case 'DELETE_USER':
       const filteredUsers = state.users.filter(
         (user) => user.id !== action.payload
       );
@@ -8976,7 +9409,7 @@ const reducer = (state, action) => {
         ...state,
         users: filteredUsers,
       };
-    case "UPDATE_USER":
+    case 'UPDATE_USER':
       const userIndex = state.users.findIndex(
         (user) => user.id === action.payload.id
       );
@@ -8997,7 +9430,7 @@ const App = () => {
   const [editableUser, setEditableUser] = useState(null);
 
   const addNewUser = (user) => {
-    dispatch({ type: "ADD_USER", payload: user });
+    dispatch({ type: 'ADD_USER', payload: user });
   };
 
   const editUser = (user) => {
@@ -9005,11 +9438,11 @@ const App = () => {
   };
 
   const deleteUser = (id) => {
-    dispatch({ type: "DELETE_USER", payload: id });
+    dispatch({ type: 'DELETE_USER', payload: id });
   };
 
   const updateUser = (updatedUser) => {
-    dispatch({ type: "UPDATE_USER", payload: updatedUser });
+    dispatch({ type: 'UPDATE_USER', payload: updatedUser });
   };
 
   return (
@@ -9203,9 +9636,9 @@ export default NewUser;
 
 ```js
 // hooks/useUsersContext.js
-import { useContext } from "react";
+import { useContext } from 'react';
 
-import { UsersContext } from "../context/UsersContext";
+import { UsersContext } from '../context/UsersContext';
 
 export const useUserContext = () => {
   return useContext(UsersContext);
@@ -9718,6 +10151,7 @@ export default Data;
 - RTK Query is a powerful data fetching and caching tool built into Redux Toolkit. It simplifies the process of fetching, caching, synchronizing, and updating data in your application.
 
 - basic project setup
+
   - `npx create vite@latest projectName --template react`
   - `npm install @reduxjs/toolkit react-redux`
   - clean up the project
@@ -9754,21 +10188,21 @@ export default Data;
 - register service in the store
 
 ```jsx
-import postsReducer from '../features/posts/postsSlice'
-import usersReducer from '../features/users/usersSlice'
-import notificationsReducer from '../features/notifications/notificationsSlice'
-import { apiSlice } from '../features/api/apiSlice'
+import postsReducer from '../features/posts/postsSlice';
+import usersReducer from '../features/users/usersSlice';
+import notificationsReducer from '../features/notifications/notificationsSlice';
+import { apiSlice } from '../features/api/apiSlice';
 
 export default configureStore({
   reducer: {
     posts: postsReducer,
     users: usersReducer,
     notifications: notificationsReducer,
-    [apiSlice.reducerPath]: apiSlice.reducer
+    [apiSlice.reducerPath]: apiSlice.reducer,
   },
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(apiSlice.middleware)
-})
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiSlice.middleware),
+});
 
 // in my case
 import { configureStore } from '@reduxjs/toolkit';
@@ -9780,11 +10214,9 @@ export const store = configureStore({
     [productApi.reducerPath]: productApi.reducer,
   },
   // do not worry about this as it is for caching
-   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(productApi.middleware)
-})
-
-
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(productApi.middleware),
+});
 ```
 
 - use rtk in react
